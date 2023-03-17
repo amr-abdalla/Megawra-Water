@@ -1,0 +1,18 @@
+{
+    "name": "Megawra Water Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e1b6f71898bdf7b4d91fb26a2e061dbf"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
