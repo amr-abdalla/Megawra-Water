@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class RigidbodyMovement : MonoBehaviour
 {
-    [SerializeField] private float impulseForce = 10f;
     [SerializeField] private float maxSpeed = 10f;
     private Vector2 moveDirection = Vector2.down;
     // Start is called before the first frame update
@@ -74,7 +73,7 @@ public class RigidbodyMovement : MonoBehaviour
 
     }
       
-    public void PushShabba(float force = impulseForce) {
+    public void PushShabba(float force = 10f) {
         currentDrag = initialDrag;
         // if velocity isn't 0, set move direction to velocity's direction
         if (rb.velocity != Vector2.zero) {
