@@ -74,13 +74,13 @@ public class RigidbodyMovement : MonoBehaviour
 
     }
       
-    private void PushShabba() {
+    public void PushShabba(float force = impulseForce) {
         currentDrag = initialDrag;
         // if velocity isn't 0, set move direction to velocity's direction
         if (rb.velocity != Vector2.zero) {
             moveDirection = rb.velocity.normalized;
         }
-        rb.AddForce(moveDirection * impulseForce, ForceMode2D.Impulse);
+        rb.AddForce(moveDirection * force, ForceMode2D.Impulse);
     }
 
     

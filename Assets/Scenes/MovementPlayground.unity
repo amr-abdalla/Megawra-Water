@@ -174,7 +174,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 84
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -200,12 +200,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619463765}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.14000002, y: -0.46800002, z: -15.277163}
-  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: -6.08, z: -10}
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 758519693}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &758519690
 GameObject:
@@ -218,6 +218,8 @@ GameObject:
   - component: {fileID: 758519693}
   - component: {fileID: 758519692}
   - component: {fileID: 758519691}
+  - component: {fileID: 758519695}
+  - component: {fileID: 758519694}
   m_Layer: 0
   m_Name: Shabba
   m_TagString: Untagged
@@ -240,7 +242,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.05
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -309,11 +311,68 @@ Transform:
   m_LocalPosition: {x: -0.087500006, y: 1.2925, z: -0.45177394}
   m_LocalScale: {x: 0.625, y: 0.625, z: 0.625}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 619463768}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &758519694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758519690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: aa644bfc2337c30408815c43caa8e014, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 34853bf9-3246-45a8-88fe-43bffa582f5e
+    m_ActionName: Shabba/Rotate[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1112d8ba-bd7b-40d6-8e2d-9a3a8b2d6fe0
+    m_ActionName: Shabba/Push[/Keyboard/e]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: Shabba
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &758519695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758519690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ba6d9bb41041c4ab72b07fade424af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impulseForce: 10
+  maxSpeed: 10
+  initialDrag: 0
+  maxDrag: 30
+  dragIncreasePerSecond: 13
+  minVelocity: 1
+  pushAction: {fileID: 6616664993253886368, guid: aa644bfc2337c30408815c43caa8e014, type: 3}
+  rotateAction: {fileID: 4996662534001179324, guid: aa644bfc2337c30408815c43caa8e014, type: 3}
 --- !u!1 &1309928244
 GameObject:
   m_ObjectHideFlags: 0
