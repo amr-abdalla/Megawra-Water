@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db91a4b36ad1c914aad55c8745411126, type: 3}
-  m_Name: Particle
+  m_Name: Mid Particle
   m_EditorClassIdentifier: 
-  <size>k__BackingField: 5
-  <momentum>k__BackingField: 5
-  <score>k__BackingField: 5
+  <Size>k__BackingField: 5
+  <Momentum>k__BackingField: 5
+  <Score>k__BackingField: 5

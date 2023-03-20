@@ -3,16 +3,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Particle", menuName = "Residue")]
 public class ResidueData : ScriptableObject
 {
-	[field: SerializeField] public float size { get; private set; }
-	[field: SerializeField] public float momentum { get; private set; }
-	[field: SerializeField] public float score { get; private set; }
+	[field: SerializeField] public float Size { get; private set; }
+	[field: SerializeField] public float Momentum { get; private set; }
+	[field: SerializeField] public float Score { get; private set; }
 
-	public void ApplyForce(Rigidbody2D rigidbody2D)
+	public virtual void ApplyForce(Rigidbody2D rigidbody2D)
 	{
-		rigidbody2D.AddForce(rigidbody2D.velocity.normalized * momentum, ForceMode2D.Impulse); // or push
+		rigidbody2D.AddForce(rigidbody2D.velocity.normalized * Momentum, ForceMode2D.Impulse); // or push
 	}
 
-	public bool IsCollectable()
+	public virtual bool IsCollectable()
 	{
 		return true;
 	}

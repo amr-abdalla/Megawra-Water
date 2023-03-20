@@ -9,13 +9,13 @@ public class ResidueChunk : MonoBehaviour
 	{
 		if (residueParticles.Count == 0)
 		{
-			GenerateResidueParticles();
+			FillResidueParticles();
 		}
 
 		return residueParticles;
 	}
 
-	private void GenerateResidueParticles()
+	private void FillResidueParticles()
 	{
 		foreach (ResidueParticle residueParticle in GetComponentsInChildren<ResidueParticle>())
 		{
