@@ -89,21 +89,22 @@ public class RigidbodyMovement : MonoBehaviour
         rotationRoutine = StartCoroutine(ChangeRotation(direction.x));
     }
 
+    private float easeInOutCubic(float t){
+       return t < 0.5f ? 4 * t * t * t : 1 - Mathf.Pow(-2 * t + 2, 3) / 2;
+    }
     private Coroutine rotationRoutine;
 
     IEnumerator ChangeRotation(float targetRotation)
 	{
+        float t = 0f;
+        float duration = 0.1f;
         while(currentRotation != targetRotation)
 		{
-            if(currentRotation > targetRotation)
-			{
-                currentRotation -= 10 * Time.deltaTime;
-            }
+            // interpolate between current rotation and target rotation, using easeInOutCubic
+            
+            t += Time.deltaTime / duration;
 
-            if (currentRotation < targetRotation)
-            {
-                currentRotation += 10 * Time.deltaTime;
-            }
+            currentRotation = Mathf.Lerp(currentRotation, targetRotation, easeInOutCubic(t));
 
             currentRotation = Mathf.Clamp(currentRotation, -1, 1);
 
@@ -116,8 +117,6 @@ public class RigidbodyMovement : MonoBehaviour
         // rotate move direction
         rigidBody.drag = 1f;
         moveDirection = Quaternion.Euler(0, 0, angle) * moveDirection;
-        // set the move direction to down if angle is 0
-        if (angle == 0) moveDirection = Vector2.down;
         // set velocity to move direction
         rigidBody.velocity = moveDirection * rigidBody.velocity.magnitude;
         //Debug.Log("RotateVelocity. angle: " + angle + "");
