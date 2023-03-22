@@ -7,7 +7,7 @@
             "actions": [
                 {
                     "name": "Rotate",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "34853bf9-3246-45a8-88fe-43bffa582f5e",
                     "expectedControlType": "Vector2",
                     "processors": "",
