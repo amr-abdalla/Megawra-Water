@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db91a4b36ad1c914aad55c8745411126, type: 3}
   m_Name: Small Particle
   m_EditorClassIdentifier: 
-  <Size>k__BackingField: 2
-  <Momentum>k__BackingField: 2
-  <Score>k__BackingField: 2
+  <Size>k__BackingField: 3
+  <Momentum>k__BackingField: 3
+  <Score>k__BackingField: 3

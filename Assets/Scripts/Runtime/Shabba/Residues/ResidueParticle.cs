@@ -8,18 +8,21 @@ public class ResidueParticle : MonoBehaviour
 	public event Action OnDestroyEvent;
 	public event Action OnCollect;
 
-	private void OnTriggerEnter(Collider other)
+
+	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.name == "Player" && residueData.IsCollectable()) //will figure out the condition later
+		if (other.TryGetComponent(out RigidbodyMovement playerMovement) && residueData.IsCollectable()) //will figure out the condition later
 		{
-			GetCollected(other);
+			GetCollected(playerMovement);
 		}
 	}
 
-	private void GetCollected(Collider collector)
+	private void GetCollected(RigidbodyMovement playerMovement)
 	{
+		Debug.Log("yoo");
 		OnCollect?.Invoke();
-		residueData.ApplyForce(collector.GetComponent<Rigidbody2D>());
+		playerMovement.PushShabba(residueData.Momentum);
+		Destroy(gameObject);
 	}
 
 	private void OnDestroy()

@@ -125,7 +125,7 @@ public class RigidbodyMovement : MonoBehaviour
 
     #endregion
 
-    public void PushShabba(float force = 3f)
+    public void PushShabba(float force = 10f)
     {
         rigidBody.drag = initialDrag;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ResidueChunk : MonoBehaviour
 {
-	private List<ResidueParticle> residueParticles = new();
+	[SerializeField] private List<ResidueParticle> residueParticles = new();
 
 	public List<ResidueParticle> GetResidueParticles()
 	{
