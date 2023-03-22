@@ -83,13 +83,20 @@ public class RigidbodyMovement : MonoBehaviour
         // do not rotate if velocity is 0
         if (rigidBody.velocity == Vector2.zero) return;
 
-       // currentRotation = direction.x;
+        // currentRotation = direction.x;
 
-        if(rotationRoutine is not null) StopCoroutine(rotationRoutine);
+        stopRotationRoutine();
         rotationRoutine = StartCoroutine(ChangeRotation(direction.x));
     }
 
-    private float easeInOutCubic(float t){
+    void stopRotationRoutine()
+    {
+        if (null == rotationRoutine) return;
+        StopCoroutine(rotationRoutine);
+        rotationRoutine = null;
+    }
+
+	private float easeInOutCubic(float t){
        return t < 0.5f ? 4 * t * t * t : 1 - Mathf.Pow(-2 * t + 2, 3) / 2;
     }
     private Coroutine rotationRoutine;
@@ -115,7 +122,6 @@ public class RigidbodyMovement : MonoBehaviour
     private void RotateVelocity(float angle)
     {
         // rotate move direction
-        rigidBody.drag = 1f;
         moveDirection = Quaternion.Euler(0, 0, angle) * moveDirection;
         // set velocity to move direction
         rigidBody.velocity = moveDirection * rigidBody.velocity.magnitude;

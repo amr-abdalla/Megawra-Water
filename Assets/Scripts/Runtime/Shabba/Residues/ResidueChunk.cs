@@ -1,31 +1,31 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ResidueChunk : MonoBehaviour
 {
-	[SerializeField] private List<ResidueParticle> residueParticles = new();
+	[SerializeField] private List<ResidueParticle> residueParticles = null;
 
-	public List<ResidueParticle> GetResidueParticles()
+	public IReadOnlyList<ResidueParticle> GetResidueParticles()
 	{
-		if (residueParticles.Count == 0)
-		{
-			FillResidueParticles();
-		}
-
+		InitResidueParticles();
 		return residueParticles;
 	}
 
-	private void FillResidueParticles()
+	private void InitResidueParticles()
 	{
-		foreach (ResidueParticle residueParticle in GetComponentsInChildren<ResidueParticle>())
+		if (null != residueParticles) return;
+
+		residueParticles = GetComponentsInChildren<ResidueParticle>().ToList();
+		foreach (ResidueParticle residueParticle in residueParticles)
 		{
-			residueParticles.Add(residueParticle);
-			residueParticle.OnDestroyEvent += () => RemoveResidueParticleFromCachedList(residueParticle);
+			residueParticle.OnCollect += RemoveResidueParticleFromCachedList;
 		}
 	}
 
 	private void RemoveResidueParticleFromCachedList(ResidueParticle residueParticle)
 	{
+		residueParticle.OnCollect -= RemoveResidueParticleFromCachedList;
 		residueParticles.Remove(residueParticle);
 	}
 }
