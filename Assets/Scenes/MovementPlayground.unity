@@ -592,6 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ba6d9bb41041c4ab72b07fade424af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skipDecceleration: 0
   angularAccelerationData: {fileID: 11400000, guid: f54d7bd3ee4d4634fa1bf5e7e50bcb48, type: 2}
   maxSpeed: 10
   maxDrag: 2

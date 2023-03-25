@@ -11,6 +11,10 @@ public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
     private Rigidbody2D rigidBody;
     #endregion
 
+    #region testing flag
+    [SerializeField] private bool skipDecceleration = false;
+    #endregion
+
     #region scriptable objects
     [SerializeField] private AngularAccelerationData angularAccelerationData;
     #endregion
@@ -87,7 +91,16 @@ public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
         float targetAngularVelocity = angularAccelerationData.maxAngularVelocity * x;
         float angularAcceleration = angularAccelerationData.angularAcceleration;
 
-        currentAngularVelocity = Mathf.MoveTowards(currentAngularVelocity, targetAngularVelocity, angularAcceleration * Time.fixedDeltaTime);
+        
+        // set the angular velocity to 0 if the target angular velocity is 0 or if it has a different sign
+        if ( skipDecceleration && (targetAngularVelocity == 0 || currentAngularVelocity * targetAngularVelocity < 0))
+        {
+            currentAngularVelocity = 0;
+
+        }else{
+    
+            currentAngularVelocity = Mathf.MoveTowards(currentAngularVelocity, targetAngularVelocity, angularAcceleration * Time.fixedDeltaTime);
+        }
 
         return currentAngularVelocity;
 
