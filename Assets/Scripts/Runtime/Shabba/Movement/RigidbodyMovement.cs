@@ -79,7 +79,6 @@ public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
     {
         // returns the angular velocity vector based on the direction vector and the angular acceleration data
         float x = direction.x;
-        // flip x
         float currentAngularVelocity = rigidBody.angularVelocity;
         float targetAngularVelocity = angularAccelerationData.maxAngularVelocity * x;
         float angularAcceleration = angularAccelerationData.angularAcceleration;

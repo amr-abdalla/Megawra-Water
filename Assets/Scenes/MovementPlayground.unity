@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 758519695}
   - component: {fileID: 758519694}
   - component: {fileID: 758519696}
+  - component: {fileID: 758519697}
   m_Layer: 0
   m_Name: Shabba
   m_TagString: Untagged
@@ -591,12 +592,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ba6d9bb41041c4ab72b07fade424af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  angularAccelerationData: {fileID: 11400000, guid: f54d7bd3ee4d4634fa1bf5e7e50bcb48, type: 2}
   maxSpeed: 10
   maxDrag: 20
   minVelocity: 0
   dragIncreasePerSecond: 3
   initialDrag: 0
-  currentRotation: 0
+  rotateDirection: {x: 0, y: 0}
   pushAction: {fileID: 6616664993253886368, guid: aa644bfc2337c30408815c43caa8e014, type: 3}
   rotateAction: {fileID: 4996662534001179324, guid: aa644bfc2337c30408815c43caa8e014, type: 3}
 --- !u!58 &758519696
@@ -615,6 +617,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &758519697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758519690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c84ef5fc6d63849beb6257a7f89071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushAction: {fileID: 6616664993253886368, guid: aa644bfc2337c30408815c43caa8e014, type: 3}
+  rotateAction: {fileID: 4996662534001179324, guid: aa644bfc2337c30408815c43caa8e014, type: 3}
 --- !u!1 &917099086 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7107227001869529466, guid: 9695b94a0aafa0b4fbe10680583316c7, type: 3}
