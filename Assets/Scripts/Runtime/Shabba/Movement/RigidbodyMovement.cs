@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
 {
@@ -56,7 +57,10 @@ public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
     private void FixedUpdate()
     {
 
-        rigidBody.angularVelocity = ComputeAngularVelocity(rotateDirection);
+    //rigidBody.angularVelocity = ComputeAngularVelocity(rotateDirection);
+        moveDirection = Quaternion.Euler(0, 0, ComputeAngularVelocity(rotateDirection) * Time.deltaTime) * moveDirection;
+
+        rigidBody.velocity = moveDirection * rigidBody.velocity.magnitude;
 
         rigidBody.velocity = Vector2.ClampMagnitude(rigidBody.velocity, maxSpeed);
 
@@ -102,7 +106,7 @@ public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
 
 
         // match the moveDirection to the forward direction of the rigidbody's rotation
-        moveDirection = rigidBody.transform.up;
+       // moveDirection = rigidBody.transform.up;
 
 
         rigidBody.AddForce(moveDirection * force, ForceMode2D.Impulse);

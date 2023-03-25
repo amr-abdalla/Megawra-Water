@@ -594,9 +594,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angularAccelerationData: {fileID: 11400000, guid: f54d7bd3ee4d4634fa1bf5e7e50bcb48, type: 2}
   maxSpeed: 10
-  maxDrag: 20
+  maxDrag: 2
   minVelocity: 0
-  dragIncreasePerSecond: 3
+  dragIncreasePerSecond: 0.5
   initialDrag: 0
   rotateDirection: {x: 0, y: 0}
   pushAction: {fileID: 6616664993253886368, guid: aa644bfc2337c30408815c43caa8e014, type: 3}

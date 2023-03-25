@@ -15,7 +15,7 @@ public class ShabbaInput : MonoBehaviour
     {
         pushAction.action.Enable();
         rotateAction.action.Enable();
-        pushAction.action.performed += ctx => shabbaMoveAction.Push(ctx.ReadValue<float>());
+        pushAction.action.performed += ctx => shabbaMoveAction.Push(5f);
         rotateAction.action.performed += ctx => shabbaMoveAction.Rotate(ctx.ReadValue<Vector2>());
         //rotateAction.action.canceled += ctx => RotateVelocity(0);
     }
