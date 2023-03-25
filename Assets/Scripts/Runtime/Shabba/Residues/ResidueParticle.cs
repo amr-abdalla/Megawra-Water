@@ -12,7 +12,7 @@ public class ResidueParticle : MonoBehaviour
 		if (other.TryGetComponent(out RigidbodyMovement playerMovement) && residueData.IsCollectable()) //will figure out the condition later
 		{
 			GetCollected();
-			playerMovement.PushShabba(residueData.Momentum);
+			playerMovement.Push(residueData.Momentum);
 
 			Destroy(gameObject);
 		}
