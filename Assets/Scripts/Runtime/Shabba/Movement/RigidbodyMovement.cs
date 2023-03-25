@@ -2,12 +2,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class RigidbodyMovement : MonoBehaviour
+public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
 {
     #region private members
 
     #region components
     private Rigidbody2D rigidBody;
+    #endregion
+
+    #region scriptable objects
+    [SerializeField] private AngularAccelerationData angularAccelerationData;
     #endregion
 
     #region max values
@@ -23,7 +27,7 @@ public class RigidbodyMovement : MonoBehaviour
     #endregion
 
     #region current values
-    [SerializeField] private float currentRotation = 0;
+    [SerializeField] private Vector2 rotateDirection = Vector2.zero;
     #endregion
 
     #region input Actions
@@ -40,28 +44,24 @@ public class RigidbodyMovement : MonoBehaviour
 
 	private void Awake()
     {
-        InitInput();
 
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.drag = initialDrag;
+        // set object to look down
+        rigidBody.transform.rotation = Quaternion.Euler(0, 0, 180);
     }
 
-    private void InitInput()
-    {
-        pushAction.action.Enable();
-        rotateAction.action.Enable();
-        pushAction.action.performed += ctx => PushShabba();
-        rotateAction.action.performed += ctx => RotateVelocityVector2(ctx.ReadValue<Vector2>());
-        //rotateAction.action.canceled += ctx => RotateVelocity(0);
-    }
+
 
     private void FixedUpdate()
     {
-        // linearly increase drag
 
-        // clamp speed
+        rigidBody.angularVelocity = ComputeAngularVelocity(rotateDirection);
+
         rigidBody.velocity = Vector2.ClampMagnitude(rigidBody.velocity, maxSpeed);
-        RotateVelocity(currentRotation);
+
+        // set the direction of the movement to be forward
+
         // if velocity is minimum, set linear drag to initial drag
         if (rigidBody.velocity.magnitude < minVelocity)
         {
@@ -71,76 +71,51 @@ public class RigidbodyMovement : MonoBehaviour
         {
             rigidBody.drag = Mathf.Clamp(rigidBody.drag + dragIncreasePerSecond * Time.fixedDeltaTime, initialDrag, maxDrag);
         }
+
     }
 
-    #region rotation
-
-    private void RotateVelocityVector2(Vector2 direction)
+    #region angular acceleration
+    private float ComputeAngularVelocity(Vector2 direction)
     {
-       // Debug.Log(direction);
-        Debug.Log(Time.deltaTime);
-        // get the x component of the direction vector
-        // do not rotate if velocity is 0
-        if (rigidBody.velocity == Vector2.zero) return;
+        // returns the angular velocity vector based on the direction vector and the angular acceleration data
+        float x = direction.x;
+        // flip x
+        float currentAngularVelocity = rigidBody.angularVelocity;
+        float targetAngularVelocity = angularAccelerationData.maxAngularVelocity * x;
+        float angularAcceleration = angularAccelerationData.angularAcceleration;
 
-        // currentRotation = direction.x;
+        currentAngularVelocity = Mathf.MoveTowards(currentAngularVelocity, targetAngularVelocity, angularAcceleration * Time.fixedDeltaTime);
 
-        stopRotationRoutine();
-        rotationRoutine = StartCoroutine(ChangeRotation(direction.x));
-    }
+        return currentAngularVelocity;
 
-    void stopRotationRoutine()
-    {
-        if (null == rotationRoutine) return;
-        StopCoroutine(rotationRoutine);
-        rotationRoutine = null;
-    }
-
-	private float easeInOutCubic(float t){
-       return t < 0.5f ? 4 * t * t * t : 1 - Mathf.Pow(-2 * t + 2, 3) / 2;
-    }
-    private Coroutine rotationRoutine;
-
-    IEnumerator ChangeRotation(float targetRotation)
-	{
-        float t = 0f;
-        float duration = 0.1f;
-        while(currentRotation != targetRotation)
-		{
-            // interpolate between current rotation and target rotation, using easeInOutCubic
-            
-            t += Time.deltaTime / duration;
-
-            currentRotation = Mathf.Lerp(currentRotation, targetRotation, easeInOutCubic(t));
-
-            currentRotation = Mathf.Clamp(currentRotation, -1, 1);
-
-            yield return null;
-        }
-	}        
-
-    private void RotateVelocity(float angle)
-    {
-        // rotate move direction
-        moveDirection = Quaternion.Euler(0, 0, angle) * moveDirection;
-        // set velocity to move direction
-        rigidBody.velocity = moveDirection * rigidBody.velocity.magnitude;
-        //Debug.Log("RotateVelocity. angle: " + angle + "");
-
+        
     }
 
     #endregion
 
-    public void PushShabba(float force = 10f)
+
+    #region action interface
+    public void Push(float force = 100f)
     {
         rigidBody.drag = initialDrag;
 
         // if velocity isn't 0, set move direction to velocity's direction
-        if (rigidBody.velocity != Vector2.zero)
-        {
-            moveDirection = rigidBody.velocity.normalized;
-        }
+
+
+        // match the moveDirection to the forward direction of the rigidbody's rotation
+        moveDirection = rigidBody.transform.up;
+
 
         rigidBody.AddForce(moveDirection * force, ForceMode2D.Impulse);
     }
+
+    public void Rotate(Vector2 direction)
+    {
+        rotateDirection = direction;
+    }
+
+    #endregion
+
+
+    
 }
