@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class ResidueChunk : MonoBehaviour
 {
 	[SerializeField] private List<ResidueParticle> residueParticles = null;
+	public Action<ResidueChunk, Vector3, float> OnGetPushed;
+	public float lastPushTime = 0f;
 
 	public IReadOnlyList<ResidueParticle> GetResidueParticles()
 	{
@@ -19,8 +22,6 @@ public class ResidueChunk : MonoBehaviour
 
 	private void InitResidueParticles()
 	{
-		//if (null != residueParticles) return;
-
 		residueParticles = GetComponentsInChildren<ResidueParticle>().ToList();
 		foreach (ResidueParticle residueParticle in residueParticles)
 		{
@@ -34,19 +35,27 @@ public class ResidueChunk : MonoBehaviour
 		residueParticles.Remove(residueParticle);
 	}
 
+	public void Init()
+	{
+		residueParticles.ForEach(particle => particle.particleMovement.Init());
+	}
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if(collision.TryGetComponent(out RigidbodyMovement playerMovement)) // figure condition out later
 		{
-			PushAllParticles(2f, playerMovement.GetComponent<Rigidbody2D>().velocity.normalized);		
+			PushAllParticles(playerMovement.GetComponent<Rigidbody2D>().velocity.magnitude * 0.5f, playerMovement.GetComponent<Rigidbody2D>().velocity.normalized);		
 		}
 	}
 
 	public void PushAllParticles(float value, Vector3 pushDirection)
 	{
-		foreach (var particle in residueParticles)
+		foreach (ResidueParticle particle in residueParticles)
 		{
-			particle.GetComponent<ResidueParticleMovement>().GetPushed(value, pushDirection);
+			particle.particleMovement.GetPushed(value, pushDirection);
 		}
+
+		lastPushTime = Time.time;
+		OnGetPushed?.Invoke(this, pushDirection, value);
 	}
 }
