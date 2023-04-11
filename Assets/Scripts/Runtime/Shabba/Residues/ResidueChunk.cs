@@ -15,7 +15,7 @@ public class ResidueChunk : MonoBehaviour
 		return residueParticles;
 	}
 
-	private void Start()
+	private void Awake()
 	{
 		InitResidueParticles();
 	}

@@ -48,7 +48,7 @@ public class ResidueGrid : MonoBehaviour
 
 		foreach (var cell in cellsToPush)
 		{
-			if (cell.residueChunk.GetResidueParticles().First().GetComponent<ResidueParticleMovement>().currentPush is null)
+			if (cell.residueChunk.GetResidueParticles()[0].particleMovement.currentPush is null)
 			{
 				cell.residueChunk.PushAllParticles(pushValue * _AdjacentPushValueMultiplier, direction, 2f * _AdjacentPushValueMultiplier);
 			}

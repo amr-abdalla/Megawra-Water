@@ -8,7 +8,7 @@ public class ResidueParticle : MonoBehaviour
 
 	public event Action<ResidueParticle> OnCollect;
 
-	private void Start()
+	private void Awake()
 	{
 		particleMovement = GetComponent<ResidueParticleMovement>();
 	}
