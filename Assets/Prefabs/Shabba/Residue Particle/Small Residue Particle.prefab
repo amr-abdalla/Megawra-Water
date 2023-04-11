@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2809870400543900221}
   - component: {fileID: 2809870400543900354}
   - component: {fileID: 2809870400543900353}
+  - component: {fileID: -8110271796349198096}
   m_Layer: 0
   m_Name: Small Residue Particle
   m_TagString: Untagged
@@ -149,3 +150,15 @@ PolygonCollider2D:
     - - {x: 0, y: 0.5773587}
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
+--- !u!114 &-8110271796349198096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2809870400543900222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae1230a8ed8ec994d8456dd3dded9a10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
