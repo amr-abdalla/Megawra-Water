@@ -44,15 +44,15 @@ public class ResidueChunk : MonoBehaviour
 	{
 		if(collision.TryGetComponent(out RigidbodyMovement playerMovement)) // figure condition out later
 		{
-			PushAllParticles(playerMovement.GetComponent<Rigidbody2D>().velocity.magnitude * 0.5f, playerMovement.GetComponent<Rigidbody2D>().velocity.normalized);		
+			PushAllParticles(playerMovement.GetComponent<Rigidbody2D>().velocity.magnitude * 0.5f, playerMovement.GetComponent<Rigidbody2D>().velocity.normalized, 2f);		
 		}
 	}
 
-	public void PushAllParticles(float value, Vector3 pushDirection)
+	public void PushAllParticles(float value, Vector3 pushDirection, float speed)
 	{
 		foreach (ResidueParticle particle in residueParticles)
 		{
-			particle.particleMovement.GetPushed(value, pushDirection);
+			particle.particleMovement.GetPushed(value, pushDirection, speed);
 		}
 
 		lastPushTime = Time.time;

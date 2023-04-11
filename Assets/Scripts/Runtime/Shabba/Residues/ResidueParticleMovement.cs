@@ -28,19 +28,18 @@ public class ResidueParticleMovement : MonoBehaviour
 		}	
 	}
 
-	public void GetPushed(float pushValue, Vector2 pushDirection)
+	public void GetPushed(float pushValue, Vector2 pushDirection, float speed)
 	{
-		OnGetPushed?.Invoke(pushValue, pushDirection);
-
 		if (currentPush is not null)
 		{
 			StopCoroutine(currentPush);
 		}
 
-		currentPush = StartCoroutine(PushRoutine(pushValue, pushDirection));
+		currentPush = StartCoroutine(PushRoutine(pushValue, pushDirection, speed));
+		OnGetPushed?.Invoke(pushValue, pushDirection);
 	}
 
-	private IEnumerator PushRoutine(float pushValue, Vector2 pushDirection, float speed = 2f)
+	private IEnumerator PushRoutine(float pushValue, Vector2 pushDirection, float speed)
 	{
 		Vector2 initialPosition = transform.position;
 		Vector2 targetPosition = (Vector2)transform.position + pushDirection * pushValue;
