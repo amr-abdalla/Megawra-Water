@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResidueParticleMovement : MonoBehaviour
 {
-	private const float _ReturnToStartCheckRateInSeconds = 5f;
+	private const float _ReturnToStartPositionCheckRateInSeconds = 5f;
 	public event Action<float, Vector3> OnGetPushed;
 	private Vector3 startPosition;
 	public Coroutine currentPush;
@@ -24,7 +24,7 @@ public class ResidueParticleMovement : MonoBehaviour
 				currentPush = StartCoroutine(PushRoutine(Vector2.Distance(startPosition, transform.position), (startPosition - transform.position).normalized, 0.5f));
 			}
 
-			yield return new WaitForSeconds(_ReturnToStartCheckRateInSeconds);
+			yield return new WaitForSeconds(_ReturnToStartPositionCheckRateInSeconds);
 		}	
 	}
 
@@ -43,15 +43,15 @@ public class ResidueParticleMovement : MonoBehaviour
 	{
 		Vector2 initialPosition = transform.position;
 		Vector2 targetPosition = (Vector2)transform.position + pushDirection * pushValue;
-		float timeToSpend = Vector2.Distance(initialPosition, targetPosition) / speed;
+		float totalPushTime = Vector2.Distance(initialPosition, targetPosition) / speed;
 		float timeSpent = 0;
 
 		while (Vector2.Distance(transform.position, targetPosition) != 0)
 		{
 			timeSpent += Time.deltaTime;
-			timeSpent = MathF.Min(timeSpent, timeToSpend);
-			float f = timeSpent/timeToSpend < 0.5f ? Mathf.Pow(timeSpent / timeToSpend * 2f, 3f) / 2f : 1f - Mathf.Pow((1f - timeSpent / timeToSpend) * 2f, 3f) / 2f;
-			transform.position = Vector2.Lerp(initialPosition, targetPosition, f);
+			timeSpent = MathF.Min(timeSpent, totalPushTime);
+			float t = timeSpent/totalPushTime < 0.5f ? Mathf.Pow(timeSpent / totalPushTime * 2f, 3f) / 2f : 1f - Mathf.Pow((1f - timeSpent / totalPushTime) * 2f, 3f) / 2f;
+			transform.position = Vector2.Lerp(initialPosition, targetPosition, t);
 			yield return new WaitForEndOfFrame();
 		}
 

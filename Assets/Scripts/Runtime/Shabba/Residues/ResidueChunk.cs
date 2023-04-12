@@ -8,7 +8,6 @@ public class ResidueChunk : MonoBehaviour
 	[SerializeField] private List<ResidueParticle> residueParticles = null;
 	public Action<ResidueChunk, Vector3, float> OnGetPushed;
 	public Action<ResidueChunk> OnDestroy;
-	public float lastPushTime = 0f;
 	public const float _PushValueMultiplier = 0.1f;
 	public const float _PushSpeedMultiplier = 0.5f;
 
@@ -65,7 +64,6 @@ public class ResidueChunk : MonoBehaviour
 			particle.particleMovement.GetPushed(value, pushDirection, speed);
 		}
 
-		lastPushTime = Time.time;
 		OnGetPushed?.Invoke(this, pushDirection, value);
 	}
 }
