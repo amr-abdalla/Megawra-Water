@@ -11,6 +11,10 @@ public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
     private Rigidbody2D rigidBody;
     #endregion
 
+    #region testing flag
+    [SerializeField] private bool skipDecceleration = false;
+    #endregion
+
     #region scriptable objects
     [SerializeField] private AngularAccelerationData angularAccelerationData;
     #endregion
@@ -19,7 +23,13 @@ public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
     [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private float maxDrag = 10f;
     [SerializeField] private float minVelocity = 1f;
-    [SerializeField] private float dragIncreasePerSecond = 1f;
+    // [SerializeField] private float dragIncreasePerSecond = 1f;
+    [SerializeField] private float timeToMaxDrag = 1f;
+
+    // drop down menu for lerp function
+    public enum LerpFunction { EaseOutExpo, EaseOutBack }
+    [SerializeField] private LerpFunction dragLerpFunction = LerpFunction.EaseOutExpo;
+
     #endregion
 
     #region initial values
@@ -73,11 +83,37 @@ public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
         }
         else
         {
-            rigidBody.drag = Mathf.Clamp(rigidBody.drag + dragIncreasePerSecond * Time.fixedDeltaTime, initialDrag, maxDrag);
+
+            rigidBody.drag = Mathf.Lerp(rigidBody.drag, maxDrag,  Lerp(Time.deltaTime / timeToMaxDrag));
         }
 
     }
 
+    private float Lerp(float x)
+    {
+        switch (dragLerpFunction)
+        {
+            case LerpFunction.EaseOutExpo:
+                return EaseOutExpo(x);
+            case LerpFunction.EaseOutBack:
+                return EaseOutBack(x);
+            default:
+                return EaseOutExpo(x);
+        }
+    }
+
+    private float EaseOutExpo(float x)
+    {
+        return 1 - Mathf.Pow(2, -10 * x);
+    }
+
+    private float EaseOutBack(float x)
+    {
+        float c1 = 1.70158f;
+        float c3 = c1 + 1;
+
+        return 1 + c3 * Mathf.Pow(x - 1, 3) + c1 * Mathf.Pow(x - 1, 2);
+    }
     #region angular acceleration
     private float ComputeAngularVelocity(Vector2 direction)
     {
@@ -87,7 +123,16 @@ public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
         float targetAngularVelocity = angularAccelerationData.maxAngularVelocity * x;
         float angularAcceleration = angularAccelerationData.angularAcceleration;
 
-        currentAngularVelocity = Mathf.MoveTowards(currentAngularVelocity, targetAngularVelocity, angularAcceleration * Time.fixedDeltaTime);
+        
+        // set the angular velocity to 0 if the target angular velocity is 0 or if it has a different sign
+        if ( skipDecceleration && (targetAngularVelocity == 0 || currentAngularVelocity * targetAngularVelocity < 0))
+        {
+            currentAngularVelocity = 0;
+
+        }else{
+    
+            currentAngularVelocity = Mathf.MoveTowards(currentAngularVelocity, targetAngularVelocity, angularAcceleration * Time.fixedDeltaTime);
+        }
 
         return currentAngularVelocity;
 
