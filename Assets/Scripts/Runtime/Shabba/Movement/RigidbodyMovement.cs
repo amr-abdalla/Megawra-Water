@@ -1,74 +1,51 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
-public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
+public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 {
-    #region private members
-
-    #region components
-    private Rigidbody2D rigidBody;
-    #endregion
-
-    #region testing flag
-    [SerializeField] private bool skipDecceleration = false;
-    #endregion
-
-    #region scriptable objects
     [SerializeField] private AngularAccelerationData angularAccelerationData;
-    #endregion
+    // Code review : create a curve settings scriptable object instead
 
-    #region max values
+    [SerializeField] AnimationCurve dragEvolutionCurve = null;
+
+    [Header("Max values")]
+    [SerializeField] private float minSpeed = 1f;
     [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private float maxDrag = 10f;
-    [SerializeField] private float minVelocity = 1f;
-    // [SerializeField] private float dragIncreasePerSecond = 1f;
     [SerializeField] private float timeToMaxDrag = 1f;
 
-    // drop down menu for lerp function
-    public enum LerpFunction { EaseOutExpo, EaseOutBack }
-    [SerializeField] private LerpFunction dragLerpFunction = LerpFunction.EaseOutExpo;
-
-    #endregion
-
-    #region initial values
-    private Vector2 moveDirection = Vector2.down;
+    [Header("Initial values")]
     [SerializeField] private float initialDrag = 0f;
-    #endregion
 
-    #region current values
-    [SerializeField] private Vector2 rotateDirection = Vector2.zero;
-    #endregion
+    private Rigidbody2D rigidBody;
 
-    #region input Actions
-    [SerializeField] private InputActionReference pushAction;
-    [SerializeField] private InputActionReference rotateAction;
-	#endregion
+    // Runtime variables
+    private float currentDragTimer = 0f;
+    float currentAngularVelocity = 0f;
+    private Vector2 rotateDirection = Vector2.zero;
+    private Vector2 moveDirection = Vector2.down;
 
-	#endregion
+    #region UNITY
 
-	private void Update()
+    void Start()
+    {
+        rigidBody = GetComponent<Rigidbody2D>();
+        resetToInitialState();
+    }
+
+    private void Update()
 	{
         Debug.DrawRay(transform.position, rigidBody.velocity, Color.red);
 	}
 
-	private void Awake()
+    void OnDisable()
     {
-
-        rigidBody = GetComponent<Rigidbody2D>();
-        rigidBody.drag = initialDrag;
-        // set object to look down
-        rigidBody.transform.rotation = Quaternion.Euler(0, 0, 180);
+        resetToInitialState();
     }
-
-
 
     private void FixedUpdate()
     {
-
-    //rigidBody.angularVelocity = ComputeAngularVelocity(rotateDirection);
-        moveDirection = Quaternion.Euler(0, 0, ComputeAngularVelocity(rotateDirection) * Time.deltaTime) * moveDirection;
+        float deltaAngle = ComputeAngularVelocity(rotateDirection.x) * Time.deltaTime;
+        moveDirection = Quaternion.Euler(0, 0, -deltaAngle) * moveDirection;
 
         rigidBody.velocity = moveDirection * rigidBody.velocity.magnitude;
 
@@ -77,72 +54,22 @@ public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
         // set the direction of the movement to be forward
 
         // if velocity is minimum, set linear drag to initial drag
-        if (rigidBody.velocity.magnitude < minVelocity)
+        if (rigidBody.velocity.magnitude >= minSpeed)
         {
-            rigidBody.drag = initialDrag;
+            applyDrag();
         }
         else
         {
-
-            rigidBody.drag = Mathf.Lerp(rigidBody.drag, maxDrag,  Lerp(Time.deltaTime / timeToMaxDrag));
+            onDidStopMoving();
         }
-
-    }
-
-    private float Lerp(float x)
-    {
-        switch (dragLerpFunction)
-        {
-            case LerpFunction.EaseOutExpo:
-                return EaseOutExpo(x);
-            case LerpFunction.EaseOutBack:
-                return EaseOutBack(x);
-            default:
-                return EaseOutExpo(x);
-        }
-    }
-
-    private float EaseOutExpo(float x)
-    {
-        return 1 - Mathf.Pow(2, -10 * x);
-    }
-
-    private float EaseOutBack(float x)
-    {
-        float c1 = 1.70158f;
-        float c3 = c1 + 1;
-
-        return 1 + c3 * Mathf.Pow(x - 1, 3) + c1 * Mathf.Pow(x - 1, 2);
-    }
-    #region angular acceleration
-    private float ComputeAngularVelocity(Vector2 direction)
-    {
-        // returns the angular velocity vector based on the direction vector and the angular acceleration data
-        float x = direction.x;
-        float currentAngularVelocity = rigidBody.angularVelocity;
-        float targetAngularVelocity = angularAccelerationData.maxAngularVelocity * x;
-        float angularAcceleration = angularAccelerationData.angularAcceleration;
-
-        
-        // set the angular velocity to 0 if the target angular velocity is 0 or if it has a different sign
-        if ( skipDecceleration && (targetAngularVelocity == 0 || currentAngularVelocity * targetAngularVelocity < 0))
-        {
-            currentAngularVelocity = 0;
-
-        }else{
-    
-            currentAngularVelocity = Mathf.MoveTowards(currentAngularVelocity, targetAngularVelocity, angularAcceleration * Time.fixedDeltaTime);
-        }
-
-        return currentAngularVelocity;
-
-        
     }
 
     #endregion
 
 
-    #region action interface
+    #region PUBLIC API
+
+    [ExposePublicMethod]
     public void Push(float force = 100f)
     {
         rigidBody.drag = initialDrag;
@@ -151,12 +78,19 @@ public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
 
 
         // match the moveDirection to the forward direction of the rigidbody's rotation
-       // moveDirection = rigidBody.transform.up;
+        // moveDirection = rigidBody.transform.up;
 
 
         rigidBody.AddForce(moveDirection * force, ForceMode2D.Impulse);
     }
 
+    [ExposePublicMethod]
+    public void ResetToInitialState()
+    {
+        resetToInitialState();
+    }
+
+    [ExposePublicMethod]
     public void Rotate(Vector2 direction)
     {
         rotateDirection = direction;
@@ -164,6 +98,79 @@ public class RigidbodyMovement : MonoBehaviour, IShabbaMoveAction
 
     #endregion
 
+    #region PRIVATE
 
-    
+    void onDidStopMoving()
+    {
+        // Code review : this could trigger an event to tell all listeners 
+        // that object stopped moving (+ start whataver behaviour should happen in that case)
+    }
+
+    void resetToInitialState()
+    {
+        currentDragTimer = 0f;
+        currentAngularVelocity = 0f;
+
+        if (null != rigidBody)
+        {
+            rigidBody.drag = initialDrag;
+            // set object to look down
+            rigidBody.transform.rotation = Quaternion.Euler(0, 0, 180);
+            rigidBody.velocity = MathConstants.VECTOR_2_ZERO;
+        }
+    }
+
+    void applyDrag()
+    {
+        float tDrag = currentDragTimer / timeToMaxDrag;
+        float tEval = dragEvolutionCurve.Evaluate(tDrag);
+        rigidBody.drag = Mathf.Lerp(rigidBody.drag, maxDrag, tEval);
+
+        currentDragTimer += Time.fixedDeltaTime;
+        currentDragTimer = Mathf.Clamp(currentDragTimer, 0f, timeToMaxDrag);
+    }
+
+    private float ComputeAngularVelocity(float i_angleSign)
+    {
+        if (i_angleSign == 0f)
+            currentAngularVelocity = descelerate(currentAngularVelocity, angularAccelerationData.angularDesceleration);
+        else
+            currentAngularVelocity = accelerate(i_angleSign, currentAngularVelocity, angularAccelerationData.maxAngularVelocity, angularAccelerationData.angularAcceleration);
+
+        return currentAngularVelocity;
+    }
+
+    // Code review : externalize these 2 functions into a static class (AccelerationUtility)
+    float accelerate(float i_sign, float i_speed, float i_maxSpeed, float i_acceleration)
+    {
+        float deltaVel = i_acceleration * Time.fixedDeltaTime * i_sign;
+        i_speed += deltaVel;
+
+        i_speed = i_sign > 0 ?
+            Mathf.Clamp(i_speed, 0, i_maxSpeed) :
+            Mathf.Clamp(i_speed, -i_maxSpeed, 0);
+
+        return i_speed;
+    }
+
+    float descelerate(float i_speed, float i_desceleration)
+    {
+        if (i_speed == 0f) return 0f;
+
+        float deltaVel = i_desceleration * Time.fixedDeltaTime;
+
+        if (i_speed < 0)
+        {
+            i_speed += deltaVel;
+            if (i_speed > 0) i_speed = 0f;
+        }
+        else
+        {
+            i_speed -= deltaVel;
+            if (i_speed < 0) i_speed = 0f;
+        }
+
+        return i_speed;
+    }
+    #endregion
 }

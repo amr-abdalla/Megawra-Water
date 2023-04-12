@@ -9,4 +9,5 @@ public class AngularAccelerationData : ScriptableObject
 {
     public float maxAngularVelocity;
     public float angularAcceleration;
+    public float angularDesceleration;
 }
