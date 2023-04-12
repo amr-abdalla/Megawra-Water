@@ -7,7 +7,10 @@ public class ResidueChunk : MonoBehaviour
 {
 	[SerializeField] private List<ResidueParticle> residueParticles = null;
 	public Action<ResidueChunk, Vector3, float> OnGetPushed;
+	public Action<ResidueChunk> OnDestroy;
 	public float lastPushTime = 0f;
+	public const float _PushValueMultiplier = 0.1f;
+	public const float _PushSpeedMultiplier = 0.5f;
 
 	public IReadOnlyList<ResidueParticle> GetResidueParticles()
 	{
@@ -33,6 +36,12 @@ public class ResidueChunk : MonoBehaviour
 	{
 		residueParticle.OnCollect -= RemoveResidueParticleFromCachedList;
 		residueParticles.Remove(residueParticle);
+
+		if(residueParticles.Count == 0)
+		{
+			OnDestroy?.Invoke(this);
+			Destroy(gameObject);
+		}
 	}
 
 	public void Init()
@@ -44,7 +53,8 @@ public class ResidueChunk : MonoBehaviour
 	{
 		if(collision.TryGetComponent(out RigidbodyMovement playerMovement)) // figure condition out later
 		{
-			PushAllParticles(playerMovement.GetComponent<Rigidbody2D>().velocity.magnitude * 0.5f, playerMovement.GetComponent<Rigidbody2D>().velocity.normalized, 2f);		
+			Vector2 playerVelocity = playerMovement.GetComponent<Rigidbody2D>().velocity;
+			PushAllParticles(playerVelocity.magnitude * _PushValueMultiplier, playerVelocity.normalized, playerVelocity.magnitude * _PushValueMultiplier * _PushSpeedMultiplier);
 		}
 	}
 

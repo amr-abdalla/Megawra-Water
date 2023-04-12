@@ -13,7 +13,7 @@ public struct ResidueCell
 public class ResidueGrid : MonoBehaviour
 {
 	private const float _XSpacing = 8f;
-	private const float _YSpacing = 7f;
+	private const float _YSpacing = 8f;
 	private const float _AdjacentPushValueMultiplier = 0.5f;
 
 	[SerializeField] private List<ResidueCell> residueCells;
@@ -32,14 +32,19 @@ public class ResidueGrid : MonoBehaviour
 
 	private void InitChunks()
 	{
-		var allResidues = GetResidueCells();
-
-		foreach (var cell in allResidues)
+		foreach (var cell in residueCells)
 		{
 			cell.residueChunk.transform.position = new Vector3(_XSpacing * cell.position.x, _YSpacing * cell.position.y);
 			cell.residueChunk.Init();
 			cell.residueChunk.OnGetPushed += PushAdjacentCells;
+			cell.residueChunk.OnDestroy += RemoveCellWithChunk;
 		}
+	}
+
+	private void RemoveCellWithChunk(ResidueChunk residueChunk)
+	{
+		var cellToRemove = residueCells.FirstOrDefault(cell => cell.residueChunk.Equals(residueChunk));
+		residueCells.Remove(cellToRemove);
 	}
 
 	private void PushAdjacentCells(ResidueChunk residue, Vector3 direction, float pushValue)
@@ -50,7 +55,7 @@ public class ResidueGrid : MonoBehaviour
 		{
 			if (cell.residueChunk.GetResidueParticles()[0].particleMovement.currentPush is null)
 			{
-				cell.residueChunk.PushAllParticles(pushValue * _AdjacentPushValueMultiplier, direction, 2f * _AdjacentPushValueMultiplier);
+				cell.residueChunk.PushAllParticles(pushValue * _AdjacentPushValueMultiplier, direction, pushValue * _AdjacentPushValueMultiplier * ResidueChunk._PushSpeedMultiplier);
 			}
 		}
 	}
