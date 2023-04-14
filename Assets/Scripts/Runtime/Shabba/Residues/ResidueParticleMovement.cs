@@ -2,30 +2,23 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class ResidueParticleMovement : MonoBehaviour
+public class ResidueParticleMovement : MonoBehaviourBase
 {
-	private const float _ReturnToStartPositionCheckRateInSeconds = 5f;
-	public event Action<float, Vector3> OnGetPushed;
-	private Vector3 startPosition;
-	public Coroutine currentPush;
+	[SerializeField] protected AnimationCurve pushEvolutionCurve;
 
+	private const float _ReturnToStartPositionCheckRateInSeconds = 5f;
+
+	public event Action<float, Vector3> OnGetPushed;
+	public Coroutine currentPush { get; private set; }
+
+	private Vector3 startPosition;
+
+
+	#region PUBLIC API
 	public void Init()
 	{
 		startPosition = transform.position;
 		StartCoroutine(TryReturnToStartPosition());
-	}
-
-	private IEnumerator TryReturnToStartPosition()
-	{
-		while(true)
-		{
-			if (currentPush == null && transform.position != startPosition)
-			{
-				currentPush = StartCoroutine(PushRoutine(Vector2.Distance(startPosition, transform.position), (startPosition - transform.position).normalized, 0.5f));
-			}
-
-			yield return new WaitForSeconds(_ReturnToStartPositionCheckRateInSeconds);
-		}	
 	}
 
 	public void GetPushed(float pushValue, Vector2 pushDirection, float speed)
@@ -39,6 +32,22 @@ public class ResidueParticleMovement : MonoBehaviour
 		OnGetPushed?.Invoke(pushValue, pushDirection);
 	}
 
+	#endregion
+
+	#region PRIVATE
+	private IEnumerator TryReturnToStartPosition()
+	{
+		while(true)
+		{
+			if (currentPush == null && transform.position != startPosition)
+			{
+				currentPush = StartCoroutine(PushRoutine(Vector2.Distance(startPosition, transform.position), (startPosition - transform.position).normalized, 0.5f));
+			}
+
+			yield return new WaitForSeconds(_ReturnToStartPositionCheckRateInSeconds);
+		}	
+	}
+
 	private IEnumerator PushRoutine(float pushValue, Vector2 pushDirection, float speed)
 	{
 		Vector2 initialPosition = transform.position;
@@ -50,7 +59,7 @@ public class ResidueParticleMovement : MonoBehaviour
 		{
 			timeSpent += Time.deltaTime;
 			timeSpent = MathF.Min(timeSpent, totalPushTime);
-			float t = timeSpent/totalPushTime < 0.5f ? Mathf.Pow(timeSpent / totalPushTime * 2f, 3f) / 2f : 1f - Mathf.Pow((1f - timeSpent / totalPushTime) * 2f, 3f) / 2f;
+			float t = pushEvolutionCurve.Evaluate(timeSpent/totalPushTime);
 			transform.position = Vector2.Lerp(initialPosition, targetPosition, t);
 			yield return new WaitForEndOfFrame();
 		}
@@ -58,4 +67,5 @@ public class ResidueParticleMovement : MonoBehaviour
 		currentPush = null;
 	}
 
+	#endregion
 }

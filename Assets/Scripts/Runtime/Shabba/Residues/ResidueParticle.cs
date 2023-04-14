@@ -4,10 +4,11 @@ using UnityEngine;
 public class ResidueParticle : MonoBehaviour
 {
 	[SerializeField] private ResidueData residueData;
-	public ResidueParticleMovement particleMovement { get; private set; }
 
+	public ResidueParticleMovement particleMovement { get; private set; }
 	public event Action<ResidueParticle> OnCollect;
 
+	#region UNITY
 	private void Awake()
 	{
 		particleMovement = GetComponent<ResidueParticleMovement>();
@@ -24,9 +25,14 @@ public class ResidueParticle : MonoBehaviour
 		}
 	}
 
+	#endregion
+
+	#region PRIVATE
 	private void GetCollected()
 	{
 		OnCollect?.Invoke(this);
 	}
+
+	#endregion
 
 }
