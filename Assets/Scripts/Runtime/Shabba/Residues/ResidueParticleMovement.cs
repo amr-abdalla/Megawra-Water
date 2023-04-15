@@ -6,7 +6,8 @@ public class ResidueParticleMovement : MonoBehaviourBase
 {
 	[SerializeField] protected AnimationCurve pushEvolutionCurve;
 
-	private const float _ReturnToStartPositionCheckRateInSeconds = 5f;
+	private const float _ReturnToStartPositionCheckRateInSeconds = 1f;
+	private const float _ReturnToStartPositionSpeed = 0.05f;
 
 	public event Action<float, Vector3> OnGetPushed;
 	public Coroutine currentPush { get; private set; }
@@ -41,7 +42,7 @@ public class ResidueParticleMovement : MonoBehaviourBase
 		{
 			if (currentPush == null && transform.position != startPosition)
 			{
-				currentPush = StartCoroutine(PushRoutine(Vector2.Distance(startPosition, transform.position), (startPosition - transform.position).normalized, 0.5f));
+				currentPush = StartCoroutine(PushRoutine(Vector2.Distance(startPosition, transform.position), (startPosition - transform.position).normalized, _ReturnToStartPositionSpeed));
 			}
 
 			yield return new WaitForSeconds(_ReturnToStartPositionCheckRateInSeconds);

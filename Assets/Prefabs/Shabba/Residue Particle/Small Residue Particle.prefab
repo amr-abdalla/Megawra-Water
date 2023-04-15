@@ -162,14 +162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1230a8ed8ec994d8456dd3dded9a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushCurve:
+  pushEvolutionCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0

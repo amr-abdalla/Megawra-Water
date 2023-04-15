@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,11 +6,12 @@ public class ResidueChunk : MonoBehaviour
 {
 	[SerializeField] private List<ResidueParticle> residueParticles = null;
 
-	public Action<ResidueChunk, Vector3, float, float> OnGetPushed;
-	public Action<ResidueChunk> OnDestroy;
+	public System.Action<ResidueChunk, Vector3, float, float> OnGetPushed;
+	public System.Action<ResidueChunk> OnDestroy;
 
 	public const float _PushValueMultiplier = 0.1f;
 	public const float _PushSpeedMultiplier = 0.05f;
+	public const float _randomPushRotationRange = 150f;
 
 	#region PUBLIC API
 	public IReadOnlyList<ResidueParticle> GetResidueParticles()
@@ -29,7 +29,7 @@ public class ResidueChunk : MonoBehaviour
 	{
 		foreach (ResidueParticle particle in residueParticles)
 		{
-			particle.particleMovement.GetPushed(value, pushDirection, speed);
+			particle.particleMovement.GetPushed(value, Quaternion.AngleAxis(Random.Range(- _randomPushRotationRange, _randomPushRotationRange), Vector2.right) * pushDirection, speed);
 		}
 
 		OnGetPushed?.Invoke(this, pushDirection, value, speed);
