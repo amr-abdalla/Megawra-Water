@@ -14,7 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dragEvolutionCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.4118762
+      outSlope: 3.4118762
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.05
+    - serializedVersion: 3
+      time: 0.3997832
+      value: 0.9294342
+      inSlope: 0.56740046
+      outSlope: 0.56740046
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.84825677
+      outSlope: 0.84825677
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.20833331
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
