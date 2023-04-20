@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   residueParticles: []
+  physicsConfig: {fileID: 11400000, guid: 07130fbfd98950245a607968c133fc9e, type: 2}
 --- !u!61 &-7761711707519999274
 BoxCollider2D:
   m_ObjectHideFlags: 0

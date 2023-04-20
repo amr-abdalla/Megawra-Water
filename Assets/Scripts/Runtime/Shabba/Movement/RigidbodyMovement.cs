@@ -96,6 +96,8 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
         rotateDirection = direction;
     }
 
+    public Vector2 CurrentVelocity => null == rigidBody ? MathConstants.VECTOR_2_ZERO : rigidBody.velocity;
+
     #endregion
 
     #region PRIVATE

@@ -4,57 +4,49 @@ using UnityEngine;
 
 public class ResidueChunk : MonoBehaviour
 {
-	[SerializeField] private List<ResidueParticle> residueParticles = null;
+	[SerializeField] float adjacentChunkDetectionRadius = 8f;
+	[SerializeField] ResidueChunkPhysicsConfig physicsConfig = null;
 
 	public System.Action<ResidueChunk, Vector3, float, float> OnGetPushed;
 	public System.Action<ResidueChunk> OnDestroy;
 
-	public const float _PushValueMultiplier = 0.1f;
-	public const float _PushSpeedMultiplier = 0.05f;
-	public const float _randomPushRotationRange = 150f;
-	private const float _AdjacentPushValueMultiplier = 0.5f;
-	private const float _AdjacentPushSpeedMultiplier = 0.5f;
-	private const string _ChunkLayer = "Chunk";
+	private List<ResidueParticle> residueParticles = null;
+
+	int pushedParticlesCount = 0;
 
 	#region PUBLIC API
 	public IReadOnlyList<ResidueParticle> GetResidueParticles()
 	{
-		InitResidueParticles();
 		return residueParticles;
 	}
 
 	public void Init()
 	{
-		residueParticles.ForEach(particle => particle.particleMovement.Init());
+		residueParticles = GetComponentsInChildren<ResidueParticle>().ToList();
+		foreach (ResidueParticle residueParticle in residueParticles)
+		{
+			residueParticle.Init();
+			residueParticle.OnCollect += RemoveResidueParticleFromCachedList;
+		}
 	}
+
 	#endregion
 
 	#region UNITY
-	private void Awake()
-	{
-		InitResidueParticles();
-	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.TryGetComponent(out RigidbodyMovement playerMovement)) // figure condition out later
+		if (collision.TryGetComponent(out RigidbodyMovement otherBody))
 		{
-			Vector2 playerVelocity = playerMovement.GetComponent<Rigidbody2D>().velocity;
-			PushAllParticles(playerVelocity.magnitude * _PushValueMultiplier, playerVelocity.normalized, playerVelocity.magnitude * _PushSpeedMultiplier);
+			Vector2 bodyVelocity = otherBody.CurrentVelocity;
+			float bodySpeed = bodyVelocity.magnitude;
+			PushAllParticles(bodySpeed * physicsConfig.PushValueMultiplier, bodyVelocity.normalized, bodySpeed * physicsConfig.PushSpeedMultiplier);
 		}
 	}
 
 	#endregion
 
 	#region PRIVATE
-	private void InitResidueParticles()
-	{
-		residueParticles = GetComponentsInChildren<ResidueParticle>().ToList();
-		foreach (ResidueParticle residueParticle in residueParticles)
-		{
-			residueParticle.OnCollect += RemoveResidueParticleFromCachedList;
-		}
-	}
 
 	private void RemoveResidueParticleFromCachedList(ResidueParticle residueParticle)
 	{
@@ -68,14 +60,29 @@ public class ResidueChunk : MonoBehaviour
 		}
 	}
 
+	void onParticlePushEnded(ResidueParticle i_particle)
+    {
+		i_particle.OnPushEnded -= onParticlePushEnded;
+		pushedParticlesCount++;
+
+		if(pushedParticlesCount == residueParticles.Count)
+        {
+			pushedParticlesCount = 0;
+			// all particle movement ended
+		}
+	}
+
 	private void PushAllParticles(float value, Vector3 pushDirection, float speed)
 	{
+		pushedParticlesCount = 0;
+
 		foreach (ResidueParticle particle in residueParticles)
 		{
-			particle.particleMovement.GetPushed(value, Quaternion.AngleAxis(Random.Range(-_randomPushRotationRange, _randomPushRotationRange), Vector2.right) * pushDirection, speed);
+			particle.OnPushEnded += onParticlePushEnded;
+			particle.GetPushed(value, Quaternion.AngleAxis(physicsConfig.GetRandomRotation(), Vector2.right) * pushDirection, speed);
 		}
 
-		PushAdjacentChunks(pushDirection * _AdjacentPushValueMultiplier, value, speed * _AdjacentPushSpeedMultiplier);
+		PushAdjacentChunks(pushDirection * physicsConfig.AdjacentPushValueMultiplier, value, speed * physicsConfig.AdjacentPushSpeedMultiplier);
 		OnGetPushed?.Invoke(this, pushDirection, value, speed);
 	}
 
@@ -85,7 +92,7 @@ public class ResidueChunk : MonoBehaviour
 
 		foreach (ResidueChunk chunk in adjacentChunks)
 		{
-			if (chunk.GetResidueParticles()[0].particleMovement.currentPush is null)
+			if (chunk.pushedParticlesCount == 0)
 			{
 				chunk.PushAllParticles(pushValue, direction, pushSpeed);
 			}
@@ -94,11 +101,14 @@ public class ResidueChunk : MonoBehaviour
 
 	private IReadOnlyList<ResidueChunk> GetAdjacentChunks()
 	{
-		List<Collider2D> adjacentChunkColliders = Physics2D.OverlapCircleAll(transform.position, 8f, LayerMask.GetMask(_ChunkLayer)).ToList();
+		List<Collider2D> adjacentChunkColliders = Physics2D.OverlapCircleAll(transform.position, adjacentChunkDetectionRadius, physicsConfig.GetLayerMask()).ToList();
 		adjacentChunkColliders.Remove(GetComponent<Collider2D>());
 
 		return adjacentChunkColliders.Select(chunk => chunk.GetComponent<ResidueChunk>()).ToList();
 	}
 
 	#endregion
+
+
+	// Code review : draw a gizmo for the adjacentChunkDetectionRadius
 }
