@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c285f57b959f840448c8d61e83899a0e, type: 3}
   m_Name: ShabbaAcceleration
   m_EditorClassIdentifier: 
-  maxAngularVelocity: 50
-  angularAcceleration: 50
-  angularDesceleration: 50
+  maxAngularVelocity: 220
+  angularAcceleration: 600
+  angularDesceleration: 1000
