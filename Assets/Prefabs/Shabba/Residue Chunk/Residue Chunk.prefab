@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6752318931937633164}
   - component: {fileID: -4846367069386651512}
   - component: {fileID: -7761711707519999274}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Residue Chunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   residueParticles: []
-  lastPushTime: 0
+  physicsConfig: {fileID: 11400000, guid: 07130fbfd98950245a607968c133fc9e, type: 2}
 --- !u!61 &-7761711707519999274
 BoxCollider2D:
   m_ObjectHideFlags: 0

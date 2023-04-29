@@ -5,14 +5,34 @@ public class ResidueParticle : MonoBehaviour
 {
 	[SerializeField] private ResidueData residueData;
 
-	public ResidueParticleMovement particleMovement { get; private set; }
+	ResidueParticleMovement particleMovement = null;
 	public event Action<ResidueParticle> OnCollect;
+	public event Action<ResidueParticle> OnPushEnded;
+
+	#region PUBLIC API
+
+	public void Init()
+    {
+		particleMovement = GetComponent<ResidueParticleMovement>();
+
+		if(null != particleMovement)
+			particleMovement.Init();
+	}
+
+	public void GetPushed(float pushValue, Vector2 pushDirection, float speed)
+	{
+		if (null == particleMovement) return;
+		particleMovement.GetPushed(pushValue, pushDirection, speed);
+
+		particleMovement.OnPushEnded -= onPushEnded;
+		particleMovement.OnPushEnded += onPushEnded;
+	}
+
+	#endregion
 
 	#region UNITY
-	private void Awake()
-	{
-		particleMovement = GetComponent<ResidueParticleMovement>();
-	}
+
+
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
@@ -28,6 +48,14 @@ public class ResidueParticle : MonoBehaviour
 	#endregion
 
 	#region PRIVATE
+
+	void onPushEnded(ResidueParticleMovement i_movement)
+    {
+		i_movement.OnPushEnded -= onPushEnded;
+		OnPushEnded(this);
+	}
+
+
 	private void GetCollected()
 	{
 		OnCollect?.Invoke(this);

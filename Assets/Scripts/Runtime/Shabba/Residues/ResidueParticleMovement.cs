@@ -6,67 +6,95 @@ public class ResidueParticleMovement : MonoBehaviourBase
 {
 	[SerializeField] protected AnimationCurve pushEvolutionCurve;
 
+	// Code review : make this a part of a ParticleConfig scriptable object
 	private const float _ReturnToStartPositionCheckRateInSeconds = 1f;
 	private const float _ReturnToStartPositionSpeed = 0.05f;
 
 	public event Action<float, Vector3> OnGetPushed;
-	public Coroutine currentPush { get; private set; }
+	public event Action<ResidueParticleMovement> OnPushEnded;
+	Coroutine currentPush = null;
+	Coroutine goBackToStartRoutine = null;
 
+	private Vector3 currentTargetPosition;
 	private Vector3 startPosition;
-
 
 	#region PUBLIC API
 	public void Init()
 	{
 		startPosition = transform.position;
-		StartCoroutine(TryReturnToStartPosition());
 	}
 
 	public void GetPushed(float pushValue, Vector2 pushDirection, float speed)
 	{
-		if (currentPush is not null)
-		{
-			StopCoroutine(currentPush);
-		}
-
+		stopAllMovement();
 		currentPush = StartCoroutine(PushRoutine(pushValue, pushDirection, speed));
-		OnGetPushed?.Invoke(pushValue, pushDirection);
 	}
+
+	public bool IsBeingPushed => null != currentPush;
+
+	public bool IsReturningToStart => null != goBackToStartRoutine;
+
+	public bool IsMoving => IsBeingPushed || IsReturningToStart;
 
 	#endregion
 
 	#region PRIVATE
-	private IEnumerator TryReturnToStartPosition()
-	{
-		while(true)
-		{
-			if (currentPush == null && transform.position != startPosition)
-			{
-				currentPush = StartCoroutine(PushRoutine(Vector2.Distance(startPosition, transform.position), (startPosition - transform.position).normalized, _ReturnToStartPositionSpeed));
-			}
 
-			yield return new WaitForSeconds(_ReturnToStartPositionCheckRateInSeconds);
-		}	
+	void stopAllMovement()
+    {
+		this.DisposeCoroutine(ref currentPush);
+		this.DisposeCoroutine(ref goBackToStartRoutine);
+	}
+
+	private IEnumerator lerpPosition(float pushValue, Vector2 pushDirection, float speed)
+	{
+		Vector2 initialPosition = transform.position;
+		currentTargetPosition = (Vector2)transform.position + pushDirection * pushValue;
+		float totalPushTime = Vector2.Distance(initialPosition, currentTargetPosition) / speed;
+		float timeSpent = 0;
+
+		// Code review : need a safer stop condition
+		while (timeSpent < totalPushTime)
+		{
+			float t = pushEvolutionCurve.Evaluate(timeSpent / totalPushTime);
+			transform.position = Vector2.Lerp(initialPosition, currentTargetPosition, t);
+			timeSpent += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
 	}
 
 	private IEnumerator PushRoutine(float pushValue, Vector2 pushDirection, float speed)
 	{
-		Vector2 initialPosition = transform.position;
-		Vector2 targetPosition = (Vector2)transform.position + pushDirection * pushValue;
-		float totalPushTime = Vector2.Distance(initialPosition, targetPosition) / speed;
-		float timeSpent = 0;
+		OnGetPushed?.Invoke(pushValue, pushDirection);
+		yield return StartCoroutine(lerpPosition(pushValue, pushDirection, speed));
+		OnPushEnded?.Invoke(this);
 
-		while (Vector2.Distance(transform.position, targetPosition) != 0)
-		{
-			timeSpent += Time.deltaTime;
-			timeSpent = MathF.Min(timeSpent, totalPushTime);
-			float t = pushEvolutionCurve.Evaluate(timeSpent/totalPushTime);
-			transform.position = Vector2.Lerp(initialPosition, targetPosition, t);
-			yield return new WaitForEndOfFrame();
-		}
+		goBackToStartRoutine = StartCoroutine(returnToInitialPosition(Vector2.Distance(startPosition, transform.position), (startPosition - transform.position).normalized, _ReturnToStartPositionSpeed));
 
-		currentPush = null;
+		this.DisposeCoroutine(ref currentPush);
 	}
 
-	#endregion
+	private IEnumerator returnToInitialPosition(float pushValue, Vector2 pushDirection, float speed)
+    {
+		yield return new WaitForSeconds(_ReturnToStartPositionCheckRateInSeconds);
+		yield return StartCoroutine(lerpPosition(pushValue, pushDirection, speed));
+
+		this.DisposeCoroutine(ref goBackToStartRoutine);
+	}
+
+    #endregion
+
+    private void OnDrawGizmos()
+    {
+		if (!IsBeingPushed) return;
+
+		Color col = Gizmos.color;
+		Gizmos.color = Color.red;
+
+		Vector3 dir = currentTargetPosition - transform.position;
+
+		Gizmos.DrawLine(transform.position, transform.position + dir.normalized * 10f);
+
+		Gizmos.color = col;
+	}
 }
