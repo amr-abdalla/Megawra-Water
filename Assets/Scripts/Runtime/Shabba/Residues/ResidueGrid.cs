@@ -17,8 +17,6 @@ public class ResidueGrid : MonoBehaviourBase
 
 	[SerializeField] private List<ResidueCell> residueCells;
 
-
-
 	#region PUBLIC API
 	public IReadOnlyList<ResidueCell> GetResidueCells() => residueCells;
 

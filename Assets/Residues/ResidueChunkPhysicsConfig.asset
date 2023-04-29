@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushValueMultiplier: 0.1
   pushSpeedMultiplier: 0.05
-  randomPushRotationRange: 150
+  randomPushRotationRange: 45
   adjacentPushValueMultiplier: 0.5
   adjacentPushSpeedMultiplier: 0.5
   chunkLayer: Chunk

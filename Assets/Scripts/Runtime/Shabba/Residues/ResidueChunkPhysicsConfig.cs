@@ -5,7 +5,7 @@ public class ResidueChunkPhysicsConfig : ScriptableObject
 {
 	[SerializeField] float pushValueMultiplier = 0.1f;
 	[SerializeField] float pushSpeedMultiplier = 0.05f;
-	[SerializeField] float randomPushRotationRange = 150f;
+	[SerializeField] float randomPushRotationRange = 45f;
 	[SerializeField] float adjacentPushValueMultiplier = 0.5f;
 	[SerializeField] float adjacentPushSpeedMultiplier = 0.5f;
 	[SerializeField] string chunkLayer = "Chunk";

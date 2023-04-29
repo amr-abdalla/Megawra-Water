@@ -79,7 +79,7 @@ public class ResidueChunk : MonoBehaviour
 		foreach (ResidueParticle particle in residueParticles)
 		{
 			particle.OnPushEnded += onParticlePushEnded;
-			particle.GetPushed(value, Quaternion.AngleAxis(physicsConfig.GetRandomRotation(), Vector2.right) * pushDirection, speed);
+			particle.GetPushed(value, Quaternion.Euler(0,0,physicsConfig.GetRandomRotation()) * pushDirection, speed);
 		}
 
 		PushAdjacentChunks(pushDirection * physicsConfig.AdjacentPushValueMultiplier, value, speed * physicsConfig.AdjacentPushSpeedMultiplier);

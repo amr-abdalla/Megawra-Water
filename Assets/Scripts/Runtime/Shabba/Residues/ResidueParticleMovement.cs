@@ -15,8 +15,8 @@ public class ResidueParticleMovement : MonoBehaviourBase
 	Coroutine currentPush = null;
 	Coroutine goBackToStartRoutine = null;
 
-	private Vector3 currentTargetPosition;
-	private Vector3 startPosition;
+	private Vector2 currentTargetPosition;
+	private Vector2 startPosition;
 
 	#region PUBLIC API
 	public void Init()
@@ -49,7 +49,9 @@ public class ResidueParticleMovement : MonoBehaviourBase
 	private IEnumerator lerpPosition(float pushValue, Vector2 pushDirection, float speed)
 	{
 		Vector2 initialPosition = transform.position;
+		Debug.Log("initial = " + initialPosition);
 		currentTargetPosition = (Vector2)transform.position + pushDirection * pushValue;
+		Debug.Log("target = " + currentTargetPosition);
 		float totalPushTime = Vector2.Distance(initialPosition, currentTargetPosition) / speed;
 		float timeSpent = 0;
 
@@ -69,7 +71,7 @@ public class ResidueParticleMovement : MonoBehaviourBase
 		yield return StartCoroutine(lerpPosition(pushValue, pushDirection, speed));
 		OnPushEnded?.Invoke(this);
 
-		goBackToStartRoutine = StartCoroutine(returnToInitialPosition(Vector2.Distance(startPosition, transform.position), (startPosition - transform.position).normalized, _ReturnToStartPositionSpeed));
+		goBackToStartRoutine = StartCoroutine(returnToInitialPosition(Vector2.Distance(startPosition, transform.position), (startPosition - (Vector2)transform.position).normalized, _ReturnToStartPositionSpeed));
 
 		this.DisposeCoroutine(ref currentPush);
 	}
@@ -86,14 +88,22 @@ public class ResidueParticleMovement : MonoBehaviourBase
 
     private void OnDrawGizmos()
     {
-		if (!IsBeingPushed) return;
+		if (!IsMoving) return;
 
 		Color col = Gizmos.color;
-		Gizmos.color = Color.red;
 
-		Vector3 dir = currentTargetPosition - transform.position;
+		if(IsBeingPushed)
+		{
+			Gizmos.color = Color.red;
+		}
+		else if (IsReturningToStart)
+		{
+			Gizmos.color = Color.blue;
+		}
 
-		Gizmos.DrawLine(transform.position, transform.position + dir.normalized * 10f);
+		Vector2 dir = currentTargetPosition - (Vector2)transform.position;
+
+		Gizmos.DrawLine(transform.position, (Vector2)transform.position + dir.normalized * 10f * Vector2.Distance(transform.position, currentTargetPosition));
 
 		Gizmos.color = col;
 	}
