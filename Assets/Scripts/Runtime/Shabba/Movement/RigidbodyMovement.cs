@@ -33,8 +33,8 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 
     private void Update()
 	{
-        // Debug.DrawRay(transform.position, rigidBody.velocity, Color.red);
-        debugMovement();
+        Debug.DrawRay(transform.position, rigidBody.velocity, Color.red);
+        //debugMovement();
 	}
 
     void OnDisable()
