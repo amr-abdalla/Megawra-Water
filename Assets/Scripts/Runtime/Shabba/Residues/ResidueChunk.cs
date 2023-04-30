@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+//
 public class ResidueChunk : MonoBehaviour
 {
 	[SerializeField] float adjacentChunkDetectionRadius = 8f;
@@ -12,7 +13,7 @@ public class ResidueChunk : MonoBehaviour
 
 	private List<ResidueParticle> residueParticles = null;
 
-	int pushedParticlesCount = 0;
+	bool pushedThisFrame = false;
 
 	#region PUBLIC API
 	public IReadOnlyList<ResidueParticle> GetResidueParticles()
@@ -60,25 +61,18 @@ public class ResidueChunk : MonoBehaviour
 		}
 	}
 
-	void onParticlePushEnded(ResidueParticle i_particle)
-    {
-		i_particle.OnPushEnded -= onParticlePushEnded;
-		pushedParticlesCount++;
-
-		if(pushedParticlesCount == residueParticles.Count)
-        {
-			pushedParticlesCount = 0;
-			// all particle movement ended
-		}
+	private void MarkPushedToFalse()
+	{
+		pushedThisFrame = false;
 	}
 
 	private void PushAllParticles(float value, Vector3 pushDirection, float speed)
 	{
-		pushedParticlesCount = 0;
+		pushedThisFrame = true;
+		StartCoroutine(this.InvokeAtEndOfFrame(MarkPushedToFalse)); ////
 
 		foreach (ResidueParticle particle in residueParticles)
 		{
-			particle.OnPushEnded += onParticlePushEnded;
 			particle.GetPushed(value, Quaternion.Euler(0,0,physicsConfig.GetRandomRotation()) * pushDirection, speed);
 		}
 
@@ -92,7 +86,7 @@ public class ResidueChunk : MonoBehaviour
 
 		foreach (ResidueChunk chunk in adjacentChunks)
 		{
-			if (chunk.pushedParticlesCount == 0)
+			if (!chunk.pushedThisFrame)
 			{
 				chunk.PushAllParticles(pushValue, direction, pushSpeed);
 			}
@@ -108,6 +102,15 @@ public class ResidueChunk : MonoBehaviour
 	}
 
 	#endregion
+
+	private void OnDrawGizmos()
+	{
+		//Color col = Gizmos.color;
+		//Gizmos.color = Color.green;
+		//Gizmos.DrawWireSphere(transform.position, adjacentChunkDetectionRadius);
+
+		//Gizmos.color = col;
+	}
 
 
 	// Code review : draw a gizmo for the adjacentChunkDetectionRadius

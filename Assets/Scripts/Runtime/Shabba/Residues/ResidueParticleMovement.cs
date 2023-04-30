@@ -56,7 +56,7 @@ public class ResidueParticleMovement : MonoBehaviourBase
 		float timeSpent = 0;
 
 		// Code review : need a safer stop condition
-		while (timeSpent < totalPushTime)
+		while (timeSpent <= totalPushTime)
 		{
 			float t = pushEvolutionCurve.Evaluate(timeSpent / totalPushTime);
 			transform.position = Vector2.Lerp(initialPosition, currentTargetPosition, t);
@@ -70,7 +70,6 @@ public class ResidueParticleMovement : MonoBehaviourBase
 		OnGetPushed?.Invoke(pushValue, pushDirection);
 		yield return StartCoroutine(lerpPosition(pushValue, pushDirection, speed));
 		OnPushEnded?.Invoke(this);
-
 		goBackToStartRoutine = StartCoroutine(returnToInitialPosition(Vector2.Distance(startPosition, transform.position), (startPosition - (Vector2)transform.position).normalized, _ReturnToStartPositionSpeed));
 
 		this.DisposeCoroutine(ref currentPush);

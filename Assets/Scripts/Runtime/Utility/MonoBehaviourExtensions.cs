@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public static class MonoBehaviourExtensions
@@ -22,4 +23,10 @@ public static class MonoBehaviourExtensions
                 yield return new WaitForSecondsRealtime(i_waitTime);
         }
     }
+
+    public static IEnumerator InvokeAtEndOfFrame(this MonoBehaviour i_behaviour, Action action)
+	{
+        yield return new WaitForEndOfFrame();
+        action.Invoke();
+	}
 }

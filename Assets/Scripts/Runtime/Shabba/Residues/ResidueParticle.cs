@@ -23,9 +23,6 @@ public class ResidueParticle : MonoBehaviour
 	{
 		if (null == particleMovement) return;
 		particleMovement.GetPushed(pushValue, pushDirection, speed);
-
-		particleMovement.OnPushEnded -= onPushEnded;
-		particleMovement.OnPushEnded += onPushEnded;
 	}
 
 	#endregion
@@ -48,13 +45,6 @@ public class ResidueParticle : MonoBehaviour
 	#endregion
 
 	#region PRIVATE
-
-	void onPushEnded(ResidueParticleMovement i_movement)
-    {
-		i_movement.OnPushEnded -= onPushEnded;
-		OnPushEnded(this);
-	}
-
 
 	private void GetCollected()
 	{
