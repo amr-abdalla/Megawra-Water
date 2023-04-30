@@ -33,13 +33,32 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 
     private void Update()
 	{
-        Debug.DrawRay(transform.position, rigidBody.velocity, Color.red);
+        // Debug.DrawRay(transform.position, rigidBody.velocity, Color.red);
+        debugMovement();
 	}
 
     void OnDisable()
     {
         resetToInitialState();
     }
+
+    void debugMovement(){
+        // draws a gizmo of a small triangle pointing towards the direction of movement
+        Vector3[] trianglePoints = new Vector3[3];
+
+        trianglePoints[0] = transform.position + (Vector3)moveDirection * 0.8f;
+        trianglePoints[1] = trianglePoints[0] + Quaternion.Euler(0, 0, -90) * (Vector3)moveDirection * 0.3f;
+        trianglePoints[2] = trianglePoints[0]  + Quaternion.Euler(0, 0, 90) * (Vector3)moveDirection * 0.3f;
+        trianglePoints[0] += (Vector3)moveDirection * 0.5f;
+
+        Debug.DrawLine(trianglePoints[0], trianglePoints[1], Color.magenta);
+        Debug.DrawLine(trianglePoints[1], trianglePoints[2], Color.magenta);
+        Debug.DrawLine(trianglePoints[2], trianglePoints[0], Color.magenta);
+
+
+    }
+
+    
 
     private void FixedUpdate()
     {
