@@ -5,15 +5,13 @@ using UnityEngine;
 public class ResidueParticleMovement : MonoBehaviourBase
 {
 	[SerializeField] protected AnimationCurve pushEvolutionCurve;
-
-	// Code review : make this a part of a ParticleConfig scriptable object
-	private const float _ReturnToStartPositionCheckRateInSeconds = 1f;
-	private const float _ReturnToStartPositionSpeed = 0.05f;
+	[SerializeField] private ResidueParticlePhysicsConfig residueParticlePhysicsConfig;
 
 	public event Action<float, Vector3> OnGetPushed;
 	public event Action<ResidueParticleMovement> OnPushEnded;
 	Coroutine currentPush = null;
 	Coroutine goBackToStartRoutine = null;
+	Coroutine lerpRoutine = null;
 
 	private Vector2 currentTargetPosition;
 	private Vector2 startPosition;
@@ -44,14 +42,13 @@ public class ResidueParticleMovement : MonoBehaviourBase
     {
 		this.DisposeCoroutine(ref currentPush);
 		this.DisposeCoroutine(ref goBackToStartRoutine);
+		this.DisposeCoroutine(ref lerpRoutine);
 	}
 
 	private IEnumerator lerpPosition(float pushValue, Vector2 pushDirection, float speed)
 	{
 		Vector2 initialPosition = transform.position;
-		Debug.Log("initial = " + initialPosition);
 		currentTargetPosition = (Vector2)transform.position + pushDirection * pushValue;
-		Debug.Log("target = " + currentTargetPosition);
 		float totalPushTime = Vector2.Distance(initialPosition, currentTargetPosition) / speed;
 		float timeSpent = 0;
 
@@ -63,24 +60,40 @@ public class ResidueParticleMovement : MonoBehaviourBase
 			timeSpent += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
+
+		transform.position = currentTargetPosition;
 	}
 
 	private IEnumerator PushRoutine(float pushValue, Vector2 pushDirection, float speed)
 	{
 		OnGetPushed?.Invoke(pushValue, pushDirection);
-		yield return StartCoroutine(lerpPosition(pushValue, pushDirection, speed));
+
+		yield return StartCoroutine(StartLerp(pushValue, pushDirection, speed));
+
 		OnPushEnded?.Invoke(this);
-		goBackToStartRoutine = StartCoroutine(returnToInitialPosition(Vector2.Distance(startPosition, transform.position), (startPosition - (Vector2)transform.position).normalized, _ReturnToStartPositionSpeed));
+		goBackToStartRoutine = StartCoroutine(returnToInitialPosition(Vector2.Distance(startPosition, transform.position), (startPosition - (Vector2)transform.position).normalized, residueParticlePhysicsConfig.ReturnToStartPositionSpeed));
 
 		this.DisposeCoroutine(ref currentPush);
 	}
 
 	private IEnumerator returnToInitialPosition(float pushValue, Vector2 pushDirection, float speed)
-    {
-		yield return new WaitForSeconds(_ReturnToStartPositionCheckRateInSeconds);
-		yield return StartCoroutine(lerpPosition(pushValue, pushDirection, speed));
+	{
+		yield return new WaitForSeconds(residueParticlePhysicsConfig.ReturnToStartPositionDelayInSeconds);
+		yield return StartCoroutine(StartLerp(pushValue, pushDirection, speed));
 
 		this.DisposeCoroutine(ref goBackToStartRoutine);
+	}
+
+	private IEnumerator StartLerp(float pushValue, Vector2 pushDirection, float speed)
+	{
+		if(lerpRoutine != null)
+		{
+			this.DisposeCoroutine(ref lerpRoutine);
+		}
+
+		yield return lerpRoutine = StartCoroutine(lerpPosition(pushValue, pushDirection, speed));
+
+		this.DisposeCoroutine(ref lerpRoutine);
 	}
 
     #endregion

@@ -538,6 +538,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Residue Chunk Variant 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6558623347166836133, guid: 8136cb929a0f7714a804beb64b862fad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8136cb929a0f7714a804beb64b862fad, type: 3}
 --- !u!114 &466927561 stripped
@@ -954,6 +958,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Residue Chunk Variant 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1447078474285900604, guid: 0b9c98d7a71a3b24fab222c0e60a2184, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6203556586606148364, guid: 0b9c98d7a71a3b24fab222c0e60a2184, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -1021,6 +1029,18 @@ PrefabInstance:
     - target: {fileID: 310535286725635177, guid: 479280e96dc5bec479a18f35ed530bad, type: 3}
       propertyPath: m_Name
       value: Residue Chunk Variant 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929003959806836328, guid: 479280e96dc5bec479a18f35ed530bad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2959683592827242743, guid: 479280e96dc5bec479a18f35ed530bad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3806271876669272925, guid: 479280e96dc5bec479a18f35ed530bad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5065781980929209433, guid: 479280e96dc5bec479a18f35ed530bad, type: 3}
       propertyPath: m_RootOrder

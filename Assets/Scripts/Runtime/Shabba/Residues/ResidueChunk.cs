@@ -41,7 +41,7 @@ public class ResidueChunk : MonoBehaviour
 		{
 			Vector2 bodyVelocity = otherBody.CurrentVelocity;
 			float bodySpeed = bodyVelocity.magnitude;
-			PushAllParticles(bodySpeed * physicsConfig.PushValueMultiplier, bodyVelocity.normalized, bodySpeed * physicsConfig.PushSpeedMultiplier);
+			PushAllParticles(bodySpeed * physicsConfig.PushValueMultiplier, otherBody.transform.position, bodySpeed * physicsConfig.PushSpeedMultiplier);
 		}
 	}
 
@@ -66,18 +66,19 @@ public class ResidueChunk : MonoBehaviour
 		pushedThisFrame = false;
 	}
 
-	private void PushAllParticles(float value, Vector3 pushDirection, float speed)
+	private void PushAllParticles(float value, Vector3 playerPosition, float speed)
 	{
 		pushedThisFrame = true;
 		StartCoroutine(this.InvokeAtEndOfFrame(MarkPushedToFalse)); ////
 
 		foreach (ResidueParticle particle in residueParticles)
 		{
+			Vector3 pushDirection = (particle.transform.position - playerPosition).normalized;
 			particle.GetPushed(value, Quaternion.Euler(0,0,physicsConfig.GetRandomRotation()) * pushDirection, speed);
 		}
 
-		PushAdjacentChunks(pushDirection * physicsConfig.AdjacentPushValueMultiplier, value, speed * physicsConfig.AdjacentPushSpeedMultiplier);
-		OnGetPushed?.Invoke(this, pushDirection, value, speed);
+		PushAdjacentChunks(playerPosition * physicsConfig.AdjacentPushValueMultiplier, value, speed * physicsConfig.AdjacentPushSpeedMultiplier);
+		OnGetPushed?.Invoke(this, playerPosition, value, speed);
 	}
 
 	private void PushAdjacentChunks(Vector3 direction, float pushValue, float pushSpeed)

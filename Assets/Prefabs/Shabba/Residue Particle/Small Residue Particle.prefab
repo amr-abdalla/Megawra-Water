@@ -186,3 +186,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 11400000, guid: ede4ac2d511e19147ac57c90a21cfd3b, type: 2}
