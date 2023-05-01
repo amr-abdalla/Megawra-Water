@@ -8,5 +8,10 @@ using UnityEngine;
 public class DragSettingsData : ScriptableObject
 {
     public AnimationCurve dragEvolutionCurve;
+    public float MinSpeed;
+    public float MaxSpeed;
+    public float MaxDrag;
+    public float TimeToMaxDrag;
+    public float InitialDrag;
 
 }

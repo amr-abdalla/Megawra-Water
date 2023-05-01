@@ -7,14 +7,14 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
     [SerializeField] private Transform ArrowSprite;
     [SerializeField] private DragSettingsData dragSettingsData;
 
-    [Header("Max values")]
-    [SerializeField] private float minSpeed = 1f;
-    [SerializeField] private float maxSpeed = 10f;
-    [SerializeField] private float maxDrag = 10f;
-    [SerializeField] private float timeToMaxDrag = 1f;
+    // [Header("Max values")]
+     private float minSpeed = 1f;
+     private float maxSpeed = 10f;
+     private float maxDrag = 10f;
+     private float timeToMaxDrag = 1f;
 
-    [Header("Initial values")]
-    [SerializeField] private float initialDrag = 0f;
+    
+     private float initialDrag = 0f;
 
     private Rigidbody2D rigidBody;
 
@@ -28,6 +28,12 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 
     void Start()
     {
+        minSpeed = dragSettingsData.MinSpeed;
+        maxSpeed = dragSettingsData.MaxSpeed;
+        maxDrag = dragSettingsData.MaxDrag;
+        timeToMaxDrag = dragSettingsData.TimeToMaxDrag;
+        initialDrag = dragSettingsData.InitialDrag;
+
         rigidBody = GetComponent<Rigidbody2D>();
         resetToInitialState();
     }

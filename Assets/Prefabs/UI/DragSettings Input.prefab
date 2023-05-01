@@ -334,9 +334,9 @@ GameObject:
   - component: {fileID: 8327849371683260950}
   - component: {fileID: 8327849371683260951}
   - component: {fileID: 8327849371683260948}
-  - component: {fileID: 8327849371683260945}
+  - component: {fileID: 6913433097647143888}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: DragSettings Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -500,7 +500,7 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
---- !u!114 &8327849371683260945
+--- !u!114 &6913433097647143888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -509,8 +509,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8327849371683260954}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 001ae0cbfff5c8645904ab1f415a6ac9, type: 3}
+  m_Script: {fileID: 11500000, guid: 16cb62c1e3f024340ab012f9cd757df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputField: {fileID: 8327849371683260948}
-  accelerationData: {fileID: 11400000, guid: f54d7bd3ee4d4634fa1bf5e7e50bcb48, type: 2}
+  dragData: {fileID: 11400000, guid: ee81ccdd3dc44474f8a1e929bad59dd3, type: 2}
+  controlledVariable: 0
