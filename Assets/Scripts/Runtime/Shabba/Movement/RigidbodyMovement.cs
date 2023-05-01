@@ -4,6 +4,7 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 {
     [SerializeField] private AngularAccelerationData angularAccelerationData;
 
+    [SerializeField] private Transform ArrowSprite;
     [SerializeField] private DragSettingsData dragSettingsData;
 
     [Header("Max values")]
@@ -33,8 +34,8 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 
     private void Update()
 	{
-        Debug.DrawRay(transform.position, rigidBody.velocity, Color.red);
-        //debugMovement();
+        // Debug.DrawRay(transform.position, rigidBody.velocity, Color.red);
+        debugMovement();
 	}
 
     void OnDisable()
@@ -44,16 +45,21 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 
     void debugMovement(){
         // draws a gizmo of a small triangle pointing towards the direction of movement
-        Vector3[] trianglePoints = new Vector3[3];
+        // Vector3[] trianglePoints = new Vector3[3];
 
-        trianglePoints[0] = transform.position + (Vector3)moveDirection * 0.8f;
-        trianglePoints[1] = trianglePoints[0] + Quaternion.Euler(0, 0, -90) * (Vector3)moveDirection * 0.3f;
-        trianglePoints[2] = trianglePoints[0]  + Quaternion.Euler(0, 0, 90) * (Vector3)moveDirection * 0.3f;
-        trianglePoints[0] += (Vector3)moveDirection * 0.5f;
+        // trianglePoints[0] = transform.position + (Vector3)moveDirection * 0.8f;
+        // trianglePoints[1] = trianglePoints[0] + Quaternion.Euler(0, 0, -90) * (Vector3)moveDirection * 0.3f;
+        // trianglePoints[2] = trianglePoints[0]  + Quaternion.Euler(0, 0, 90) * (Vector3)moveDirection * 0.3f;
+        // trianglePoints[0] += (Vector3)moveDirection * 0.5f;
 
-        Debug.DrawLine(trianglePoints[0], trianglePoints[1], Color.magenta);
-        Debug.DrawLine(trianglePoints[1], trianglePoints[2], Color.magenta);
-        Debug.DrawLine(trianglePoints[2], trianglePoints[0], Color.magenta);
+        // Debug.DrawLine(trianglePoints[0], trianglePoints[1], Color.magenta);
+        // Debug.DrawLine(trianglePoints[1], trianglePoints[2], Color.magenta);
+        // Debug.DrawLine(trianglePoints[2], trianglePoints[0], Color.magenta);
+
+            // set the position and rotation of Arrow Sprite to match the moveDirection
+
+       ArrowSprite.position = transform.position+(Vector3)moveDirection * 0.8f;
+       ArrowSprite.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, moveDirection));
 
 
     }
