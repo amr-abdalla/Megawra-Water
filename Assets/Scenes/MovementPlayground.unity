@@ -881,6 +881,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentChunkDetectionRadius: 8
   physicsConfig: {fileID: 0}
+--- !u!223 &636279067 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 1667985955956305365, guid: e1cc3e60b9c1e1246aa36f751d807585, type: 3}
+  m_PrefabInstance: {fileID: 1711883846}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &690873371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,6 +1252,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 154943e8-890a-41fe-8d23-89fbc246f6c8
     m_ActionName: Shabba/Restart[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eb396436-81fe-4052-a454-056270fd228a
+    m_ActionName: Shabba/CanvasToggle[/Keyboard/t]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Shabba
@@ -1300,9 +1309,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c84ef5fc6d63849beb6257a7f89071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 636279067}
   pushAction: {fileID: 6616664993253886368, guid: aa644bfc2337c30408815c43caa8e014, type: 3}
   rotateAction: {fileID: 4996662534001179324, guid: aa644bfc2337c30408815c43caa8e014, type: 3}
   restartAction: {fileID: 2603610467220078062, guid: aa644bfc2337c30408815c43caa8e014, type: 3}
+  canvasToggleAction: {fileID: 3090115404929133704, guid: aa644bfc2337c30408815c43caa8e014, type: 3}
 --- !u!1001 &802088180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2431,6 +2442,10 @@ PrefabInstance:
     - target: {fileID: 1667985955956305362, guid: e1cc3e60b9c1e1246aa36f751d807585, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667985955956305362, guid: e1cc3e60b9c1e1246aa36f751d807585, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1667985955956305366, guid: e1cc3e60b9c1e1246aa36f751d807585, type: 3}
       propertyPath: m_Pivot.x

@@ -3,11 +3,11 @@
 [CreateAssetMenu(fileName = "ResidueChunkPhysicsConfig", menuName = "ScriptableObjects/ResidueChunkPhysicsConfig", order = 1)]
 public class ResidueChunkPhysicsConfig : ScriptableObject
 {
-	[SerializeField] float pushValueMultiplier = 0.1f;
-	[SerializeField] float pushSpeedMultiplier = 0.1f;
-	[SerializeField] float randomPushRotationRange = 20f;
-	[SerializeField] float adjacentPushValueMultiplier = 0.5f;
-	[SerializeField] float adjacentPushSpeedMultiplier = 0.5f;
+	[SerializeField] public float pushValueMultiplier = 0.1f;
+	[SerializeField] public float pushSpeedMultiplier = 0.1f;
+	[SerializeField] public float randomPushRotationRange = 20f;
+	[SerializeField] public float adjacentPushValueMultiplier = 0.5f;
+	[SerializeField] public float adjacentPushSpeedMultiplier = 0.5f;
 	[SerializeField] string chunkLayer = "Chunk";
 
 	public float PushValueMultiplier => pushValueMultiplier;
