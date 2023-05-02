@@ -45,6 +45,11 @@ public class ResidueChunk : MonoBehaviour
 		}
 	}
 
+	private void Start()
+	{
+		Init();
+	}
+
 	#endregion
 
 	#region PRIVATE
