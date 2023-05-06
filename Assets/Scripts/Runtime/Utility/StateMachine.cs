@@ -8,9 +8,6 @@ public delegate void StateAction();
 
 public interface IState
 {
-    public StateAction EnterActions { get; set; }
-    public StateAction ExitActions { get; set; }
-    public StateAction UpdateActions { get; set; }
     string Name { get; }
     void Enter();
     void Exit();

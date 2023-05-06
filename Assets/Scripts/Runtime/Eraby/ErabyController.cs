@@ -1,31 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
-using System.Collections;
 using UnityEngine.Events;
+using static Eraby.ErabyConstants;
 
 public class ErabyController : MonoBehaviour
 {
-    const string RUNNING = "Running";
-    const string JUMPING = "Jumping";
-    const string FLYING = "Flying";
-    const string FALLING = "Falling";
-    const string DIVING = "Diving";
-    const string BOUNCING = "Bouncing";
-    const string CRASHING = "Crashing";
-    const string LOSING = "Losing";
     private StateMachine stateMachine;
-    private Dictionary<string, ErabyState> states = new Dictionary<string, ErabyState>()
-    {
-        { RUNNING, new ErabyState(RUNNING) },
-        { JUMPING, new ErabyState(JUMPING) },
-        { FLYING, new ErabyState(FLYING) },
-        { FALLING, new ErabyState(FALLING) },
-        { DIVING, new ErabyState(DIVING) },
-        { BOUNCING, new ErabyState(BOUNCING) },
-        { CRASHING, new ErabyState(CRASHING) },
-        { LOSING, new ErabyState(LOSING) },
-    };
 
     public UnityEvent OnJumpStart = new UnityEvent();
     public UnityEvent OnJumpEnd = new UnityEvent();
@@ -39,17 +19,30 @@ public class ErabyController : MonoBehaviour
     private List<(string, string, UnityEvent)> transitions =
         new List<(string, string, UnityEvent)>();
 
+    private JumpingState jumpingState = new JumpingState();
+    private FlyingState flyingState = new FlyingState();
+    private FallingState fallingState = new FallingState();
+    private DivingState divingState = new DivingState();
+    private BouncingState bouncingState = new BouncingState();
+    private CrashingState crashingState = new CrashingState();
+    private LosingState losingState = new LosingState();
+
     private void Awake()
     {
-        foreach (var state in states.Values)
-        {
-            state.EnterActions += () => Debug.Log("Enter " + state.Name);
-            state.ExitActions += () => Debug.Log("Exit " + state.Name);
-        }
+        stateMachine = new StateMachine(
+            new IState[]
+            {
+                jumpingState,
+                flyingState,
+                fallingState,
+                divingState,
+                bouncingState,
+                crashingState,
+                losingState
+            }
+        );
 
-        stateMachine = new StateMachine(states.Values.ToArray());
         stateMachine.SetStateUnconditional(RUNNING);
-
         transitions.Add((RUNNING, JUMPING, OnJumpStart));
         transitions.Add((JUMPING, FLYING, OnJumpEnd));
         transitions.Add((FLYING, FALLING, OnFall));
@@ -60,12 +53,13 @@ public class ErabyController : MonoBehaviour
         transitions.Add((DIVING, CRASHING, OnCrash));
         transitions.Add((FALLING, CRASHING, OnCrash));
         transitions.Add((CRASHING, FLYING, OnCrashRecovery));
-        transitions.Add((CRASHING, LOSING, OnLose));
 
         foreach (var transition in transitions)
         {
             stateMachine.AddTransition(transition.Item1, transition.Item2, transition.Item3);
         }
+
+        OnLose.AddListener(() => stateMachine.SetStateUnconditional(LOSING));
     }
 
     private void Update()
