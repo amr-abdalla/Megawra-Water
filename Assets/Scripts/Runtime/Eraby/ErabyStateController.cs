@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using static Eraby.ErabyConstants;
 
-public class ErabyController : MonoBehaviour
+public class ErabyStateController : MonoBehaviour
 {
     private StateMachine stateMachine;
 
