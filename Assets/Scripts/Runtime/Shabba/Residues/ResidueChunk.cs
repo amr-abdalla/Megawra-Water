@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-//
+
 public class ResidueChunk : MonoBehaviour
 {
-	[SerializeField] float adjacentChunkDetectionRadius = 8f;
+	[SerializeField] float adjacentChunkDetectionRadius = 4f;
 	[SerializeField] ResidueChunkPhysicsConfig physicsConfig = null;
 
 	public System.Action<ResidueChunk, Vector3, float, float> OnGetPushed;
@@ -69,7 +69,7 @@ public class ResidueChunk : MonoBehaviour
 	private void PushAllParticles(float value, Vector3 playerPosition, float speed)
 	{
 		pushedThisFrame = true;
-		StartCoroutine(this.InvokeAtEndOfFrame(MarkPushedToFalse)); ////
+		StartCoroutine(this.InvokeAtEndOfFrame(MarkPushedToFalse));
 
 		foreach (ResidueParticle particle in residueParticles)
 		{
@@ -106,13 +106,14 @@ public class ResidueChunk : MonoBehaviour
 
 	private void OnDrawGizmos()
 	{
-		//Color col = Gizmos.color;
-		//Gizmos.color = Color.green;
-		//Gizmos.DrawWireSphere(transform.position, adjacentChunkDetectionRadius);
+		Color col = Gizmos.color;
+		Gizmos.color = Color.green;
+		Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y + adjacentChunkDetectionRadius));
+		Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y - adjacentChunkDetectionRadius));
+		Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + adjacentChunkDetectionRadius, transform.position.y));
+		Gizmos.DrawLine(transform.position, new Vector2(transform.position.x - adjacentChunkDetectionRadius, transform.position.y));
 
-		//Gizmos.color = col;
+		Gizmos.color = col;
 	}
 
-
-	// Code review : draw a gizmo for the adjacentChunkDetectionRadius
 }
