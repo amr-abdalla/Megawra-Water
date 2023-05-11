@@ -52,7 +52,6 @@ public class ResidueParticleMovement : MonoBehaviourBase
 		float totalPushTime = Vector2.Distance(initialPosition, currentTargetPosition) / speed;
 		float timeSpent = 0;
 
-		// Code review : need a safer stop condition
 		while (timeSpent <= totalPushTime)
 		{
 			float t = pushEvolutionCurve.Evaluate(timeSpent / totalPushTime);
@@ -86,10 +85,7 @@ public class ResidueParticleMovement : MonoBehaviourBase
 
 	private IEnumerator StartLerp(float pushValue, Vector2 pushDirection, float speed)
 	{
-		if(lerpRoutine != null)
-		{
-			this.DisposeCoroutine(ref lerpRoutine);
-		}
+		this.DisposeCoroutine(ref lerpRoutine);
 
 		yield return lerpRoutine = StartCoroutine(lerpPosition(pushValue, pushDirection, speed));
 

@@ -106,14 +106,14 @@ public class ResidueChunk : MonoBehaviour
 
 	private void OnDrawGizmos()
 	{
-		Color col = Gizmos.color;
-		Gizmos.color = Color.green;
-		Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y + adjacentChunkDetectionRadius));
-		Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y - adjacentChunkDetectionRadius));
-		Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + adjacentChunkDetectionRadius, transform.position.y));
-		Gizmos.DrawLine(transform.position, new Vector2(transform.position.x - adjacentChunkDetectionRadius, transform.position.y));
+#if UNITY_EDITOR
+		Color col = UnityEditor.Handles.color;
+		UnityEditor.Handles.color = Color.green;
 
-		Gizmos.color = col;
+		UnityEditor.Handles.DrawWireDisc(transform.position, MathConstants.VECTOR_3_BACK, adjacentChunkDetectionRadius);
+
+		UnityEditor.Handles.color = col;
+#endif
 	}
 
 }
