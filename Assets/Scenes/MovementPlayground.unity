@@ -250,6 +250,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1 &306218405 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4913235853395244379, guid: 9695b94a0aafa0b4fbe10680583316c7, type: 3}
@@ -273,6 +274,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1 &325496675 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7650869841072325168, guid: 205dad9e6fa7382449ec49fe41be351d, type: 3}
@@ -437,6 +439,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1 &448550077 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4996052210334186539, guid: 205dad9e6fa7382449ec49fe41be351d, type: 3}
@@ -460,6 +463,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1 &448994244 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4996052209429159206, guid: 205dad9e6fa7382449ec49fe41be351d, type: 3}
@@ -483,6 +487,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1001 &466927560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -537,6 +542,14 @@ PrefabInstance:
     - target: {fileID: 6558623347166836133, guid: 8136cb929a0f7714a804beb64b862fad, type: 3}
       propertyPath: m_Name
       value: Residue Chunk Variant 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558623347166836133, guid: 8136cb929a0f7714a804beb64b862fad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8650748967693076113, guid: 8136cb929a0f7714a804beb64b862fad, type: 3}
+      propertyPath: adjacentChunkDetectionRadius
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8136cb929a0f7714a804beb64b862fad, type: 3}
@@ -773,6 +786,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1 &715779976 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4996052210027756933, guid: 205dad9e6fa7382449ec49fe41be351d, type: 3}
@@ -796,6 +810,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1 &758519690
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,6 +969,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Residue Chunk Variant 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1447078474285900604, guid: 0b9c98d7a71a3b24fab222c0e60a2184, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3971125120381407240, guid: 0b9c98d7a71a3b24fab222c0e60a2184, type: 3}
+      propertyPath: adjacentChunkDetectionRadius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6203556586606148364, guid: 0b9c98d7a71a3b24fab222c0e60a2184, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -1021,6 +1044,22 @@ PrefabInstance:
     - target: {fileID: 310535286725635177, guid: 479280e96dc5bec479a18f35ed530bad, type: 3}
       propertyPath: m_Name
       value: Residue Chunk Variant 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2830078367755886429, guid: 479280e96dc5bec479a18f35ed530bad, type: 3}
+      propertyPath: adjacentChunkDetectionRadius
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929003959806836328, guid: 479280e96dc5bec479a18f35ed530bad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2959683592827242743, guid: 479280e96dc5bec479a18f35ed530bad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3806271876669272925, guid: 479280e96dc5bec479a18f35ed530bad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5065781980929209433, guid: 479280e96dc5bec479a18f35ed530bad, type: 3}
       propertyPath: m_RootOrder
@@ -1266,6 +1305,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1001 &1116333361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1421,6 +1461,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1 &1309928244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,6 +1663,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1 &1455080699 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4996052209402514309, guid: 205dad9e6fa7382449ec49fe41be351d, type: 3}
@@ -1645,6 +1687,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1 &1646439837 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6193858376310571025, guid: 205dad9e6fa7382449ec49fe41be351d, type: 3}
@@ -1668,6 +1711,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1 &1647985659 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4996052209765371079, guid: 205dad9e6fa7382449ec49fe41be351d, type: 3}
@@ -1691,6 +1735,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1 &1743173841 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6735601328110908251, guid: 9695b94a0aafa0b4fbe10680583316c7, type: 3}
@@ -1714,6 +1759,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1 &1768917660 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7650869841072325168, guid: 205dad9e6fa7382449ec49fe41be351d, type: 3}
@@ -1807,6 +1853,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}
 --- !u!1 &2138275341 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5522531495747831313, guid: 205dad9e6fa7382449ec49fe41be351d, type: 3}
@@ -1830,3 +1877,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  residueParticlePhysicsConfig: {fileID: 0}

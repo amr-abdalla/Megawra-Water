@@ -5,18 +5,16 @@ using UnityEngine;
 public class ResidueParticleMovement : MonoBehaviourBase
 {
 	[SerializeField] protected AnimationCurve pushEvolutionCurve;
-
-	// Code review : make this a part of a ParticleConfig scriptable object
-	private const float _ReturnToStartPositionCheckRateInSeconds = 1f;
-	private const float _ReturnToStartPositionSpeed = 0.05f;
+	[SerializeField] private ResidueParticlePhysicsConfig residueParticlePhysicsConfig;
 
 	public event Action<float, Vector3> OnGetPushed;
 	public event Action<ResidueParticleMovement> OnPushEnded;
 	Coroutine currentPush = null;
 	Coroutine goBackToStartRoutine = null;
+	Coroutine lerpRoutine = null;
 
-	private Vector3 currentTargetPosition;
-	private Vector3 startPosition;
+	private Vector2 currentTargetPosition;
+	private Vector2 startPosition;
 
 	#region PUBLIC API
 	public void Init()
@@ -44,6 +42,7 @@ public class ResidueParticleMovement : MonoBehaviourBase
     {
 		this.DisposeCoroutine(ref currentPush);
 		this.DisposeCoroutine(ref goBackToStartRoutine);
+		this.DisposeCoroutine(ref lerpRoutine);
 	}
 
 	private IEnumerator lerpPosition(float pushValue, Vector2 pushDirection, float speed)
@@ -53,47 +52,66 @@ public class ResidueParticleMovement : MonoBehaviourBase
 		float totalPushTime = Vector2.Distance(initialPosition, currentTargetPosition) / speed;
 		float timeSpent = 0;
 
-		// Code review : need a safer stop condition
-		while (timeSpent < totalPushTime)
+		while (timeSpent <= totalPushTime)
 		{
 			float t = pushEvolutionCurve.Evaluate(timeSpent / totalPushTime);
 			transform.position = Vector2.Lerp(initialPosition, currentTargetPosition, t);
 			timeSpent += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
+
+		transform.position = currentTargetPosition;
 	}
 
 	private IEnumerator PushRoutine(float pushValue, Vector2 pushDirection, float speed)
 	{
 		OnGetPushed?.Invoke(pushValue, pushDirection);
-		yield return StartCoroutine(lerpPosition(pushValue, pushDirection, speed));
-		OnPushEnded?.Invoke(this);
 
-		goBackToStartRoutine = StartCoroutine(returnToInitialPosition(Vector2.Distance(startPosition, transform.position), (startPosition - transform.position).normalized, _ReturnToStartPositionSpeed));
+		yield return StartCoroutine(StartLerp(pushValue, pushDirection, speed));
+
+		OnPushEnded?.Invoke(this);
+		goBackToStartRoutine = StartCoroutine(returnToInitialPosition(Vector2.Distance(startPosition, transform.position), (startPosition - (Vector2)transform.position).normalized, residueParticlePhysicsConfig.ReturnToStartPositionSpeed));
 
 		this.DisposeCoroutine(ref currentPush);
 	}
 
 	private IEnumerator returnToInitialPosition(float pushValue, Vector2 pushDirection, float speed)
-    {
-		yield return new WaitForSeconds(_ReturnToStartPositionCheckRateInSeconds);
-		yield return StartCoroutine(lerpPosition(pushValue, pushDirection, speed));
+	{
+		yield return new WaitForSeconds(residueParticlePhysicsConfig.ReturnToStartPositionDelayInSeconds);
+		yield return StartCoroutine(StartLerp(pushValue, pushDirection, speed));
 
 		this.DisposeCoroutine(ref goBackToStartRoutine);
+	}
+
+	private IEnumerator StartLerp(float pushValue, Vector2 pushDirection, float speed)
+	{
+		this.DisposeCoroutine(ref lerpRoutine);
+
+		yield return lerpRoutine = StartCoroutine(lerpPosition(pushValue, pushDirection, speed));
+
+		this.DisposeCoroutine(ref lerpRoutine);
 	}
 
     #endregion
 
     private void OnDrawGizmos()
     {
-		if (!IsBeingPushed) return;
+		if (!IsMoving) return;
 
 		Color col = Gizmos.color;
-		Gizmos.color = Color.red;
 
-		Vector3 dir = currentTargetPosition - transform.position;
+		if(IsBeingPushed)
+		{
+			Gizmos.color = Color.red;
+		}
+		else if (IsReturningToStart)
+		{
+			Gizmos.color = Color.blue;
+		}
 
-		Gizmos.DrawLine(transform.position, transform.position + dir.normalized * 10f);
+		Vector2 dir = currentTargetPosition - (Vector2)transform.position;
+
+		Gizmos.DrawLine(transform.position, (Vector2)transform.position + dir.normalized * 10f * Vector2.Distance(transform.position, currentTargetPosition));
 
 		Gizmos.color = col;
 	}
