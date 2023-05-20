@@ -29,12 +29,12 @@ public class UIR2LText : MonoBehaviourBase
         if (null == uiText) return;
         if (null == originaltext) originaltext = uiText.text;
 
-        if (false == i_reset)
-        {
-            if (null == fixedText) fixedText = ArabicFixerTool.FixLine(originaltext);
-        }
-        else 
-            fixedText = null;
+        //if (false == i_reset)
+        //{
+        //    if (null == fixedText) fixedText = ArabicFixerTool.FixLine(originaltext);
+        //}
+        //else 
+        //    fixedText = null;
 
 
         uiText.text = i_reset ? originaltext : fixedText;
