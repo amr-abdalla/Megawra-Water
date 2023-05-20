@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: dora_ui
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: a1c045973bf423b44ac20ff2e48b5b4a, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 16ce5a80e4090c24996f7cd305c2bc1c, type: 3}
+  - {fileID: 21300000, guid: 4ef8d99087e3b58488cce3e9e558501d, type: 3}
+  - {fileID: 21300000, guid: f4ff2fe014cdbac41bccb3c650aa4d38, type: 3}
+  - {fileID: 21300000, guid: 70e5a7631b0bfd845a3fe1ad301225ce, type: 3}
+  - {fileID: 21300000, guid: dc338ef4898f9774387279576084558b, type: 3}
+  - {fileID: 21300000, guid: f1d9aa950bd8e744a921e556f7a06047, type: 3}
+  - {fileID: 21300000, guid: 5259c7161cdf75e4a888e123a941b819, type: 3}
+  - {fileID: 21300000, guid: 29182238e56390045aabd162fc4e89fd, type: 3}
+  - {fileID: 21300000, guid: 904b5e78c1b169b4b9f726305ca65851, type: 3}
+  - {fileID: 21300000, guid: 5a7b51492aa5aeb4085fe4743ecd56f0, type: 3}
+  - {fileID: 21300000, guid: 3a3959d9c3e1f7840a548bb153307ea9, type: 3}
+  - {fileID: 21300000, guid: 0c84576b988c2bf46970b7b1ee2dff1d, type: 3}
+  - {fileID: 21300000, guid: 9a31710cf051bb048b167519fc1e9fd3, type: 3}
+  - {fileID: 21300000, guid: 3e51af0c81ac2544dae050f1cef6c2c5, type: 3}
+  - {fileID: 21300000, guid: bfae7fcc3379bef4abac2cc0876b59a6, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - UI_kernel_OK
+  - cursor_center_static
+  - UI_kernel_bad
+  - Dura_gameover_title_AR
+  - UI_timer_corn_icon
+  - dura_gameover_popup_button_normal
+  - dura_render_GOpopup_01
+  - cursor_action_mouth003
+  - cursor_action_mouth001
+  - dura_gameover_title_bg
+  - dura_gameover_popup_bg
+  - cursor_action_mouth004
+  - dura_gameover_title
+  - cursor_action_mouth002
+  - dura_gameover_popup_button_highlight
+  m_RenderDataMap: {}
+  m_Tag: dora_ui
+  m_IsVariant: 0
