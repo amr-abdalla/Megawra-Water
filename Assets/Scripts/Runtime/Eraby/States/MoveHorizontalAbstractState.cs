@@ -2,8 +2,11 @@
 
 public abstract class MoveHorizontalAbstractState : State
 {
-    [SerializeField] protected AccelerationConfig2D accelerationData = null;
-    [SerializeField] protected PhysicsBody2D body = null;
+    [SerializeField]
+    protected AccelerationConfig2D accelerationData = null;
+
+    [SerializeField]
+    protected PhysicsBody2D body = null;
 
     #region PROTECTED
 
@@ -13,7 +16,11 @@ public abstract class MoveHorizontalAbstractState : State
         updateMoveVelocity();
     }
 
-    protected virtual void accelerateX(IAccelerationConfig i_currentAccelerationConfig, float i_velocityX, float i_deltaX)
+    protected virtual void accelerateX(
+        IAccelerationConfig i_currentAccelerationConfig,
+        float i_velocityX,
+        float i_deltaX
+    )
     {
         float maxVelX = i_currentAccelerationConfig.MaxVelocityX;
         if (Mathf.Abs(i_velocityX) >= maxVelX)
@@ -28,18 +35,24 @@ public abstract class MoveHorizontalAbstractState : State
         }
     }
 
-    protected virtual void descelerateX(IAccelerationConfig i_currentAccelerationConfig, float i_velocityX)
+    protected virtual void descelerateX(
+        IAccelerationConfig i_currentAccelerationConfig,
+        float i_velocityX
+    )
     {
-        if (false == enabled) return;
+        if (false == enabled)
+            return;
 
         if (null != i_currentAccelerationConfig && i_velocityX != 0f)
         {
             float velocitySign = Mathf.Sign(i_velocityX);
-            float addedVelocity = -velocitySign * i_currentAccelerationConfig.DescelerationX * Time.fixedDeltaTime;
+            float addedVelocity =
+                -velocitySign * i_currentAccelerationConfig.DescelerationX * Time.fixedDeltaTime;
 
             body.AddVelocityX(addedVelocity);
 
-            if (velocitySign != Mathf.Sign(i_velocityX)) onDidStop();
+            if (velocitySign != Mathf.Sign(i_velocityX))
+                onDidStop();
         }
         else
         {
@@ -47,8 +60,7 @@ public abstract class MoveHorizontalAbstractState : State
         }
     }
 
-    protected virtual void onDidStop()
-    { }
+    protected virtual void onDidStop() { }
 
     #endregion
 
@@ -64,7 +76,7 @@ public abstract class MoveHorizontalAbstractState : State
 
     void updateMoveVelocity()
     {
-        float moveDirection = controls.MoveDirection();
+        float moveDirection = 1f;
 
         if (moveDirection != 0)
         {
@@ -79,8 +91,5 @@ public abstract class MoveHorizontalAbstractState : State
 
     #endregion
 
-    public override void ResetState()
-    {
-
-    }
+    public override void ResetState() { }
 }
