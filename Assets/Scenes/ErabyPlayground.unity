@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controls: {fileID: 483121429}
   accelerationData: {fileID: 0}
-  body: {fileID: 0}
+  body: {fileID: 1576811035}
   impactSFX: {fileID: 0}
   timeBeforeBounce: 0.5
   trail: {fileID: 0}
@@ -403,7 +403,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896421770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.388233, y: 32.349606, z: -0.09773934}
+  m_LocalPosition: {x: 28.388233, y: 30.94, z: -0.09773934}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1155667773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4695dd453cb6375499abe594ac7df569, type: 3}
+  m_Script: {fileID: 11500000, guid: acfdb2c847da8014abc9cf4311d96afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxConcurrentFloat: -1
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controls: {fileID: 0}
   accelerationData: {fileID: 0}
-  body: {fileID: 0}
+  body: {fileID: 1576811035}
   maxJumpHeight: 8
   interpolatorsManager: {fileID: 0}
   eventDispatcher: {fileID: 0}
@@ -590,6 +590,7 @@ GameObject:
   - component: {fileID: 1257803888}
   - component: {fileID: 1257803887}
   - component: {fileID: 1257803886}
+  - component: {fileID: 1257803889}
   m_Layer: 0
   m_Name: Static Sprite
   m_TagString: Untagged
@@ -711,6 +712,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1257803889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257803884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3ad80a756d563747b2fdfa4cd84f023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accelerationConfig: {fileID: 0}
+  maxJumpHeight: 8
+  thisCollider: {fileID: 1257803887}
 --- !u!1 &1461756038
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,7 +823,7 @@ GameObject:
   - component: {fileID: 1576811031}
   - component: {fileID: 1576811034}
   - component: {fileID: 1576811033}
-  - component: {fileID: 1576811032}
+  - component: {fileID: 1576811035}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -882,27 +898,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1576811032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1576811029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5c089c02c8a8704eb9a49e34d65ac82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gizmoDrawMode: 0
-  groundTangentColor: {r: 1, g: 0, b: 0, a: 1}
-  groundNormalColor: {r: 0, g: 1, b: 0, a: 1}
-  velocityColor: {r: 0, g: 0, b: 1, a: 1}
-  normalizeVelocityGizmo: 1
-  gizmoThickness: 2
-  objectCollider: {fileID: 0}
-  objectRgbd2D: {fileID: 0}
-  physicsConfig: {fileID: 0}
 --- !u!61 &1576811033
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -950,6 +945,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1576811035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576811029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618467ff2b3a7e640a37b0d27f739adb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoDrawMode: 0
+  groundTangentColor: {r: 1, g: 0, b: 0, a: 1}
+  groundNormalColor: {r: 0, g: 1, b: 0, a: 1}
+  velocityColor: {r: 0, g: 0, b: 1, a: 1}
+  normalizeVelocityGizmo: 1
+  gizmoThickness: 2
+  objectCollider: {fileID: 1576811033}
+  objectRgbd2D: {fileID: 1576811034}
+  physicsConfig: {fileID: 11400000, guid: 47fadc8ac19f9744c8abf5a9b08f18d9, type: 2}
 --- !u!1 &1624911659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,7 +1027,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1638945075}
   - component: {fileID: 1638945076}
-  - component: {fileID: 1638945077}
   m_Layer: 0
   m_Name: Crash
   m_TagString: Untagged
@@ -1048,32 +1063,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controls: {fileID: 483121429}
   accelerationData: {fileID: 0}
-  body: {fileID: 0}
+  body: {fileID: 1576811035}
   maxJumpHeight: 8
   interpolatorsManager: {fileID: 0}
   eventDispatcher: {fileID: 0}
   crashAcceleration: {fileID: 0}
---- !u!114 &1638945077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1638945074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5c089c02c8a8704eb9a49e34d65ac82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gizmoDrawMode: 0
-  groundTangentColor: {r: 1, g: 0, b: 0, a: 1}
-  groundNormalColor: {r: 0, g: 1, b: 0, a: 1}
-  velocityColor: {r: 0, g: 0, b: 1, a: 1}
-  normalizeVelocityGizmo: 1
-  gizmoThickness: 2
-  objectCollider: {fileID: 0}
-  objectRgbd2D: {fileID: 0}
-  physicsConfig: {fileID: 0}
 --- !u!1 &1680013003
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,5 +1114,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controls: {fileID: 483121429}
   accelerationData: {fileID: 0}
-  body: {fileID: 0}
+  body: {fileID: 1576811035}
   maxJumpHeight: 8
