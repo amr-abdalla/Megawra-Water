@@ -1,20 +1,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D, IGroundedObject2D, IVelocity2DManager
+public class PhysicsBody2D
+    : 
+    MonoBehaviourBase
+    ,
+        IPhysicsBody2D,
+        IWallDetector2D,
+        IGroundedObject2D,
+        IVelocity2DManager
 {
     [Header("Gizmos")]
-    [SerializeField] GizmoDrawMode gizmoDrawMode = GizmoDrawMode.NONE;
-    [SerializeField] Color groundTangentColor = Color.red;
-    [SerializeField] Color groundNormalColor = Color.green;
-    [SerializeField] Color velocityColor = Color.blue;
-    [SerializeField] bool normalizeVelocityGizmo = true;
-    [SerializeField] [Range(0.1f, 3f)] float gizmoThickness = 2f;
+    [SerializeField]
+    GizmoDrawMode gizmoDrawMode = GizmoDrawMode.NONE;
+
+    [SerializeField]
+    Color groundTangentColor = Color.red;
+
+    [SerializeField]
+    Color groundNormalColor = Color.green;
+
+    [SerializeField]
+    Color velocityColor = Color.blue;
+
+    [SerializeField]
+    bool normalizeVelocityGizmo = true;
+
+    [SerializeField]
+    [Range(0.1f, 3f)]
+    float gizmoThickness = 2f;
 
     [Header("Physics components")]
-    [SerializeField] private Collider2D objectCollider = null;
-    [SerializeField] private Rigidbody2D objectRgbd2D = null;
-    [SerializeField] private PhysicsObject2DConfig physicsConfig = null;
+    [SerializeField]
+    private Collider2D objectCollider = null;
+
+    [SerializeField]
+    private Rigidbody2D objectRgbd2D = null;
+
+    [SerializeField]
+    private PhysicsObject2DConfig physicsConfig = null;
 
     // Contact filter allows us to filter our raycasting depending on layers for example
     private ContactFilter2D contactFilter = new ContactFilter2D();
@@ -26,7 +50,7 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
     private List<RaycastHit2D> hitBufferListX = null;
     private List<RaycastHit2D> hitBufferListY = null;
 
-    // We cache the ground transforms 
+    // We cache the ground transforms
     private Dictionary<Transform, RaycastHit2D> groundTransformsBuffer = null;
 
     // Object transfrom
@@ -34,7 +58,7 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
     private Transform initialParent = null;
 
     // Runtime values
-    private Vector2 targetVelocity = MathConstants.VECTOR_2_ZERO; // The inputed velocity 
+    private Vector2 targetVelocity = MathConstants.VECTOR_2_ZERO; // The inputed velocity
     private Vector2 velocity = MathConstants.VECTOR_2_ZERO; // The internal velocity updated by the physics system
     private bool isGrounded = false;
     private bool wasGrounded = false;
@@ -54,17 +78,19 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
     {
         base.Awake();
 
-
-        if (null != physicsConfig) physicsConfig = Instantiate<PhysicsObject2DConfig>(physicsConfig);
-        if(null == objectRgbd2D) objectRgbd2D = GetComponent<Rigidbody2D>();
-        if (null == objectCollider) objectCollider = GetComponent<Collider2D>();
+        // if (null != physicsConfig) physicsConfig = Instantiate<PhysicsObject2DConfig>(physicsConfig);
+        if (null == objectRgbd2D)
+            objectRgbd2D = GetComponent<Rigidbody2D>();
+        if (null == objectCollider)
+            objectCollider = GetComponent<Collider2D>();
 
         initBody();
     }
 
     private void FixedUpdate()
     {
-        if (null == hitBuffer) return;
+        if (null == hitBuffer)
+            return;
 
         wasGrounded = isGrounded;
         wasHittingWall = isHittingWall;
@@ -79,10 +105,10 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
         // Our position delta at the current physics frame (current velocity * dt). This will be used for our movement.
         Vector2 deltaPosition = velocity * Time.fixedDeltaTime;
 
-        // To make it easier to deal with slopes, we call updateMovement twice : 
+        // To make it easier to deal with slopes, we call updateMovement twice :
         // once for x, once for y, with different parameters involved...
 
-        // Horizontal movement takes a vector that includes the ground normal, 
+        // Horizontal movement takes a vector that includes the ground normal,
         // so our entity can move along the ground's tangent
         Vector2 groundTangent = new Vector2(groundNormal.y, -groundNormal.x);
         Vector2 xMov = updateMovement(groundTangent * deltaPosition.x, false);
@@ -103,7 +129,8 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
     public ICollisions2DConfig CollisionsConfig => physicsConfig;
 
-    public Vector2 GravityVector => (null == physicsConfig ? Physics2D.gravity : physicsConfig.GravityVector);
+    public Vector2 GravityVector =>
+        (null == physicsConfig ? Physics2D.gravity : physicsConfig.GravityVector);
 
     #endregion
 
@@ -179,26 +206,39 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
     #region MUTABLE API
 
     [ExposePublicMethod]
-    public void SetGravityModifier(float i_gravityModifier) { if (null != physicsConfig) physicsConfig.SetGravityModifier(i_gravityModifier); }
+    public void SetGravityModifier(float i_gravityModifier)
+    {
+        if (null != physicsConfig)
+            physicsConfig.SetGravityModifier(i_gravityModifier);
+    }
 
     [ExposePublicMethod]
-    public void ResetGravityModifier() { if (null != physicsConfig) physicsConfig.ResetGravityModifier(); }
+    public void ResetGravityModifier()
+    {
+        if (null != physicsConfig)
+            physicsConfig.ResetGravityModifier();
+    }
 
     [ExposePublicMethod]
     public void ResetToInitialState()
     {
         resetValues();
-        if (null != physicsConfig) physicsConfig.ResetToInitialState();
+        if (null != physicsConfig)
+            physicsConfig.ResetToInitialState();
     }
 
     #endregion
 
     #region PROTECTED VIRTUAL
 
-    protected virtual bool canCheckForCollision(ref Vector2 i_move, bool i_yMovement, RaycastHit2D i_hit)
+    protected virtual bool canCheckForCollision(
+        ref Vector2 i_move,
+        bool i_yMovement,
+        RaycastHit2D i_hit
+    )
     {
         int layer = i_hit.collider.gameObject.layer;
-        LayerMask oneWayGroundLayers = physicsConfig.OneWayGroundLayerMask; 
+        LayerMask oneWayGroundLayers = physicsConfig.OneWayGroundLayerMask;
         bool isOneWay = oneWayGroundLayers == (oneWayGroundLayers | (1 << layer));
         bool checkForCollsions = true;
         float shellRadius = physicsConfig.ShellRadius;
@@ -207,17 +247,23 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
         {
             if (i_yMovement)
             {
-                if (VelocityY > 0.1f) return false;
-                if(null == objectCollider)
+                if (VelocityY > 0.1f)
+                    return false;
+                if (null == objectCollider)
                 {
-                    Debug.LogWarning("PhysicsBody2D::canCheckForCollision -> cannot check one way ground collisions if collider isn't assigned.");
+                    Debug.LogWarning(
+                        "PhysicsBody2D::canCheckForCollision -> cannot check one way ground collisions if collider isn't assigned."
+                    );
                     return false;
                 }
 
                 float hitY = i_hit.point.y;
                 float boundsY = objectCollider.bounds.min.y;
 
-                if (hitY /*+ shellRadius*/ > boundsY)
+                if (
+                    hitY /*+ shellRadius*/
+                    > boundsY
+                )
                     checkForCollsions = false;
             }
             else
@@ -234,19 +280,11 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
     protected virtual void onWallHitExit() { }
 
-    protected virtual void onExitGround()
-    {
-    }
+    protected virtual void onExitGround() { }
 
-    protected virtual void onEnterGround()
-    {
-    }
+    protected virtual void onEnterGround() { }
 
-    protected virtual void onCurrentGroundUpdated()
-    {
-
-
-    }
+    protected virtual void onCurrentGroundUpdated() { }
 
     #endregion
 
@@ -262,8 +300,16 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
     int cast(Vector2 i_direction, float i_distance, RaycastSource i_raycastSource)
     {
         int hitCount = 0;
-        if (i_raycastSource == RaycastSource.RIGIDBODY) hitCount = null == objectRgbd2D ? 0 : objectRgbd2D.Cast(i_direction, contactFilter, hitBuffer, i_distance);
-        else if (i_raycastSource == RaycastSource.COLLIDER) hitCount = null == objectCollider ? 0 : objectCollider.Cast(i_direction, contactFilter, hitBuffer, i_distance);
+        if (i_raycastSource == RaycastSource.RIGIDBODY)
+            hitCount =
+                null == objectRgbd2D
+                    ? 0
+                    : objectRgbd2D.Cast(i_direction, contactFilter, hitBuffer, i_distance);
+        else if (i_raycastSource == RaycastSource.COLLIDER)
+            hitCount =
+                null == objectCollider
+                    ? 0
+                    : objectCollider.Cast(i_direction, contactFilter, hitBuffer, i_distance);
 
         return hitCount;
     }
@@ -296,7 +342,7 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
                 if (true == hit)
                 {
-                    // We check the normals of our hits in order to determine the angle of the collision 
+                    // We check the normals of our hits in order to determine the angle of the collision
                     currentNormal = hit.normal;
                     hitBufferList.Add(hit);
 
@@ -335,7 +381,8 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
                             if (false == i_yMovement)
                             {
-                                if (Mathf.Abs(velocity.x) <= Physics2DConstants.EPSILON_VELOCITY) velocity.x = 0f;
+                                if (Mathf.Abs(velocity.x) <= Physics2DConstants.EPSILON_VELOCITY)
+                                    velocity.x = 0f;
                                 isHittingWall = targetVelocity.x != 0f && velocity.x == 0f;
                             }
                         }
@@ -354,8 +401,10 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
     void triggerWallEvents()
     {
-        if (null == physicsConfig) return;
-        if (false == physicsConfig.IsCollisionEnabled) return;
+        if (null == physicsConfig)
+            return;
+        if (false == physicsConfig.IsCollisionEnabled)
+            return;
 
         if (false == wasHittingWall && true == isHittingWall)
         {
@@ -371,8 +420,10 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
     void triggerGroundedEvents()
     {
-        if (null == physicsConfig) return;
-        if (false == physicsConfig.IsCollisionEnabled) return;
+        if (null == physicsConfig)
+            return;
+        if (false == physicsConfig.IsCollisionEnabled)
+            return;
 
         if (false == isGrounded && true == wasGrounded)
         {
@@ -386,7 +437,9 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
         float dist = float.MaxValue;
         Transform newTransform = currentGroundTransform;
-        float castCentroidX, hitPosX, currDist;
+        float castCentroidX,
+            hitPosX,
+            currDist;
         foreach (KeyValuePair<Transform, RaycastHit2D> pair in groundTransformsBuffer)
         {
             castCentroidX = pair.Value.centroid.x;
@@ -402,7 +455,8 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
         }
 
         bool didGroundTransformChange = currentGroundTransform != newTransform;
-        if (null != newTransform) currentGroundLayer = newTransform.gameObject.layer;
+        if (null != newTransform)
+            currentGroundLayer = newTransform.gameObject.layer;
         currentGroundTransform = newTransform;
 
         if (null != currentGroundTransform)
@@ -410,13 +464,13 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
             if (true == isGrounded && false == wasGrounded)
             {
                 // Moving ground WIP
-               /* LayerMask movingGroundLayers = physicsConfig.MovingGroundLayerMask;
-                bool isMoving = movingGroundLayers == (movingGroundLayers | (1 << currentGroundLayer));
-
-                if (true == isMoving)
-                    objectTransform.SetParent(currentGroundTransform);
-                else
-                    objectTransform.SetParent(initialParent);*/
+                /* LayerMask movingGroundLayers = physicsConfig.MovingGroundLayerMask;
+                 bool isMoving = movingGroundLayers == (movingGroundLayers | (1 << currentGroundLayer));
+ 
+                 if (true == isMoving)
+                     objectTransform.SetParent(currentGroundTransform);
+                 else
+                     objectTransform.SetParent(initialParent);*/
 
                 OnGroundedStatusChanged?.Invoke(this);
                 onEnterGround();
@@ -441,8 +495,10 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
     private void initBody()
     {
-        if (null == physicsConfig) return;
-        if (null == objectRgbd2D) return;
+        if (null == physicsConfig)
+            return;
+        if (null == objectRgbd2D)
+            return;
 
         resetValues();
 
@@ -460,13 +516,14 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
     }
 
     /// <summary>
-    /// This setting will filter the layers with which we want check collisions 
+    /// This setting will filter the layers with which we want check collisions
     /// </summary>
     private void setContactFilters()
     {
         contactFilter = new ContactFilter2D();
         contactFilter.useTriggers = false;
-        if(null != physicsConfig) contactFilter.SetLayerMask(physicsConfig.GroundLayerMask);
+        if (null != physicsConfig)
+            contactFilter.SetLayerMask(physicsConfig.GroundLayerMask);
         contactFilter.useLayerMask = true;
     }
 
@@ -498,8 +555,14 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
         if (velocity != MathConstants.VECTOR_2_ZERO)
         {
             Vector3 vel = new Vector3(velocity.x, velocity.y);
-            if (true == normalizeVelocityGizmo) vel.Normalize();
-            GizmoUtility.DrawArrow(transform.position, transform.position + vel, gizmoThickness, velocityColor);
+            if (true == normalizeVelocityGizmo)
+                vel.Normalize();
+            GizmoUtility.DrawArrow(
+                transform.position,
+                transform.position + vel,
+                gizmoThickness,
+                velocityColor
+            );
         }
 
         if (null != currentGroundHit)
@@ -510,7 +573,12 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
             if (true == isGrounded)
             {
-                GizmoUtility.DrawArrow(hit, hit + groundTangent, gizmoThickness, groundTangentColor);
+                GizmoUtility.DrawArrow(
+                    hit,
+                    hit + groundTangent,
+                    gizmoThickness,
+                    groundTangentColor
+                );
                 GizmoUtility.DrawArrow(hit, hit + normal, gizmoThickness, groundNormalColor);
             }
         }
@@ -518,12 +586,14 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
     void OnDrawGizmos()
     {
-        if (gizmoDrawMode == GizmoDrawMode.ALWAYS) drawGizmos();
+        if (gizmoDrawMode == GizmoDrawMode.ALWAYS)
+            drawGizmos();
     }
 
     void OnDrawGizmosSelected()
     {
-        if (gizmoDrawMode == GizmoDrawMode.ON_SELECTED) drawGizmos();
+        if (gizmoDrawMode == GizmoDrawMode.ON_SELECTED)
+            drawGizmos();
     }
 
 #endif
