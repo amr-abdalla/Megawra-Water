@@ -76,7 +76,7 @@ public abstract class MoveHorizontalAbstractState : State
 
     void updateMoveVelocity()
     {
-        float moveDirection = 1f;
+        float moveDirection = -1f;
 
         if (moveDirection != 0)
         {

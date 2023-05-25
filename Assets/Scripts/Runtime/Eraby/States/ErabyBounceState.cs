@@ -1,19 +1,15 @@
 using UnityEngine;
+using System.Collections;
 
-public class ErabyBounceState : ErabyJumpState
+public class ErabyBounceState : ErabyAbstractBounceState
 {
-    [Header("Extra Configs")]
-    [SerializeField]
-    InterpolatorsManager interpolatorsManager = null;
-
-    [SerializeField]
-    HarrankashPlatformEventDispatcher eventDispatcher = null;
-
     private HaraPlatformAbstract fallPlatform = null;
 
     #region STATE API
     protected override void onStateEnter()
     {
+        // Debug.Log("Enter bounce");
+
         if (!body.IsGrounded)
         {
             setState<ErabyFallState>();
@@ -36,19 +32,13 @@ public class ErabyBounceState : ErabyJumpState
 
         maxJumpHeight = collidedPlatform.MaxJumpHeight;
         accelerationData = collidedPlatform.AccelerationConfig;
-        base.onStateEnter();
-    }
-
-    public override void ResetState()
-    {
-        StopAllCoroutines();
-        // bounceSFX?.Stop();
-        // jumpSFX?.Stop();
-        onStateExit();
+        base.onAbstractBounceStateEnter();
     }
     #endregion
 
     #region PRIVATE
+
+
     private HaraPlatformAbstract getCollidedPlatformComponent()
     {
         //Debug.LogError("Get component bounce");
@@ -85,5 +75,6 @@ public class ErabyBounceState : ErabyJumpState
     {
         fallPlatform = i_platform;
     }
+
     #endregion
 }

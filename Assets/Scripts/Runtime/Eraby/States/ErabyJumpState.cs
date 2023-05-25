@@ -11,18 +11,19 @@ public class ErabyJumpState : MoveHorizontalAbstractState
     Coroutine launchRoutine = null;
 
     float startJumpY = 0f;
-    float stopJumpY = 0f;
+    protected float stopJumpY = 0f;
+
+    float desY = 0f;
 
     #region STATE API
     protected override void onStateInit() { }
 
-    protected override void onStateEnter()
+    protected void onBaseJumpStateEnter()
     {
-        Debug.Log("Enter jump");
+        // Debug.Log("Enter jump");
 
         startJumpY = body.transform.position.y;
         stopJumpY = startJumpY + maxJumpHeight;
-
         Debug.Log(startJumpY + "  " + stopJumpY);
 
         if (launchRoutine == null)
@@ -31,9 +32,16 @@ public class ErabyJumpState : MoveHorizontalAbstractState
             Debug.LogError("Launch Routine already running!");
     }
 
+    protected override void onStateEnter()
+    {
+        onBaseJumpStateEnter();
+        controls.DiveStarted += goToFastFall;
+    }
+
     protected override void onStateExit()
     {
         // jumpRiseFrames.Stop();
+        controls.DiveStarted -= goToFastFall;
         this.DisposeCoroutine(ref launchRoutine);
     }
 
@@ -79,16 +87,16 @@ public class ErabyJumpState : MoveHorizontalAbstractState
             return;
         }
 
-        if (body.VelocityY < 0)
+        if (body.VelocityY <= 0)
         {
             setState<ErabyFallState>();
             return;
         }
     }
 
-    void goToFastFall()
+    protected void goToFastFall()
     {
-        // setState<ErabyDiveState>();
+        setState<ErabyDiveState>();
     }
 
     #endregion

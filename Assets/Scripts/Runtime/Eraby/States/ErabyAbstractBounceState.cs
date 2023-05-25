@@ -1,0 +1,78 @@
+using UnityEngine;
+using System.Collections;
+
+public class ErabyAbstractBounceState : ErabyJumpState
+{
+    [Header("Extra Configs")]
+    [SerializeField]
+    InterpolatorsManager interpolatorsManager = null;
+
+    [SerializeField]
+    HarrankashPlatformEventDispatcher eventDispatcher = null;
+
+    [Header("Timing Multipliers")]
+    [SerializeField]
+    float tapMultiplier = 1.5f;
+
+    [SerializeField]
+    float timingThreshold = 0.2f;
+
+    bool tapped = true;
+
+    Coroutine bounceRoutine = null;
+
+    #region STATE API
+    protected void onAbstractBounceStateEnter()
+    {
+        onBaseJumpStateEnter();
+        if (bounceRoutine == null)
+            bounceRoutine = StartCoroutine(bounceSequence());
+    }
+
+    protected override void onStateEnter()
+    {
+        // Debug.Log("Enter bounce");
+        onAbstractBounceStateEnter();
+    }
+
+    private IEnumerator bounceSequence()
+    {
+        tapped = false;
+        controls.DiveStarted += applyTapMulipier;
+        yield return new WaitForSeconds(timingThreshold);
+        controls.DiveStarted -= applyTapMulipier;
+        controls.DiveStarted += goToFastFall;
+        this.DisposeCoroutine(ref bounceRoutine);
+    }
+
+    private void applyTapMulipier()
+    {
+        if (!tapped)
+        {
+            body.SetVelocityY(body.VelocityY * tapMultiplier);
+            stopJumpY += maxJumpHeight * (tapMultiplier - 1);
+            tapped = true;
+            Debug.Log("Good timing!");
+        }
+    }
+
+    public override void ResetState()
+    {
+        StopAllCoroutines();
+        // bounceSFX?.Stop();
+        // jumpSFX?.Stop();
+        onStateExit();
+    }
+    #endregion
+
+    #region PRIVATE
+
+    protected override void onStateExit()
+    {
+        // jumpRiseFrames.Stop();
+        this.DisposeCoroutine(ref bounceRoutine);
+        base.onStateExit();
+    }
+
+    #endregion
+}

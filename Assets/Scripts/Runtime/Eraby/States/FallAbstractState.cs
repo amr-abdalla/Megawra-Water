@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public abstract class FallAbstractState : MoveHorizontalAbstractState
@@ -12,9 +11,11 @@ public abstract class FallAbstractState : MoveHorizontalAbstractState
 
     void updateFallVelocity()
     {
-        if (false == enabled) return;
+        if (false == enabled)
+            return;
 
-        float addedVelocityY = body.GravityVector.y * (accelerationData.AccelerationY - 1) * Time.fixedDeltaTime;
+        float addedVelocityY =
+            body.GravityVector.y * (accelerationData.AccelerationY - 1) * Time.fixedDeltaTime;
         body.AddVelocityY(addedVelocityY);
     }
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ErabyFallState : FallAbstractState
 {
-
-
     [SerializeField]
     private AudioSource impactSFX = null;
 
@@ -29,7 +27,7 @@ public class ErabyFallState : FallAbstractState
     [SerializeField]
     ErabyBounceState bounceState = null;
 
-    Coroutine landingRoutine = null;
+    protected Coroutine landingRoutine = null;
 
     private bool firstFall = true;
 
@@ -38,6 +36,9 @@ public class ErabyFallState : FallAbstractState
 
     protected override void onStateEnter()
     {
+        // Debug.Log("Enter fall");
+        controls.DiveStarted += goToFastFall;
+        // body.SetVelocityY(0);
         controls.EnableControls();
     }
 
@@ -54,6 +55,7 @@ public class ErabyFallState : FallAbstractState
 
     protected override void onStateExit()
     {
+        controls.DiveStarted -= goToFastFall;
         this.DisposeCoroutine(ref landingRoutine);
     }
 
@@ -67,6 +69,7 @@ public class ErabyFallState : FallAbstractState
     #region PRIVATE
     private IEnumerator landingSequence(string i_tag)
     {
+        Debug.Log("Landing sequence");
         body.SetVelocityX(0);
         body.SetVelocityY(0);
         controls.DisableControls();
@@ -74,7 +77,7 @@ public class ErabyFallState : FallAbstractState
         HaraPlatformAbstract platform = getCollidedPlatformComponent();
 
         // sfx suggestion: impact sound
-        impactSFX?.Play();
+        // impactSFX?.Play();
 
         yield return this.Wait(timeBeforeBounce);
 
@@ -118,4 +121,9 @@ public class ErabyFallState : FallAbstractState
         return collidedPlatform;
     }
     #endregion
+
+    void goToFastFall()
+    {
+        setState<ErabyDiveState>();
+    }
 }

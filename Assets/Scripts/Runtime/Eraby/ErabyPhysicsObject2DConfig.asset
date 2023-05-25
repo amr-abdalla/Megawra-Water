@@ -20,7 +20,7 @@ MonoBehaviour:
   shellRadius: 0.01
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   oneWayGroundLayerMask:
     serializedVersion: 2
     m_Bits: 0

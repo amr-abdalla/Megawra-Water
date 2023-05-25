@@ -1,22 +1,15 @@
 // using Cinemachine;
 using UnityEngine;
 
-public class ErabyCrashState : ErabyJumpState
+public class ErabyCrashState : ErabyAbstractBounceState
 {
-    [Header("Extra Configs")]
-    [SerializeField]
-    InterpolatorsManager interpolatorsManager = null;
-
-    [SerializeField]
-    HarrankashPlatformEventDispatcher eventDispatcher = null;
-
-    [SerializeField]
     AccelerationConfig2D crashAcceleration = null;
-    private HaraPlatformAbstract fallPlatform = null;
 
     #region STATE API
     protected override void onStateEnter()
     {
+        Debug.Log("Enter crash");
+
         if (!body.IsGrounded)
         {
             setState<ErabyFallState>();
@@ -28,17 +21,13 @@ public class ErabyCrashState : ErabyJumpState
         // jumpSFX?.Play();
 
         maxJumpHeight /= 2;
+        crashAcceleration = Instantiate(accelerationData);
+        crashAcceleration.MaxVelocityY /= 2;
         accelerationData = crashAcceleration;
-        base.onStateEnter();
+
+        onAbstractBounceStateEnter();
     }
 
-    public override void ResetState()
-    {
-        StopAllCoroutines();
-        // bounceSFX?.Stop();
-        // jumpSFX?.Stop();
-        onStateExit();
-    }
     #endregion
 
     #region PRIVATE

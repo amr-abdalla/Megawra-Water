@@ -2,9 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PhysicsBody2D
-    : 
-    MonoBehaviourBase
-    ,
+    : MonoBehaviourBase,
         IPhysicsBody2D,
         IWallDetector2D,
         IGroundedObject2D,
@@ -78,7 +76,8 @@ public class PhysicsBody2D
     {
         base.Awake();
 
-        // if (null != physicsConfig) physicsConfig = Instantiate<PhysicsObject2DConfig>(physicsConfig);
+        if (null != physicsConfig)
+            physicsConfig = Instantiate<PhysicsObject2DConfig>(physicsConfig);
         if (null == objectRgbd2D)
             objectRgbd2D = GetComponent<Rigidbody2D>();
         if (null == objectCollider)
