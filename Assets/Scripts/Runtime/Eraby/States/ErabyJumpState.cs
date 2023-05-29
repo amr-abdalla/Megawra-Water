@@ -10,21 +10,18 @@ public class ErabyJumpState : MoveHorizontalAbstractState
 
     Coroutine launchRoutine = null;
 
-    float startJumpY = 0f;
-    protected float stopJumpY = 0f;
-
-    float desY = 0f;
+    protected float startJumpY;
+    protected float stopJumpY;
 
     #region STATE API
     protected override void onStateInit() { }
 
     protected void onBaseJumpStateEnter()
     {
-        // Debug.Log("Enter jump");
-
+        Debug.Log("jump ||||| " + accelerationData.MaxVelocityY);
         startJumpY = body.transform.position.y;
         stopJumpY = startJumpY + maxJumpHeight;
-        Debug.Log(startJumpY + "  " + stopJumpY);
+       // Debug.Log(startJumpY + "  " + stopJumpY);
 
         if (launchRoutine == null)
             launchRoutine = StartCoroutine(launchSequence());
@@ -50,6 +47,7 @@ public class ErabyJumpState : MoveHorizontalAbstractState
     protected override void onStateFixedUpdate()
     {
         base.onStateFixedUpdate();
+        Debug.Log(body.VelocityY);
         checkHeight();
     }
 
@@ -79,7 +77,9 @@ public class ErabyJumpState : MoveHorizontalAbstractState
     void checkHeight()
     {
         if (false == enabled || launchRoutine != null)
+		{
             return;
+        }
 
         if (body.transform.position.y >= stopJumpY)
         {
@@ -99,5 +99,14 @@ public class ErabyJumpState : MoveHorizontalAbstractState
         setState<ErabyDiveState>();
     }
 
-    #endregion
+	#endregion
+
+
+	private void OnDrawGizmos()
+	{
+        Color col = Gizmos.color;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(new Vector3(-100, stopJumpY), new Vector3(100, stopJumpY));
+        Gizmos.color = col;
+	}
 }

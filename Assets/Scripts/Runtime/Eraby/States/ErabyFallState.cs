@@ -34,9 +34,12 @@ public class ErabyFallState : FallAbstractState
     #region STATE API
     protected override void onStateInit() { }
 
+    float startTime;
+
     protected override void onStateEnter()
     {
-        // Debug.Log("Enter fall");
+        Debug.Log("Enter fall");
+        startTime = Time.time;
         controls.DiveStarted += goToFastFall;
         // body.SetVelocityY(0);
         controls.EnableControls();
@@ -55,6 +58,7 @@ public class ErabyFallState : FallAbstractState
 
     protected override void onStateExit()
     {
+        Debug.Log("TIME of Fall " + (Time.time - startTime));
         controls.DiveStarted -= goToFastFall;
         this.DisposeCoroutine(ref landingRoutine);
     }
