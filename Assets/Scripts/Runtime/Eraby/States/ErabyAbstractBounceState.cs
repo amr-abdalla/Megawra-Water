@@ -50,7 +50,6 @@ public class ErabyAbstractBounceState : ErabyJumpState
         if (!tapped)
         {
             body.SetVelocityY(body.VelocityY * tapMultiplier);
-            stopJumpY += maxJumpHeight * (tapMultiplier - 1);
             tapped = true;
             Debug.Log("Good timing!");
         }

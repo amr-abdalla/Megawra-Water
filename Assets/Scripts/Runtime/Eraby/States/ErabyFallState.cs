@@ -38,7 +38,7 @@ public class ErabyFallState : FallAbstractState
 
     protected override void onStateEnter()
     {
-        Debug.Log("Enter fall");
+        // Debug.Log("Enter fall");
         startTime = Time.time;
         controls.DiveStarted += goToFastFall;
         // body.SetVelocityY(0);
@@ -58,7 +58,7 @@ public class ErabyFallState : FallAbstractState
 
     protected override void onStateExit()
     {
-        Debug.Log("TIME of Fall " + (Time.time - startTime));
+        // Debug.Log("TIME of Fall " + (Time.time - startTime));
         controls.DiveStarted -= goToFastFall;
         this.DisposeCoroutine(ref landingRoutine);
     }
@@ -73,7 +73,7 @@ public class ErabyFallState : FallAbstractState
     #region PRIVATE
     private IEnumerator landingSequence(string i_tag)
     {
-        Debug.Log("Landing sequence");
+        // Debug.Log("Landing sequence");
         body.SetVelocityX(0);
         body.SetVelocityY(0);
         controls.DisableControls();

@@ -8,6 +8,8 @@ public class ErabyJumpState : MoveHorizontalAbstractState
     [Range(1f, 30f)]
     protected float maxJumpHeight = 8f;
 
+    [SerializeField]
+    protected PersistentErabyData persistentData = null;
     Coroutine launchRoutine = null;
 
     [SerializeField]
@@ -34,12 +36,14 @@ public class ErabyJumpState : MoveHorizontalAbstractState
     protected override void onStateEnter()
     {
         onBaseJumpStateEnter();
+
         controls.DiveStarted += goToFastFall;
     }
 
     protected override void onStateExit()
     {
         // jumpRiseFrames.Stop();
+        persistentData.initialVelocityY = initialVelocityY;
         controls.DiveStarted -= goToFastFall;
         this.DisposeCoroutine(ref launchRoutine);
     }
@@ -49,7 +53,7 @@ public class ErabyJumpState : MoveHorizontalAbstractState
     protected override void onStateFixedUpdate()
     {
         base.onStateFixedUpdate();
-        Debug.Log(body.VelocityY);
+        // Debug.Log(body.VelocityY);
         checkHeight();
     }
 
@@ -68,7 +72,7 @@ public class ErabyJumpState : MoveHorizontalAbstractState
     {
         yield return this.Wait(0.05f);
 
-        body.SetVelocityY(accelerationData.MaxVelocityY);
+        body.SetVelocityY(initialVelocityY);
         yield return this.Wait(0.07f);
         controls.EnableControls();
         yield return this.Wait(0.13f);

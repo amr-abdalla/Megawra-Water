@@ -20,11 +20,8 @@ public class ErabyCrashState : ErabyAbstractBounceState
         // bounceSFX?.Play();
         // jumpSFX?.Play();
 
-        maxJumpHeight /= 2;
-        crashAcceleration = Instantiate(accelerationData);
-        crashAcceleration.MaxVelocityY /= 2;
-        accelerationData = crashAcceleration;
 
+        initialVelocityY = persistentData.initialVelocityY / 2;
         onAbstractBounceStateEnter();
     }
 

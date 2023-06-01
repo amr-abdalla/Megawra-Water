@@ -2,10 +2,20 @@ using UnityEngine;
 
 public abstract class HaraPlatformAbstract : MonoBehaviourBase
 {
-    [SerializeField] private AccelerationConfig2D accelerationConfig;
-    [SerializeField][Range(1f, 30f)] private float maxJumpHeight = 8f;
-    [SerializeField] protected Collider2D thisCollider = null;
+    [SerializeField]
+    private AccelerationConfig2D accelerationConfig;
 
+    [SerializeField]
+    [Range(1f, 30f)]
+    private float maxJumpHeight = 8f;
+
+    [SerializeField]
+    protected Collider2D thisCollider = null;
+
+    [SerializeField]
+    private PlatformBounceData bounceData = null;
+
+    public float BounceVelocityYMultiplier => bounceData.BounceVelocityYMultiplier;
     public AccelerationConfig2D AccelerationConfig => accelerationConfig;
     public float MaxJumpHeight => maxJumpHeight;
 

@@ -30,8 +30,9 @@ public class ErabyBounceState : ErabyAbstractBounceState
         // bounceSFX?.Play();
         // jumpSFX?.Play();
 
-        maxJumpHeight = collidedPlatform.MaxJumpHeight;
-        accelerationData = collidedPlatform.AccelerationConfig;
+        initialVelocityY =
+            collidedPlatform.BounceVelocityYMultiplier * persistentData.initialVelocityY;
+        Debug.Log("Bounce velocity: " + initialVelocityY);
         base.onAbstractBounceStateEnter();
     }
     #endregion
