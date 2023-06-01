@@ -12,6 +12,7 @@ public class ErabyJumpState : MoveHorizontalAbstractState
 
     [SerializeField]
     protected float initialVelocityY = 0f;
+    float stopJumpY = 0f;
 
     #region STATE API
     protected override void onStateInit() { }
@@ -23,6 +24,7 @@ public class ErabyJumpState : MoveHorizontalAbstractState
 
 
         clampInitialVelocityY();
+        stopJumpY = body.transform.position.y + maxJumpHeight;
         if (launchRoutine == null)
             launchRoutine = StartCoroutine(launchSequence());
         else
@@ -47,6 +49,7 @@ public class ErabyJumpState : MoveHorizontalAbstractState
     protected override void onStateFixedUpdate()
     {
         base.onStateFixedUpdate();
+        Debug.Log(body.VelocityY);
         checkHeight();
     }
 
@@ -76,7 +79,9 @@ public class ErabyJumpState : MoveHorizontalAbstractState
     void checkHeight()
     {
         if (false == enabled || launchRoutine != null)
+        {
             return;
+        }
 
         if (body.VelocityY <= 0)
         {
@@ -99,4 +104,14 @@ public class ErabyJumpState : MoveHorizontalAbstractState
     }
 
     #endregion
+
+
+
+    private void OnDrawGizmos()
+    {
+        Color col = Gizmos.color;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(new Vector3(-100, stopJumpY), new Vector3(100, stopJumpY));
+        Gizmos.color = col;
+    }
 }
