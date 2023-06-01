@@ -16,7 +16,7 @@ MonoBehaviour:
   accY: 2
   desX: 0
   desY: 0
-  maxVelX: 10
+  maxVelX: 0
   maxVelY: 20
   minVelX: 0
   minVelY: 0

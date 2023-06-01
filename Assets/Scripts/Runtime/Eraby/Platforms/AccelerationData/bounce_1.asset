@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc89ec4fe933d544ab054eb5066eccaa, type: 3}
   m_Name: bounce_1
   m_EditorClassIdentifier: 
-  bounceVelocityYMultiplier: 0
+  bounceVelocityYMultiplier: 1.5
