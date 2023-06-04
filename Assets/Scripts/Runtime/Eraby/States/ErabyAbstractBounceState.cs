@@ -19,7 +19,9 @@ public class ErabyAbstractBounceState : ErabyJumpState
 
     [SerializeField]
     ParticleSystem tapParticles = null;
-    bool tapped = true;
+
+    [SerializeField]
+    BounceTapManager tapManager = null;
 
     Coroutine bounceRoutine = null;
 
@@ -39,25 +41,23 @@ public class ErabyAbstractBounceState : ErabyJumpState
 
     private IEnumerator bounceSequence()
     {
-        tapped = false;
-        controls.DiveStarted += applyTapMulipier;
-        yield return new WaitForSeconds(timingThreshold);
-        controls.DiveStarted -= applyTapMulipier;
+        if (tapManager.isTapped())
+        {
+            applyTapMulipier();
+        }
+        tapManager.OnTap += applyTapMulipier;
         controls.DiveStarted += goToFastFall;
+        yield return null;
         this.DisposeCoroutine(ref bounceRoutine);
     }
 
     private void applyTapMulipier()
     {
-        if (!tapped)
-        {
-            float newVelocityY = clampVelocityY(body.VelocityY * tapMultiplier);
-            body.SetVelocityY(newVelocityY);
-            persistentData.initialVelocityY = newVelocityY;
-            tapParticles?.Play();
-            tapped = true;
-            Debug.Log("Good timing!");
-        }
+        float newVelocityY = clampVelocityY(body.VelocityY * tapMultiplier);
+        body.SetVelocityY(newVelocityY);
+        persistentData.initialVelocityY = newVelocityY;
+        tapParticles?.Play();
+        Debug.Log("Good timing!");
     }
 
     public override void ResetState()
@@ -75,6 +75,8 @@ public class ErabyAbstractBounceState : ErabyJumpState
     {
         // jumpRiseFrames.Stop();
         this.DisposeCoroutine(ref bounceRoutine);
+        tapManager.OnTap -= applyTapMulipier;
+
         base.onStateExit();
     }
 

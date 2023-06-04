@@ -27,6 +27,8 @@ public class ErabyFallState : FallAbstractState
     [SerializeField]
     ErabyBounceState bounceState = null;
 
+    [SerializeField]
+    BounceTapManager tapManager = null;
     protected Coroutine landingRoutine = null;
 
     private bool firstFall = true;
@@ -40,6 +42,7 @@ public class ErabyFallState : FallAbstractState
     {
         // Debug.Log("Enter fall");
         startTime = Time.time;
+        tapManager.ResetTap();
         controls.DiveStarted += goToFastFall;
         // body.SetVelocityY(0);
         controls.EnableControls();

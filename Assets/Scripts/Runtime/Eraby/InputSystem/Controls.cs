@@ -17,6 +17,9 @@ public class Controls : MonoBehaviourBase
     public Action Dive;
     public Action DiveReleased;
 
+    public Action BounceStarted;
+    public Action BounceReleased;
+
     bool locked = false;
     Coroutine diveRoutine = null;
 

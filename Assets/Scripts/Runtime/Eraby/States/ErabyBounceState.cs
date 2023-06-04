@@ -4,7 +4,7 @@ using System.Collections;
 public class ErabyBounceState : ErabyAbstractBounceState
 {
     private HaraPlatformAbstract fallPlatform = null;
-
+    
     #region STATE API
     protected override void onStateEnter()
     {
@@ -34,6 +34,7 @@ public class ErabyBounceState : ErabyAbstractBounceState
             collidedPlatform.BounceVelocityYMultiplier * persistentData.initialVelocityY;
         Debug.Log("Bounce velocity: " + initialVelocityY);
         base.onAbstractBounceStateEnter();
+
     }
     #endregion
 
