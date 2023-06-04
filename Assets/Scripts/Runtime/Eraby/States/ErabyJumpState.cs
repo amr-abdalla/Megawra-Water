@@ -15,6 +15,7 @@ public class ErabyJumpState : MoveHorizontalAbstractState
     [SerializeField]
     protected float initialVelocityY = 0f;
     float stopJumpY = 0f;
+    float startJumpY = 0f;
 
     #region STATE API
     protected override void onStateInit() { }
@@ -26,6 +27,7 @@ public class ErabyJumpState : MoveHorizontalAbstractState
 
 
         clampInitialVelocityY();
+        startJumpY = body.transform.position.y;
         stopJumpY = body.transform.position.y + maxJumpHeight;
         if (launchRoutine == null)
             launchRoutine = StartCoroutine(launchSequence());
@@ -101,10 +103,19 @@ public class ErabyJumpState : MoveHorizontalAbstractState
 
     void clampInitialVelocityY()
     {
+        initialVelocityY = clampVelocityY(initialVelocityY);
+    }
+
+    protected float clampVelocityY(float velocityY)
+    {
         // given a desceleration, clamp the initial velocity to reach the desired height
         // u = sqrt(2as)
-        float maxInitialVelocityY = Mathf.Sqrt(2 * body.GravityVector.magnitude * maxJumpHeight);
-        initialVelocityY = Mathf.Clamp(initialVelocityY, initialVelocityY, maxInitialVelocityY);
+        float maxInitialVelocityY = Mathf.Sqrt(
+            2
+                * body.GravityVector.magnitude
+                * (maxJumpHeight - (body.transform.position.y - startJumpY))
+        );
+        return Mathf.Clamp(velocityY, velocityY, maxInitialVelocityY);
     }
 
     #endregion

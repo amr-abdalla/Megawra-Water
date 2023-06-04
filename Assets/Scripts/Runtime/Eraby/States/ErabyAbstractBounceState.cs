@@ -17,6 +17,8 @@ public class ErabyAbstractBounceState : ErabyJumpState
     [SerializeField]
     float timingThreshold = 0.2f;
 
+    [SerializeField]
+    ParticleSystem tapParticles = null;
     bool tapped = true;
 
     Coroutine bounceRoutine = null;
@@ -49,7 +51,10 @@ public class ErabyAbstractBounceState : ErabyJumpState
     {
         if (!tapped)
         {
-            body.SetVelocityY(body.VelocityY * tapMultiplier);
+            float newVelocityY = clampVelocityY(body.VelocityY * tapMultiplier);
+            body.SetVelocityY(newVelocityY);
+            persistentData.initialVelocityY = newVelocityY;
+            tapParticles?.Play();
             tapped = true;
             Debug.Log("Good timing!");
         }

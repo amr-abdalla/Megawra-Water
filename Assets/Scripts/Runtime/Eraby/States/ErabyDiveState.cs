@@ -2,7 +2,7 @@ public class ErabyDiveState : ErabyFallState
 {
     protected override void onStateEnter()
     {
-        body.SetVelocityY(0);
+        // body.SetVelocityY(0);
         controls.EnableControls();
     }
 
