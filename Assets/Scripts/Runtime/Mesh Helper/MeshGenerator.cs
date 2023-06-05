@@ -3,82 +3,48 @@ using UnityEngine;
 
 public class MeshGenerator : MonoBehaviourBase
 {
-    Mesh mesh;
-    public Vector3[] vertices;
-    public triangle[] triangles;
+	public int width;
+	public int height;
+	[Min(1)] public int subdivisionsX;
+	[Min(1)] public int subdivisionsY;
+	private MeshFilter meshFilter;
 
-    [System.Serializable]
-    public struct triangle
+	public void init()
 	{
-        public int index1;
-        public int index2;
-        public int index3;
+		MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
+		meshRenderer.sharedMaterial = new Material(Shader.Find("Standard"));
+		meshRenderer.sharedMaterial.color = Color.red;
+		meshFilter = gameObject.AddComponent<MeshFilter>();
 	}
 
-    public void Start()
-    {
-        MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
-        meshRenderer.sharedMaterial = new Material(Shader.Find("Standard"));
-        meshRenderer.sharedMaterial.color = Color.red;
-
-        MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
-
-        mesh = new Mesh();
-
-        //Vector3[] vertices = new Vector3[4]
-        //{
-        //    new Vector3(0, 0, 0),
-        //    new Vector3(width, 0, 0),
-        //    new Vector3(0, width, 0),
-        //    new Vector3(width, height, 0)
-        //};
-
-        mesh.vertices = vertices;
-
-        mesh.triangles = GetIndices();
-
-        //Vector3[] normals = new Vector3[4]
-        //{
-        //    -Vector3.forward,
-        //    -Vector3.forward,
-        //    -Vector3.forward,
-        //    -Vector3.forward
-        //};
-        //mesh.normals = normals;
-
-        mesh.RecalculateNormals();
-
-        //Vector2[] uv = new Vector2[4]
-        //{
-        //    new Vector2(0, 0),
-        //    new Vector2(1, 0),
-        //    new Vector2(0, 1),
-        //    new Vector2(1, 1)
-        //};
-        //mesh.uv = uv;
-
-        meshFilter.mesh = mesh;
-    }
-
-    public int[] GetIndices()
+	[ExposePublicMethod]
+	public void GenerateMesh()
 	{
-        List<int> result = new();
+		Mesh mesh = new Mesh();
 
-        foreach(triangle triangle in triangles)
+		List<Vector3> vertices = new()
 		{
-            result.Add(triangle.index1);
-            result.Add(triangle.index2);
-            result.Add(triangle.index3);
-		}
+			new Vector3(0, 0, 0),
+			new Vector3(0, height, 0),
+			new Vector3(width, height, 0),
+			new Vector3(width, 0, 0)
+		};
 
-        return result.ToArray();
+		List<int> tris = MeshHelper.SubdivideX(subdivisionsX, subdivisionsY, height, width, ref vertices);  //MeshHelper.SubdivideX(10, height, ref vertices);
+
+		mesh.vertices = vertices.ToArray();
+
+		mesh.triangles = tris.ToArray();
+
+		mesh.RecalculateNormals();
+
+		meshFilter.mesh = mesh;
+
 	}
 
-    [ExposePublicMethod]
-    public void Subdivide()
+	public void Start()
 	{
-        MeshHelper.Subdivide4(mesh);
-    }
-
+		init();
+	}
 
 }
