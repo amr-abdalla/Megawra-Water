@@ -33,6 +33,7 @@ public class ErabyJumpState : MoveHorizontalAbstractState
             launchRoutine = StartCoroutine(launchSequence());
         else
             Debug.LogError("Launch Routine already running!");
+        base.onStateEnter();
     }
 
     protected override void onStateEnter()
@@ -48,6 +49,7 @@ public class ErabyJumpState : MoveHorizontalAbstractState
         persistentData.initialVelocityY = initialVelocityY;
         controls.DiveStarted -= goToFastFall;
         this.DisposeCoroutine(ref launchRoutine);
+        base.onStateExit();
     }
 
     protected override void onStateUpdate() { }

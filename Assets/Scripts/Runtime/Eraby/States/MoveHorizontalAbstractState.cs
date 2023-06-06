@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System;
+using System.Collections;
 
 public abstract class MoveHorizontalAbstractState : State
 {
@@ -8,56 +10,21 @@ public abstract class MoveHorizontalAbstractState : State
     [SerializeField]
     protected PhysicsBody2D body = null;
 
+    private float initialVelocityX = 0f;
+
     #region PROTECTED
 
-    protected override void onStateFixedUpdate()
+    protected override void onStateEnter()
     {
-        base.onStateFixedUpdate();
-        updateMoveVelocity();
+        initialVelocityX = body.VelocityX;
+        controls.MoveStarted += updateMoveVelocity;
+        controls.MoveReleased += handleMoveCancel;
     }
 
-    protected virtual void accelerateX(
-        IAccelerationConfig i_currentAccelerationConfig,
-        float i_velocityX,
-        float i_deltaX
-    )
+    protected override void onStateExit()
     {
-        float maxVelX = i_currentAccelerationConfig.MaxVelocityX;
-        if (Mathf.Abs(i_velocityX) >= maxVelX)
-        {
-            descelerateX(i_currentAccelerationConfig, body.VelocityX);
-        }
-        else
-        {
-            float addedVelocity = i_deltaX * i_currentAccelerationConfig.AccelerationX;
-            body.AddVelocityX(addedVelocity);
-            clampVelocityX(body.VelocityX, maxVelX);
-        }
-    }
-
-    protected virtual void descelerateX(
-        IAccelerationConfig i_currentAccelerationConfig,
-        float i_velocityX
-    )
-    {
-        if (false == enabled)
-            return;
-
-        if (null != i_currentAccelerationConfig && i_velocityX != 0f)
-        {
-            float velocitySign = Mathf.Sign(i_velocityX);
-            float addedVelocity =
-                -velocitySign * i_currentAccelerationConfig.DescelerationX * Time.fixedDeltaTime;
-
-            body.AddVelocityX(addedVelocity);
-
-            if (velocitySign != Mathf.Sign(i_velocityX))
-                onDidStop();
-        }
-        else
-        {
-            onDidStop();
-        }
+        controls.MoveStarted -= updateMoveVelocity;
+        controls.MoveReleased -= handleMoveCancel;
     }
 
     protected virtual void onDidStop() { }
@@ -66,27 +33,23 @@ public abstract class MoveHorizontalAbstractState : State
 
     #region PRIVATE
 
-    void clampVelocityX(float i_velocityX, float i_maxVelocityX)
+    float clampVelocityX(float i_velocityX, float i_maxVelocityX)
     {
-        if (Mathf.Abs(i_velocityX) >= i_maxVelocityX)
-        {
-            body.SetVelocityX(Mathf.Sign(i_velocityX) * i_maxVelocityX);
-        }
+        return Mathf.Abs(i_velocityX) >= i_maxVelocityX
+            ? Mathf.Sign(i_velocityX) * i_maxVelocityX
+            : i_velocityX;
     }
 
-    void updateMoveVelocity()
+    void updateMoveVelocity(float x)
     {
-        float moveDirection = -1f;
+        float newVelocityX = initialVelocityX + x * accelerationData.MoveVelocityX;
+        newVelocityX = clampVelocityX(newVelocityX, accelerationData.MaxVelocityX);
+        body.SetVelocityX(newVelocityX);
+    }
 
-        if (moveDirection != 0)
-        {
-            float deltaX = moveDirection * Time.fixedDeltaTime;
-            accelerateX(accelerationData, body.VelocityX, deltaX);
-        }
-        else
-        {
-            descelerateX(accelerationData, body.VelocityX);
-        }
+    private void handleMoveCancel()
+    {
+        updateMoveVelocity(0);
     }
 
     #endregion
