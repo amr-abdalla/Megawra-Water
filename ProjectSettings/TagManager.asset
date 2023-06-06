@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Bouncy
+  - Bump
+  - Trample
   layers:
   - Default
   - TransparentFX

@@ -21,7 +21,7 @@ class BounceTapManager : MonoBehaviour
 
     private void Awake()
     {
-        controls.DiveStarted += tap;
+        controls.BounceStarted += tap;
     }
 
     public void ResetTap()

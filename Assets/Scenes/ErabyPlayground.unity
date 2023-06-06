@@ -175,6 +175,7 @@ MonoBehaviour:
   trail: {fileID: 0}
   eventDispatcher: {fileID: 0}
   bounceState: {fileID: 1172577963}
+  tapManager: {fileID: 896421777}
 --- !u!1 &483121428
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +539,7 @@ GameObject:
   - component: {fileID: 896421771}
   - component: {fileID: 896421772}
   - component: {fileID: 896421776}
+  - component: {fileID: 896421777}
   m_Layer: 0
   m_Name: Eraby
   m_TagString: Untagged
@@ -592,6 +594,21 @@ MonoBehaviour:
   _data:
     _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
     _objectReferences: []
+--- !u!114 &896421777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896421770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025ecf68c4245304f9b35149b674be15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tapColliderSize: {x: 4, y: 4}
+  erabyTransform: {fileID: 1576811030}
+  controls: {fileID: 483121429}
 --- !u!1 &1133338280
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,6 +661,7 @@ MonoBehaviour:
   trail: {fileID: 0}
   eventDispatcher: {fileID: 0}
   bounceState: {fileID: 1172577963}
+  tapManager: {fileID: 0}
 --- !u!1 &1155667773
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,6 +785,7 @@ MonoBehaviour:
   tapMultiplier: 1.5
   timingThreshold: 0.5
   tapParticles: {fileID: 1576811037}
+  tapManager: {fileID: 896421777}
 --- !u!1 &1257803884
 GameObject:
   m_ObjectHideFlags: 0
@@ -6794,6 +6813,7 @@ MonoBehaviour:
   tapMultiplier: 1.5
   timingThreshold: 0.5
   tapParticles: {fileID: 1576811037}
+  tapManager: {fileID: 896421777}
 --- !u!1 &1680013003
 GameObject:
   m_ObjectHideFlags: 0
