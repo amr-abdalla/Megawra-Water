@@ -20,6 +20,9 @@ public class Controls : MonoBehaviourBase
     public Action BounceStarted;
     public Action BounceReleased;
 
+    public Action<float> MoveStarted;
+    public Action MoveReleased;
+
     bool locked = false;
     Coroutine diveRoutine = null;
 
@@ -50,6 +53,12 @@ public class Controls : MonoBehaviourBase
         Dive = null;
         DiveReleased = null;
 
+        BounceStarted = null;
+        BounceReleased = null;
+
+        MoveStarted = null;
+        MoveReleased = null;
+
         unregisterInputs();
     }
 
@@ -62,6 +71,8 @@ public class Controls : MonoBehaviourBase
         //Debug.LogError("Enable Controls");
         inputActions.Player.Dive.Enable();
         inputActions.Player.Jump.Enable();
+        inputActions.Player.Bounce.Enable();
+        inputActions.Player.Move.Enable();
     }
 
     public void DisableControls()
@@ -71,6 +82,8 @@ public class Controls : MonoBehaviourBase
         //Debug.LogError("Disable Controls");
         inputActions.Player.Dive.Disable();
         inputActions.Player.Jump.Disable();
+        inputActions.Player.Bounce.Disable();
+        inputActions.Player.Move.Disable();
         this.DisposeCoroutine(ref diveRoutine);
     }
 
@@ -97,6 +110,12 @@ public class Controls : MonoBehaviourBase
 
         inputActions.Player.Jump.started += onJumpStarted;
         inputActions.Player.Jump.canceled += onJumpCanceled;
+
+        inputActions.Player.Bounce.started += onBounceStarted;
+        inputActions.Player.Bounce.canceled += onBounceCanceled;
+
+        inputActions.Player.Move.started += onMoveStarted;
+        inputActions.Player.Move.canceled += onMoveCanceled;
     }
 
     void unregisterInputs()
@@ -130,6 +149,26 @@ public class Controls : MonoBehaviourBase
     private void onJumpCanceled(InputAction.CallbackContext obj)
     {
         JumpReleased?.Invoke();
+    }
+
+    private void onBounceStarted(InputAction.CallbackContext obj)
+    {
+        BounceStarted?.Invoke();
+    }
+
+    private void onBounceCanceled(InputAction.CallbackContext obj)
+    {
+        BounceReleased?.Invoke();
+    }
+
+    private void onMoveStarted(InputAction.CallbackContext obj)
+    {
+        MoveStarted?.Invoke(obj.ReadValue<float>());
+    }
+
+    private void onMoveCanceled(InputAction.CallbackContext obj)
+    {
+        MoveReleased?.Invoke();
     }
 
     private IEnumerator dispatchDive()
