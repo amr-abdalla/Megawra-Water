@@ -26,6 +26,9 @@ public class Controls : MonoBehaviourBase
     bool locked = false;
     Coroutine diveRoutine = null;
 
+    private bool jumpActive = false;
+    private bool diveActive = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -106,6 +109,16 @@ public class Controls : MonoBehaviourBase
         locked = i_lock;
     }
 
+    public bool isJumping()
+    {
+        return jumpActive;
+    }
+
+    public bool isDiving()
+    {
+        return diveActive;
+    }
+
     // public float DiveDirection()
     // {
     //     return (inputActions.Player.Dive.enabled)? inputActions.Player.Dive.ReadValue<Vector2>().x:0f;
@@ -151,21 +164,25 @@ public class Controls : MonoBehaviourBase
 
     private void onDiveStarted(InputAction.CallbackContext obj)
     {
+        diveActive = true;
         DiveStarted?.Invoke();
     }
 
     private void onDiveCanceled(InputAction.CallbackContext obj)
     {
+        diveActive = false;
         DiveReleased?.Invoke();
     }
 
     private void onJumpStarted(InputAction.CallbackContext obj)
     {
+        jumpActive = true;
         JumpPressed?.Invoke();
     }
 
     private void onJumpCanceled(InputAction.CallbackContext obj)
     {
+        jumpActive = false;
         JumpReleased?.Invoke();
     }
 

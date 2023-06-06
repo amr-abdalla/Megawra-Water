@@ -13,9 +13,6 @@ public class ErabyFallState : MoveHorizontalAbstractState
     [SerializeField]
     private TrailRenderer trail = null;
 
-    [SerializeField]
-    private PersistentErabyData persistentData = null;
-
     [Header("Extra Configs")]
     [SerializeField]
     HarrankashPlatformEventDispatcher eventDispatcher = null;
@@ -29,6 +26,8 @@ public class ErabyFallState : MoveHorizontalAbstractState
 
     private float resetDiveVelocityY = 0f;
 
+    private bool isGliding = false;
+
     #region STATE API
     protected override void onStateInit() { }
 
@@ -41,12 +40,14 @@ public class ErabyFallState : MoveHorizontalAbstractState
         tapManager.ResetTap();
         controls.DiveStarted += goToFastFall;
         controls.DiveReleased += onFastFallCancel;
-        if (persistentData?.isDiving == true)
-        {
-            persistentData.isDiving = false;
+        controls.JumpPressed += onGlide;
+        controls.JumpReleased += onGlideCancel;
+
+        if (controls.isDiving())
             goToFastFall();
-        }
-        // body.SetVelocityY(0);
+
+        if (controls.isJumping())
+            isGliding = true;
 
         base.onStateEnter();
         controls.EnableControls();
@@ -68,8 +69,21 @@ public class ErabyFallState : MoveHorizontalAbstractState
         // Debug.Log("TIME of Fall " + (Time.time - startTime));
         controls.DiveStarted -= goToFastFall;
         controls.DiveReleased -= onFastFallCancel;
+        controls.JumpPressed -= onGlide;
+        controls.JumpReleased -= onGlideCancel;
         this.DisposeCoroutine(ref landingRoutine);
         base.onStateExit();
+    }
+
+    protected override void onStateFixedUpdate()
+    {
+        base.onStateFixedUpdate();
+        if (isGliding)
+        {
+            float newVelocityY =
+                body.VelocityY + accelerationData.GlideDecelerationY * Time.fixedDeltaTime;
+            body.SetVelocityY(newVelocityY);
+        }
     }
 
     public override void ResetState()
@@ -136,16 +150,27 @@ public class ErabyFallState : MoveHorizontalAbstractState
 
     void goToFastFall()
     {
-        controls.DisableMove();
+        isGliding = false;
+        // controls.DisableMove();
         resetDiveVelocityY = body.VelocityY > 0 ? 0 : body.VelocityY;
-        body.SetVelocityX(0);
+        // body.SetVelocityX(0);
         body.SetVelocityY(-accelerationData.DiveVelocityY);
     }
 
     void onFastFallCancel()
     {
-        body.SetVelocityX(initialVelocityX);
-        controls.EnableMove();
-        body.SetVelocityY(resetDiveVelocityY);
+        // body.SetVelocityX(initialVelocityX);
+        // controls.EnableMove();
+        // body.SetVelocityY(resetDiveVelocityY);
+    }
+
+    void onGlide()
+    {
+        isGliding = true;
+    }
+
+    void onGlideCancel()
+    {
+        isGliding = false;
     }
 }

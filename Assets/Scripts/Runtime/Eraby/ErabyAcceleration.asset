@@ -12,11 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013dac98f90c2144fba45bfbfbff265f, type: 3}
   m_Name: ErabyAcceleration
   m_EditorClassIdentifier: 
-  accX: 100
-  accY: 1
-  desX: 1
-  desY: 1
-  maxVelX: 0
-  maxVelY: 10
+  maxVelX: 4
   minVelX: 0
-  minVelY: 0
+  moveVelX: 1
+  diveVelY: 30
+  glideDescelY: 6

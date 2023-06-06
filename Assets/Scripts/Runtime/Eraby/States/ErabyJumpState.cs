@@ -100,7 +100,6 @@ public class ErabyJumpState : MoveHorizontalAbstractState
 
     protected void goToFastFall()
     {
-        persistentData.isDiving = true;
         setState<ErabyFallState>();
     }
 
