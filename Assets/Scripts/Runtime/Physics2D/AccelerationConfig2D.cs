@@ -17,6 +17,9 @@ public class AccelerationConfig2D : ScriptableObject
     [SerializeField]
     float moveVelX = 0f;
 
+    [SerializeField]
+    float diveVelY = 0f;
+
     #region IAccelerationConfig2D
 
 
@@ -50,6 +53,11 @@ public class AccelerationConfig2D : ScriptableObject
     public float MoveVelocityX
     {
         get { return moveVelX; }
+    }
+
+    public float DiveVelocityY
+    {
+        get { return diveVelY; }
     }
 
     #endregion

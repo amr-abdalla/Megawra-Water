@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ErabyFallState : FallAbstractState
+public class ErabyFallState : MoveHorizontalAbstractState
 {
     [SerializeField]
     private AudioSource impactSFX = null;
@@ -13,12 +13,8 @@ public class ErabyFallState : FallAbstractState
     [SerializeField]
     private TrailRenderer trail = null;
 
-    // [Header("Camera")]
-    // [SerializeField]
-    // VCamSwitcher vCamSwitcher = null;
-
-    // [SerializeField]
-    // CinemachineVirtualCamera nearCam = null;
+    [SerializeField]
+    private PersistentErabyData persistentData = null;
 
     [Header("Extra Configs")]
     [SerializeField]
@@ -31,7 +27,7 @@ public class ErabyFallState : FallAbstractState
     BounceTapManager tapManager = null;
     protected Coroutine landingRoutine = null;
 
-    private bool firstFall = true;
+    private float resetDiveVelocityY = 0f;
 
     #region STATE API
     protected override void onStateInit() { }
@@ -44,7 +40,15 @@ public class ErabyFallState : FallAbstractState
         startTime = Time.time;
         tapManager.ResetTap();
         controls.DiveStarted += goToFastFall;
+        controls.DiveReleased += onFastFallCancel;
+        if (persistentData?.isDiving == true)
+        {
+            persistentData.isDiving = false;
+            goToFastFall();
+        }
         // body.SetVelocityY(0);
+
+        base.onStateEnter();
         controls.EnableControls();
     }
 
@@ -63,7 +67,9 @@ public class ErabyFallState : FallAbstractState
     {
         // Debug.Log("TIME of Fall " + (Time.time - startTime));
         controls.DiveStarted -= goToFastFall;
+        controls.DiveReleased -= onFastFallCancel;
         this.DisposeCoroutine(ref landingRoutine);
+        base.onStateExit();
     }
 
     public override void ResetState()
@@ -91,7 +97,6 @@ public class ErabyFallState : FallAbstractState
         if (platform != null)
             platform.onCollision();
 
-        firstFall = false;
         if (i_tag == "Bouncy")
         {
             bounceState.SetFallPlatform(platform);
@@ -131,6 +136,16 @@ public class ErabyFallState : FallAbstractState
 
     void goToFastFall()
     {
-        setState<ErabyDiveState>();
+        controls.DisableMove();
+        resetDiveVelocityY = body.VelocityY > 0 ? 0 : body.VelocityY;
+        body.SetVelocityX(0);
+        body.SetVelocityY(-accelerationData.DiveVelocityY);
+    }
+
+    void onFastFallCancel()
+    {
+        body.SetVelocityX(initialVelocityX);
+        controls.EnableMove();
+        body.SetVelocityY(resetDiveVelocityY);
     }
 }

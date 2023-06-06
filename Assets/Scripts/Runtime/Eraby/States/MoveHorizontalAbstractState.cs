@@ -10,7 +10,7 @@ public abstract class MoveHorizontalAbstractState : State
     [SerializeField]
     protected PhysicsBody2D body = null;
 
-    private float initialVelocityX = 0f;
+    protected float initialVelocityX = 0f;
 
     #region PROTECTED
 

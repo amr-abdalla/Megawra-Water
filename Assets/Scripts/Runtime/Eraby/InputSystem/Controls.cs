@@ -87,6 +87,20 @@ public class Controls : MonoBehaviourBase
         this.DisposeCoroutine(ref diveRoutine);
     }
 
+    public void DisableMove()
+    {
+        if (locked)
+            return;
+        inputActions.Player.Move.Disable();
+    }
+
+    public void EnableMove()
+    {
+        if (locked)
+            return;
+        inputActions.Player.Move.Enable();
+    }
+
     public void SetLock(bool i_lock)
     {
         locked = i_lock;
@@ -105,7 +119,7 @@ public class Controls : MonoBehaviourBase
     {
         if (null == inputActions)
             inputActions = new ErabyInputActions();
-        inputActions.Player.Dive.performed += onDiveStarted;
+        inputActions.Player.Dive.started += onDiveStarted;
         inputActions.Player.Dive.canceled += onDiveCanceled;
 
         inputActions.Player.Jump.started += onJumpStarted;
@@ -122,22 +136,26 @@ public class Controls : MonoBehaviourBase
     {
         if (null == inputActions)
             return;
-        inputActions.Player.Dive.performed -= onDiveStarted;
+        inputActions.Player.Dive.started -= onDiveStarted;
         inputActions.Player.Dive.canceled -= onDiveCanceled;
 
         inputActions.Player.Jump.started -= onJumpStarted;
         inputActions.Player.Jump.canceled -= onJumpCanceled;
+
+        inputActions.Player.Bounce.started -= onBounceStarted;
+        inputActions.Player.Bounce.canceled -= onBounceCanceled;
+
+        inputActions.Player.Move.started -= onMoveStarted;
+        inputActions.Player.Move.canceled -= onMoveCanceled;
     }
 
     private void onDiveStarted(InputAction.CallbackContext obj)
     {
-        if (null == diveRoutine)
-            diveRoutine = StartCoroutine(dispatchDive());
+        DiveStarted?.Invoke();
     }
 
     private void onDiveCanceled(InputAction.CallbackContext obj)
     {
-        this.DisposeCoroutine(ref diveRoutine);
         DiveReleased?.Invoke();
     }
 
@@ -169,17 +187,6 @@ public class Controls : MonoBehaviourBase
     private void onMoveCanceled(InputAction.CallbackContext obj)
     {
         MoveReleased?.Invoke();
-    }
-
-    private IEnumerator dispatchDive()
-    {
-        DiveStarted?.Invoke();
-
-        while (true)
-        {
-            yield return diveDispatchInterval <= 0f ? null : this.Wait(diveDispatchInterval);
-            Dive?.Invoke();
-        }
     }
 
     #endregion

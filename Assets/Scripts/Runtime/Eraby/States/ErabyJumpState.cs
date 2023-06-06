@@ -100,7 +100,8 @@ public class ErabyJumpState : MoveHorizontalAbstractState
 
     protected void goToFastFall()
     {
-        setState<ErabyDiveState>();
+        persistentData.isDiving = true;
+        setState<ErabyFallState>();
     }
 
     void clampInitialVelocityY()
