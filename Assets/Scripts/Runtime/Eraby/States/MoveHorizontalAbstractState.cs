@@ -52,6 +52,11 @@ public abstract class MoveHorizontalAbstractState : State
         updateMoveVelocity(0);
     }
 
+    protected override void onStateFixedUpdate()
+    {
+        Debug.Log("Velocity X: " + body.VelocityX);
+    }
+
     #endregion
 
     public override void ResetState() { }

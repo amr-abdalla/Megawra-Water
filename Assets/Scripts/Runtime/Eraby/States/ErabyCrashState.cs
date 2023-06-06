@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class ErabyCrashState : ErabyAbstractBounceState
 {
-    AccelerationConfig2D crashAcceleration = null;
-
     #region STATE API
     protected override void onStateEnter()
     {

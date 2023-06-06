@@ -8,8 +8,6 @@ using UnityEngine.InputSystem;
 public class Controls : MonoBehaviourBase
 {
     [SerializeField]
-    float diveDispatchInterval = 0.2f;
-
     ErabyInputActions inputActions;
     public Action JumpPressed;
     public Action JumpReleased;

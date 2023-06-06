@@ -170,10 +170,8 @@ MonoBehaviour:
   controls: {fileID: 483121429}
   accelerationData: {fileID: 11400000, guid: 13fa2509e550a3342b7981286f974cac, type: 2}
   body: {fileID: 1576811035}
-  impactSFX: {fileID: 0}
   timeBeforeBounce: 0.05
-  trail: {fileID: 0}
-  eventDispatcher: {fileID: 0}
+  persistentData: {fileID: 1155667776}
   bounceState: {fileID: 1172577963}
   tapManager: {fileID: 896421777}
 --- !u!61 &64640559 stripped
@@ -216,7 +214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fc15c55f2892e4988f4016b4a958bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diveDispatchInterval: 0.2
 --- !u!114 &483121430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,7 +483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5973593231523510216, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.56
+      value: 30.7
       objectReference: {fileID: 0}
     - target: {fileID: 5973593231523510216, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: m_LocalPosition.y
@@ -602,7 +599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialVelocityY: 0
   finalVelocityY: 0
-  finalVelocityX: 0
+  landingVelocityX: 0
 --- !u!1 &1172577961
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,10 +650,7 @@ MonoBehaviour:
   maxJumpHeight: 20
   persistentData: {fileID: 1155667776}
   initialVelocityY: 10
-  interpolatorsManager: {fileID: 0}
-  eventDispatcher: {fileID: 0}
   tapMultiplier: 1.5
-  timingThreshold: 0.5
   tapParticles: {fileID: 1576811037}
   tapManager: {fileID: 896421777}
 --- !u!1 &1257803884
@@ -6011,10 +6005,7 @@ MonoBehaviour:
   maxJumpHeight: 20
   persistentData: {fileID: 1155667776}
   initialVelocityY: 0
-  interpolatorsManager: {fileID: 0}
-  eventDispatcher: {fileID: 0}
   tapMultiplier: 1.5
-  timingThreshold: 0.5
   tapParticles: {fileID: 1576811037}
   tapManager: {fileID: 896421777}
 --- !u!1 &1680013003
@@ -6089,7 +6080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5973593231523510216, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.78
+      value: 39.6
       objectReference: {fileID: 0}
     - target: {fileID: 5973593231523510216, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: m_LocalPosition.y

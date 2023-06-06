@@ -5,18 +5,12 @@ using UnityEngine;
 public class ErabyFallState : MoveHorizontalAbstractState
 {
     [SerializeField]
-    private AudioSource impactSFX = null;
-
-    [SerializeField]
     private float timeBeforeBounce = 0.5f;
 
     [SerializeField]
-    private TrailRenderer trail = null;
+    private PersistentErabyData persistentData = null;
 
     [Header("Extra Configs")]
-    [SerializeField]
-    HarrankashPlatformEventDispatcher eventDispatcher = null;
-
     [SerializeField]
     ErabyBounceState bounceState = null;
 
@@ -97,6 +91,9 @@ public class ErabyFallState : MoveHorizontalAbstractState
     private IEnumerator landingSequence(string i_tag)
     {
         // Debug.Log("Landing sequence");
+
+        persistentData.landingVelocityX = body.VelocityX;
+
         body.SetVelocityX(0);
         body.SetVelocityY(0);
         controls.DisableControls();

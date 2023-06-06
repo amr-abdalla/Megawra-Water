@@ -3,19 +3,9 @@ using System.Collections;
 
 public class ErabyAbstractBounceState : ErabyJumpState
 {
-    [Header("Extra Configs")]
-    [SerializeField]
-    InterpolatorsManager interpolatorsManager = null;
-
-    [SerializeField]
-    HarrankashPlatformEventDispatcher eventDispatcher = null;
-
     [Header("Timing Multipliers")]
     [SerializeField]
     float tapMultiplier = 1.5f;
-
-    [SerializeField]
-    float timingThreshold = 0.2f;
 
     [SerializeField]
     ParticleSystem tapParticles = null;

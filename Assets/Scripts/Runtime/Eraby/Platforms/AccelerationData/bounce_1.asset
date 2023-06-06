@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: bounce_1
   m_EditorClassIdentifier: 
   bounceVelocityYMultiplier: 1.5
+  bounceVelocityXMultiplier: 2

@@ -16,6 +16,9 @@ public abstract class HaraPlatformAbstract : MonoBehaviourBase
     private PlatformBounceData bounceData = null;
 
     public float BounceVelocityYMultiplier => bounceData.BounceVelocityYMultiplier;
+
+    public float BounceVelocityXMultiplier => bounceData.BounceVelocityXMultiplier;
+
     public AccelerationConfig2D AccelerationConfig => accelerationConfig;
     public float MaxJumpHeight => maxJumpHeight;
 
