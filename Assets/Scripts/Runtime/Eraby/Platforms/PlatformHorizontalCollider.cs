@@ -10,11 +10,11 @@ public class PlatformHorizontalCollider : MonoBehaviour
     [SerializeField]
     private PlatformHorizontalColliderConfig config;
 
-    float getHealthPenalty() => config.HealthPenalty;
+    public float getHealthPenalty() => config.HealthPenalty;
 
-    float getTimeDisabled() => config.timeDisabled;
+    public float getTimeDisabled() => config.timeDisabled;
 
-    float getBumpMagnitude() => config.bumpMagnitude;
+    public float getBumpMagnitude() => config.bumpMagnitude;
 
     private void Awake()
     {

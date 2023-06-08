@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using System;
 using System.Collections;
 
-class BounceTapManager : MonoBehaviour
+public class BounceTapManager : MonoBehaviour
 {
     bool tapped;
     float distance;

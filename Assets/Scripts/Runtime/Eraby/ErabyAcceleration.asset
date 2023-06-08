@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ErabyAcceleration
   m_EditorClassIdentifier: 
   maxVelX: 100
-  minVelX: 0
-  moveVelX: 1
+  minVelX: -100
+  moveVelX: 4
   diveVelY: 30
   glideDescelY: 6

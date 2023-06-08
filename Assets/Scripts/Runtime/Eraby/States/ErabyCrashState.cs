@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class ErabyCrashState : ErabyAbstractBounceState
 {
+    [SerializeField]
+    private float minBounceVelocityY = 0f;
+
     #region STATE API
     protected override void onStateEnter()
     {
@@ -20,7 +23,10 @@ public class ErabyCrashState : ErabyAbstractBounceState
 
 
         initialVelocityY = persistentData.initialVelocityY / 2;
-        onAbstractBounceStateEnter();
+        if (initialVelocityY > minBounceVelocityY)
+            onAbstractBounceStateEnter();
+        else
+            setState<ErabyWalkState>();
     }
 
     #endregion

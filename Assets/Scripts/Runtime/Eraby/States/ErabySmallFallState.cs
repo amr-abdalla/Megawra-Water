@@ -2,12 +2,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class ErabyFallState : ErabyGenericFallState
+public class ErabySmallFallState : ErabyGenericFallState
 {
-    private float resetDiveVelocityY = 0f;
-
-    private bool isGliding = false;
-
     #region STATE API
     protected override void onStateInit() { }
 
@@ -15,26 +11,12 @@ public class ErabyFallState : ErabyGenericFallState
     {
         // Debug.Log("Enter fall");
 
-
+        Debug.Log("Enter Small Fall");
         onGenericFallStateEnter();
-        controls.DiveStarted += goToFastFall;
-        controls.DiveReleased += onFastFallCancel;
-        controls.JumpPressed += onGlide;
-        controls.JumpReleased += onGlideCancel;
-
-        if (controls.isDiving())
-            goToFastFall();
-
-        if (controls.isJumping())
-            isGliding = true;
     }
 
     protected override void onStateExit()
     {
-        controls.DiveStarted -= goToFastFall;
-        controls.DiveReleased -= onFastFallCancel;
-        controls.JumpPressed -= onGlide;
-        controls.JumpReleased -= onGlideCancel;
         this.DisposeCoroutine(ref landingRoutine);
         base.onStateExit();
     }
@@ -42,12 +24,6 @@ public class ErabyFallState : ErabyGenericFallState
     protected override void onStateFixedUpdate()
     {
         base.onStateFixedUpdate();
-        if (isGliding)
-        {
-            float newVelocityY =
-                body.VelocityY + accelerationData.GlideDecelerationY * Time.fixedDeltaTime;
-            body.SetVelocityY(newVelocityY);
-        }
     }
 
     public override void ResetState()
@@ -81,32 +57,9 @@ public class ErabyFallState : ErabyGenericFallState
             setState<ErabyBounceState>();
         }
         else
-            setState<ErabyCrashState>();
+            setState<ErabyWalkState>();
 
         this.DisposeCoroutine(ref landingRoutine);
     }
     #endregion
-
-
-
-    void goToFastFall()
-    {
-        isGliding = false;
-        // controls.DisableMove();
-        resetDiveVelocityY = body.VelocityY > 0 ? 0 : body.VelocityY;
-        // body.SetVelocityX(0);
-        body.SetVelocityY(-accelerationData.DiveVelocityY);
-    }
-
-    void onFastFallCancel() { }
-
-    void onGlide()
-    {
-        isGliding = true;
-    }
-
-    void onGlideCancel()
-    {
-        isGliding = false;
-    }
 }

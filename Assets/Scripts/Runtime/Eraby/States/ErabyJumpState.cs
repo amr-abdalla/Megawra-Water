@@ -10,7 +10,7 @@ public class ErabyJumpState : MoveHorizontalAbstractState
 
     [SerializeField]
     protected PersistentErabyData persistentData = null;
-    Coroutine launchRoutine = null;
+    protected Coroutine launchRoutine = null;
 
     [SerializeField]
     protected float initialVelocityY = 0f;
@@ -84,7 +84,7 @@ public class ErabyJumpState : MoveHorizontalAbstractState
         this.DisposeCoroutine(ref launchRoutine);
     }
 
-    void checkHeight()
+    protected virtual void checkHeight()
     {
         if (false == enabled || launchRoutine != null)
         {
