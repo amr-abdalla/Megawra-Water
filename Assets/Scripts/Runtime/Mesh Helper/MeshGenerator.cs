@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MeshGenerator : MonoBehaviourBase
@@ -22,19 +21,11 @@ public class MeshGenerator : MonoBehaviourBase
 	{
 		Mesh mesh = new Mesh();
 
-		List<Vector3> vertices = new()
-		{
-			new Vector3(0, 0, 0),
-			new Vector3(0, height, 0),
-			new Vector3(width, height, 0),
-			new Vector3(width, 0, 0)
-		};
+		MeshData meshData = MeshHelper.Subdivide(subdivisionsX, subdivisionsY, height, width);
 
-		List<int> tris = MeshHelper.SubdivideX(subdivisionsX, subdivisionsY, height, width, ref vertices);  //MeshHelper.SubdivideX(10, height, ref vertices);
+		mesh.vertices = meshData.vertices.ToArray();
 
-		mesh.vertices = vertices.ToArray();
-
-		mesh.triangles = tris.ToArray();
+		mesh.triangles = meshData.tris.ToArray();
 
 		mesh.RecalculateNormals();
 
