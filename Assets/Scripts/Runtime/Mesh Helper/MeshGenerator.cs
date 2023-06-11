@@ -1,27 +1,33 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MeshGenerator : MonoBehaviourBase
 {
-	public int width;
-	public int height;
-	[Min(1)] public int subdivisionsX;
-	[Min(1)] public int subdivisionsY;
-	private MeshFilter meshFilter;
+	[SerializeField] private float width;
+	[SerializeField] private float height;
+	[Min(1)] [SerializeField] private int subdivisionsX;
+	[Min(1)] [SerializeField] private int subdivisionsY;
+	[SerializeField] private Material material;
 
-	public void init()
+	private MeshFilter meshFilter;
+	private Dictionary<int, int> VerticesIndicesByIDs;
+	private List<Vector3> vertices;
+
+	#region UNITY
+	private void Start()
 	{
-		MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
-		meshRenderer.sharedMaterial = new Material(Shader.Find("Standard"));
-		meshRenderer.sharedMaterial.color = Color.red;
-		meshFilter = gameObject.AddComponent<MeshFilter>();
+		Init();
 	}
 
+	#endregion
+
+	#region PUBLIC API
 	[ExposePublicMethod]
 	public void GenerateMesh()
 	{
 		Mesh mesh = new Mesh();
 
-		MeshData meshData = MeshHelper.Subdivide(subdivisionsX, subdivisionsY, height, width);
+		MeshData meshData = GetMeshData();
 
 		mesh.vertices = meshData.vertices.ToArray();
 
@@ -33,9 +39,83 @@ public class MeshGenerator : MonoBehaviourBase
 
 	}
 
-	public void Start()
+	#endregion
+
+	#region PRIVATE
+	private void Init()
 	{
-		init();
+		MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
+		meshRenderer.sharedMaterial = material;
+		meshFilter = gameObject.AddComponent<MeshFilter>();
 	}
+
+	private MeshData GetMeshData()
+	{
+		List<int> tris = new();
+		VerticesIndicesByIDs = new();
+		vertices = new();
+
+		AddCornerVertices();
+
+		int index1;
+		int index2;
+		int index3;
+
+		for (int i = 1; i <= subdivisionsX; i++)
+		{
+			index1 = AddVertex(i - 1, 0);
+			index2 = AddVertex(i, 0);
+
+			for (int j = 1; j <= subdivisionsY; j++)
+			{
+				index3 = AddVertex(i - 1, j);
+
+				AddTriangle(tris, index3, index2, index1);
+				index1 = index2;
+				index2 = index3;
+
+				index3 = AddVertex(i, j);
+
+				AddTriangle(tris, index3, index1, index2);
+				index1 = index2;
+				index2 = index3;
+			}
+
+		}
+
+		return new MeshData(vertices, tris);
+	}
+
+	private void AddTriangle(List<int> tri, int index1, int index2, int index3)
+	{
+		tri.Add(index1);
+		tri.Add(index2);
+		tri.Add(index3);
+	}
+
+	private void AddCornerVertices()
+	{
+		AddVertex(0, 0);
+		AddVertex(0, subdivisionsY);
+		AddVertex(subdivisionsX, subdivisionsY);
+		AddVertex(subdivisionsX, 0);
+	}
+
+	private int AddVertex(int i, int j)
+	{
+		int ID = (i << 16) | j;
+
+		if (VerticesIndicesByIDs.TryGetValue(ID, out int index))
+		{
+			return index;
+		}
+
+		vertices.Add(new Vector3(width / subdivisionsX * i, height / subdivisionsY * j));
+		VerticesIndicesByIDs.Add(ID, vertices.Count - 1);
+
+		return vertices.Count - 1;
+	}
+
+	#endregion
 
 }
