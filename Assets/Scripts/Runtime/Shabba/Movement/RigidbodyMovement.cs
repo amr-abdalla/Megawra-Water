@@ -69,7 +69,7 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
     private void FixedUpdate()
     {
         float deltaAngle = ComputeAngularVelocity(rotateDirection.x) * Time.deltaTime;
-        moveDirection = Quaternion.Euler(0, 0, -deltaAngle) * moveDirection;
+        moveDirection = Quaternion.Euler(0, 0, deltaAngle) * moveDirection;
 
         rigidBody.velocity = moveDirection * rigidBody.velocity.magnitude;
 
@@ -140,8 +140,6 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
         if (null != rigidBody)
         {
             rigidBody.drag = initialDrag;
-            // set object to look down
-            rigidBody.transform.rotation = Quaternion.Euler(0, 0, 180);
             rigidBody.velocity = MathConstants.VECTOR_2_ZERO;
         }
     }
