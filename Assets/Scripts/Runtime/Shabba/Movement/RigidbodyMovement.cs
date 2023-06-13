@@ -16,13 +16,13 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
     [Header("Initial values")]
     [SerializeField] private float initialDrag = 0f;
 
-    private Rigidbody2D rigidBody;
+    public Rigidbody2D rigidBody;
 
     // Runtime variables
     private float currentDragTimer = 0f;
     float currentAngularVelocity = 0f;
-    private Vector2 rotateDirection = Vector2.zero;
-    private Vector2 moveDirection = Vector2.down;
+    public Vector2 rotateDirection = Vector2.zero;
+    public Vector2 moveDirection = Vector2.down;
 
     #region UNITY
 
@@ -96,16 +96,20 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
     [ExposePublicMethod]
     public void Push(float force = 100f)
     {
-        rigidBody.drag = initialDrag;
+        Push(force, moveDirection);
 
         // if velocity isn't 0, set move direction to velocity's direction
 
 
         // match the moveDirection to the forward direction of the rigidbody's rotation
         // moveDirection = rigidBody.transform.up;
+    }
 
+    public void Push(float force, Vector2 direction)
+    {
+        rigidBody.drag = initialDrag;
 
-        rigidBody.AddForce(moveDirection * force, ForceMode2D.Impulse);
+        rigidBody.AddForce(direction * force, ForceMode2D.Impulse);
     }
 
     [ExposePublicMethod]
@@ -146,7 +150,7 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
         }
     }
 
-    void applyDrag()
+    public void applyDrag()
     {
         float tDrag = currentDragTimer / timeToMaxDrag;
         float tEval = dragSettingsData.dragEvolutionCurve.Evaluate(tDrag);
@@ -166,5 +170,5 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
         return currentAngularVelocity;
     }
 
-    #endregion
+	#endregion
 }
