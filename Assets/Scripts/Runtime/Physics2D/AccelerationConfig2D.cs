@@ -24,6 +24,9 @@ public class AccelerationConfig2D : ScriptableObject
     [SerializeField]
     float glideDescelY = 0f;
 
+    [SerializeField]
+    float diveAccelerationY = 0f;
+
     #region IAccelerationConfig2D
 
 
@@ -67,6 +70,11 @@ public class AccelerationConfig2D : ScriptableObject
     public float GlideDecelerationY
     {
         get { return glideDescelY; }
+    }
+
+    public float DiveAccelrationY
+    {
+        get { return diveAccelerationY; }
     }
 
     #endregion

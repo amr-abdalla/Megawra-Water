@@ -7,6 +7,11 @@ public class ErabyFallState : ErabyGenericFallState
     private float resetDiveVelocityY = 0f;
 
     private bool isGliding = false;
+    private bool isDiving = false;
+
+    private bool isFrozen = false;
+
+    private Coroutine glideRoutine = null;
 
     #region STATE API
     protected override void onStateInit() { }
@@ -21,6 +26,8 @@ public class ErabyFallState : ErabyGenericFallState
         controls.DiveReleased += onFastFallCancel;
         controls.JumpPressed += onGlide;
         controls.JumpReleased += onGlideCancel;
+        isDiving = false;
+        isGliding = false;
 
         if (controls.isDiving())
             goToFastFall();
@@ -35,17 +42,29 @@ public class ErabyFallState : ErabyGenericFallState
         controls.DiveReleased -= onFastFallCancel;
         controls.JumpPressed -= onGlide;
         controls.JumpReleased -= onGlideCancel;
+
         this.DisposeCoroutine(ref landingRoutine);
+        onGenericFallStateExit();
         base.onStateExit();
     }
 
     protected override void onStateFixedUpdate()
     {
         base.onStateFixedUpdate();
-        if (isGliding)
+        if (isFrozen)
+        {
+            body.SetVelocityY(0);
+        }
+        else if (isGliding)
         {
             float newVelocityY =
                 body.VelocityY + accelerationData.GlideDecelerationY * Time.fixedDeltaTime;
+            body.SetVelocityY(newVelocityY);
+        }
+        else if (isDiving)
+        {
+            float newVelocityY =
+                body.VelocityY - accelerationData.DiveAccelrationY * Time.fixedDeltaTime;
             body.SetVelocityY(newVelocityY);
         }
     }
@@ -85,28 +104,38 @@ public class ErabyFallState : ErabyGenericFallState
 
         this.DisposeCoroutine(ref landingRoutine);
     }
-    #endregion
 
-
+    private IEnumerator glideSequence()
+    {
+        isFrozen = true;
+        body.SetVelocityY(0);
+        yield return this.Wait(0.4f);
+        isFrozen = false;
+        isGliding = true;
+        this.DisposeCoroutine(ref glideRoutine);
+    }
 
     void goToFastFall()
     {
         isGliding = false;
-        // controls.DisableMove();
-        resetDiveVelocityY = body.VelocityY > 0 ? 0 : body.VelocityY;
-        // body.SetVelocityX(0);
-        body.SetVelocityY(-accelerationData.DiveVelocityY);
+        isDiving = true;
     }
 
-    void onFastFallCancel() { }
+    void onFastFallCancel()
+    {
+        isDiving = false;
+    }
 
     void onGlide()
     {
-        isGliding = true;
+        if (isGliding || glideRoutine != null)
+            return;
+        glideRoutine = StartCoroutine(glideSequence());
     }
 
     void onGlideCancel()
     {
         isGliding = false;
     }
+    #endregion
 }

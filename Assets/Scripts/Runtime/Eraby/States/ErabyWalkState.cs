@@ -55,7 +55,10 @@ public class ErabyWalkState : MoveHorizontalAbstractState
     private IEnumerator bumpSequence(float bumpMagnitude, float bumpDuration)
     {
         controls.DisableControls();
-        body.SetVelocityX(bumpMagnitude);
+        float velocityX = Mathf.Cos(Mathf.Deg2Rad * 45) * bumpMagnitude;
+        float velocityY = Mathf.Sin(Mathf.Deg2Rad * 45) * bumpMagnitude;
+        body.SetVelocityX(velocityX);
+        body.SetVelocityY(velocityY);
         yield return new WaitForSeconds(bumpDuration);
         body.SetVelocityX(0);
         controls.EnableControls();

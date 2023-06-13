@@ -13,32 +13,24 @@ public class ErabyAbstractBounceState : ErabyJumpState
     [SerializeField]
     BounceTapManager tapManager = null;
 
-    Coroutine bounceRoutine = null;
-
     #region STATE API
     protected void onAbstractBounceStateEnter()
     {
         onBaseJumpStateEnter();
-        if (bounceRoutine == null)
-            bounceRoutine = StartCoroutine(bounceSequence());
-    }
 
-    protected override void onStateEnter()
-    {
-        // Debug.Log("Enter bounce");
-        onAbstractBounceStateEnter();
-    }
-
-    private IEnumerator bounceSequence()
-    {
         if (tapManager.isTapped())
         {
             applyTapMulipier();
         }
         tapManager.OnTap += applyTapMulipier;
         controls.DiveStarted += goToFastFall;
-        yield return null;
-        this.DisposeCoroutine(ref bounceRoutine);
+        tapManager.EnableTap();
+    }
+
+    protected override void onStateEnter()
+    {
+        // Debug.Log("Enter bounce");
+        onAbstractBounceStateEnter();
     }
 
     private void applyTapMulipier()
@@ -64,8 +56,9 @@ public class ErabyAbstractBounceState : ErabyJumpState
     protected override void onStateExit()
     {
         // jumpRiseFrames.Stop();
-        this.DisposeCoroutine(ref bounceRoutine);
         tapManager.OnTap -= applyTapMulipier;
+        controls.DiveStarted -= goToFastFall;
+        tapManager.DisableTap();
 
         base.onStateExit();
     }

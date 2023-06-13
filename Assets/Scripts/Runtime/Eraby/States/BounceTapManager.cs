@@ -19,6 +19,8 @@ public class BounceTapManager : MonoBehaviour
     [SerializeField]
     private Controls controls = null;
 
+    private bool enableTap = false;
+
     private void Awake()
     {
         controls.BounceStarted += tap;
@@ -26,13 +28,24 @@ public class BounceTapManager : MonoBehaviour
 
     public void ResetTap()
     {
+        Debug.Log("Reset tap");
         tapped = false;
         distance = 0;
     }
 
+    public void EnableTap()
+    {
+        enableTap = true;
+    }
+
+    public void DisableTap()
+    {
+        enableTap = false;
+    }
+
     public void tap()
     {
-        if (tapped)
+        if (tapped || !enableTap)
             return;
 
         RaycastHit2D hit = Physics2D.BoxCast(

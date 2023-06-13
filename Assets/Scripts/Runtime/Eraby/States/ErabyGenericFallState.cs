@@ -5,7 +5,7 @@ using UnityEngine;
 public class ErabyGenericFallState : MoveHorizontalAbstractState
 {
     [SerializeField]
-    protected float timeBeforeBounce = 0.5f;
+    protected float timeBeforeBounce = 0;
 
     [SerializeField]
     protected PersistentErabyData persistentData = null;
@@ -21,14 +21,10 @@ public class ErabyGenericFallState : MoveHorizontalAbstractState
     #region STATE API
     protected override void onStateInit() { }
 
-    float startTime;
-
     protected void onGenericFallStateEnter()
     {
-        startTime = Time.time;
-
         tapManager.ResetTap();
-
+        tapManager.EnableTap();
         base.onStateEnter();
         controls.EnableControls();
     }
@@ -49,6 +45,19 @@ public class ErabyGenericFallState : MoveHorizontalAbstractState
         base.ResetState();
         onStateExit();
     }
+
+    protected void onGenericFallStateExit()
+    {
+        tapManager.DisableTap();
+        this.DisposeCoroutine(ref landingRoutine);
+    }
+
+    protected override void onStateExit()
+    {
+        onGenericFallStateExit();
+        base.onStateExit();
+    }
+
     #endregion
 
     #region PRIVATE

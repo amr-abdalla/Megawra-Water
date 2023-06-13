@@ -17,6 +17,7 @@ public class ErabySmallFallState : ErabyGenericFallState
 
     protected override void onStateExit()
     {
+        onGenericFallStateExit();
         this.DisposeCoroutine(ref landingRoutine);
         base.onStateExit();
     }

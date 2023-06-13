@@ -26,10 +26,6 @@ public class ErabyBounceState : ErabyAbstractBounceState
             collidedPlatform.onCollision();
         }
 
-        // sfx suggestion: bouncy jump sound
-        // bounceSFX?.Play();
-        // jumpSFX?.Play();
-
         initialVelocityY =
             collidedPlatform.BounceVelocityYMultiplier * persistentData.initialVelocityY;
 

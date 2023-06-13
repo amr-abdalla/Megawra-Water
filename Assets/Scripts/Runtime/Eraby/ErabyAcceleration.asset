@@ -17,3 +17,4 @@ MonoBehaviour:
   moveVelX: 4
   diveVelY: 30
   glideDescelY: 6
+  diveAccelerationY: 50
