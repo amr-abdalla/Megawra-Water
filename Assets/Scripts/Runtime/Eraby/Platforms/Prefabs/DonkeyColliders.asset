@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DonkeyColliders
   m_EditorClassIdentifier: 
   HealthPenalty: 0.1
-  timeDisabled: 0.2
+  timeDisabled: 0.5
   bumpMagnitude: 4
