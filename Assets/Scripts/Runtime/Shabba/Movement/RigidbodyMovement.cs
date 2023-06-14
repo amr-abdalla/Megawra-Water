@@ -16,13 +16,13 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
     [Header("Initial values")]
     [SerializeField] private float initialDrag = 0f;
 
-    public Rigidbody2D rigidBody;
+    private Rigidbody2D rigidBody;
 
     // Runtime variables
     private float currentDragTimer = 0f;
     float currentAngularVelocity = 0f;
-    public Vector2 rotateDirection = Vector2.zero;
-    public Vector2 moveDirection = Vector2.down;
+    private Vector2 rotateDirection = Vector2.zero;
+    private Vector2 moveDirection = Vector2.down;
 
     #region UNITY
 
@@ -105,6 +105,16 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
         // moveDirection = rigidBody.transform.up;
     }
 
+    public void ApplyCancellingForce()
+	{
+        Push(CurrentVelocity.magnitude, -moveDirection);
+    }
+
+    public void SetMoveDirection(Vector2 value)
+	{
+        moveDirection = value;
+	}
+
     public void Push(float force, Vector2 direction)
     {
         rigidBody.drag = initialDrag;
@@ -126,11 +136,12 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 
     public Vector2 CurrentVelocity => null == rigidBody ? MathConstants.VECTOR_2_ZERO : rigidBody.velocity;
 
-    #endregion
+    public Vector2 MoveDirection => moveDirection;
+	#endregion
 
-    #region PRIVATE
+	#region PRIVATE
 
-    void onDidStopMoving()
+	void onDidStopMoving()
     {
         // Code review : this could trigger an event to tell all listeners 
         // that object stopped moving (+ start whataver behaviour should happen in that case)
@@ -150,7 +161,7 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
         }
     }
 
-    public void applyDrag()
+    void applyDrag()
     {
         float tDrag = currentDragTimer / timeToMaxDrag;
         float tEval = dragSettingsData.dragEvolutionCurve.Evaluate(tDrag);
