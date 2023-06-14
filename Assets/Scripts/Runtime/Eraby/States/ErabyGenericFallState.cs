@@ -63,8 +63,6 @@ public class ErabyGenericFallState : MoveHorizontalAbstractState
     #region PRIVATE
     protected virtual IEnumerator landingSequence(string i_tag)
     {
-        // Debug.Log("Landing sequence");
-
         yield return null;
 
         this.DisposeCoroutine(ref landingRoutine);
@@ -74,7 +72,6 @@ public class ErabyGenericFallState : MoveHorizontalAbstractState
     #region UTILITY
     protected HaraPlatformAbstract getCollidedPlatformComponent()
     {
-        //Debug.LogError("Get component fall");
         HaraPlatformAbstract collidedPlatform =
             body.CurrentGroundTransform.gameObject.GetComponentInParent<HaraPlatformAbstract>();
 

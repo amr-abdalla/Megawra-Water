@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections;
+
 
 public class ErabyBounceState : ErabyAbstractBounceState
 {
@@ -8,7 +8,7 @@ public class ErabyBounceState : ErabyAbstractBounceState
     #region STATE API
     protected override void onStateEnter()
     {
-        // Debug.Log("Enter bounce");
+
 
         if (!body.IsGrounded)
         {

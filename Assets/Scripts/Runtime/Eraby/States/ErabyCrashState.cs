@@ -20,11 +20,6 @@ public class ErabyCrashState : ErabyAbstractBounceState
             return;
         }
 
-        // sfx suggestion: bouncy jump sound
-        // bounceSFX?.Play();
-        // jumpSFX?.Play();
-
-
         initialVelocityY = persistentData.initialVelocityY / 2;
         if (initialVelocityY > minBounceVelocityY)
         {

@@ -9,8 +9,6 @@ public class ErabySmallFallState : ErabyGenericFallState
 
     protected override void onStateEnter()
     {
-        // Debug.Log("Enter fall");
-
         Debug.Log("Enter Small Fall");
         onGenericFallStateEnter();
     }
@@ -37,7 +35,6 @@ public class ErabySmallFallState : ErabyGenericFallState
     #region PRIVATE
     protected override IEnumerator landingSequence(string i_tag)
     {
-        // Debug.Log("Landing sequence");
 
         persistentData.landingVelocityX = body.VelocityX;
 

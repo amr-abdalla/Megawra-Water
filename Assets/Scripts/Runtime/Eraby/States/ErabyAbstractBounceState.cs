@@ -29,7 +29,6 @@ public class ErabyAbstractBounceState : ErabyJumpState
 
     protected override void onStateEnter()
     {
-        // Debug.Log("Enter bounce");
         onAbstractBounceStateEnter();
     }
 
@@ -45,8 +44,7 @@ public class ErabyAbstractBounceState : ErabyJumpState
     public override void ResetState()
     {
         StopAllCoroutines();
-        // bounceSFX?.Stop();
-        // jumpSFX?.Stop();
+
         onStateExit();
     }
     #endregion
@@ -55,7 +53,6 @@ public class ErabyAbstractBounceState : ErabyJumpState
 
     protected override void onStateExit()
     {
-        // jumpRiseFrames.Stop();
         tapManager.OnTap -= applyTapMulipier;
         controls.DiveStarted -= goToFastFall;
         tapManager.DisableTap();

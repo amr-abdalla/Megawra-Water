@@ -1,4 +1,3 @@
-// using Cinemachine;
 using System.Collections;
 using UnityEngine;
 
@@ -18,9 +17,6 @@ public class ErabyFallState : ErabyGenericFallState
 
     protected override void onStateEnter()
     {
-        // Debug.Log("Enter fall");
-
-
         onGenericFallStateEnter();
         controls.DiveStarted += goToFastFall;
         controls.DiveReleased += onFastFallCancel;
@@ -79,7 +75,6 @@ public class ErabyFallState : ErabyGenericFallState
     #region PRIVATE
     protected override IEnumerator landingSequence(string i_tag)
     {
-        // Debug.Log("Landing sequence");
 
         persistentData.landingVelocityX = body.VelocityX;
 

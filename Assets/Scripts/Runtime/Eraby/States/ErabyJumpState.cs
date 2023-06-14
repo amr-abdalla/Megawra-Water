@@ -22,10 +22,6 @@ public class ErabyJumpState : MoveHorizontalAbstractState
 
     protected void onBaseJumpStateEnter()
     {
-        // Debug.Log("Enter jump");
-
-
-
         clampInitialVelocityY();
         startJumpY = body.transform.position.y;
         stopJumpY = body.transform.position.y + maxJumpHeight;
@@ -45,7 +41,6 @@ public class ErabyJumpState : MoveHorizontalAbstractState
 
     protected override void onStateExit()
     {
-        // jumpRiseFrames.Stop();
         persistentData.initialVelocityY = initialVelocityY;
         controls.DiveStarted -= goToFastFall;
         this.DisposeCoroutine(ref launchRoutine);
