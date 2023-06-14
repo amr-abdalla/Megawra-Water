@@ -445,18 +445,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 488870030ce938c41ad841805bf11f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vertices:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 4, z: 0}
-  - {x: 2, y: 0, z: 0}
-  - {x: 2, y: 4, z: 0}
-  triangles:
-  - index1: 0
-    index2: 1
-    index3: 2
-  - index1: 0
-    index2: 1
-    index3: 3
+  width: 10
+  height: 10
+  subdivisionsX: 10
+  subdivisionsY: 50
+  material: {fileID: 2100000, guid: 69bb1def4dd38244eb2354c16a2407c9, type: 2}
 --- !u!4 &422880031
 Transform:
   m_ObjectHideFlags: 0

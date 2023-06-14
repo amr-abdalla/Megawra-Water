@@ -1,4 +1,4 @@
-Shader "Custom/2DWaterShader_Texture"
+Shader "WaterShader"
 {
     Properties
     {

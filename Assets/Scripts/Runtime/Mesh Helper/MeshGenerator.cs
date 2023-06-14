@@ -12,6 +12,7 @@ public class MeshGenerator : MonoBehaviourBase
 	private MeshFilter meshFilter;
 	private Dictionary<int, int> VerticesIndicesByIDs;
 	private List<Vector3> vertices;
+	private List<Vector2> uvs;
 
 	#region UNITY
 	private void Start()
@@ -32,6 +33,8 @@ public class MeshGenerator : MonoBehaviourBase
 		mesh.vertices = meshData.vertices.ToArray();
 
 		mesh.triangles = meshData.tris.ToArray();
+
+		mesh.uv = meshData.uvs.ToArray();
 
 		mesh.RecalculateNormals();
 
@@ -54,6 +57,7 @@ public class MeshGenerator : MonoBehaviourBase
 		List<int> tris = new();
 		VerticesIndicesByIDs = new();
 		vertices = new();
+		uvs = new();
 
 		AddCornerVertices();
 
@@ -83,7 +87,12 @@ public class MeshGenerator : MonoBehaviourBase
 
 		}
 
-		return new MeshData(vertices, tris);
+		foreach(var vertex in vertices)
+		{
+			uvs.Add(new Vector2(vertex.x, vertex.y));
+		}
+
+		return new MeshData(vertices, uvs, tris);
 	}
 
 	private void AddTriangle(List<int> tri, int index1, int index2, int index3)
