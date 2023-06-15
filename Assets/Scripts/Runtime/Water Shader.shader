@@ -38,12 +38,22 @@ Shader "WaterShader"
             float _WaveHeight;
             float _WaveFrequency;
 
+
+            // surfaceWaveStrength
+            // waveOriginUv
+            // waveImpactExtent
+
             v2f vert(appdata v)
             {
                 v2f o;
 
                 float2 offset = float2(sin(v.vertex.y * _WaveFrequency + _Time.y * _WaveSpeed), 0) * _WaveHeight;
                 float2 distortedVertex = v.vertex.xy + offset;
+
+                // call a function that is going to generate the surface wave
+                // the surface wave will affect all vertices. However, this offset gets smaller as uv.y gets smaller. This lerp is remapped from 1 to waveImpactExtent
+
+
                 o.vertex = UnityObjectToClipPos(float4(distortedVertex, v.vertex.zw));
                 o.uv = v.uv;
 
