@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class ErabyBounceState : ErabyAbstractBounceState
 {
     private HaraPlatformAbstract fallPlatform = null;
@@ -8,7 +7,7 @@ public class ErabyBounceState : ErabyAbstractBounceState
     #region STATE API
     protected override void onStateEnter()
     {
-
+        fallPlatform = persistentData.fallPlatform;
 
         if (!body.IsGrounded)
         {
@@ -37,10 +36,13 @@ public class ErabyBounceState : ErabyAbstractBounceState
             Mathf.Abs(newVelocityX),
             Mathf.Abs(accelerationData.MaxVelocityX)
         );
-        body.SetVelocityX(newVelocityX);
+        persistentData.launchVelocityY = initialVelocityY;
+        persistentData.launchVelocityX = newVelocityX;
+        setState<ErabyLaunchState>();
         Debug.Log("Bounce velocity: " + initialVelocityY);
-        base.onAbstractBounceStateEnter();
+        base.onStateEnter();
     }
+
     #endregion
 
     #region PRIVATE
@@ -76,11 +78,6 @@ public class ErabyBounceState : ErabyAbstractBounceState
         }
 
         return collidedPlatform;
-    }
-
-    public void SetFallPlatform(HaraPlatformAbstract i_platform)
-    {
-        fallPlatform = i_platform;
     }
 
     #endregion

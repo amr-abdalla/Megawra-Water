@@ -10,11 +10,16 @@ public abstract class MoveHorizontalAbstractState : State
 
     protected float initialVelocityX = 0f;
 
+    protected bool active = false;
+
     #region PROTECTED
 
     protected override void onStateEnter()
     {
+        active = true;
         initialVelocityX = body.VelocityX;
+        if (controls.isMoving())
+            updateMoveVelocity(controls.MoveDirection());
         controls.MoveStarted += updateMoveVelocity;
         controls.MoveReleased += handleMoveCancel;
     }
@@ -23,6 +28,8 @@ public abstract class MoveHorizontalAbstractState : State
     {
         controls.MoveStarted -= updateMoveVelocity;
         controls.MoveReleased -= handleMoveCancel;
+        active = false;
+        body.SetVelocityX(initialVelocityX);
     }
 
     protected virtual void onDidStop() { }
@@ -38,8 +45,10 @@ public abstract class MoveHorizontalAbstractState : State
             : i_velocityX;
     }
 
-    void updateMoveVelocity(float x)
+    protected void updateMoveVelocity(float x)
     {
+        if (!active)
+            return;
         float newVelocityX = initialVelocityX + x * accelerationData.MoveVelocityX;
         newVelocityX = clampVelocityX(newVelocityX, accelerationData.MaxVelocityX);
         body.SetVelocityX(newVelocityX);

@@ -1,14 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class ErabyFallState : ErabyGenericFallState
+public class ErabyFallState : ErabyAbstractFallState
 {
-    // TODO: move all three into new states
-    private bool isGliding = false;
-    private bool isDiving = false;
-
-    private bool isFrozen = false;
-
     private Coroutine glideRoutine = null;
 
     #region STATE API
@@ -17,51 +11,26 @@ public class ErabyFallState : ErabyGenericFallState
     protected override void onStateEnter()
     {
         base.onStateEnter();
+        Debug.Log("Enter fall");
         controls.DiveStarted += goToFastFall;
-        controls.DiveReleased += onFastFallCancel;
-        controls.JumpPressed += onGlide;
-        controls.JumpReleased += onGlideCancel;
-        isDiving = false;
-        isGliding = false;
+        controls.JumpPressed += goToGlide;
 
         if (controls.isDiving())
             goToFastFall();
 
         if (controls.isJumping())
-            isGliding = true;
+            goToGlide();
     }
 
     protected override void onStateExit()
     {
         controls.DiveStarted -= goToFastFall;
-        controls.DiveReleased -= onFastFallCancel;
-        controls.JumpPressed -= onGlide;
-        controls.JumpReleased -= onGlideCancel;
+
+        controls.JumpPressed -= goToGlide;
 
         this.DisposeCoroutine(ref landingRoutine);
-        // onGenericFallStateExit();
-        base.onStateExit();
-    }
 
-    protected override void onStateFixedUpdate()
-    {
-        base.onStateFixedUpdate();
-        if (isFrozen)
-        {
-            body.SetVelocityY(0);
-        }
-        else if (isGliding)
-        {
-            float newVelocityY =
-                body.VelocityY + accelerationData.GlideDecelerationY * Time.fixedDeltaTime; // move the decceleration / acceleration to new basic acceleration2dconfigs
-            body.SetVelocityY(newVelocityY);
-        }
-        else if (isDiving)
-        {
-            float newVelocityY =
-                body.VelocityY - accelerationData.DiveAccelrationY * Time.fixedDeltaTime;
-            body.SetVelocityY(newVelocityY);
-        }
+        base.onStateExit();
     }
 
     public override void ResetState()
@@ -91,7 +60,7 @@ public class ErabyFallState : ErabyGenericFallState
 
         if (i_tag == "Bouncy")
         {
-            bounceState.SetFallPlatform(platform);
+            persistentData.fallPlatform = platform;
             setState<ErabyBounceState>();
         }
         else
@@ -100,39 +69,15 @@ public class ErabyFallState : ErabyGenericFallState
         this.DisposeCoroutine(ref landingRoutine);
     }
 
-    // move to its separate state
-    private IEnumerator glideSequence()
-    {
-        isFrozen = true;
-        body.SetVelocityY(0);
-        yield return this.Wait(0.4f);
-        isFrozen = false;
-        isGliding = true;
-        this.DisposeCoroutine(ref glideRoutine);
-    }
-
- // TODO: move to a new state
     void goToFastFall()
     {
-        isGliding = false;
-        isDiving = true;
+        setState<ErabyDiveState>();
     }
 
-    void onFastFallCancel()
+    void goToGlide()
     {
-        isDiving = false;
+        setState<ErabyGlideStartState>();
     }
 
-    void onGlide()
-    {
-        if (isGliding || glideRoutine != null)
-            return;
-        glideRoutine = StartCoroutine(glideSequence());
-    }
-
-    void onGlideCancel()
-    {
-        isGliding = false;
-    }
     #endregion
 }

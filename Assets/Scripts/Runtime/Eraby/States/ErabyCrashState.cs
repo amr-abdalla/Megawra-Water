@@ -29,11 +29,13 @@ public class ErabyCrashState : ErabyAbstractBounceState
                 Mathf.Abs(newVelocityX),
                 Mathf.Abs(accelerationData.MaxVelocityX)
             );
-            body.SetVelocityX(newVelocityX);
-            onAbstractBounceStateEnter();
+            persistentData.launchVelocityX = newVelocityX;
+            persistentData.launchVelocityY = initialVelocityY;
+            setState<ErabyLaunchState>();
+            base.onStateEnter();
         }
         else
-            setState<ErabyWalkState>();
+            setState<ErabyIdleState>();
     }
 
     #endregion

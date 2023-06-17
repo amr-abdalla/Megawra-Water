@@ -18,14 +18,14 @@ public class AccelerationConfig2D : ScriptableObject
     float moveVelX = 0f;
 
     [SerializeField]
-    float diveVelY = 0f;
+    float moveVelY = 0f;
 
     [Header("Acceleration")]
     [SerializeField]
-    float glideDescelY = 0f;
+    float decelerationY = 0f;
 
     [SerializeField]
-    float diveAccelerationY = 0f;
+    float accelerationY = 0f;
 
     #region IAccelerationConfig2D
 
@@ -62,19 +62,14 @@ public class AccelerationConfig2D : ScriptableObject
         get { return moveVelX; }
     }
 
-    public float DiveVelocityY
+    public float DecelerationY
     {
-        get { return diveVelY; }
+        get { return decelerationY; }
     }
 
-    public float GlideDecelerationY
+    public float AccelerationY
     {
-        get { return glideDescelY; }
-    }
-
-    public float DiveAccelrationY
-    {
-        get { return diveAccelerationY; }
+        get { return accelerationY; }
     }
 
     #endregion

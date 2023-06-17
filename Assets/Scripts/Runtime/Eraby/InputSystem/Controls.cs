@@ -22,7 +22,6 @@ public class Controls : MonoBehaviourBase
     public Action MoveReleased;
 
     bool locked = false;
-    Coroutine diveRoutine = null;
 
     private bool jumpActive = false;
     private bool diveActive = false;
@@ -87,7 +86,6 @@ public class Controls : MonoBehaviourBase
         inputActions.Player.Jump.Disable();
         inputActions.Player.Bounce.Disable();
         inputActions.Player.Move.Disable();
-        this.DisposeCoroutine(ref diveRoutine);
     }
 
     public void DisableMove()
@@ -209,11 +207,16 @@ public class Controls : MonoBehaviourBase
     private void onMoveStarted(InputAction.CallbackContext obj)
     {
         moveValue = obj.ReadValue<float>();
-        MoveStarted?.Invoke(obj.ReadValue<float>());
+
+        if (moveValue == 0f)
+            onMoveCanceled(obj);
+        else
+            MoveStarted?.Invoke(obj.ReadValue<float>());
     }
 
     private void onMoveCanceled(InputAction.CallbackContext obj)
     {
+        moveValue = 0f;
         MoveReleased?.Invoke();
     }
 

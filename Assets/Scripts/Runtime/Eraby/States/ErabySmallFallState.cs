@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ErabySmallFallState : ErabyGenericFallState
+public class ErabySmallFallState : ErabyAbstractFallState
 {
     #region STATE API
     protected override void onStateInit() { }
@@ -51,11 +51,11 @@ public class ErabySmallFallState : ErabyGenericFallState
 
         if (i_tag == "Bouncy")
         {
-            bounceState.SetFallPlatform(platform);
+            persistentData.fallPlatform = platform;
             setState<ErabyBounceState>();
         }
         else
-            setState<ErabyWalkState>();
+            setState<ErabyIdleState>();
 
         this.DisposeCoroutine(ref landingRoutine);
     }

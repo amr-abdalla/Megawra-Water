@@ -1,40 +1,57 @@
 using UnityEngine;
 using System.Collections;
 
-public class ErabyAbstractBounceState : ErabyJumpState
+public class ErabyAbstractBounceState : State
 {
     [Header("Timing Multipliers")]
     [SerializeField]
-    float tapMultiplier = 1.5f;
+    protected float tapMultiplier = 1.5f;
 
     [SerializeField]
-    ParticleSystem tapParticles = null;
+    protected ParticleSystem tapParticles = null;
 
     [SerializeField]
-    BounceTapManager tapManager = null;
+    protected BounceTapManager tapManager = null;
+
+    [SerializeField]
+    protected PhysicsBody2D body = null;
+
+    [SerializeField]
+    protected AccelerationConfig2D accelerationData = null;
+
+    [SerializeField]
+    protected PersistentErabyData persistentData = null;
+
+    private bool active = false;
+
+    protected float initialVelocityY = 0f;
 
     #region STATE API
-    protected void onAbstractBounceStateEnter()
-    {
-        onBaseJumpStateEnter();
 
+
+    protected override void onStateInit() { }
+
+    protected override void onStateUpdate() { }
+
+    protected override void onStateFixedUpdate() { }
+
+    protected override void onStateEnter()
+    {
+        active = true;
         if (tapManager.isTapped())
         {
             applyTapMulipier();
         }
         tapManager.OnTap += applyTapMulipier;
-        controls.DiveStarted += goToFastFall;
         tapManager.EnableTap();
-    }
-
-    protected override void onStateEnter()
-    {
-        onAbstractBounceStateEnter();
     }
 
     private void applyTapMulipier()
     {
-        float newVelocityY = clampVelocityY(body.VelocityY * tapMultiplier);
+        if (!active)
+            return;
+
+        float newVelocityY = body.VelocityY * tapMultiplier;
         body.SetVelocityY(newVelocityY);
         persistentData.initialVelocityY = newVelocityY;
         tapParticles?.Play();
@@ -54,10 +71,8 @@ public class ErabyAbstractBounceState : ErabyJumpState
     protected override void onStateExit()
     {
         tapManager.OnTap -= applyTapMulipier;
-        controls.DiveStarted -= goToFastFall;
-        tapManager.DisableTap();
 
-        base.onStateExit();
+        tapManager.DisableTap();
     }
 
     #endregion

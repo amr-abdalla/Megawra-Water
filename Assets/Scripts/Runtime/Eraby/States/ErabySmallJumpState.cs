@@ -1,21 +1,17 @@
 using UnityEngine;
 
-public class ErabySmallJumpState : ErabyJumpState
+public class ErabySmallJumpState : ErabyAbstractJumpState
 {
-    [SerializeField]
-    float jumpVelocityY = 0f;
-
     protected override void onStateEnter()
     {
-        initialVelocityY = jumpVelocityY;
-        onBaseJumpStateEnter();
-        initialVelocityX = 0;
+        base.onStateEnter();
+
         Debug.Log("Enter small jump");
     }
 
     protected override void checkHeight()
     {
-        if (!enabled || launchRoutine != null)
+        if (!enabled)
         {
             return;
         }

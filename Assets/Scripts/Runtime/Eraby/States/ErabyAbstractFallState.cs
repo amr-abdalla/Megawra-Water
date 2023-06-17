@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ErabyGenericFallState : MoveHorizontalAbstractState
+public class ErabyAbstractFallState : MoveHorizontalAbstractState
 {
     [SerializeField]
     protected float timeBeforeBounce = 0;
@@ -11,10 +11,6 @@ public class ErabyGenericFallState : MoveHorizontalAbstractState
     protected PersistentErabyData persistentData = null;
 
     [Header("Extra Configs")]
-    [SerializeField]
-    // remove this - replace with persistentData
-    protected ErabyBounceState bounceState = null;
-
     [SerializeField]
     protected BounceTapManager tapManager = null;
     protected Coroutine landingRoutine = null;
