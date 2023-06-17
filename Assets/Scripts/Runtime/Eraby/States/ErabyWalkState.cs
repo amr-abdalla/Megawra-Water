@@ -15,8 +15,6 @@ public class ErabyWalkState : MoveHorizontalAbstractState
         initialVelocityX = 0;
         body.SetVelocityX(0);
         controls.EnableControls();
-        if (controls.isJumping())
-            goToJump();
         controls.JumpPressed += goToJump;
         collisionEvents.OnBump += onBump;
         // collisionEvents.OnTrample += onBump;
@@ -25,6 +23,7 @@ public class ErabyWalkState : MoveHorizontalAbstractState
     protected override void onStateExit()
     {
         controls.JumpPressed -= goToJump;
+        collisionEvents.OnBump -= onBump;
         base.onStateExit();
     }
 
@@ -45,6 +44,7 @@ public class ErabyWalkState : MoveHorizontalAbstractState
         stateMachine.SetState<ErabySmallJumpState>();
     }
 
+    // move to a new bump state. Call bumpSequence onStateEnter. Go to idle state when done.
     private void onBump(float bumpMagnitude, float bumpDuration)
     {
         if (bumpRoutine == null)

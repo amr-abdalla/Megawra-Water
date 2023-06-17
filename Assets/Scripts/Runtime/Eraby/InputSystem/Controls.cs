@@ -27,6 +27,8 @@ public class Controls : MonoBehaviourBase
     private bool jumpActive = false;
     private bool diveActive = false;
 
+    private float moveValue = 0f;
+
     protected override void Awake()
     {
         base.Awake();
@@ -117,6 +119,16 @@ public class Controls : MonoBehaviourBase
         return diveActive;
     }
 
+    public bool isMoving()
+    {
+        return moveValue != 0f;
+    }
+
+    public float MoveDirection()
+    {
+        return moveValue;
+    }
+
     // public float DiveDirection()
     // {
     //     return (inputActions.Player.Dive.enabled)? inputActions.Player.Dive.ReadValue<Vector2>().x:0f;
@@ -196,6 +208,7 @@ public class Controls : MonoBehaviourBase
 
     private void onMoveStarted(InputAction.CallbackContext obj)
     {
+        moveValue = obj.ReadValue<float>();
         MoveStarted?.Invoke(obj.ReadValue<float>());
     }
 

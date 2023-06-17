@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxVelX: 100
   minVelX: -100
-  moveVelX: 4
+  moveVelX: 6
   diveVelY: 30
   glideDescelY: 6
   diveAccelerationY: 50

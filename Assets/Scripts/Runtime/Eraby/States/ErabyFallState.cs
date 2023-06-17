@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class ErabyFallState : ErabyGenericFallState
 {
-    private float resetDiveVelocityY = 0f;
-
+    // TODO: move all three into new states
     private bool isGliding = false;
     private bool isDiving = false;
 
@@ -17,7 +16,7 @@ public class ErabyFallState : ErabyGenericFallState
 
     protected override void onStateEnter()
     {
-        onGenericFallStateEnter();
+        base.onStateEnter();
         controls.DiveStarted += goToFastFall;
         controls.DiveReleased += onFastFallCancel;
         controls.JumpPressed += onGlide;
@@ -40,7 +39,7 @@ public class ErabyFallState : ErabyGenericFallState
         controls.JumpReleased -= onGlideCancel;
 
         this.DisposeCoroutine(ref landingRoutine);
-        onGenericFallStateExit();
+        // onGenericFallStateExit();
         base.onStateExit();
     }
 
@@ -54,7 +53,7 @@ public class ErabyFallState : ErabyGenericFallState
         else if (isGliding)
         {
             float newVelocityY =
-                body.VelocityY + accelerationData.GlideDecelerationY * Time.fixedDeltaTime;
+                body.VelocityY + accelerationData.GlideDecelerationY * Time.fixedDeltaTime; // move the decceleration / acceleration to new basic acceleration2dconfigs
             body.SetVelocityY(newVelocityY);
         }
         else if (isDiving)
@@ -73,9 +72,10 @@ public class ErabyFallState : ErabyGenericFallState
     #endregion
 
     #region PRIVATE
+
+    // move to a new landing state
     protected override IEnumerator landingSequence(string i_tag)
     {
-
         persistentData.landingVelocityX = body.VelocityX;
 
         body.SetVelocityX(0);
@@ -100,6 +100,7 @@ public class ErabyFallState : ErabyGenericFallState
         this.DisposeCoroutine(ref landingRoutine);
     }
 
+    // move to its separate state
     private IEnumerator glideSequence()
     {
         isFrozen = true;
@@ -110,6 +111,7 @@ public class ErabyFallState : ErabyGenericFallState
         this.DisposeCoroutine(ref glideRoutine);
     }
 
+ // TODO: move to a new state
     void goToFastFall()
     {
         isGliding = false;

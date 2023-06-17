@@ -45,6 +45,7 @@ public abstract class MoveHorizontalAbstractState : State
         body.SetVelocityX(newVelocityX);
     }
 
+    // TODO: make a protected virtual method
     private void handleMoveCancel()
     {
         updateMoveVelocity(0);

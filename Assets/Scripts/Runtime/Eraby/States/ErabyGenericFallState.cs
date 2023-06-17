@@ -12,6 +12,7 @@ public class ErabyGenericFallState : MoveHorizontalAbstractState
 
     [Header("Extra Configs")]
     [SerializeField]
+    // remove this - replace with persistentData
     protected ErabyBounceState bounceState = null;
 
     [SerializeField]
@@ -21,7 +22,7 @@ public class ErabyGenericFallState : MoveHorizontalAbstractState
     #region STATE API
     protected override void onStateInit() { }
 
-    protected void onGenericFallStateEnter()
+    protected override void onStateEnter()
     {
         tapManager.ResetTap();
         tapManager.EnableTap();

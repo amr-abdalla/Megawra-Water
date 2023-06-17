@@ -10,7 +10,7 @@ public class ErabySmallFallState : ErabyGenericFallState
     protected override void onStateEnter()
     {
         Debug.Log("Enter Small Fall");
-        onGenericFallStateEnter();
+        base.onStateEnter();
     }
 
     protected override void onStateExit()
@@ -33,9 +33,9 @@ public class ErabySmallFallState : ErabyGenericFallState
     #endregion
 
     #region PRIVATE
+    // TODO: move to a new state. Have a base class for the landing
     protected override IEnumerator landingSequence(string i_tag)
     {
-
         persistentData.landingVelocityX = body.VelocityX;
 
         body.SetVelocityX(0);

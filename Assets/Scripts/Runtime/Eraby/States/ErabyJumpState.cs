@@ -20,6 +20,7 @@ public class ErabyJumpState : MoveHorizontalAbstractState
     #region STATE API
     protected override void onStateInit() { }
 
+    // TODO: turn into an abstract state
     protected void onBaseJumpStateEnter()
     {
         clampInitialVelocityY();
