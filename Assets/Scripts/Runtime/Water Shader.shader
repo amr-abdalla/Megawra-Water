@@ -50,7 +50,6 @@ Shader "WaterShader"
             float _Alpha;
             Vector _WaveCollisionPoint;
 
-
             // surfaceWaveStrength
             // waveOriginUv
             // waveImpactExtent
