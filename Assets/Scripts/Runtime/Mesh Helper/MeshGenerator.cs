@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MeshGenerator : MonoBehaviourBase
@@ -8,11 +9,13 @@ public class MeshGenerator : MonoBehaviourBase
 	[Min(1)] [SerializeField] private int subdivisionsX;
 	[Min(1)] [SerializeField] private int subdivisionsY;
 	[SerializeField] private Material material;
+	[SerializeField] BoxCollider2D collider;
 
 	private MeshFilter meshFilter;
 	private Dictionary<int, int> VerticesIndicesByIDs;
 	private List<Vector3> vertices;
 	private List<Vector2> uvs;
+	public List<Vector3> surfaceVertices { get; private set; }
 
 	#region UNITY
 	private void Start()
@@ -40,6 +43,7 @@ public class MeshGenerator : MonoBehaviourBase
 
 		meshFilter.mesh = mesh;
 
+		UpdateCollider();
 	}
 
 	#endregion
@@ -50,6 +54,12 @@ public class MeshGenerator : MonoBehaviourBase
 		MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
 		meshRenderer.sharedMaterial = material;
 		meshFilter = gameObject.AddComponent<MeshFilter>();
+	}
+
+	private void UpdateCollider()
+	{
+		collider.size = new Vector2(width, 1f);
+		collider.offset = new Vector2(width / 2f, height);
 	}
 
 	private MeshData GetMeshData()
@@ -87,12 +97,27 @@ public class MeshGenerator : MonoBehaviourBase
 
 		}
 
-		foreach(var vertex in vertices)
+		foreach (var vertex in vertices)
 		{
 			uvs.Add(new Vector2(vertex.x, vertex.y));
 		}
 
+		UpdateSurfaceVertices();
+
 		return new MeshData(vertices, uvs, tris);
+	}
+
+	private void UpdateSurfaceVertices()
+	{
+		surfaceVertices = new();
+
+		foreach(Vector3 vertex in vertices)
+		{
+			if(vertex.y == height)
+			{
+				surfaceVertices.Add(vertex);
+			}
+		}
 	}
 
 	private void AddTriangle(List<int> tri, int index1, int index2, int index3)
