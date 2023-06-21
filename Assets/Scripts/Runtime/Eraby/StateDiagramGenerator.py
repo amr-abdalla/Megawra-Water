@@ -10,6 +10,10 @@ import os
 import re
 import sys
 import argparse
+import base64
+import requests
+from PIL import Image
+from io import BytesIO
 
 # Regex to find all classes that inherit from State
 stateClassRegex = re.compile(r"class\s+(\w+)\s*:\s*State")
@@ -39,6 +43,12 @@ def getTransitions(fileContents):
 
     return transitions
 
+def filterComments(fileContents):
+    # remove all comments from the file
+    fileContents = re.sub(r"//.*", "", fileContents)
+    fileContents = re.sub(r"/\*.*\*/", "", fileContents)
+    return fileContents
+
 # for each file in the given folder, get all classes and their parent classes
 # if a class inherits from State, add it to the list of states
 def getStates(folder):
@@ -46,6 +56,7 @@ def getStates(folder):
         if filename.endswith(".cs"):
             with open(file=os.path.join(folder, filename), mode="r", encoding="UTF-8") as file:
                 fileContents = file.read()
+                fileContents = filterComments(fileContents)
                 stateClasses = stateClassRegex.findall(fileContents)
                 for stateClass in stateClasses:
                     states.add(stateClass)
@@ -147,6 +158,18 @@ def main():
     print(f"Generated state machine diagram in {folder}.")
     print(mermaidDiagram)
     print("Done.")
+    # export the diagram to an image
+    base64_bytes = base64.b64encode(mermaidDiagram.encode("utf-8"))
+    base64_string = base64_bytes.decode("utf-8")
+    print("https://mermaid.ink/img/" + base64_string)
+    data = requests.get("https://mermaid.ink/img/" + base64_string).content
+    image = Image.open(BytesIO(data))
+    # save the image to the folder
+    img_path = os.path.join(folder, "stateMachineDiagram.png")
+    image.save(img_path)
+
+    print("Exported diagram to image.")
+
         
 
 

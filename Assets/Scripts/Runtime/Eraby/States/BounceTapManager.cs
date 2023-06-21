@@ -43,6 +43,11 @@ public class BounceTapManager : MonoBehaviour
 
     public void tap()
     {
+        if (!enableTap)
+            Debug.Log("Tap disabled");
+
+        if (tapped)
+            Debug.Log("Already tapped");
         if (tapped || !enableTap)
             return;
 

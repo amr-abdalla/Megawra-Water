@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ErabyAbstractBounceState : State
+abstract public class ErabyAbstractLandingState : State
 {
     [Header("Timing Multipliers")]
     [SerializeField]
@@ -22,9 +22,13 @@ public class ErabyAbstractBounceState : State
     [SerializeField]
     protected PersistentErabyData persistentData = null;
 
+    [SerializeField]
+    protected float landingTime = 0.5f;
+    protected Coroutine landingRoutine = null;
+
     private bool active = false;
 
-    protected float initialVelocityY = 0f;
+    protected float launchVelocityY = 0f;
 
     #region STATE API
 
@@ -37,25 +41,23 @@ public class ErabyAbstractBounceState : State
 
     protected override void onStateEnter()
     {
+        controls?.EnableControls();
         active = true;
-        if (tapManager.isTapped())
-        {
-            applyTapMulipier();
-        }
-        tapManager.OnTap += applyTapMulipier;
+        tapManager.ResetTap();
+
         tapManager.EnableTap();
+        landingRoutine = StartCoroutine(landingSequence());
     }
 
-    private void applyTapMulipier()
-    {
-        if (!active)
-            return;
+    abstract protected void applyTapMulipier();
 
-        float newVelocityY = body.VelocityY * tapMultiplier;
-        body.SetVelocityY(newVelocityY);
-        persistentData.initialVelocityY = newVelocityY;
+    abstract protected IEnumerator landingSequence();
+
+    private void onTap()
+    {
         tapParticles?.Play();
         Debug.Log("Good timing!");
+        applyTapMulipier();
     }
 
     public override void ResetState()
@@ -70,9 +72,23 @@ public class ErabyAbstractBounceState : State
 
     protected override void onStateExit()
     {
-        tapManager.OnTap -= applyTapMulipier;
+        if (tapManager.isTapped())
+        {
+            onTap();
+        }
 
+        active = false;
+        this.DisposeCoroutine(ref landingRoutine);
         tapManager.DisableTap();
+    }
+
+    protected float clampVelocityX(float velocityX)
+    {
+        return Mathf.Clamp(
+            velocityX,
+            -Mathf.Abs(accelerationData.MaxVelocityX),
+            Mathf.Abs(accelerationData.MaxVelocityX)
+        );
     }
 
     #endregion

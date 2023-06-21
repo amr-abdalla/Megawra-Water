@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ErabyAbstractFallState : MoveHorizontalAbstractState
+abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
 {
     [SerializeField]
     protected float timeBeforeBounce = 0;
@@ -13,13 +13,13 @@ public class ErabyAbstractFallState : MoveHorizontalAbstractState
     [Header("Extra Configs")]
     [SerializeField]
     protected BounceTapManager tapManager = null;
-    protected Coroutine landingRoutine = null;
 
     #region STATE API
     protected override void onStateInit() { }
 
     protected override void onStateEnter()
     {
+        active = true;
         tapManager.ResetTap();
         tapManager.EnableTap();
         base.onStateEnter();
@@ -28,12 +28,9 @@ public class ErabyAbstractFallState : MoveHorizontalAbstractState
 
     protected override void onStateUpdate()
     {
-        if (body.IsGrounded && body.CurrentGroundTransform != null)
+        if (active && body.IsGrounded && body.CurrentGroundTransform != null)
         {
-            if (landingRoutine == null)
-                landingRoutine = StartCoroutine(
-                    landingSequence(body.CurrentGroundTransform.gameObject.tag)
-                );
+            goToLanding(body.CurrentGroundTransform.gameObject.tag);
         }
     }
 
@@ -46,7 +43,6 @@ public class ErabyAbstractFallState : MoveHorizontalAbstractState
     protected void onGenericFallStateExit()
     {
         tapManager.DisableTap();
-        this.DisposeCoroutine(ref landingRoutine);
     }
 
     protected override void onStateExit()
@@ -58,11 +54,9 @@ public class ErabyAbstractFallState : MoveHorizontalAbstractState
     #endregion
 
     #region PRIVATE
-    protected virtual IEnumerator landingSequence(string i_tag)
+    protected virtual void goToLanding(string i_tag)
     {
-        yield return null;
-
-        this.DisposeCoroutine(ref landingRoutine);
+        return;
     }
     #endregion
 

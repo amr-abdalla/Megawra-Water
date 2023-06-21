@@ -1,36 +1,35 @@
 # State Machine Diagram
-
 ```mermaid
 stateDiagram-v2
 	[*] --> Idle
 
-	Jump --> Dive
-	Jump --> Fall
-	Dive --> GlideStart
-	Dive --> Fall
-	Launch --> Jump
-	GlideStart --> Glide
-	Bump --> Idle
-	Crash --> Idle
-	Crash --> Launch
-	Crash --> Fall
-	SmallLaunch --> SmallJump
-	Walk --> Idle
-	Walk --> SmallLaunch
-	Walk --> Bump
-	Idle --> SmallLaunch
-	Idle --> Walk
-	Glide --> Fall
-	Bounce --> Launch
-	Bounce --> Crash
-	Bounce --> Fall
+	SmallFall --> Landing
+	SmallFall --> Idle
 	SmallJump --> SmallFall
 	SmallJump --> Fall
-	SmallFall --> Idle
-	SmallFall --> Bounce
-	Fall --> GlideStart
+	Landing --> Launch
+	Landing --> SuperLaunch
+	Dive --> GlideStart
+	Dive --> Fall
 	Fall --> Dive
-	Fall --> Bounce
+	Fall --> Landing
+	Fall --> GlideStart
 	Fall --> Crash
+	Walk --> Idle
+	Walk --> Bump
+	Walk --> SmallLaunch
+	Crash --> Launch
+	Crash --> Idle
+	Crash --> SuperLaunch
+	Glide --> Fall
+	GlideStart --> Glide
+	SmallLaunch --> SmallJump
+	SuperLaunch --> Jump
+	Jump --> Dive
+	Jump --> Fall
+	Launch --> Jump
+	Bump --> Idle
+	Idle --> Walk
+	Idle --> SmallLaunch
 
 ```

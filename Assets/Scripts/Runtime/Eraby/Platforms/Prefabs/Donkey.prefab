@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab2a45e3c940304b8508125202824e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HorizontalCollider: {fileID: 0}
+  HorizontalCollider: {fileID: 3797476581314139841}
   config: {fileID: 11400000, guid: 2b15f04760f58a44f91ae1a2b6183ba9, type: 2}
 --- !u!1 &2572253042544754452
 GameObject:
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab2a45e3c940304b8508125202824e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HorizontalCollider: {fileID: 0}
+  HorizontalCollider: {fileID: 7946358095261406421}
   config: {fileID: 11400000, guid: 2b15f04760f58a44f91ae1a2b6183ba9, type: 2}
 --- !u!1 &5973593231523509811
 GameObject:

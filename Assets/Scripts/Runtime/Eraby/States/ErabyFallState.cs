@@ -28,8 +28,6 @@ public class ErabyFallState : ErabyAbstractFallState
 
         controls.JumpPressed -= goToGlide;
 
-        this.DisposeCoroutine(ref landingRoutine);
-
         base.onStateExit();
     }
 
@@ -43,7 +41,7 @@ public class ErabyFallState : ErabyAbstractFallState
     #region PRIVATE
 
     // move to a new landing state
-    protected override IEnumerator landingSequence(string i_tag)
+    protected override void goToLanding(string i_tag)
     {
         persistentData.landingVelocityX = body.VelocityX;
 
@@ -53,20 +51,16 @@ public class ErabyFallState : ErabyAbstractFallState
 
         HaraPlatformAbstract platform = getCollidedPlatformComponent();
 
-        yield return this.Wait(timeBeforeBounce);
-
         if (platform != null)
             platform.onCollision();
 
         if (i_tag == "Bouncy")
         {
             persistentData.fallPlatform = platform;
-            setState<ErabyBounceState>();
+            setState<ErabyLandingState>();
         }
         else
             setState<ErabyCrashState>();
-
-        this.DisposeCoroutine(ref landingRoutine);
     }
 
     void goToFastFall()

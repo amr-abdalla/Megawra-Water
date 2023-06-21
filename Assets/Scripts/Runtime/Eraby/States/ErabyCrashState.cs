@@ -1,7 +1,8 @@
 // using Cinemachine;
 using UnityEngine;
+using System.Collections;
 
-public class ErabyCrashState : ErabyAbstractBounceState
+public class ErabyCrashState : ErabyAbstractLandingState
 {
     [SerializeField]
     private float minBounceVelocityY = 0f;
@@ -14,28 +15,42 @@ public class ErabyCrashState : ErabyAbstractBounceState
     {
         Debug.Log("Enter crash");
 
-        if (!body.IsGrounded)
-        {
-            setState<ErabyFallState>();
-            return;
-        }
+        launchVelocityY = persistentData.initialVelocityY / 2;
+        float newVelocityX = -Mathf.Abs(persistentData.landingVelocityX) * velocityXMultiplier;
+        newVelocityX = -Mathf.Clamp(
+            Mathf.Abs(newVelocityX),
+            Mathf.Abs(newVelocityX),
+            Mathf.Abs(accelerationData.MaxVelocityX)
+        );
+        persistentData.launchVelocityX = newVelocityX;
+        persistentData.launchVelocityY = launchVelocityY;
+        base.onStateEnter();
+    }
 
-        initialVelocityY = persistentData.initialVelocityY / 2;
-        if (initialVelocityY > minBounceVelocityY)
+    override protected IEnumerator landingSequence()
+    {
+        yield return new WaitForSeconds(landingTime);
+
+        if (launchVelocityY > minBounceVelocityY)
         {
-            float newVelocityX = -Mathf.Abs(persistentData.landingVelocityX) * velocityXMultiplier;
-            newVelocityX = -Mathf.Clamp(
-                Mathf.Abs(newVelocityX),
-                Mathf.Abs(newVelocityX),
-                Mathf.Abs(accelerationData.MaxVelocityX)
-            );
-            persistentData.launchVelocityX = newVelocityX;
-            persistentData.launchVelocityY = initialVelocityY;
-            setState<ErabyLaunchState>();
-            base.onStateEnter();
+            if (tapManager.isTapped())
+                setState<ErabySuperLaunchState>();
+            else
+                setState<ErabyLaunchState>();
         }
         else
             setState<ErabyIdleState>();
+    }
+
+    override protected void applyTapMulipier()
+    {
+        //Debug.LogError("Apply tap multiplier");
+        float newVelocityX = clampVelocityX(
+            -Mathf.Abs(persistentData.landingVelocityX) * tapMultiplier
+        );
+
+        persistentData.launchVelocityX = newVelocityX;
+        persistentData.launchVelocityY *= tapMultiplier;
     }
 
     #endregion

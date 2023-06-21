@@ -16,7 +16,7 @@ public class ErabySmallFallState : ErabyAbstractFallState
     protected override void onStateExit()
     {
         onGenericFallStateExit();
-        this.DisposeCoroutine(ref landingRoutine);
+
         base.onStateExit();
     }
 
@@ -33,9 +33,10 @@ public class ErabySmallFallState : ErabyAbstractFallState
     #endregion
 
     #region PRIVATE
-    // TODO: move to a new state. Have a base class for the landing
-    protected override IEnumerator landingSequence(string i_tag)
+
+    protected override void goToLanding(string i_tag)
     {
+        Debug.Log("Landing sequence");
         persistentData.landingVelocityX = body.VelocityX;
 
         body.SetVelocityX(0);
@@ -44,20 +45,16 @@ public class ErabySmallFallState : ErabyAbstractFallState
 
         HaraPlatformAbstract platform = getCollidedPlatformComponent();
 
-        yield return this.Wait(timeBeforeBounce);
-
         if (platform != null)
             platform.onCollision();
 
         if (i_tag == "Bouncy")
         {
             persistentData.fallPlatform = platform;
-            setState<ErabyBounceState>();
+            setState<ErabyLandingState>();
         }
         else
             setState<ErabyIdleState>();
-
-        this.DisposeCoroutine(ref landingRoutine);
     }
     #endregion
 }
