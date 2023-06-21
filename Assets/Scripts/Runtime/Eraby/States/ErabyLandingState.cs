@@ -11,22 +11,20 @@ public class ErabyLandingState : ErabyAbstractLandingState
         Debug.Log("Enter landing");
 
         fallPlatform = persistentData.fallPlatform;
+        fallPlatform.onCollision();
 
-        HaraPlatformAbstract collidedPlatform = getCollidedPlatformComponent();
+        //  HaraPlatformAbstract collidedPlatform = getCollidedPlatformComponent();
 
-        if (collidedPlatform == null)
-            return;
-
-        if (collidedPlatform != fallPlatform)
-        {
-            collidedPlatform.onCollision();
-        }
+        /*   if (collidedPlatform != fallPlatform)
+           {
+               collidedPlatform.onCollision();
+           } */
 
         launchVelocityY =
-            collidedPlatform.BounceVelocityYMultiplier * persistentData.initialVelocityY;
+            fallPlatform.BounceVelocityYMultiplier * persistentData.initialVelocityY;
 
         float newVelocityX = clampVelocityX(
-            -Mathf.Abs(persistentData.landingVelocityX) * collidedPlatform.BounceVelocityXMultiplier
+            -Mathf.Abs(persistentData.landingVelocityX) * fallPlatform.BounceVelocityXMultiplier
         );
         persistentData.launchVelocityY = launchVelocityY;
         persistentData.launchVelocityX = newVelocityX;
@@ -60,7 +58,7 @@ public class ErabyLandingState : ErabyAbstractLandingState
         persistentData.launchVelocityY *= tapMultiplier;
     }
 
-    private HaraPlatformAbstract getCollidedPlatformComponent()
+   /* private HaraPlatformAbstract getCollidedPlatformComponent()
     {
         //Debug.LogError("Get component bounce");
 
@@ -90,7 +88,7 @@ public class ErabyLandingState : ErabyAbstractLandingState
         // }
 
         return collidedPlatform;
-    }
+    } */
 
     #endregion
 }

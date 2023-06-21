@@ -6,6 +6,8 @@ public abstract class State : MonoBehaviourBase
     private bool isInit = false;
     private StateFeatureAbstract[] features = null;
 
+    private bool _isEnabled = false;
+
     #region PUBLIC API
     public void Initialize(StateMachine i_stateMachine, Controls i_controls )
     {
@@ -25,6 +27,7 @@ public abstract class State : MonoBehaviourBase
     public void EnterState()
     {
         foreach (StateFeatureAbstract feature in features) feature.FeatureStart();
+        _isEnabled = true;
         onStateEnter();
     }
     public void UpdateState()
@@ -43,6 +46,7 @@ public abstract class State : MonoBehaviourBase
     {
         foreach (StateFeatureAbstract feature in features) feature.FeatureExit();
         onStateExit();
+        _isEnabled = false;
     }
 
     public abstract void ResetState();
@@ -50,6 +54,8 @@ public abstract class State : MonoBehaviourBase
     #endregion
 
     #region PROTECTED API
+
+    protected bool isEnabled => _isEnabled;
 
     protected void setState(string i_id)
     {
@@ -72,5 +78,7 @@ public abstract class State : MonoBehaviourBase
     protected virtual void onStateFixedUpdate() { }
 
     #endregion
+
+    public virtual void DrawGizmos() { }
 
 }

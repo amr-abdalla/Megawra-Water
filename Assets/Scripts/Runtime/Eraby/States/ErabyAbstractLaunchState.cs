@@ -64,4 +64,10 @@ abstract class ErabyAbstractLaunchState : State
     }
 
     abstract protected void goToJump();
+
+    public override void DrawGizmos()
+    {
+        base.DrawGizmos();
+        // Draw a line gizmo for max height
+    }
 }

@@ -108,4 +108,11 @@ public class StateMachine : MonoBehaviourBase
             }
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        if (null == currentState) return;
+
+        currentState.DrawGizmos();
+    }
 }

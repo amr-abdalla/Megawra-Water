@@ -9,7 +9,7 @@ public class ErabySmallJumpState : ErabyAbstractJumpState
         Debug.Log("Enter small jump");
     }
 
-    protected override void checkHeight()
+    protected override void onJumpEnded()
     {
         if (!enabled)
         {

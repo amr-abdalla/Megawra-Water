@@ -5,10 +5,6 @@ public class ErabyAbstractJumpState : MoveHorizontalAbstractState
 {
     [Header("Jump Configs")]
     [SerializeField]
-    [Range(1f, 30f)]
-    protected float maxJumpHeight = 8f;
-
-    [SerializeField]
     protected PersistentErabyData persistentData = null;
 
     [SerializeField]
@@ -37,7 +33,7 @@ public class ErabyAbstractJumpState : MoveHorizontalAbstractState
     {
         base.onStateFixedUpdate();
 
-        checkHeight();
+        onJumpEnded();
     }
 
     public override void ResetState()
@@ -50,9 +46,9 @@ public class ErabyAbstractJumpState : MoveHorizontalAbstractState
     }
     #endregion
 
-    #region PRIVATE
+    #region PROTECTED
 
-    protected virtual void checkHeight()
+    protected virtual void onJumpEnded()
     {
         if (false == enabled)
         {

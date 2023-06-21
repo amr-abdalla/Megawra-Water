@@ -31,7 +31,7 @@ public class ErabyJumpState : ErabyAbstractJumpState
     #region PRIVATE
 
 
-    protected override void checkHeight()
+    protected override void onJumpEnded()
     {
         if (false == enabled)
         {
