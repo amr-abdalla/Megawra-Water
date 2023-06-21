@@ -99,7 +99,7 @@ public class MeshGenerator : MonoBehaviourBase
 
 		foreach (var vertex in vertices)
 		{
-			uvs.Add(new Vector2(vertex.x, vertex.y));
+			uvs.Add(new Vector2(vertex.x / width, vertex.y / height));
 		}
 
 		UpdateSurfaceVertices();

@@ -41,8 +41,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 66647d985fad7f94e811135a6c2f437e, type: 3}
+        m_Scale: {x: 5, y: 5}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -58,6 +58,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha: 0.541
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -72,16 +73,16 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _SurfaceWaveStrength: 0.81
+    - _SurfaceWaveStrength: -0.35
     - _UVSec: 0
     - _WaveFrequency: 2.45
-    - _WaveHeight: 0.26
+    - _WaveHeight: 1.42
     - _WaveImpactExtent: 0.5
-    - _WaveSpeed: 8.72
+    - _WaveSpeed: 8.9
     - _ZWrite: 1
     - _waveImpactExtent: 0.5
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _WaveCollisionPoint: {r: 5, g: 5, b: 0, a: 0}
+    - _WaveCollisionPoint: {r: 3.61, g: 5.13, b: 0, a: 0}
   m_BuildTextureStacks: []
