@@ -1,6 +1,5 @@
 using UnityEngine;
-
-// using Cinemachine;
+using Cinemachine;
 
 public class CameraManager : MonoBehaviour
 {
@@ -11,10 +10,10 @@ public class CameraManager : MonoBehaviour
     float yCutoff = 0;
 
     [SerializeField]
-    GameObject groundCamera = null;
 
-    const float lowPrio = 5;
-    const float highPrio = 15;
+    CinemachineVirtualCamera  groundCamera = null;
+    const int lowPrio = 5;
+    const int highPrio = 15;
 
     // Update is called once per frame
     void Update()
@@ -22,11 +21,11 @@ public class CameraManager : MonoBehaviour
         // if the body is below the yCutoff, switch to the player camera
         if (body.position.y > yCutoff)
         {
-            groundCamera.SetActive(true);
+            groundCamera.Priority = highPrio;
         }
         else
         {
-            groundCamera.SetActive(false);
+            groundCamera.Priority = lowPrio;
         }
     }
 }
