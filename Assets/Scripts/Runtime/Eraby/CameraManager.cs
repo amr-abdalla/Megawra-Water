@@ -1,5 +1,6 @@
 using UnityEngine;
-using Cinemachine;
+
+// using Cinemachine;
 
 public class CameraManager : MonoBehaviour
 {
