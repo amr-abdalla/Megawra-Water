@@ -35,6 +35,7 @@ abstract class ErabyAbstractLaunchState : State
     {
         persistentData.launchVelocityY = 0f;
         persistentData.launchVelocityX = 0f;
+        persistentData.maxJumpHeight = stopJumpY;
     }
 
     protected override void onStateUpdate() { }

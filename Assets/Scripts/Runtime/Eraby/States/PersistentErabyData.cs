@@ -13,4 +13,6 @@ public class PersistentErabyData : MonoBehaviour
     public float launchVelocityX = 0f;
 
     public HaraPlatformAbstract fallPlatform = null;
+
+    public float maxJumpHeight = 0f;
 }

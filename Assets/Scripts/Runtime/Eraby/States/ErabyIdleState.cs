@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ErabyIdleState : State
 {
-    private bool active = false;
+
 
     [SerializeField]
     protected PhysicsBody2D body = null;
@@ -11,7 +11,6 @@ public class ErabyIdleState : State
     protected override void onStateEnter()
     {
         Debug.Log("Enter idle");
-        active = true;
         if (controls == null)
         {
             Debug.LogError("Controls not set");
@@ -29,7 +28,6 @@ public class ErabyIdleState : State
 
     protected override void onStateExit()
     {
-        active = false;
         controls.MoveStarted -= handleMoveStarted;
         controls.JumpPressed -= handleJumpPressed;
     }
@@ -47,14 +45,14 @@ public class ErabyIdleState : State
 
     void handleMoveStarted(float x = 0)
     {
-        if (!active)
+        if (!isEnabled)
             return;
         stateMachine.SetState<ErabyWalkState>();
     }
 
     void handleJumpPressed()
     {
-        if (!active)
+        if (!isEnabled)
             return;
         stateMachine.SetState<ErabySmallLaunchState>();
     }

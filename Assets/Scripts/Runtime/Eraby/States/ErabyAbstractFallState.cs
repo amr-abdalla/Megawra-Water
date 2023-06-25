@@ -19,7 +19,7 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
 
     protected override void onStateEnter()
     {
-        active = true;
+
         tapManager.ResetTap();
         tapManager.EnableTap();
         base.onStateEnter();
@@ -28,7 +28,7 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
 
     protected override void onStateUpdate()
     {
-        if (active && body.IsGrounded && body.CurrentGroundTransform != null)
+        if (isEnabled && body.IsGrounded && body.CurrentGroundTransform != null)
         {
             goToLanding(body.CurrentGroundTransform.gameObject.tag);
         }

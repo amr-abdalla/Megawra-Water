@@ -13,10 +13,14 @@ public class ErabyAbstractJumpState : MoveHorizontalAbstractState
     #region STATE API
     protected override void onStateInit() { }
 
+    private Vector3[] gizmoPoints = new Vector3[2];
+
     protected override void onStateEnter()
     {
         controls.EnableControls();
         initialVelocityY = body.VelocityY;
+        gizmoPoints[0] = new Vector3(-100, persistentData.maxJumpHeight, 0);
+        gizmoPoints[1] = new Vector3(100, persistentData.maxJumpHeight, 0);
         base.onStateEnter();
     }
 
@@ -60,6 +64,12 @@ public class ErabyAbstractJumpState : MoveHorizontalAbstractState
             setState<ErabyFallState>();
             return;
         }
+    }
+
+    public override void DrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(gizmoPoints[0], gizmoPoints[1]);
     }
 
     #endregion

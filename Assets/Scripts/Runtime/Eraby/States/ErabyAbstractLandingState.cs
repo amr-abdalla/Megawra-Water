@@ -26,7 +26,7 @@ abstract public class ErabyAbstractLandingState : State
     protected float landingTime = 0.5f;
     protected Coroutine landingRoutine = null;
 
-    private bool active = false;
+
 
     protected float launchVelocityY = 0f;
 
@@ -42,7 +42,7 @@ abstract public class ErabyAbstractLandingState : State
     protected override void onStateEnter()
     {
         controls?.EnableControls();
-        active = true;
+
         tapManager.ResetTap();
 
         tapManager.EnableTap();
@@ -77,7 +77,7 @@ abstract public class ErabyAbstractLandingState : State
             onTap();
         }
 
-        active = false;
+
         this.DisposeCoroutine(ref landingRoutine);
         tapManager.DisableTap();
     }

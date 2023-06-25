@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ErabyGlideStartState : State
 {
-    bool active = false;
+   
     private Coroutine glideRoutine = null;
 
     [SerializeField]
@@ -14,7 +14,7 @@ public class ErabyGlideStartState : State
 
     protected override void onStateEnter()
     {
-        active = true;
+
         Debug.Log("Enter glide start");
         // controls.DisableControls();
         body.SetVelocityX(0);
@@ -25,7 +25,7 @@ public class ErabyGlideStartState : State
 
     protected override void onStateExit()
     {
-        active = false;
+
         this.DisposeCoroutine(ref glideRoutine);
     }
 
@@ -40,7 +40,7 @@ public class ErabyGlideStartState : State
 
     protected override void onStateFixedUpdate()
     {
-        if (!active)
+        if (!isEnabled)
             return;
         body.SetVelocityY(0);
     }

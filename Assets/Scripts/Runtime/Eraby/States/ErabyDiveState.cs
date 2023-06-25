@@ -5,7 +5,6 @@ public class ErabyDiveState : MoveHorizontalAbstractState
 {
     protected override void onStateEnter()
     {
-        active = true;
         base.onStateEnter();
         Debug.Log("Enter dive");
         controls.DiveReleased += goToFall;
@@ -14,7 +13,6 @@ public class ErabyDiveState : MoveHorizontalAbstractState
 
     protected override void onStateExit()
     {
-        active = false;
         controls.DiveReleased -= goToFall;
         controls.JumpPressed -= goToGlide;
         base.onStateExit();
@@ -22,7 +20,7 @@ public class ErabyDiveState : MoveHorizontalAbstractState
 
     protected override void onStateFixedUpdate()
     {
-        if (!active)
+        if (!isEnabled)
             return;
         float newVelocityY = body.VelocityY - accelerationData.AccelerationY * Time.fixedDeltaTime;
         body.SetVelocityY(newVelocityY);

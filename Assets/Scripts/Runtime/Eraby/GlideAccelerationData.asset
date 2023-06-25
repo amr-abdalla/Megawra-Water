@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxVelX: 100
   minVelX: -100
-  moveVelX: 60
-  moveVelY: 60
+  moveVelX: 6
+  moveVelY: 6
   decelerationY: 5
   accelerationY: 0

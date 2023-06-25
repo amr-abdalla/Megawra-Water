@@ -8,7 +8,6 @@ public class ErabyGlideState : MoveHorizontalAbstractState
         base.onStateEnter();
         Debug.Log("Enter glide");
         controls.EnableControls();
-        active = true;
         controls.JumpReleased += goToFall;
         if (!controls.isJumping())
             goToFall();
@@ -20,7 +19,7 @@ public class ErabyGlideState : MoveHorizontalAbstractState
 
     protected override void onStateFixedUpdate()
     {
-        if (!active)
+        if (!isEnabled)
             return;
         float newVelocityY = body.VelocityY + accelerationData.DecelerationY * Time.fixedDeltaTime;
         body.SetVelocityY(newVelocityY);
@@ -36,7 +35,6 @@ public class ErabyGlideState : MoveHorizontalAbstractState
 
     protected override void onStateExit()
     {
-        active = false;
         controls.JumpReleased -= goToFall;
         base.onStateExit();
     }

@@ -10,13 +10,12 @@ public abstract class MoveHorizontalAbstractState : State
 
     protected float initialVelocityX = 0f;
 
-    protected bool active = false;
+
 
     #region PROTECTED
 
     protected override void onStateEnter()
     {
-        active = true;
         initialVelocityX = body.VelocityX;
         if (controls.isMoving())
             updateMoveVelocity(controls.MoveDirection());
@@ -28,7 +27,6 @@ public abstract class MoveHorizontalAbstractState : State
     {
         controls.MoveStarted -= updateMoveVelocity;
         controls.MoveReleased -= handleMoveCancel;
-        active = false;
         body.SetVelocityX(initialVelocityX);
     }
 
@@ -47,7 +45,7 @@ public abstract class MoveHorizontalAbstractState : State
 
     protected void updateMoveVelocity(float x)
     {
-        if (!active)
+        if (!isEnabled)
             return;
         float newVelocityX = initialVelocityX + x * accelerationData.MoveVelocityX;
         newVelocityX = clampVelocityX(newVelocityX, accelerationData.MaxVelocityX);
