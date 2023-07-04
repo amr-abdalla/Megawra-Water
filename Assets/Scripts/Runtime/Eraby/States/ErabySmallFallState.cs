@@ -1,5 +1,3 @@
-// using Cinemachine;
-using System.Collections;
 using UnityEngine;
 
 public class ErabySmallFallState : ErabyAbstractFallState
@@ -32,29 +30,9 @@ public class ErabySmallFallState : ErabyAbstractFallState
     }
     #endregion
 
-    #region PRIVATE
-
-    protected override void goToLanding(string i_tag)
+    protected override void onDidEnterGround()
     {
-        Debug.Log("Landing sequence");
-        persistentData.landingVelocityX = body.VelocityX;
-
-        body.SetVelocityX(0);
-        body.SetVelocityY(0);
-        controls.DisableControls();
-
-        HaraPlatformAbstract platform = getCollidedPlatformComponent();
-
-        if (platform != null)
-            platform.onCollision();
-
-        if (i_tag == "Bouncy")
-        {
-            persistentData.fallPlatform = platform;
-            setState<ErabyLandingState>();
-        }
-        else
-            setState<ErabyIdleState>();
+        goToLanding<ErabyIdleState>();
     }
-    #endregion
+
 }

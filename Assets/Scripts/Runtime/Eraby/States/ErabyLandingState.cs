@@ -3,15 +3,10 @@ using System.Collections;
 
 public class ErabyLandingState : ErabyAbstractLandingState
 {
-    private HaraPlatformAbstract fallPlatform = null;
-
     #region STATE API
     protected override void onStateEnter()
     {
         Debug.Log("Enter landing");
-
-        fallPlatform = persistentData.fallPlatform;
-        fallPlatform.onCollision();
 
         //  HaraPlatformAbstract collidedPlatform = getCollidedPlatformComponent();
 
@@ -21,11 +16,11 @@ public class ErabyLandingState : ErabyAbstractLandingState
            } */
 
         launchVelocityY =
-            fallPlatform.BounceVelocityYMultiplier * persistentData.initialVelocityY;
+            persistentData.bounceVelocityMultiplier.y * persistentData.initialVelocityY;
 
         float newVelocityX = clampVelocityX(
-            -Mathf.Abs(persistentData.landingVelocityX) * fallPlatform.BounceVelocityXMultiplier
-        );
+            -Mathf.Abs(persistentData.landingVelocityX) * persistentData.bounceVelocityMultiplier.x
+        ); 
         persistentData.launchVelocityY = launchVelocityY;
         persistentData.launchVelocityX = newVelocityX;
         Debug.Log("Bounce velocity: " + launchVelocityY);

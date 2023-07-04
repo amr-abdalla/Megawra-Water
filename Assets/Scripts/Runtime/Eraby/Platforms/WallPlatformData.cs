@@ -5,7 +5,7 @@ using UnityEngine;
     menuName = "Eraby/PlatformHorizontalColliderConfig",
     order = 0
 )]
-public class PlatformHorizontalColliderConfig : ScriptableObject
+public class WallPlatformData : ScriptableObject
 {
     public float HealthPenalty = 0.1f;
 

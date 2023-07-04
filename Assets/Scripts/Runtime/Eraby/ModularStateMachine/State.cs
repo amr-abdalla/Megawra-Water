@@ -17,7 +17,7 @@ public abstract class State : MonoBehaviourBase
         controls = i_controls;
 
         features = GetComponentsInChildren<StateFeatureAbstract>(true);
-        foreach (StateFeatureAbstract feature in features) feature.FeatureInit();
+        foreach (StateFeatureAbstract feature in features) feature.InitFeature(stateMachine);
 
         onStateInit();
 
@@ -26,25 +26,25 @@ public abstract class State : MonoBehaviourBase
 
     public void EnterState()
     {
-        foreach (StateFeatureAbstract feature in features) feature.FeatureStart();
+        foreach (StateFeatureAbstract feature in features) feature.OnStateEnter();
         _isEnabled = true;
         onStateEnter();
     }
     public void UpdateState()
     {
-        foreach (StateFeatureAbstract feature in features) feature.FeatureUpdate();
+        foreach (StateFeatureAbstract feature in features) feature.OnStateUpdate();
         onStateUpdate();
     }
 
     public void FixedUpdateState()
     {
-        foreach (StateFeatureAbstract feature in features) feature.FeatureFixedUpdate();
+        foreach (StateFeatureAbstract feature in features) feature.OnStateFixedUpdate();
         onStateFixedUpdate();
     }
 
     public void ExitState()
     {
-        foreach (StateFeatureAbstract feature in features) feature.FeatureExit();
+        foreach (StateFeatureAbstract feature in features) feature.OnStateExit();
         onStateExit();
         _isEnabled = false;
     }

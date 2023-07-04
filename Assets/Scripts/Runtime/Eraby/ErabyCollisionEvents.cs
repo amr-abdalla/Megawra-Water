@@ -21,11 +21,11 @@ public class ErabyCollisionEvents : MonoBehaviour
         else if (other.gameObject.CompareTag("Bump"))
         {
             float duration = other.gameObject
-                .GetComponent<PlatformHorizontalCollider>()
+                .GetComponent<WallPlatform>()
                 .getTimeDisabled();
 
             float magnitude = other.gameObject
-                .GetComponent<PlatformHorizontalCollider>()
+                .GetComponent<WallPlatform>()
                 .getBumpMagnitude();
 
             Vector2 direction = other.GetContact(0).normal.x * Vector2.right;

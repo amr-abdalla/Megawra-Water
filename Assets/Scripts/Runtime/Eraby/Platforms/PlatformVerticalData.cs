@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlatformBounceData", menuName = "eraby/PlatformBounceData", order = 2)]
-public class PlatformBounceData : ScriptableObject
+public class PlatformVerticalData : ScriptableObject
 {
     [SerializeField]
     private float bounceVelocityYMultiplier = 0f;

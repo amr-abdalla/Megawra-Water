@@ -1,4 +1,4 @@
-using System.Collections;
+
 using UnityEngine;
 
 public class ErabyFallState : ErabyAbstractFallState
@@ -40,27 +40,10 @@ public class ErabyFallState : ErabyAbstractFallState
 
     #region PRIVATE
 
-    // move to a new landing state
-    protected override void goToLanding(string i_tag)
+
+    protected override void onDidEnterGround()
     {
-        persistentData.landingVelocityX = body.VelocityX;
-
-        body.SetVelocityX(0);
-        body.SetVelocityY(0);
-        controls.DisableControls();
-
-        HaraPlatformAbstract platform = getCollidedPlatformComponent();
-
-        if (platform != null)
-            platform.onCollision();
-
-        if (i_tag == "Bouncy")
-        {
-            persistentData.fallPlatform = platform;
-            setState<ErabyLandingState>();
-        }
-        else
-            setState<ErabyCrashState>();
+        goToLanding<ErabyCrashState>();
     }
 
     void goToFastFall()

@@ -30,9 +30,11 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
     {
         if (isEnabled && body.IsGrounded && body.CurrentGroundTransform != null)
         {
-            goToLanding(body.CurrentGroundTransform.gameObject.tag);
+            onDidEnterGround();
         }
     }
+
+
 
     public override void ResetState()
     {
@@ -54,27 +56,31 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
     #endregion
 
     #region PRIVATE
-    protected virtual void goToLanding(string i_tag)
+
+    protected abstract void onDidEnterGround();
+
+    protected void goToLanding<OnGroundedType>() where OnGroundedType : State
     {
-        return;
+        if (null == body.CurrentGroundTransform) return;
+        GroundPlatform ground = body.CurrentGroundTransform.GetComponent<GroundPlatform>();
+
+        if (null == ground) return;
+
+        Debug.Log("Landing sequence");
+        persistentData.landingVelocityX = body.VelocityX;
+
+        body.SetVelocityX(0);
+        body.SetVelocityY(0);
+        controls.DisableControls();
+
+        if (ground.IsBouncy)
+        {
+            persistentData.bounceVelocityMultiplier = new Vector2(ground.BounceVelocityXMultiplier, ground.BounceVelocityYMultiplier);
+            setState<ErabyLandingState>();
+        }
+        else
+            setState<OnGroundedType>();
     }
     #endregion
 
-    #region UTILITY
-    protected HaraPlatformAbstract getCollidedPlatformComponent()
-    {
-        HaraPlatformAbstract collidedPlatform =
-            body.CurrentGroundTransform.gameObject.GetComponentInParent<HaraPlatformAbstract>();
-
-        if (collidedPlatform == null)
-            collidedPlatform =
-                body.CurrentGroundTransform.gameObject.GetComponent<HaraPlatformAbstract>();
-
-        if (collidedPlatform == null)
-            collidedPlatform =
-                body.CurrentGroundTransform.gameObject.GetComponentInChildren<HaraPlatformAbstract>();
-
-        return collidedPlatform;
-    }
-    #endregion
 }

@@ -2,34 +2,40 @@ using UnityEngine;
 
 public abstract class StateFeatureAbstract : MonoBehaviourBase
 {
+    StateMachine stateMachine = null;
+
     #region Public
 
-    public void FeatureInit()
+    public void InitFeature(StateMachine i_stateMachine)
     {
+        stateMachine = i_stateMachine;
         onInit();
     }
-    public void FeatureStart()
+    public void OnStateEnter()
     {
-        onStart();
+        onEnter();
     }
 
-    public void FeatureUpdate()
+    public void OnStateUpdate()
     {
         onUpdate();
     }
-    public void FeatureFixedUpdate()
+    public void OnStateFixedUpdate()
     {
         onFixedUpdate();
     }
-    public void FeatureExit()
+    public void OnStateExit()
     {
         onExit();
     }
     #endregion
 
     #region Protected
+
+    // code review : add implementation for setState
+
     protected virtual void onInit() { }
-    protected virtual void onStart() { }
+    protected virtual void onEnter() { }
     protected virtual void onUpdate() { }
     protected virtual void onFixedUpdate() { }
     protected virtual void onExit() { }

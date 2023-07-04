@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlatformMoveState : State
 {
     [SerializeField]
-    private PlatformCollisionEvents collisionEvents;
+    private Platform platformObj;
 
     [SerializeField]
     private AccelerationConfig2D accelerationConfig;
@@ -16,14 +16,12 @@ public class PlatformMoveState : State
     protected override void onStateEnter()
     {
         Debug.Log("Platform Move State");
-        collisionEvents.OnBounce += goToBounce;
-        collisionEvents.OnBump += goToBump;
+        platformObj.onCollision += onPlatformCollision;
     }
 
     protected override void onStateExit()
     {
-        collisionEvents.OnBounce -= goToBounce;
-        collisionEvents.OnBump -= goToBump;
+        platformObj.onCollision -= onPlatformCollision;
     }
 
     protected override void onStateUpdate() { }
@@ -40,13 +38,13 @@ public class PlatformMoveState : State
 
     public override void ResetState() { }
 
-    private void goToBounce()
+    void onPlatformCollision(PlatformCollisionData i_collisionParams)
     {
-        setState<PlatformBounceState>();
+        if(i_collisionParams.direction.x != 0)
+            setState<PlatformBumpState>();
+        else
+            setState<PlatformBounceState>();
+
     }
 
-    private void goToBump(Vector2 bumpDirection)
-    {
-        setState<PlatformBumpState>();
-    }
 }

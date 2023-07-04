@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af47df217e3601b4c9a6c1068fce94af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformCollider: {fileID: 543883293}
+  compatibleTag: 
   maxJumpHeight: 8
-  thisCollider: {fileID: 543883293}
   bounceData: {fileID: 11400000, guid: c3726ebd6a2b4fa4a9d8d8610185c5af, type: 2}
-  collisionEvents: {fileID: 2094476998982615366}
 --- !u!61 &543883293
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controls: {fileID: 0}
-  collisionEvents: {fileID: 2094476998982615366}
+  platformObj: {fileID: 0}
   accelerationConfig: {fileID: 11400000, guid: 893c8417e18c22d488975d5c79f80af5, type: 2}
   moveTarget: {fileID: 5973593231523510216}
 --- !u!1 &1288595026452786831
@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab2a45e3c940304b8508125202824e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HorizontalCollider: {fileID: 3797476581314139841}
-  collisionEvents: {fileID: 2094476998982615366}
+  platformCollider: {fileID: 3797476581314139841}
+  compatibleTag: 
   config: {fileID: 11400000, guid: 2b15f04760f58a44f91ae1a2b6183ba9, type: 2}
 --- !u!1 &2572253042544754452
 GameObject:
@@ -290,8 +290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab2a45e3c940304b8508125202824e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HorizontalCollider: {fileID: 7946358095261406421}
-  collisionEvents: {fileID: 2094476998982615366}
+  platformCollider: {fileID: 7946358095261406421}
+  compatibleTag: 
   config: {fileID: 11400000, guid: 2b15f04760f58a44f91ae1a2b6183ba9, type: 2}
 --- !u!1 &3457120263760998296
 GameObject:
@@ -353,7 +353,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5973593231523510216}
   - component: {fileID: 5973593231523509815}
-  - component: {fileID: 2094476998982615366}
   m_Layer: 3
   m_Name: GenericPlatform
   m_TagString: Untagged
@@ -432,18 +431,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2094476998982615366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5973593231523509811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40b062ddeeb6c2942bcc69135ddfc22b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7760102668174251321
 GameObject:
   m_ObjectHideFlags: 0

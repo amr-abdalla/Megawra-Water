@@ -12,7 +12,9 @@ public class PersistentErabyData : MonoBehaviour
     public float launchVelocityY = 0f;
     public float launchVelocityX = 0f;
 
-    public HaraPlatformAbstract fallPlatform = null;
+    public Vector2 bounceVelocityMultiplier = MathConstants.VECTOR_2_ONE;
+
+    public GroundPlatform fallPlatform = null;
 
     public Vector2 bumpDirection = Vector2.zero;
 
