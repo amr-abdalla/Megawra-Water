@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class ErabyCollisionEvents : MonoBehaviour
 {
-    public Action<float, float> OnBump;
+    public Action<float, float, Vector2> OnBump;
     public Action OnTrample;
 
-     private void OnCollisionEnter2D(Collision2D other) {
-        
-
+    private void OnCollisionEnter2D(Collision2D other)
+    {
         Debug.Log("Collision with " + other.gameObject.tag);
+
+        // get direction of collision
+
 
         if (other.gameObject.CompareTag("Trample"))
         {
@@ -25,11 +27,10 @@ public class ErabyCollisionEvents : MonoBehaviour
             float magnitude = other.gameObject
                 .GetComponent<PlatformHorizontalCollider>()
                 .getBumpMagnitude();
-            
-        
 
-            OnBump?.Invoke(magnitude, duration);
+            Vector2 direction = other.GetContact(0).normal.x * Vector2.right;
 
-        }   
+            OnBump?.Invoke(magnitude, duration, direction);
+        }
     }
 }

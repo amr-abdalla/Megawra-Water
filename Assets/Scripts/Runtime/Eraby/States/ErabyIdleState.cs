@@ -3,10 +3,17 @@ using UnityEngine;
 
 public class ErabyIdleState : State
 {
-
-
     [SerializeField]
     protected PhysicsBody2D body = null;
+
+    [SerializeField]
+    protected PersistentErabyData persistentData = null;
+
+    public PersistentErabyData _persistentData
+    {
+        get => persistentData;
+        set => persistentData = value;
+    }
 
     protected override void onStateEnter()
     {

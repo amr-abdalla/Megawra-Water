@@ -16,10 +16,16 @@ public class ErabyBumpState : State
         Debug.Log("Enter bump");
         controls.DisableControls();
         float bumpMagnitude = persistentData.bumpMagnitude;
-        float velocityX = Mathf.Cos(Mathf.Deg2Rad * 45) * bumpMagnitude;
-        float velocityY = Mathf.Sin(Mathf.Deg2Rad * 45) * bumpMagnitude;
-        body.SetVelocityX(velocityX);
-        body.SetVelocityY(velocityY);
+        Vector2 bumpDirection = persistentData.bumpDirection;
+        // make sure the bump direction is normalized
+        bumpDirection = Vector2.right * Mathf.Sign(bumpDirection.x);
+        // rotate the bump direction by 45 degrees "up"
+        bumpDirection =
+            Quaternion.Euler(0, 0, 45 * bumpDirection.x) * bumpDirection * bumpMagnitude;
+
+        body.SetVelocityX(bumpDirection.x);
+        body.SetVelocityY(bumpDirection.y);
+
         bumpRoutine = StartCoroutine(bumpSequence(persistentData.bumpDuration));
     }
 

@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlatformHorizontalCollider : MonoBehaviour
 {
     [SerializeField]
     private Collider2D HorizontalCollider;
+
+    [SerializeField]
+    private PlatformCollisionEvents collisionEvents;
 
     [SerializeField]
     private PlatformHorizontalColliderConfig config;
@@ -20,6 +21,14 @@ public class PlatformHorizontalCollider : MonoBehaviour
     {
         if (HorizontalCollider == null)
             HorizontalCollider = GetComponent<Collider2D>();
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("PlayerBumper"))
+        {
+            collisionEvents.OnBump?.Invoke(other.GetContact(0).normal);
+        }
     }
 
     private void OnDrawGizmos()

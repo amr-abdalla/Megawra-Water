@@ -8,6 +8,7 @@ TagManager:
   - Bouncy
   - Bump
   - Trample
+  - PlayerBumper
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - UI
   - Chunk
   - Camera Confiner
-  - 
-  - 
+  - PlatformBump
+  - PlayerBump
   - 
   - 
   - 

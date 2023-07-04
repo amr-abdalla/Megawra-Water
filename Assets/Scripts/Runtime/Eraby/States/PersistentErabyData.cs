@@ -14,5 +14,7 @@ public class PersistentErabyData : MonoBehaviour
 
     public HaraPlatformAbstract fallPlatform = null;
 
+    public Vector2 bumpDirection = Vector2.zero;
+
     public float maxJumpHeight = 0f;
 }

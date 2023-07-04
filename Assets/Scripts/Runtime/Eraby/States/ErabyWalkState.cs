@@ -43,10 +43,11 @@ public class ErabyWalkState : MoveHorizontalAbstractState
     }
 
     // move to a new bump state. Call bumpSequence onStateEnter. Go to idle state when done.
-    private void onBump(float bumpMagnitude, float bumpDuration)
+    private void onBump(float bumpMagnitude, float bumpDuration, Vector2 bumpDirection)
     {
         persistentData.bumpMagnitude = bumpMagnitude;
         persistentData.bumpDuration = bumpDuration;
+        persistentData.bumpDirection = bumpDirection;
         setState<ErabyBumpState>();
     }
 
