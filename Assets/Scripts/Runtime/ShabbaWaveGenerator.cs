@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class ShabbaWaveGenerator : MonoBehaviourBase
 {
 	[SerializeField] MeshGenerator meshGenerator;
-
+	[SerializeField] private float increaseRate;
+	[SerializeField] private float DecreaseRate;
+	private Coroutine increaseRoutine;
+	private Coroutine decreaseRoutine;
 
 	// Properties
 	// reference to the mesh / mesh generator
@@ -15,7 +19,42 @@ public class ShabbaWaveGenerator : MonoBehaviourBase
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		Debug.Log(collision.transform.position.GetClosestVector(meshGenerator.surfaceVertices));
+		Debug.Log("here");
+		var closestVector = collision.transform.position.GetClosestVector(meshGenerator.surfaceVertices);
+		meshGenerator.material.SetVector("_WaveCollisionPoint", new Vector4(closestVector.x / meshGenerator.width, 0, 0, 0));
+		this.DisposeCoroutine(ref increaseRoutine);
+		this.DisposeCoroutine(ref decreaseRoutine);
+		increaseRoutine = StartCoroutine(IncreaseWave());
+	}
+
+	IEnumerator IncreaseWave()
+	{
+		float height = meshGenerator.material.GetFloat("_WaveHeight");
+		while (height < 3)
+		{
+			height += Time.deltaTime * increaseRate;
+			meshGenerator.material.SetFloat("_WaveHeight", height);
+			yield return null;
+		}
+
+		meshGenerator.material.SetFloat("_WaveHeight", 3);
+		increaseRoutine = null;
+		StartCoroutine(DecreaseWave());
+	}
+
+	IEnumerator DecreaseWave()
+	{
+		float height = meshGenerator.material.GetFloat("_WaveHeight");
+		while (height > 0.5f)
+		{
+			height -= Time.deltaTime * DecreaseRate;
+			meshGenerator.material.SetFloat("_WaveHeight", height);
+			yield return null;
+		}
+
+		meshGenerator.material.SetFloat("_WaveHeight", 0.5f);
+		decreaseRoutine = null;
+
 	}
 
 	//private void OnCollisionEnter2D(Collision2D collision)

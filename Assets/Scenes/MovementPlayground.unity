@@ -449,8 +449,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 10
   height: 10
-  subdivisionsX: 3
-  subdivisionsY: 3
+  subdivisionsX: 20
+  subdivisionsY: 20
   material: {fileID: 2100000, guid: 69bb1def4dd38244eb2354c16a2407c9, type: 2}
   collider: {fileID: 422880033}
 --- !u!4 &422880031

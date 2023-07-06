@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MeshGenerator : MonoBehaviourBase
 {
-	[SerializeField] private float width;
+	[SerializeField] public float width;
 	[SerializeField] private float height;
 	[Min(1)] [SerializeField] private int subdivisionsX;
 	[Min(1)] [SerializeField] private int subdivisionsY;
-	[SerializeField] private Material material;
+	[SerializeField] public Material material;
 	[SerializeField] BoxCollider2D collider;
 
 	private MeshFilter meshFilter;
