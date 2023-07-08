@@ -14,7 +14,7 @@ public class PersistentErabyData : MonoBehaviour
 
     public Vector2 bounceVelocityMultiplier = MathConstants.VECTOR_2_ONE;
 
-    public GroundPlatform fallPlatform = null;
+    public IGroundPlatform fallPlatform = null;
 
     public Vector2 bumpDirection = Vector2.zero;
 

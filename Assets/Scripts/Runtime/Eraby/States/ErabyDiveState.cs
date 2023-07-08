@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ErabyDiveState : MoveHorizontalAbstractState
+public class ErabyDiveState : ErabyAbstractFallState
 {
     protected override void onStateEnter()
     {
@@ -34,10 +34,6 @@ public class ErabyDiveState : MoveHorizontalAbstractState
         onStateExit();
     }
 
-    protected override void onStateInit() { }
-
-    protected override void onStateUpdate() { }
-
     private void goToGlide()
     {
         stateMachine.SetState<ErabyGlideStartState>();
@@ -46,5 +42,10 @@ public class ErabyDiveState : MoveHorizontalAbstractState
     private void goToFall()
     {
         stateMachine.SetState<ErabyFallState>();
+    }
+
+    protected override void onDidEnterGround()
+    {
+        goToLanding<ErabyCrashState>();
     }
 }

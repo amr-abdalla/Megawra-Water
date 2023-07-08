@@ -4,7 +4,7 @@ using UnityEngine;
 public class ErabyWalkState : MoveHorizontalAbstractState
 {
     [SerializeField]
-    private ErabyCollisionEvents collisionEvents;
+    private ErabyRBCollisionHandler collisionEvents;
 
     [SerializeField]
     PersistentErabyData persistentData = null;

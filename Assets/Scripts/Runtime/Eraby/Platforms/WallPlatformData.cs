@@ -1,10 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(
-    fileName = "PlatformHorizontalColliderConfig",
-    menuName = "Eraby/PlatformHorizontalColliderConfig",
-    order = 0
-)]
+[CreateAssetMenu(fileName = "WallPlatformData", menuName = "Eraby/WallPlatformData", order = 0)]
 public class WallPlatformData : ScriptableObject
 {
     public float HealthPenalty = 0.1f;

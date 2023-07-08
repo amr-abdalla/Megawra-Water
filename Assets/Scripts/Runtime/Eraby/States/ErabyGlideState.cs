@@ -1,7 +1,6 @@
-using System.Collections;
 using UnityEngine;
 
-public class ErabyGlideState : MoveHorizontalAbstractState
+public class ErabyGlideState : ErabyAbstractFallState
 {
     protected override void onStateEnter()
     {
@@ -12,10 +11,6 @@ public class ErabyGlideState : MoveHorizontalAbstractState
         if (!controls.isJumping())
             goToFall();
     }
-
-    protected override void onStateInit() { }
-
-    protected override void onStateUpdate() { }
 
     protected override void onStateFixedUpdate()
     {
@@ -42,5 +37,10 @@ public class ErabyGlideState : MoveHorizontalAbstractState
     private void goToFall()
     {
         stateMachine.SetState<ErabyFallState>();
+    }
+
+    protected override void onDidEnterGround()
+    {
+        goToLanding<ErabyCrashState>();
     }
 }

@@ -11,6 +11,7 @@ public abstract class StateFeatureAbstract : MonoBehaviourBase
         stateMachine = i_stateMachine;
         onInit();
     }
+
     public void OnStateEnter()
     {
         onEnter();
@@ -20,10 +21,12 @@ public abstract class StateFeatureAbstract : MonoBehaviourBase
     {
         onUpdate();
     }
+
     public void OnStateFixedUpdate()
     {
         onFixedUpdate();
     }
+
     public void OnStateExit()
     {
         onExit();
@@ -32,12 +35,20 @@ public abstract class StateFeatureAbstract : MonoBehaviourBase
 
     #region Protected
 
-    // code review : add implementation for setState
+    protected void setState<TState>()
+        where TState : State
+    {
+        stateMachine.SetState<TState>();
+    }
 
     protected virtual void onInit() { }
+
     protected virtual void onEnter() { }
+
     protected virtual void onUpdate() { }
+
     protected virtual void onFixedUpdate() { }
+
     protected virtual void onExit() { }
     #endregion
 }

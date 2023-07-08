@@ -10,18 +10,11 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
     [SerializeField]
     protected PersistentErabyData persistentData = null;
 
-    [Header("Extra Configs")]
-    [SerializeField]
-    protected BounceTapManager tapManager = null;
-
     #region STATE API
     protected override void onStateInit() { }
 
     protected override void onStateEnter()
     {
-
-        tapManager.ResetTap();
-        tapManager.EnableTap();
         base.onStateEnter();
         controls.EnableControls();
     }
@@ -34,18 +27,13 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
         }
     }
 
-
-
     public override void ResetState()
     {
         base.ResetState();
         onStateExit();
     }
 
-    protected void onGenericFallStateExit()
-    {
-        tapManager.DisableTap();
-    }
+    protected void onGenericFallStateExit() { }
 
     protected override void onStateExit()
     {
@@ -59,14 +47,24 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
 
     protected abstract void onDidEnterGround();
 
-    protected void goToLanding<OnGroundedType>() where OnGroundedType : State
+    protected void goToLanding<OnGroundedType>()
+        where OnGroundedType : State
     {
-        if (null == body.CurrentGroundTransform) return;
-        GroundPlatform ground = body.CurrentGroundTransform.GetComponent<GroundPlatform>();
+        if (null == body.CurrentGroundTransform)
+        {
+            Debug.LogError("Ground is null");
+            return;
+        }
+        IGroundPlatform ground = body.CurrentGroundTransform.GetComponent<IGroundPlatform>();
 
-        if (null == ground) return;
+        if (null == ground)
+        {
+            Debug.LogError(
+                "Ground is not a platform: " + body.CurrentGroundTransform.gameObject.name
+            );
+            return;
+        }
 
-        Debug.Log("Landing sequence");
         persistentData.landingVelocityX = body.VelocityX;
 
         body.SetVelocityX(0);
@@ -75,12 +73,14 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
 
         if (ground.IsBouncy)
         {
-            persistentData.bounceVelocityMultiplier = new Vector2(ground.BounceVelocityXMultiplier, ground.BounceVelocityYMultiplier);
+            persistentData.bounceVelocityMultiplier = new Vector2(
+                ground.BounceVelocityXMultiplier,
+                ground.BounceVelocityYMultiplier
+            );
             setState<ErabyLandingState>();
         }
         else
             setState<OnGroundedType>();
     }
     #endregion
-
 }
