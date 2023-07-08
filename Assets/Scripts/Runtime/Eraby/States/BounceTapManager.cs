@@ -48,24 +48,13 @@ public class BounceTapManager : MonoBehaviour
 
         if (tapped)
             Debug.Log("Already tapped");
+
         if (tapped || !enableTap)
-            return;
-
-        RaycastHit2D hit = Physics2D.BoxCast(
-            erabyTransform.position,
-            tapColliderSize,
-            0,
-            Vector2.zero,
-            0,
-            1 << LayerMask.NameToLayer("Ground")
-        );
-
-        if (hit.collider == null)
             return;
 
         Debug.Log("Tapped");
         tapped = true;
-        distance = hit.distance;
+
         OnTap?.Invoke();
     }
 

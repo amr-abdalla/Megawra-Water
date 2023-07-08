@@ -1,18 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public class ErabyBumpState : State
+public class ErabyBumpState : ErabyAbstractFallState
 {
     private Coroutine bumpRoutine = null;
 
-    [SerializeField]
-    protected PhysicsBody2D body = null;
-
-    [SerializeField]
-    private PersistentErabyData persistentData = null;
-
     protected override void onStateEnter()
     {
+        base.onStateEnter();
         Debug.Log("Enter bump");
         controls.DisableControls();
         float bumpMagnitude = persistentData.bumpMagnitude;
@@ -25,38 +20,33 @@ public class ErabyBumpState : State
 
         body.SetVelocityX(bumpDirection.x);
         body.SetVelocityY(bumpDirection.y);
-
+        persistentData.initialVelocityY = bumpDirection.y;
+        groundCheckEnabled = false;
         bumpRoutine = StartCoroutine(bumpSequence(persistentData.bumpDuration));
     }
 
     protected override void onStateExit()
     {
+        base.onStateExit();
         controls.EnableControls();
         this.DisposeCoroutine(ref bumpRoutine);
     }
 
-    private void goToIdle()
-    {
-        stateMachine.SetState<ErabyIdleState>();
-    }
-
-    protected override void onStateFixedUpdate() { }
-
     public override void ResetState()
     {
+        base.ResetState();
         onStateExit();
     }
-
-    protected override void onStateInit() { }
-
-    protected override void onStateUpdate() { }
 
     private IEnumerator bumpSequence(float bumpDuration)
     {
         yield return new WaitForSeconds(bumpDuration);
-        body.SetVelocityX(0);
-        controls.EnableControls();
-        goToIdle();
+        groundCheckEnabled = true;
         this.DisposeCoroutine(ref bumpRoutine);
+    }
+
+    protected override void onDidEnterGround()
+    {
+        goToLanding<ErabyIdleState>();
     }
 }

@@ -36,7 +36,7 @@ public class ErabyCrashState : ErabyAbstractLandingState
             if (tapManager.isTapped())
                 setState<ErabySuperLaunchState>();
             else
-                setState<ErabyLaunchState>();
+                setState<ErabySmallLaunchState>();
         }
         else
             setState<ErabyIdleState>();

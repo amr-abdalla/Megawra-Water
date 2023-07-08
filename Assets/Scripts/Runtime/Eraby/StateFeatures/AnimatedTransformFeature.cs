@@ -4,37 +4,20 @@ using System.Collections;
 public class AnimatedTransformFeature : StateFeatureAbstract
 {
     [SerializeField]
-    private Transform targetTransform = null;
+    private AnimatedTransformData data = null;
 
     [SerializeField]
-    private Vector3 targetPosition = MathConstants.VECTOR_3_ZERO;
-
-    [SerializeField]
-    private Quaternion targetRotation = MathConstants.QUATERNION_IDENTITY;
-
-    [SerializeField]
-    private Vector3 targetScale = MathConstants.VECTOR_3_ONE;
-
-    [SerializeField]
-    private AnimationCurve animationCurve = null;
-
-    [SerializeField]
-    private bool looping = false;
-
-    [SerializeField]
-    private float length = 0f;
-
-    [SerializeField]
-    private bool disablePosition = false;
-
-    [SerializeField]
-    private bool disableRotation = false;
-
-    [SerializeField]
-    private bool disableScale = false;
-
-    [SerializeField]
-    private bool resetOnExit = true;
+    private Transform targetTransform;
+    private Vector3 targetPosition => data.TargetPosition;
+    private Quaternion targetRotation => data.TargetRotation;
+    private Vector3 targetScale => data.TargetScale;
+    private AnimationCurve animationCurve => data.AnimationCurve;
+    private bool looping => data.Looping;
+    private float length => data.Length;
+    private bool disablePosition => data.DisablePosition;
+    private bool disableRotation => data.DisableRotation;
+    private bool disableScale => data.DisableScale;
+    private bool resetOnExit => data.ResetOnExit;
 
     private Coroutine animationCoroutine = null;
 
@@ -49,6 +32,7 @@ public class AnimatedTransformFeature : StateFeatureAbstract
         initialPosition = targetTransform.localPosition;
         initialRotation = targetTransform.localRotation;
         initialScale = targetTransform.localScale;
+        // targetScale = Vector3.Scale(initialScale, scaleMultiplier);
         animationCoroutine = StartCoroutine(animationSequence());
         base.onEnter();
     }
@@ -95,7 +79,8 @@ public class AnimatedTransformFeature : StateFeatureAbstract
             if (elapsedTime > length)
             {
                 firstRun = false;
-                elapsedTime = 0;
+                elapsedTime = 0f;
+                forward = !forward;
             }
 
             yield return null;

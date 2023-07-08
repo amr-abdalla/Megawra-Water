@@ -5,9 +5,6 @@ using UnityEngine;
 abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
 {
     [SerializeField]
-    protected float timeBeforeBounce = 0;
-
-    [SerializeField]
     protected PersistentErabyData persistentData = null;
 
     #region STATE API
@@ -19,9 +16,16 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
         controls.EnableControls();
     }
 
+    protected bool groundCheckEnabled = true;
+
     protected override void onStateUpdate()
     {
-        if (isEnabled && body.IsGrounded && body.CurrentGroundTransform != null)
+        if (
+            isEnabled
+            && body.IsGrounded
+            && body.CurrentGroundTransform != null
+            && groundCheckEnabled
+        )
         {
             onDidEnterGround();
         }

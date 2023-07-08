@@ -8,23 +8,16 @@ public class ErabyLandingState : ErabyAbstractLandingState
     {
         Debug.Log("Enter landing");
 
-        //  HaraPlatformAbstract collidedPlatform = getCollidedPlatformComponent();
-
-        /*   if (collidedPlatform != fallPlatform)
-           {
-               collidedPlatform.onCollision();
-           } */
-
         launchVelocityY =
             persistentData.bounceVelocityMultiplier.y * persistentData.initialVelocityY;
 
         float newVelocityX = clampVelocityX(
             -Mathf.Abs(persistentData.landingVelocityX) * persistentData.bounceVelocityMultiplier.x
-        ); 
+        );
         persistentData.launchVelocityY = launchVelocityY;
         persistentData.launchVelocityX = newVelocityX;
         Debug.Log("Bounce velocity: " + launchVelocityY);
-        // landingRoutine = StartCoroutine(landingSequence());
+
         base.onStateEnter();
     }
 
@@ -44,7 +37,6 @@ public class ErabyLandingState : ErabyAbstractLandingState
 
     override protected void applyTapMulipier()
     {
-        //Debug.LogError("Apply tap multiplier");
         float newVelocityX = clampVelocityX(
             -Mathf.Abs(persistentData.landingVelocityX) * tapMultiplier
         );
@@ -52,38 +44,6 @@ public class ErabyLandingState : ErabyAbstractLandingState
         persistentData.launchVelocityX = newVelocityX;
         persistentData.launchVelocityY *= tapMultiplier;
     }
-
-   /* private HaraPlatformAbstract getCollidedPlatformComponent()
-    {
-        //Debug.LogError("Get component bounce");
-
-        HaraPlatformAbstract collidedPlatform =
-            body.CurrentGroundTransform.gameObject.GetComponentInParent<HaraPlatformAbstract>();
-
-        if (collidedPlatform == null)
-            collidedPlatform =
-                body.CurrentGroundTransform.gameObject.GetComponent<HaraPlatformAbstract>();
-
-        if (collidedPlatform == null)
-            collidedPlatform =
-                body.CurrentGroundTransform.gameObject.GetComponentInChildren<HaraPlatformAbstract>();
-
-        // if (body.CurrentGroundTransform.gameObject.tag == "Finish")
-        // {
-        //     setState<ErabyCrashState>();
-        // }
-        // else if (collidedPlatform == null)
-        // {
-        //     collidedPlatform = fallPlatform;
-        //     if (collidedPlatform == null)
-        //     {
-        //         Debug.LogError("No hara platform component found! setting state to idle.");
-        //         setState<ErabyCrashState>();
-        //     }
-        // }
-
-        return collidedPlatform;
-    } */
 
     #endregion
 }
