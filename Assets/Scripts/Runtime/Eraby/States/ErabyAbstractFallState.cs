@@ -5,6 +5,8 @@ using UnityEngine;
 abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
 {
     #region STATE API
+    protected bool groundCheckEnabled = true;
+
     protected override void onStateInit() { }
 
     protected override void onStateEnter()
@@ -13,9 +15,7 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
         controls.EnableControls();
     }
 
-    protected bool groundCheckEnabled = true;
-
-    protected override void onStateUpdate()
+    protected override void onStateFixedUpdate()
     {
         if (
             isEnabled
@@ -26,7 +26,11 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
         {
             onDidEnterGround();
         }
+
+        base.onStateFixedUpdate();
     }
+
+    protected override void onStateUpdate() { }
 
     public override void ResetState()
     {
@@ -51,6 +55,7 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
     protected void goToLanding<OnGroundedType>()
         where OnGroundedType : State
     {
+        Debug.Log("Go to landing. Current State: " + this.GetType().Name);
         if (null == body.CurrentGroundTransform)
         {
             Debug.LogError("Ground is null");
@@ -67,7 +72,6 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
         }
 
         persistentData.landingVelocityX = body.VelocityX;
-
 
         body.SetVelocityY(0);
         controls.DisableControls();

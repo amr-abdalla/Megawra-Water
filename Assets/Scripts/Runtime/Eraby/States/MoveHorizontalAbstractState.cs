@@ -77,6 +77,8 @@ public abstract class MoveHorizontalAbstractState : State
             || Mathf.Abs(body.VelocityX) > Mathf.Abs(targetVelocityX) && isDecelerating
         )
         {
+            if (!isEnabled)
+                break;
             body.SetVelocityX(body.VelocityX + direction * acceleration * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: W-Big
   m_EditorClassIdentifier: 
   HealthPenalty: 0.1
-  timeDisabled: 0.1
+  timeDisabled: 0.2
   bumpMagnitude: 10

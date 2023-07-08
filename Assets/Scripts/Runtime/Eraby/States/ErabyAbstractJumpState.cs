@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class ErabyAbstractJumpState : MoveHorizontalAbstractState
 {
-    [Header("Jump Configs")]
-    [SerializeField]
     protected float initialVelocityY = 0f;
 
     #region STATE API
@@ -58,7 +56,7 @@ public class ErabyAbstractJumpState : MoveHorizontalAbstractState
 
         if (body.VelocityY <= 0)
         {
-            setState<ErabyFallState>();
+            goToFall();
             return;
         }
     }
@@ -67,6 +65,11 @@ public class ErabyAbstractJumpState : MoveHorizontalAbstractState
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(gizmoPoints[0], gizmoPoints[1]);
+    }
+
+    protected virtual void goToFall()
+    {
+        setState<ErabyFallState>();
     }
 
     #endregion

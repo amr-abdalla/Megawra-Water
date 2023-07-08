@@ -1,14 +1,26 @@
 using System.Collections;
 using UnityEngine;
 
-public class ErabyBumpState : ErabyAbstractFallState
+public class ErabyBumpState : State
 {
     private Coroutine bumpRoutine = null;
 
+    [SerializeField]
+    private PhysicsBody2D body = null;
+
+    [SerializeField]
+    private Collider2D bumper = null;
+
     protected override void onStateEnter()
     {
-        base.onStateEnter();
-        Debug.Log("Enter bump");
+        Debug.Log(
+            "Enter bump. Direction: "
+                + persistentData.bumpDirection
+                + " Magnitude: "
+                + persistentData.bumpMagnitude
+                + " Duration: "
+                + persistentData.bumpDuration
+        );
         controls.DisableControls();
         float bumpMagnitude = persistentData.bumpMagnitude;
         Vector2 bumpDirection = persistentData.bumpDirection;
@@ -21,34 +33,38 @@ public class ErabyBumpState : ErabyAbstractFallState
         body.SetVelocityX(bumpDirection.x);
         body.SetVelocityY(bumpDirection.y);
         persistentData.initialVelocityY = bumpDirection.y;
-        groundCheckEnabled = false;
+
         bumpRoutine = StartCoroutine(bumpSequence(persistentData.bumpDuration));
+    }
+
+    protected override void onStateInit() { }
+
+    protected override void onStateUpdate() { }
+
+    protected override void onStateFixedUpdate()
+    {
+        if (body.VelocityY <= 0)
+            setState<ErabySmallFallState>();
     }
 
     protected override void onStateExit()
     {
-        base.onStateExit();
         controls.EnableControls();
         this.DisposeCoroutine(ref bumpRoutine);
     }
 
     public override void ResetState()
     {
-        base.ResetState();
         onStateExit();
     }
 
     private IEnumerator bumpSequence(float bumpDuration)
     {
+        bumper.enabled = false;
         controls.DisableControls();
         yield return new WaitForSeconds(bumpDuration);
-        groundCheckEnabled = true;
         controls.EnableControls();
+        bumper.enabled = true;
         this.DisposeCoroutine(ref bumpRoutine);
-    }
-
-    protected override void onDidEnterGround()
-    {
-        goToLanding<ErabyIdleState>();
     }
 }

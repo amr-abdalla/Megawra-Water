@@ -8,6 +8,9 @@ public class BumpFeature : StateFeatureAbstract
     [SerializeField]
     PersistentErabyData persistentData = null;
 
+    [SerializeField]
+    private PhysicsBody2D physicsBody = null;
+
     protected override void onEnter()
     {
         base.onEnter();
@@ -20,9 +23,11 @@ public class BumpFeature : StateFeatureAbstract
         collisionHandler.OnBump -= onBump;
     }
 
+    // TODO: Bumping bugs out sometimes when both the player and the platform are moving towards each other. This was partially fixed by giving the player a bigger bump collider.
     private void onBump(float bumpMagnitude, float bumpDuration, Vector2 bumpDirection)
     {
         Debug.Log("Bump");
+        physicsBody.SetVelocityX(bumpDirection.x);
         persistentData.bumpMagnitude = bumpMagnitude;
         persistentData.bumpDuration = bumpDuration;
         persistentData.bumpDirection = bumpDirection;

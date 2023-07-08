@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013dac98f90c2144fba45bfbfbff265f, type: 3}
   m_Name: AccelerationGeneric
   m_EditorClassIdentifier: 
-  maxVelX: 0
-  minVelX: 0
-  moveVelX: 2
-  moveVelY: 0
-  decelerationY: 0
-  accelerationY: 0
+  acceleration: {x: 34, y: 34}
+  desceleration: {x: 0, y: 0}
+  moveVelocity: {x: 3, y: 3}
+  maxVelocity: {x: 3, y: 3}
