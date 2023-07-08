@@ -27,7 +27,6 @@ public class BumpFeature : StateFeatureAbstract
     private void onBump(float bumpMagnitude, float bumpDuration, Vector2 bumpDirection)
     {
         Debug.Log("Bump");
-        physicsBody.SetVelocityX(bumpDirection.x);
         persistentData.bumpMagnitude = bumpMagnitude;
         persistentData.bumpDuration = bumpDuration;
         persistentData.bumpDirection = bumpDirection;
