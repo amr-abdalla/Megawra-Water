@@ -9,9 +9,6 @@ abstract class ErabyAbstractLaunchState : State
     protected float maxJumpHeight = 8f;
 
     [SerializeField]
-    protected PersistentErabyData persistentData = null;
-
-    [SerializeField]
     protected PhysicsBody2D body = null;
     private float initialVelocityY = 0f;
     private float startJumpY = 0f;
@@ -28,6 +25,7 @@ abstract class ErabyAbstractLaunchState : State
         body.SetVelocityY(initialVelocityY);
         body.SetVelocityX(persistentData.launchVelocityX);
         persistentData.initialVelocityY = initialVelocityY;
+        persistentData.initialVelocityX = persistentData.launchVelocityX;
         goToJump();
     }
 

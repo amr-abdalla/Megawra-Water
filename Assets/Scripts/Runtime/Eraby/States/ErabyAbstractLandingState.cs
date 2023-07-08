@@ -20,9 +20,6 @@ abstract public class ErabyAbstractLandingState : State
     protected AccelerationConfig2D accelerationData = null;
 
     [SerializeField]
-    protected PersistentErabyData persistentData = null;
-
-    [SerializeField]
     protected float landingTime = 0.5f;
     protected Coroutine landingRoutine = null;
 

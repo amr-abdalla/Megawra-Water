@@ -6,9 +6,6 @@ public class ErabyIdleState : State
     [SerializeField]
     protected PhysicsBody2D body = null;
 
-    [SerializeField]
-    protected PersistentErabyData persistentData = null;
-
     public PersistentErabyData _persistentData
     {
         get => persistentData;
@@ -23,14 +20,18 @@ public class ErabyIdleState : State
             Debug.LogError("Controls not set");
             return;
         }
-        body.SetVelocityX(0);
+
         controls.EnableControls();
         if (controls.isJumping())
             handleJumpPressed();
-        if (controls.isMoving())
-            handleMoveStarted();
+
         controls.MoveStarted += handleMoveStarted;
         controls.JumpPressed += handleJumpPressed;
+
+        if (controls.isMoving())
+            handleMoveStarted();
+        else
+            body.SetVelocityX(0);
     }
 
     protected override void onStateExit()
@@ -54,13 +55,13 @@ public class ErabyIdleState : State
     {
         if (!isEnabled)
             return;
-        stateMachine.SetState<ErabyWalkState>();
+        setState<ErabyWalkState>();
     }
 
     void handleJumpPressed()
     {
         if (!isEnabled)
             return;
-        stateMachine.SetState<ErabySmallLaunchState>();
+        setState<ErabySmallLaunchState>();
     }
 }

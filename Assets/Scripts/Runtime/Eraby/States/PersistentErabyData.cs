@@ -4,6 +4,8 @@ public class PersistentErabyData : MonoBehaviour
 {
     public float initialVelocityY = 0f;
 
+    public float initialVelocityX = 0f;
+
     public float landingVelocityX = 0f;
 
     public float bumpDuration = 0f;

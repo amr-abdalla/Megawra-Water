@@ -1,4 +1,5 @@
-﻿
+﻿using UnityEngine;
+
 public abstract class State : MonoBehaviourBase
 {
     protected StateMachine stateMachine = null;
@@ -6,18 +7,23 @@ public abstract class State : MonoBehaviourBase
     private bool isInit = false;
     private StateFeatureAbstract[] features = null;
 
+    [SerializeField]
+    protected PersistentErabyData persistentData = null;
+
     private bool _isEnabled = false;
 
     #region PUBLIC API
-    public void Initialize(StateMachine i_stateMachine, Controls i_controls )
+    public void Initialize(StateMachine i_stateMachine, Controls i_controls)
     {
-        if (isInit) return;
+        if (isInit)
+            return;
 
         stateMachine = i_stateMachine;
         controls = i_controls;
 
         features = GetComponentsInChildren<StateFeatureAbstract>(true);
-        foreach (StateFeatureAbstract feature in features) feature.InitFeature(stateMachine);
+        foreach (StateFeatureAbstract feature in features)
+            feature.InitFeature(stateMachine);
 
         onStateInit();
 
@@ -26,25 +32,30 @@ public abstract class State : MonoBehaviourBase
 
     public void EnterState()
     {
-        foreach (StateFeatureAbstract feature in features) feature.OnStateEnter();
+        foreach (StateFeatureAbstract feature in features)
+            feature.OnStateEnter();
         _isEnabled = true;
         onStateEnter();
     }
+
     public void UpdateState()
     {
-        foreach (StateFeatureAbstract feature in features) feature.OnStateUpdate();
+        foreach (StateFeatureAbstract feature in features)
+            feature.OnStateUpdate();
         onStateUpdate();
     }
 
     public void FixedUpdateState()
     {
-        foreach (StateFeatureAbstract feature in features) feature.OnStateFixedUpdate();
+        foreach (StateFeatureAbstract feature in features)
+            feature.OnStateFixedUpdate();
         onStateFixedUpdate();
     }
 
     public void ExitState()
     {
-        foreach (StateFeatureAbstract feature in features) feature.OnStateExit();
+        foreach (StateFeatureAbstract feature in features)
+            feature.OnStateExit();
         onStateExit();
         _isEnabled = false;
     }
@@ -62,7 +73,8 @@ public abstract class State : MonoBehaviourBase
         stateMachine.SetGenericState(i_id);
     }
 
-    protected void setState<TState>() where TState : State
+    protected void setState<TState>()
+        where TState : State
     {
         stateMachine.SetState<TState>();
     }
@@ -80,5 +92,4 @@ public abstract class State : MonoBehaviourBase
     #endregion
 
     public virtual void DrawGizmos() { }
-
 }

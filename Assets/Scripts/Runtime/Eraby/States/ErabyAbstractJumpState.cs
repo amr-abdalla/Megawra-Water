@@ -5,9 +5,6 @@ public class ErabyAbstractJumpState : MoveHorizontalAbstractState
 {
     [Header("Jump Configs")]
     [SerializeField]
-    protected PersistentErabyData persistentData = null;
-
-    [SerializeField]
     protected float initialVelocityY = 0f;
 
     #region STATE API

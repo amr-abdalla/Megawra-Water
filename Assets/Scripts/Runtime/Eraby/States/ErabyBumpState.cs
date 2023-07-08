@@ -40,8 +40,10 @@ public class ErabyBumpState : ErabyAbstractFallState
 
     private IEnumerator bumpSequence(float bumpDuration)
     {
+        controls.DisableControls();
         yield return new WaitForSeconds(bumpDuration);
         groundCheckEnabled = true;
+        controls.EnableControls();
         this.DisposeCoroutine(ref bumpRoutine);
     }
 

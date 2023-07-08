@@ -4,9 +4,6 @@ using UnityEngine;
 
 abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
 {
-    [SerializeField]
-    protected PersistentErabyData persistentData = null;
-
     #region STATE API
     protected override void onStateInit() { }
 
@@ -71,7 +68,7 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
 
         persistentData.landingVelocityX = body.VelocityX;
 
-        body.SetVelocityX(0);
+
         body.SetVelocityY(0);
         controls.DisableControls();
 

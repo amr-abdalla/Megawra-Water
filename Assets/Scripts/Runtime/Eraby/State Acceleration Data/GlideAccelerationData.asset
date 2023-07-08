@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 013dac98f90c2144fba45bfbfbff265f, type: 3}
-  m_Name: DiveAcceleration
+  m_Name: GlideAccelerationData
   m_EditorClassIdentifier: 
-  maxVelX: 100
-  minVelX: -100
-  moveVelX: 0
-  moveVelY: 0
-  decelerationY: 0
-  accelerationY: 100
+  acceleration: {x: 3, y: 3}
+  desceleration: {x: 3, y: 3}
+  moveVelocity: {x: 3, y: 3}
+  maxVelocity: {x: 3, y: 3}

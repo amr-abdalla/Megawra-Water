@@ -7,6 +7,7 @@ public class ErabySmallFallState : ErabyAbstractFallState
 
     protected override void onStateEnter()
     {
+        persistentData.initialVelocityX = 0;
         Debug.Log("Enter Small Fall");
         base.onStateEnter();
     }
@@ -34,5 +35,4 @@ public class ErabySmallFallState : ErabyAbstractFallState
     {
         goToLanding<ErabyIdleState>();
     }
-
 }

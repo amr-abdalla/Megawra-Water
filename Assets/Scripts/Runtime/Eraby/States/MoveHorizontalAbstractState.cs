@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public abstract class MoveHorizontalAbstractState : State
 {
@@ -10,13 +11,13 @@ public abstract class MoveHorizontalAbstractState : State
 
     protected float initialVelocityX = 0f;
 
-
+    private Coroutine accelerationCoroutine = null;
 
     #region PROTECTED
 
     protected override void onStateEnter()
     {
-        initialVelocityX = body.VelocityX;
+        initialVelocityX = persistentData.initialVelocityX;
         if (controls.isMoving())
             updateMoveVelocity(controls.MoveDirection());
         controls.MoveStarted += updateMoveVelocity;
@@ -27,7 +28,7 @@ public abstract class MoveHorizontalAbstractState : State
     {
         controls.MoveStarted -= updateMoveVelocity;
         controls.MoveReleased -= handleMoveCancel;
-        body.SetVelocityX(initialVelocityX);
+        this.DisposeCoroutine(ref accelerationCoroutine);
     }
 
     protected virtual void onDidStop() { }
@@ -47,15 +48,39 @@ public abstract class MoveHorizontalAbstractState : State
     {
         if (!isEnabled)
             return;
-        float newVelocityX = initialVelocityX + x * accelerationData.MoveVelocityX;
-        newVelocityX = clampVelocityX(newVelocityX, accelerationData.MaxVelocityX);
-        body.SetVelocityX(newVelocityX);
+
+        if (accelerationCoroutine != null)
+            this.DisposeCoroutine(ref accelerationCoroutine);
+
+        accelerationCoroutine = StartCoroutine(accelerationSequence(x));
     }
 
-    // TODO: make a protected virtual method
     private void handleMoveCancel()
     {
         updateMoveVelocity(0);
+    }
+
+    private IEnumerator accelerationSequence(float direction)
+    {
+        bool isDecelerating = true;
+        float targetVelocityX = initialVelocityX + direction * accelerationData.MoveVelocityX;
+        targetVelocityX = clampVelocityX(targetVelocityX, accelerationData.MaxVelocityX);
+
+        if (Mathf.Abs(body.VelocityX) < Mathf.Abs(targetVelocityX))
+            isDecelerating = false;
+
+        float acceleration = isDecelerating
+            ? accelerationData.DecelerationX
+            : accelerationData.AccelerationX;
+        while (
+            Mathf.Abs(body.VelocityX) < Mathf.Abs(targetVelocityX) && !isDecelerating
+            || Mathf.Abs(body.VelocityX) > Mathf.Abs(targetVelocityX) && isDecelerating
+        )
+        {
+            body.SetVelocityX(body.VelocityX + direction * acceleration * Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
+        }
+        this.DisposeCoroutine(ref accelerationCoroutine);
     }
 
     protected override void onStateFixedUpdate() { }

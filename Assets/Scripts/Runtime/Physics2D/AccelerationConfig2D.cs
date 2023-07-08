@@ -7,25 +7,19 @@
 )]
 public class AccelerationConfig2D : ScriptableObject
 {
-    [Header("Velocity")]
-    [SerializeField]
-    float maxVelX = 0f;
-
-    [SerializeField]
-    float minVelX = 0f;
-
-    [SerializeField]
-    float moveVelX = 0f;
-
-    [SerializeField]
-    float moveVelY = 0f;
-
     [Header("Acceleration")]
     [SerializeField]
-    float decelerationY = 0f;
+    Vector2 acceleration = MathConstants.VECTOR_2_ZERO;
 
     [SerializeField]
-    float accelerationY = 0f;
+    Vector2 desceleration = MathConstants.VECTOR_2_ZERO;
+
+    [Header("Velocity")]
+    [SerializeField]
+    Vector2 moveVelocity = MathConstants.VECTOR_2_ZERO;
+
+    [SerializeField]
+    Vector2 maxVelocity = MathConstants.VECTOR_2_ZERO;
 
     #region IAccelerationConfig2D
 
@@ -38,8 +32,8 @@ public class AccelerationConfig2D : ScriptableObject
 
     public float MaxVelocityX
     {
-        get { return maxVelX; }
-        set { maxVelX = value; }
+        get { return maxVelocity.x; }
+        set { maxVelocity.x = value; }
     }
 
     public float MaxVelocityZ
@@ -47,29 +41,40 @@ public class AccelerationConfig2D : ScriptableObject
         get { return 0f; }
     }
 
-    public float MinVelocityX
-    {
-        get { return minVelX; }
-    }
-
-    public float MinVelocityZ
-    {
-        get { return 0f; }
-    }
-
     public float MoveVelocityX
     {
-        get { return moveVelX; }
+        get { return moveVelocity.x; }
     }
 
     public float DecelerationY
     {
-        get { return decelerationY; }
+        get { return desceleration.y; }
     }
 
     public float AccelerationY
     {
-        get { return accelerationY; }
+        get { return acceleration.y; }
+    }
+
+    public float MoveVelocityY
+    {
+        get { return moveVelocity.y; }
+    }
+
+    public float MaxVelocityY
+    {
+        get { return maxVelocity.y; }
+        set { maxVelocity.y = value; }
+    }
+
+    public float DecelerationX
+    {
+        get { return desceleration.x; }
+    }
+
+    public float AccelerationX
+    {
+        get { return acceleration.x; }
     }
 
     #endregion
