@@ -4,24 +4,22 @@ using UnityEngine;
 public class ShabbaWaveGenerator : MonoBehaviourBase
 {
 	[SerializeField] MeshGenerator meshGenerator;
-	[SerializeField] private float increaseRate;
-	[SerializeField] private float DecreaseRate;
+	[SerializeField] private float increaseRate = 0.5f;
+	[SerializeField] private float DecreaseRate = 0.1f;
+	[SerializeField] private float maxWaveHeight = 0.3f;
 	private Coroutine increaseRoutine;
 	private Coroutine decreaseRoutine;
 
-	// Properties
-	// reference to the mesh / mesh generator
-	// waveImpactExtent : extent of the mesh distortion from the surface (normalized)
-	// the water material
+	#region material Properties
+	private const string _WaveCollisionPoint = "_WaveCollisionPoint";
+	private const string _WaveHeight = "_WaveHeight";
 
-	// Unity messages / callbacks
-	// Trigger (use OnCollisionEnter) (on the surface of the water) that will have a callback when the shabba enters the water 
+	#endregion
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		Debug.Log("here");
 		var closestVector = collision.transform.position.GetClosestVector(meshGenerator.surfaceVertices);
-		meshGenerator.material.SetVector("_WaveCollisionPoint", new Vector4(closestVector.x / meshGenerator.width, 0, 0, 0));
+		meshGenerator.material.SetFloat(_WaveCollisionPoint, closestVector.x / meshGenerator.width);
 		this.DisposeCoroutine(ref increaseRoutine);
 		this.DisposeCoroutine(ref decreaseRoutine);
 		increaseRoutine = StartCoroutine(IncreaseWave());
@@ -29,30 +27,34 @@ public class ShabbaWaveGenerator : MonoBehaviourBase
 
 	IEnumerator IncreaseWave()
 	{
-		float height = meshGenerator.material.GetFloat("_WaveHeight");
-		while (height < 3)
+		float height = meshGenerator.material.GetFloat(_WaveHeight);
+		float t = height / maxWaveHeight;
+		while (height < maxWaveHeight)
 		{
-			height += Time.deltaTime * increaseRate;
-			meshGenerator.material.SetFloat("_WaveHeight", height);
+			height = Mathf.Lerp(0.1f, maxWaveHeight, t);
+			t += Time.deltaTime * increaseRate;
+			meshGenerator.material.SetFloat(_WaveHeight, height);
 			yield return null;
 		}
 
-		meshGenerator.material.SetFloat("_WaveHeight", 3);
+		meshGenerator.material.SetFloat(_WaveHeight, maxWaveHeight);
 		increaseRoutine = null;
 		StartCoroutine(DecreaseWave());
 	}
 
 	IEnumerator DecreaseWave()
 	{
-		float height = meshGenerator.material.GetFloat("_WaveHeight");
-		while (height > 0.5f)
+		float height = meshGenerator.material.GetFloat(_WaveHeight);
+		float t = 1 - height / maxWaveHeight;
+		while (height > 0.1f)
 		{
-			height -= Time.deltaTime * DecreaseRate;
-			meshGenerator.material.SetFloat("_WaveHeight", height);
+			height = Mathf.Lerp(maxWaveHeight, 0.1f, t);
+			t += Time.deltaTime * increaseRate;
+			meshGenerator.material.SetFloat(_WaveHeight, height);
 			yield return null;
 		}
 
-		meshGenerator.material.SetFloat("_WaveHeight", 0.5f);
+		meshGenerator.material.SetFloat(_WaveHeight, 0.1f);
 		decreaseRoutine = null;
 
 	}
