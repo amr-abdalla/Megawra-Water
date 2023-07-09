@@ -58,7 +58,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.52
+    - _Alpha: 0.55
     - _Amplitude: 0.241
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -78,16 +78,16 @@ Material:
     - _SrcBlend: 1
     - _SurfaceWaveStrength: 3.61
     - _UVSec: 0
-    - _WaveCollisionPoint: 0.417
+    - _WaveCollisionPoint: 0.8
     - _WaveCollisionPointX: 0.52
-    - _WaveFrequency: 3.51
-    - _WaveHeight: 0.46
-    - _WaveImpactExtent: 0.536
+    - _WaveFrequency: 3.94
+    - _WaveHeight: 0.3
+    - _WaveImpactExtent: 0.75
     - _WaveSpeed: 2
     - _ZWrite: 1
     - _waveImpactExtent: 0.5
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _WaveCollisionPoint: {r: 0.4, g: 0, b: 0, a: 0}
+    - _WaveCollisionPoint: {r: 0.9333333, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
