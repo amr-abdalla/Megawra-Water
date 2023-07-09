@@ -12,10 +12,14 @@ public class MeshGenerator : MonoBehaviourBase
 	[SerializeField] BoxCollider2D collider;
 
 	private MeshFilter meshFilter;
+
+	#region mesh Data
 	private Dictionary<int, int> VerticesIndicesByIDs;
 	private List<Vector3> vertices;
 	private List<Vector2> uvs;
+	private List<int> tris;
 	public List<Vector3> surfaceVertices { get; private set; }
+	#endregion
 
 	#region UNITY
 	private void Start()
@@ -31,13 +35,13 @@ public class MeshGenerator : MonoBehaviourBase
 	{
 		Mesh mesh = new Mesh();
 
-		MeshData meshData = GetMeshData();
+		UpdateMeshData();
 
-		mesh.vertices = meshData.vertices.ToArray();
+		mesh.vertices = vertices.ToArray();
 
-		mesh.triangles = meshData.tris.ToArray();
+		mesh.triangles = tris.ToArray();
 
-		mesh.uv = meshData.uvs.ToArray();
+		mesh.uv = uvs.ToArray();
 
 		mesh.RecalculateNormals();
 
@@ -62,9 +66,9 @@ public class MeshGenerator : MonoBehaviourBase
 		collider.offset = new Vector2(width / 2f, height);
 	}
 
-	private MeshData GetMeshData()
+	private void UpdateMeshData()
 	{
-		List<int> tris = new();
+		tris = new();
 		VerticesIndicesByIDs = new();
 		vertices = new();
 		uvs = new();
@@ -104,7 +108,6 @@ public class MeshGenerator : MonoBehaviourBase
 
 		UpdateSurfaceVertices();
 
-		return new MeshData(vertices, uvs, tris);
 	}
 
 	private void UpdateSurfaceVertices()
