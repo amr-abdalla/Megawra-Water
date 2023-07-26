@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class MoveHorizontalAbstractState : State
+public abstract class MoveHorizontalAbstractState : ControlledState<ErabyControls>
 {
     [SerializeField]
     protected AccelerationConfig2D accelerationData = null;

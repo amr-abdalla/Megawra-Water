@@ -2,8 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 public class ErabyGlideStartState : State
-{
-   
+{  
     private Coroutine glideRoutine = null;
 
     [SerializeField]

@@ -15,7 +15,7 @@ public class BounceTapManager : MonoBehaviour
     private Transform erabyTransform = null;
 
     [SerializeField]
-    private Controls controls = null;
+    private ErabyControls controls = null;
 
     private bool enableTap = false;
 

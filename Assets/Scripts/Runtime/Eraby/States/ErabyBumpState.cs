@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ErabyBumpState : State
+public class ErabyBumpState : ControlledState<ErabyControls>
 {
     private Coroutine bumpRoutine = null;
 

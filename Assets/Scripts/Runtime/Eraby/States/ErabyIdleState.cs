@@ -1,7 +1,6 @@
-using System.Collections;
 using UnityEngine;
 
-public class ErabyIdleState : State
+public class ErabyIdleState : ControlledState<ErabyControls>
 {
     [SerializeField]
     protected PhysicsBody2D body = null;
