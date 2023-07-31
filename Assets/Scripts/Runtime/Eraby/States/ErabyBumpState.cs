@@ -21,7 +21,7 @@ public class ErabyBumpState : ControlledState<ErabyControls>
                 + " Duration: "
                 + persistentData.bumpDuration
         );
-        controls.DisableControls();
+
         float bumpMagnitude = persistentData.bumpMagnitude;
         Vector2 bumpDirection = persistentData.bumpDirection;
         // make sure the bump direction is normalized
@@ -33,8 +33,6 @@ public class ErabyBumpState : ControlledState<ErabyControls>
         body.SetVelocityX(bumpDirection.x);
         body.SetVelocityY(bumpDirection.y);
         persistentData.initialVelocityY = bumpDirection.y;
-
-        bumpRoutine = StartCoroutine(bumpSequence(persistentData.bumpDuration));
     }
 
     protected override void onStateInit() { }
@@ -56,15 +54,5 @@ public class ErabyBumpState : ControlledState<ErabyControls>
     public override void ResetState()
     {
         onStateExit();
-    }
-
-    private IEnumerator bumpSequence(float bumpDuration)
-    {
-        bumper.enabled = false;
-        controls.DisableControls();
-        yield return new WaitForSeconds(bumpDuration);
-        controls.EnableControls();
-        bumper.enabled = true;
-        this.DisposeCoroutine(ref bumpRoutine);
     }
 }

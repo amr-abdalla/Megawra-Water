@@ -66,7 +66,7 @@ public class PhysicsBody2D
     private Vector2? lastGroundEnterPosition = null;
     private Transform currentGroundTransform = null;
 
-    private Transform currentWallTransform = null;    
+    private Transform currentWallTransform = null;
 
     private int? currentGroundLayer = null;
     private Vector2 groundNormal = MathConstants.VECTOR_2_ZERO;
@@ -183,7 +183,7 @@ public class PhysicsBody2D
 
     public bool IsHittingWall => isHittingWall;
 
-    public Transform CurrentWallTransform => currentGroundTransform;
+    public Transform CurrentWallTransform => currentWallTransform;
 
     #endregion
 
@@ -389,7 +389,7 @@ public class PhysicsBody2D
                                     velocity.x = 0f;
                                 isHittingWall = targetVelocity.x != 0f && velocity.x == 0f;
 
-                                if(true == isHittingWall)
+                                if (true == isHittingWall)
                                 {
                                     currentWallTransform = hit.transform;
                                 }
@@ -414,7 +414,6 @@ public class PhysicsBody2D
             return;
         if (false == physicsConfig.IsCollisionEnabled)
             return;
-
 
         if (false == wasHittingWall && true == isHittingWall)
         {

@@ -74,7 +74,7 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
         persistentData.landingVelocityX = body.VelocityX;
 
         body.SetVelocityY(0);
-        controls.DisableControls();
+        // controls.DisableControls();
 
         if (ground.IsBouncy)
         {
