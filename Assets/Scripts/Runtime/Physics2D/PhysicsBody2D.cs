@@ -41,12 +41,17 @@ public class PhysicsBody2D
     // Contact filter allows us to filter our raycasting depending on layers for example
     private ContactFilter2D contactFilter = new ContactFilter2D();
 
+    /// <summary> Used to filter wall collisions </summary>
+    private ContactFilter2D wallContactFilter = new ContactFilter2D();
+
     // Our huit buffer will be updated by Unity's casting
     private RaycastHit2D[] hitBuffer = null;
 
     // These lists are used to cache the successful hits on ither x or y movement during a physics loop.
     private List<RaycastHit2D> hitBufferListX = null;
     private List<RaycastHit2D> hitBufferListY = null;
+
+    private List<RaycastHit2D> wallHitBufferList = null;
 
     // We cache the ground transforms
     private Dictionary<Transform, RaycastHit2D> groundTransformsBuffer = null;
@@ -318,6 +323,59 @@ public class PhysicsBody2D
         return hitCount;
     }
 
+    private void checkForIdleWallCollisions()
+    {
+        float minWallNormalX = physicsConfig.MinWallNormalX;
+
+        RaycastSource raycastSource = physicsConfig.RaycastSource;
+
+        // right
+        int hitCount = cast(
+            MathConstants.VECTOR_2_RIGHT,
+            physicsConfig.ShellRadius + 1,
+            raycastSource
+        );
+
+        // TODO: refactor whatever this is >:C make wall radius a config
+
+        // hitCount = cast(MathConstants.VECTOR_2_RIGHT, physicsConfig.ShellRadius, raycastSource);
+        for (int i = 0; i < hitCount; i++)
+        {
+            RaycastHit2D hit = hitBuffer[i];
+            if (true == hit)
+            {
+                float wallProjection = Vector2.Dot(MathConstants.VECTOR_2_RIGHT, hit.normal);
+
+                if (Mathf.Abs(wallProjection) > minWallNormalX)
+                {
+                    isHittingWall = true;
+                    currentWallTransform = hit.transform;
+                    return;
+                }
+            }
+        }
+
+        // left
+        hitCount = cast(MathConstants.VECTOR_2_LEFT, physicsConfig.ShellRadius + 1, raycastSource);
+        for (int i = 0; i < hitCount; i++)
+        {
+            RaycastHit2D hit = hitBuffer[i];
+            if (true == hit)
+            {
+                float wallProjection = Vector2.Dot(MathConstants.VECTOR_2_RIGHT, hit.normal);
+
+                if (Mathf.Abs(wallProjection) > minWallNormalX)
+                {
+                    isHittingWall = true;
+                    currentWallTransform = hit.transform;
+                    return;
+                }
+            }
+        }
+
+        isHittingWall = false;
+    }
+
     private Vector2 updateMovement(Vector2 i_move, bool i_yMovement)
     {
         float distance = i_move.magnitude;
@@ -332,6 +390,7 @@ public class PhysicsBody2D
             Vector2 currentNormal;
             RaycastHit2D hit;
             float minGroundNormalY = physicsConfig.MinGroundNormalY;
+            float minWallNormalX = physicsConfig.MinWallNormalX;
 
             // We cast in the move direction (either in front of us if we are checking collisions on x or under us if we are checking collisions on y)
             // We also add a shell radius to the ray length. This is to make sure we don't get stuck in another collider.
@@ -371,6 +430,17 @@ public class PhysicsBody2D
                             }
                         }
 
+                        float wallProjection = Vector2.Dot(
+                            MathConstants.VECTOR_2_RIGHT,
+                            currentNormal.normalized
+                        );
+
+                        if (Mathf.Abs(wallProjection) > minWallNormalX)
+                        {
+                            isHittingWall = true;
+                            currentWallTransform = hit.transform;
+                        }
+
                         // Projecting our velocity on our current normal. This will help us scale
                         // our velocity variation depending on collision
                         float projection = Vector2.Dot(velocity, currentNormal);
@@ -387,12 +457,12 @@ public class PhysicsBody2D
                             {
                                 if (Mathf.Abs(velocity.x) <= Physics2DConstants.EPSILON_VELOCITY)
                                     velocity.x = 0f;
-                                isHittingWall = targetVelocity.x != 0f && velocity.x == 0f;
+                                // isHittingWall = targetVelocity.x != 0f && velocity.x == 0f;
 
-                                if (true == isHittingWall)
-                                {
-                                    currentWallTransform = hit.transform;
-                                }
+                                // if (true == isHittingWall)
+                                // {
+                                //     currentWallTransform = hit.transform;
+                                // }
                             }
                         }
 
@@ -404,6 +474,8 @@ public class PhysicsBody2D
                 }
             }
         }
+        else if (true == physicsConfig.IsCollisionEnabled)
+            checkForIdleWallCollisions();
 
         return i_move.normalized * distance;
     }
@@ -535,6 +607,12 @@ public class PhysicsBody2D
         if (null != physicsConfig)
             contactFilter.SetLayerMask(physicsConfig.GroundLayerMask);
         contactFilter.useLayerMask = true;
+
+        wallContactFilter = new ContactFilter2D();
+        wallContactFilter.useTriggers = false;
+        if (null != physicsConfig)
+            wallContactFilter.SetLayerMask(physicsConfig.WallLayerMask);
+        wallContactFilter.useLayerMask = true;
     }
 
     void resetValues()
