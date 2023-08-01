@@ -30,6 +30,9 @@ public class PhysicsObject2DConfig : ScriptableObject, IGravity2DConfig, ICollis
     [SerializeField]
     private float shellRadius = 0.01f;
 
+    [SerializeField]
+    private float idleWallDetectionRadius = 0.5f;
+
     [Header("Layer masks")]
     [SerializeField]
     private LayerMask groundLayerMask = 0;
@@ -124,6 +127,8 @@ public class PhysicsObject2DConfig : ScriptableObject, IGravity2DConfig, ICollis
     public float MinMoveDistance => minMoveDistance;
 
     public float ShellRadius => shellRadius;
+
+    public float IdleWallDetectionRadius => idleWallDetectionRadius;
 
     public int CollisionBufferSize => collisionBufferSize;
 

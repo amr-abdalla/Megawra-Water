@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40a699dd00b8d074897c2306fa429ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 1155667776}
+  controls: {fileID: 483121429}
   accelerationData: {fileID: 11400000, guid: 13fa2509e550a3342b7981286f974cac, type: 2}
   body: {fileID: 1576811035}
 --- !u!114 &30847249
@@ -450,8 +450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49ff0a83fa67694195360a1215e7bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 1155667776}
+  controls: {fileID: 483121429}
   accelerationData: {fileID: 11400000, guid: 13fa2509e550a3342b7981286f974cac, type: 2}
   body: {fileID: 1576811035}
 --- !u!114 &736894120
@@ -722,8 +722,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c1415f2d5f2a6241a94f9b1d4538f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 1155667776}
+  controls: {fileID: 483121429}
   accelerationData: {fileID: 11400000, guid: d7d63852e5c642b4c821201980596229, type: 2}
   body: {fileID: 1576811035}
 --- !u!114 &985209279
@@ -770,8 +770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fe5336b82b8569448cc0e99655c0fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 1155667776}
+  controls: {fileID: 483121429}
   accelerationData: {fileID: 11400000, guid: 13fa2509e550a3342b7981286f974cac, type: 2}
   body: {fileID: 1576811035}
 --- !u!4 &1083301282
@@ -1060,11 +1060,9 @@ MonoBehaviour:
   landingVelocityX: 0
   bumpDuration: 0
   bumpMagnitude: 0
-  launchVelocityY: 0
-  launchVelocityX: 0
   bounceVelocityMultiplier: {x: 1, y: 1}
   bumpDirection: {x: 0, y: 0}
-  maxJumpHeight: 0
+  jumpStopHeight: 0
 --- !u!1 &1172577961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,8 +1108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 956ef08b879a7354c8e56c80f12643c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 1155667776}
+  controls: {fileID: 483121429}
   tapMultiplier: 1.5
   tapParticles: {fileID: 1576811037}
   tapManager: {fileID: 1576811038}
@@ -1264,7 +1262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d4cc65256489b4896b1fe201868135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 1155667776}
   maxJumpHeight: 8
   body: {fileID: 1576811035}
@@ -1416,10 +1413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ad80a756d563747b2fdfa4cd84f023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cachedTransform: {fileID: 0}
-  maxJumpHeight: 13
-  thisCollider: {fileID: 1257803887}
-  bounceData: {fileID: 0}
 --- !u!114 &1257803890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1527,8 +1520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4997c0fd08085741a28f4285fd06fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 1155667776}
+  controls: {fileID: 483121429}
   accelerationData: {fileID: 11400000, guid: 37931e01c22d053468c5786abed9c940, type: 2}
   body: {fileID: 1576811035}
 --- !u!114 &1373613534
@@ -1589,8 +1582,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d5116356e603884881a972c916d8643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 1155667776}
+  controls: {fileID: 483121429}
   body: {fileID: 1576811035}
   bumper: {fileID: 1917654168}
 --- !u!1 &1411213711
@@ -1746,7 +1739,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461756038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.991726, y: 42.570217, z: -10.097739}
+  m_LocalPosition: {x: 35.26546, y: 42.570217, z: -10.097739}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6749,8 +6742,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cdcdb203d4c09c459df10587830fea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 1155667776}
+  controls: {fileID: 483121429}
   accelerationData: {fileID: 11400000, guid: 8c885d4809f9cfd4482d2fb7665cc9bc, type: 2}
   body: {fileID: 1576811035}
 --- !u!1 &1601709317
@@ -6799,8 +6792,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad77751b2946e094996e8eafa2d80255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 1155667776}
+  controls: {fileID: 483121429}
   body: {fileID: 1576811035}
 --- !u!114 &1601709320
 MonoBehaviour:
@@ -6876,8 +6869,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0325baf664fa7744d9241af271e16fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 1155667776}
+  controls: {fileID: 483121429}
   tapMultiplier: 1.5
   tapParticles: {fileID: 1576811037}
   tapManager: {fileID: 1576811038}
@@ -7036,8 +7029,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac7bf415c344684c9f214e3a1a4b1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 1155667776}
+  controls: {fileID: 483121429}
   accelerationData: {fileID: 11400000, guid: 13fa2509e550a3342b7981286f974cac, type: 2}
   body: {fileID: 1576811035}
 --- !u!114 &1680013006
@@ -7098,7 +7091,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4085e03199cdcb4fb60fe0b5d9bd40b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 1155667776}
   maxJumpHeight: 20.1
   body: {fileID: 1576811035}
@@ -7146,7 +7138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4544c2aa32055e349a9d0ad3a96ee223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 1155667776}
   maxJumpHeight: 30
   body: {fileID: 1576811035}
@@ -7251,7 +7242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c048288eb3974c54b89b6a446fbedac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 483121429}
   persistentData: {fileID: 0}
   body: {fileID: 1576811035}
   glideDuration: 0.4
@@ -7358,7 +7348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1917654167
 MonoBehaviour:
   m_ObjectHideFlags: 0

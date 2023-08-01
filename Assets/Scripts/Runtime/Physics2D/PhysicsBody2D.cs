@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PhysicsBody2D
     : MonoBehaviourBase,
@@ -332,31 +333,22 @@ public class PhysicsBody2D
         // right
         int hitCount = cast(
             MathConstants.VECTOR_2_RIGHT,
-            physicsConfig.ShellRadius + 1,
+            physicsConfig.IdleWallDetectionRadius,
             raycastSource
         );
 
-        // TODO: refactor whatever this is >:C make wall radius a config
+        wallHitBufferList = hitBuffer.ToList();
 
-        // hitCount = cast(MathConstants.VECTOR_2_RIGHT, physicsConfig.ShellRadius, raycastSource);
-        for (int i = 0; i < hitCount; i++)
-        {
-            RaycastHit2D hit = hitBuffer[i];
-            if (true == hit)
-            {
-                float wallProjection = Vector2.Dot(MathConstants.VECTOR_2_RIGHT, hit.normal);
+        hitCount += cast(
+            MathConstants.VECTOR_2_LEFT,
+            physicsConfig.IdleWallDetectionRadius,
+            raycastSource
+        );
 
-                if (Mathf.Abs(wallProjection) > minWallNormalX)
-                {
-                    isHittingWall = true;
-                    currentWallTransform = hit.transform;
-                    return;
-                }
-            }
-        }
+        wallHitBufferList.AddRange(hitBuffer);
 
         // left
-        hitCount = cast(MathConstants.VECTOR_2_LEFT, physicsConfig.ShellRadius + 1, raycastSource);
+
         for (int i = 0; i < hitCount; i++)
         {
             RaycastHit2D hit = hitBuffer[i];
