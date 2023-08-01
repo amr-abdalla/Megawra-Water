@@ -8,7 +8,7 @@ class ErabySmallLaunchState : ErabyAbstractLaunchState
 
     protected override void onStateEnter()
     {
-        persistentData.launchVelocityY = launchVelocityY;
+        dataProvider.launchVelocityY = launchVelocityY;
         base.onStateEnter();
     }
 

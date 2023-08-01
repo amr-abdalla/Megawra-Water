@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ErabyBumpState : ControlledState<ErabyControls>
+public class ErabyBumpState : ErabyState
 {
     private Coroutine bumpRoutine = null;
 
@@ -15,15 +15,15 @@ public class ErabyBumpState : ControlledState<ErabyControls>
     {
         Debug.Log(
             "Enter bump. Direction: "
-                + persistentData.bumpDirection
+                + dataProvider.bumpDirection
                 + " Magnitude: "
-                + persistentData.bumpMagnitude
+                + dataProvider.bumpMagnitude
                 + " Duration: "
-                + persistentData.bumpDuration
+                + dataProvider.bumpDuration
         );
 
-        float bumpMagnitude = persistentData.bumpMagnitude;
-        Vector2 bumpDirection = persistentData.bumpDirection;
+        float bumpMagnitude = dataProvider.bumpMagnitude;
+        Vector2 bumpDirection = dataProvider.bumpDirection;
         // make sure the bump direction is normalized
         bumpDirection = Vector2.right * Mathf.Sign(bumpDirection.x);
         // rotate the bump direction by 45 degrees "up"
@@ -32,7 +32,7 @@ public class ErabyBumpState : ControlledState<ErabyControls>
 
         body.SetVelocityX(bumpDirection.x);
         body.SetVelocityY(bumpDirection.y);
-        persistentData.initialVelocityY = bumpDirection.y;
+        dataProvider.initialVelocityY = bumpDirection.y;
     }
 
     protected override void onStateInit() { }

@@ -10,7 +10,7 @@ public class ErabyWalkState : MoveHorizontalAbstractState
         if (!controls.isMoving())
             goToIdle();
 
-        persistentData.initialVelocityX = 0;
+        dataProvider.initialVelocityX = 0;
         base.onStateEnter();
         controls.EnableControls();
         controls.JumpPressed += goToJump;
@@ -30,7 +30,7 @@ public class ErabyWalkState : MoveHorizontalAbstractState
 
     private void goToJump()
     {
-        persistentData.launchVelocityX = body.VelocityX;
+        dataProvider.launchVelocityX = body.VelocityX;
         stateMachine.SetState<ErabySmallLaunchState>();
     }
 

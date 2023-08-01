@@ -7,7 +7,7 @@ public class ErabySmallFallState : ErabyAbstractFallState
 
     protected override void onStateEnter()
     {
-        persistentData.initialVelocityX = 0;
+        dataProvider.initialVelocityX = 0;
         Debug.Log("Enter Small Fall");
         base.onStateEnter();
     }

@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviourBase
 {
-    [SerializeField] State initialState;
-    [SerializeField] Controls controls;
+    [SerializeField]
+    State initialState;
+
+    [SerializeField]
+    Controls controls;
     State currentState;
 
     State[] allStates = null;
@@ -41,9 +44,10 @@ public class StateMachine : MonoBehaviourBase
         currentState.FixedUpdateState();
     }
 
-    public void SetState(State i_state)
+    public virtual void SetState(State i_state)
     {
-        if (null == i_state) return;
+        if (null == i_state)
+            return;
 
         if (currentState is not null)
             currentState.ExitState();
@@ -58,17 +62,19 @@ public class StateMachine : MonoBehaviourBase
     [ExposePublicMethod]
     public void SetGenericState(string i_id)
     {
-        if (string.IsNullOrEmpty(i_id)) return;
+        if (string.IsNullOrEmpty(i_id))
+            return;
         State genericState = allGenericStates[i_id];
         SetState(genericState);
     }
 
-
-    public void SetState<TState>() where TState : State
+    public void SetState<TState>()
+        where TState : State
     {
         System.Type stateType = typeof(TState);
 
-        if (stateType == typeof(GenericState)) return;
+        if (stateType == typeof(GenericState))
+            return;
 
         State state = null;
         if (true == allStatesByType.TryGetValue(stateType, out state))
@@ -111,7 +117,8 @@ public class StateMachine : MonoBehaviourBase
 
     private void OnDrawGizmos()
     {
-        if (null == currentState) return;
+        if (null == currentState)
+            return;
 
         currentState.DrawGizmos();
     }

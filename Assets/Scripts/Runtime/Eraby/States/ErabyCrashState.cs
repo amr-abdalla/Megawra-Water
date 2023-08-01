@@ -15,15 +15,15 @@ public class ErabyCrashState : ErabyAbstractLandingState
     {
         Debug.Log("Enter crash");
 
-        launchVelocityY = persistentData.initialVelocityY / 2;
-        float newVelocityX = -Mathf.Abs(persistentData.landingVelocityX) * velocityXMultiplier;
+        launchVelocityY = dataProvider.initialVelocityY / 2;
+        float newVelocityX = -Mathf.Abs(dataProvider.landingVelocityX) * velocityXMultiplier;
         newVelocityX = -Mathf.Clamp(
             Mathf.Abs(newVelocityX),
             Mathf.Abs(newVelocityX),
             Mathf.Abs(accelerationData.MaxVelocityX)
         );
-        persistentData.launchVelocityX = newVelocityX;
-        persistentData.launchVelocityY = launchVelocityY;
+        dataProvider.launchVelocityX = newVelocityX;
+        dataProvider.launchVelocityY = launchVelocityY;
         base.onStateEnter();
     }
 
@@ -46,11 +46,11 @@ public class ErabyCrashState : ErabyAbstractLandingState
     {
         //Debug.LogError("Apply tap multiplier");
         float newVelocityX = clampVelocityX(
-            -Mathf.Abs(persistentData.landingVelocityX) * tapMultiplier
+            -Mathf.Abs(dataProvider.landingVelocityX) * tapMultiplier
         );
 
-        persistentData.launchVelocityX = newVelocityX;
-        persistentData.launchVelocityY *= tapMultiplier;
+        dataProvider.launchVelocityX = newVelocityX;
+        dataProvider.launchVelocityY *= tapMultiplier;
     }
 
     #endregion

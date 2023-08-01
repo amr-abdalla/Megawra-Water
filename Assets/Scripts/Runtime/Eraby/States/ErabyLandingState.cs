@@ -8,14 +8,13 @@ public class ErabyLandingState : ErabyAbstractLandingState
     {
         Debug.Log("Enter landing");
 
-        launchVelocityY =
-            persistentData.bounceVelocityMultiplier.y * persistentData.initialVelocityY;
+        launchVelocityY = dataProvider.bounceVelocityMultiplier.y * dataProvider.initialVelocityY;
 
         float newVelocityX = clampVelocityX(
-            -Mathf.Abs(persistentData.landingVelocityX) * persistentData.bounceVelocityMultiplier.x
+            -Mathf.Abs(dataProvider.landingVelocityX) * dataProvider.bounceVelocityMultiplier.x
         );
-        persistentData.launchVelocityY = launchVelocityY;
-        persistentData.launchVelocityX = newVelocityX;
+        dataProvider.launchVelocityY = launchVelocityY;
+        dataProvider.launchVelocityX = newVelocityX;
         Debug.Log("Bounce velocity: " + launchVelocityY);
 
         base.onStateEnter();
@@ -38,11 +37,11 @@ public class ErabyLandingState : ErabyAbstractLandingState
     override protected void applyTapMulipier()
     {
         float newVelocityX = clampVelocityX(
-            -Mathf.Abs(persistentData.landingVelocityX) * tapMultiplier
+            -Mathf.Abs(dataProvider.landingVelocityX) * tapMultiplier
         );
 
-        persistentData.launchVelocityX = newVelocityX;
-        persistentData.launchVelocityY *= tapMultiplier;
+        dataProvider.launchVelocityX = newVelocityX;
+        dataProvider.launchVelocityY *= tapMultiplier;
     }
 
     #endregion

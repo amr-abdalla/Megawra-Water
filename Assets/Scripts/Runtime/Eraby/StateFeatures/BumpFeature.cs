@@ -6,7 +6,7 @@ public class BumpFeature : StateFeatureAbstract
     ErabyRBCollisionHandler collisionHandler = null;
 
     [SerializeField]
-    PersistentErabyData persistentData = null;
+   ErabyStateMachineDataProvider dataProvider = null;
 
     [SerializeField]
     private PhysicsBody2D physicsBody = null;
@@ -53,9 +53,9 @@ public class BumpFeature : StateFeatureAbstract
     private void onBump(float bumpMagnitude, float bumpDuration, Vector2 bumpDirection)
     {
         Debug.Log("Bump");
-        persistentData.bumpMagnitude = bumpMagnitude;
-        persistentData.bumpDuration = bumpDuration;
-        persistentData.bumpDirection = bumpDirection;
+        dataProvider.bumpMagnitude = bumpMagnitude;
+        dataProvider.bumpDuration = bumpDuration;
+        dataProvider.bumpDirection = bumpDirection;
         setState<ErabyBumpState>();
     }
 }

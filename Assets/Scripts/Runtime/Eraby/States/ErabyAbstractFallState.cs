@@ -71,14 +71,14 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
             return;
         }
 
-        persistentData.landingVelocityX = body.VelocityX;
+        dataProvider.landingVelocityX = body.VelocityX;
 
         body.SetVelocityY(0);
         // controls.DisableControls();
 
         if (ground.IsBouncy)
         {
-            persistentData.bounceVelocityMultiplier = new Vector2(
+            dataProvider.bounceVelocityMultiplier = new Vector2(
                 ground.BounceVelocityXMultiplier,
                 ground.BounceVelocityYMultiplier
             );

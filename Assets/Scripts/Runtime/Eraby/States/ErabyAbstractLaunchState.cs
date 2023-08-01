@@ -1,6 +1,6 @@
 using UnityEngine;
 
-abstract class ErabyAbstractLaunchState : State
+abstract class ErabyAbstractLaunchState : ErabyState
 {
     [Header("Jump Configs")]
     [SerializeField]
@@ -17,22 +17,22 @@ abstract class ErabyAbstractLaunchState : State
 
     protected override void onStateEnter()
     {
-        initialVelocityY = persistentData.launchVelocityY;
+        initialVelocityY = dataProvider.launchVelocityY;
         startJumpY = body.transform.position.y;
         stopJumpY = startJumpY + maxJumpHeight;
         initialVelocityY = clampVelocityY(initialVelocityY);
         body.SetVelocityY(initialVelocityY);
-        body.SetVelocityX(persistentData.launchVelocityX);
-        persistentData.initialVelocityY = initialVelocityY;
-        persistentData.initialVelocityX = persistentData.launchVelocityX;
+        body.SetVelocityX(dataProvider.launchVelocityX);
+        dataProvider.initialVelocityY = initialVelocityY;
+        dataProvider.initialVelocityX = dataProvider.launchVelocityX;
         goToJump();
     }
 
     protected override void onStateExit()
     {
-        persistentData.launchVelocityY = 0f;
-        persistentData.launchVelocityX = 0f;
-        persistentData.jumpStopHeight = stopJumpY;
+        dataProvider.launchVelocityY = 0f;
+        dataProvider.launchVelocityX = 0f;
+        dataProvider.jumpStopHeight = stopJumpY;
     }
 
     protected override void onStateUpdate() { }

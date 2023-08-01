@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-abstract public class ErabyAbstractLandingState : ControlledState<ErabyControls>
+abstract public class ErabyAbstractLandingState : ErabyState
 {
     [Header("Timing Multipliers")]
     [SerializeField]

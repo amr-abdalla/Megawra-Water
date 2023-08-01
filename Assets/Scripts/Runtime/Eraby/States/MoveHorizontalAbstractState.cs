@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class MoveHorizontalAbstractState : ControlledState<ErabyControls>
+public abstract class MoveHorizontalAbstractState : ErabyState
 {
     [SerializeField]
     protected AccelerationConfig2D accelerationData = null;
@@ -17,7 +17,7 @@ public abstract class MoveHorizontalAbstractState : ControlledState<ErabyControl
 
     protected override void onStateEnter()
     {
-        initialVelocityX = persistentData.initialVelocityX;
+        initialVelocityX = dataProvider.initialVelocityX;
         if (controls.isMoving())
             updateMoveVelocity(controls.MoveDirection());
         controls.MoveStarted += updateMoveVelocity;

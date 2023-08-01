@@ -109,7 +109,7 @@ public class PhysicsBody2D
 
         velocity.x = targetVelocity.x;
         isHittingWall = false;
-
+        
         // Our position delta at the current physics frame (current velocity * dt). This will be used for our movement.
         Vector2 deltaPosition = velocity * Time.fixedDeltaTime;
 
@@ -351,7 +351,7 @@ public class PhysicsBody2D
 
         for (int i = 0; i < hitCount; i++)
         {
-            RaycastHit2D hit = hitBuffer[i];
+            RaycastHit2D hit = wallHitBufferList[i];
             if (true == hit)
             {
                 float wallProjection = Vector2.Dot(MathConstants.VECTOR_2_RIGHT, hit.normal);

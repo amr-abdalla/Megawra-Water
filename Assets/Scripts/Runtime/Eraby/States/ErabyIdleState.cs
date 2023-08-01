@@ -1,15 +1,10 @@
 using UnityEngine;
 
-public class ErabyIdleState : ControlledState<ErabyControls>
+public class ErabyIdleState : ErabyState
 {
     [SerializeField]
     protected PhysicsBody2D body = null;
 
-    public PersistentErabyData _persistentData
-    {
-        get => persistentData;
-        set => persistentData = value;
-    }
 
     protected override void onStateEnter()
     {

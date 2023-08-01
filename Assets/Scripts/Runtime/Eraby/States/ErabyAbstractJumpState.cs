@@ -14,14 +14,14 @@ public class ErabyAbstractJumpState : MoveHorizontalAbstractState
     {
         controls.EnableControls();
         initialVelocityY = body.VelocityY;
-        gizmoPoints[0] = new Vector3(-100, persistentData.jumpStopHeight, 0);
-        gizmoPoints[1] = new Vector3(100, persistentData.jumpStopHeight, 0);
+        gizmoPoints[0] = new Vector3(-100, dataProvider.jumpStopHeight, 0);
+        gizmoPoints[1] = new Vector3(100, dataProvider.jumpStopHeight, 0);
         base.onStateEnter();
     }
 
     protected override void onStateExit()
     {
-        persistentData.initialVelocityY = initialVelocityY;
+        dataProvider.initialVelocityY = initialVelocityY;
 
         base.onStateExit();
     }
