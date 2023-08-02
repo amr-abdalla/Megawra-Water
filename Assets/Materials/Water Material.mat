@@ -58,7 +58,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.55
+    - _Alpha: 0.389
     - _Amplitude: 0.241
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -78,11 +78,11 @@ Material:
     - _SrcBlend: 1
     - _SurfaceWaveStrength: 3.61
     - _UVSec: 0
-    - _WaveCollisionPoint: 0.8
+    - _WaveCollisionPoint: 0.511
     - _WaveCollisionPointX: 0.52
-    - _WaveFrequency: 3.94
-    - _WaveHeight: 0.3
-    - _WaveImpactExtent: 0.75
+    - _WaveFrequency: 3
+    - _WaveHeight: 3.49
+    - _WaveImpactExtent: 0.194
     - _WaveSpeed: 2
     - _ZWrite: 1
     - _waveImpactExtent: 0.5
