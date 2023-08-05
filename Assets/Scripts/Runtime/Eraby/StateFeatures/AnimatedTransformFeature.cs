@@ -27,17 +27,17 @@ public class AnimatedTransformFeature : StateFeatureAbstract
 
     private Vector3 initialScale = MathConstants.VECTOR_3_ONE;
 
-    protected override void onEnter()
+    protected override void OnEnter()
     {
         initialPosition = targetTransform.localPosition;
         initialRotation = targetTransform.localRotation;
         initialScale = targetTransform.localScale;
         // targetScale = Vector3.Scale(initialScale, scaleMultiplier);
         animationCoroutine = StartCoroutine(animationSequence());
-        base.onEnter();
+        base.OnEnter();
     }
 
-    protected override void onExit()
+    protected override void OnExit()
     {
         this.DisposeCoroutine(ref animationCoroutine);
         if (resetOnExit)
@@ -46,7 +46,7 @@ public class AnimatedTransformFeature : StateFeatureAbstract
             targetTransform.localRotation = initialRotation;
             targetTransform.localScale = initialScale;
         }
-        base.onExit();
+        base.OnExit();
     }
 
     private IEnumerator animationSequence()

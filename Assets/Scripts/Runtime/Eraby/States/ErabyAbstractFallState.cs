@@ -17,6 +17,8 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
 
     protected override void onStateFixedUpdate()
     {
+        // Debug.Log("Current Ground: " + body.CurrentGroundTransform?.gameObject.name);
+        // Debug.Log("Is Grounded: " + body.IsGrounded);
         if (
             isEnabled
             && body.IsGrounded

@@ -1,12 +1,10 @@
-﻿
-
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StateFeatureExample : StateFeatureAbstract
 {
-    protected override void onEnter()
+    protected override void OnEnter()
     {
-        base.onEnter();
+        base.OnEnter();
 
         Debug.Log("on enter state");
     }

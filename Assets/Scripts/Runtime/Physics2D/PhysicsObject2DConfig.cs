@@ -109,7 +109,11 @@ public class PhysicsObject2DConfig : ScriptableObject, IGravity2DConfig, ICollis
 
     #region ICollisions2DConfig
 
-    public bool IsCollisionEnabled => enableCollisions;
+    public bool IsCollisionEnabled
+    {
+        get => enableCollisions;
+        set => enableCollisions = value;
+    }
 
     public LayerMask GroundLayerMask => groundLayerMask;
 

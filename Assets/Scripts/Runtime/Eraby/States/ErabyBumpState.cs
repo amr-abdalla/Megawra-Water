@@ -8,9 +8,6 @@ public class ErabyBumpState : ErabyState
     [SerializeField]
     private PhysicsBody2D body = null;
 
-    [SerializeField]
-    private Collider2D bumper = null;
-
     protected override void onStateEnter()
     {
         Debug.Log(
@@ -47,6 +44,7 @@ public class ErabyBumpState : ErabyState
 
     protected override void onStateExit()
     {
+        body.toggleCollisionDetection(true);
         controls.EnableControls();
         this.DisposeCoroutine(ref bumpRoutine);
     }

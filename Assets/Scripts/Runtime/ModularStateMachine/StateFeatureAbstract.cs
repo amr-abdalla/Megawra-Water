@@ -4,51 +4,57 @@ public abstract class StateFeatureAbstract : MonoBehaviourBase
 {
     StateMachine stateMachine = null;
 
+    private bool _isEnabled = false;
+
+    public bool IsEnabled => _isEnabled;
+
     #region Public
 
     public void InitFeature(StateMachine i_stateMachine)
     {
         stateMachine = i_stateMachine;
-        onInit();
+        OnInit();
     }
 
     public void OnStateEnter()
     {
-        onEnter();
+        _isEnabled = true;
+        OnEnter();
     }
 
     public void OnStateUpdate()
     {
-        onUpdate();
+        OnUpdate();
     }
 
     public void OnStateFixedUpdate()
     {
-        onFixedUpdate();
+        OnFixedUpdate();
     }
 
     public void OnStateExit()
     {
-        onExit();
+        _isEnabled = false;
+        OnExit();
     }
     #endregion
 
     #region Protected
 
-    protected void setState<TState>()
+    protected void SetState<TState>()
         where TState : State
     {
         stateMachine.SetState<TState>();
     }
 
-    protected virtual void onInit() { }
+    protected virtual void OnInit() { }
 
-    protected virtual void onEnter() { }
+    protected virtual void OnEnter() { }
 
-    protected virtual void onUpdate() { }
+    protected virtual void OnUpdate() { }
 
-    protected virtual void onFixedUpdate() { }
+    protected virtual void OnFixedUpdate() { }
 
-    protected virtual void onExit() { }
+    protected virtual void OnExit() { }
     #endregion
 }

@@ -74,6 +74,7 @@ public class PhysicsBody2D
 
     private Transform currentWallTransform = null;
 
+    private Vector2 currentWallNormal = MathConstants.VECTOR_2_ZERO;
     private int? currentGroundLayer = null;
     private Vector2 groundNormal = MathConstants.VECTOR_2_ZERO;
     private Ground2D currentGroundCmpt = null;
@@ -109,17 +110,23 @@ public class PhysicsBody2D
 
         velocity.x = targetVelocity.x;
         isHittingWall = false;
-        
+
         // Our position delta at the current physics frame (current velocity * dt). This will be used for our movement.
         Vector2 deltaPosition = velocity * Time.fixedDeltaTime;
+        Vector2 groundTangent = new Vector2(groundNormal.y, -groundNormal.x);
+        Vector2 velocityAlongGround = groundTangent * velocity.x;
+
+        velocityAlongGround = calculateCollidedWallVelocity(
+            velocityAlongGround * Time.fixedDeltaTime,
+            velocityAlongGround
+        );
 
         // To make it easier to deal with slopes, we call updateMovement twice :
         // once for x, once for y, with different parameters involved...
 
         // Horizontal movement takes a vector that includes the ground normal,
         // so our entity can move along the ground's tangent
-        Vector2 groundTangent = new Vector2(groundNormal.y, -groundNormal.x);
-        Vector2 xMov = updateMovement(groundTangent * deltaPosition.x, false);
+        Vector2 xMov = updateMovement(velocityAlongGround * Time.fixedDeltaTime, false);
         objectRgbd2D.position += new Vector2(xMov.x, xMov.y);
 
         // Vertical movement takes the up vector scaled with our deltaPosition.
@@ -185,11 +192,20 @@ public class PhysicsBody2D
 
     #region IWallDetector
 
+    public void toggleCollisionDetection(bool i_enable)
+    {
+        if (null == physicsConfig)
+            return;
+        physicsConfig.IsCollisionEnabled = i_enable;
+    }
+
     public Physics2DWallEvent OnWallStatusChanged { get; set; }
 
     public bool IsHittingWall => isHittingWall;
 
     public Transform CurrentWallTransform => currentWallTransform;
+
+    public Vector2 WallNormal => currentWallNormal;
 
     #endregion
 
@@ -324,12 +340,104 @@ public class PhysicsBody2D
         return hitCount;
     }
 
-    private void checkForIdleWallCollisions()
+    private WallCollisionData checkForWallCollision(Vector2 i_xmove)
+    {
+        if (Mathf.Abs(i_xmove.magnitude) <= Physics2DConstants.EPSILON_VELOCITY)
+            return checkForIdleWallCollisions();
+        else
+            return checkForMovingWallCollision(i_xmove);
+    }
+
+    private WallCollisionData checkForMovingWallCollision(Vector2 i_xmove)
+    {
+        int hitCount = cast(
+            i_xmove,
+            i_xmove.magnitude + physicsConfig.ShellRadius,
+            physicsConfig.RaycastSource
+        );
+
+        foreach (RaycastHit2D hit in hitBuffer)
+        {
+            if (false == hit)
+                continue;
+
+            if (isWallCollision(hit.normal))
+            {
+                // isHittingWall = true;
+                return new WallCollisionData(hit.normal, hit.transform, hit.point);
+            }
+        }
+
+        return WallCollisionData.NoCollision;
+    }
+
+    private Vector2 calculateCollidedWallVelocity(Vector2 i_xmove, Vector2 currentVelocity)
+    {
+        WallCollisionData wallCollision = checkForWallCollision(i_xmove);
+
+        isHittingWall = wallCollision.IsHittingWall;
+        currentWallTransform = wallCollision.CurrentWallTransform;
+
+        currentWallNormal = wallCollision.WallNormal;
+
+        Vector2 hitPoint = wallCollision.Point;
+
+        if (!isHittingWall || null == currentWallTransform)
+            return currentVelocity;
+
+        Vector2 wallVelocity = MathConstants.VECTOR_2_ZERO;
+        // get PhysicsBody2D of wall
+        PhysicsBody2D wallPhysicsBody2D = currentWallTransform.GetComponent<PhysicsBody2D>();
+        if (null != wallPhysicsBody2D)
+            wallVelocity = wallPhysicsBody2D.Velocity2D;
+        else
+        {
+            Rigidbody2D wallRigidbody2D = currentWallTransform.GetComponent<Rigidbody2D>();
+            if (null != wallRigidbody2D)
+                wallVelocity = wallRigidbody2D.velocity;
+        }
+
+        // do nothing if wall is moving away from us or if we are moving away from wall with a velocity greater than wall's
+
+        if (
+            Vector2.Dot(currentVelocity, wallVelocity.normalized)
+                <= Physics2DConstants.EPSILON_VELOCITY
+            && Vector2.Dot(currentWallNormal, currentVelocity.normalized) > 0f
+        )
+        {
+            isHittingWall = false;
+            return currentVelocity;
+        }
+
+        // project wall's velocity on our velocity
+
+        if (
+            Vector2.Dot(currentVelocity, wallVelocity.normalized) >= 1f
+            && Vector2.Dot(currentWallNormal, currentVelocity.normalized) > 0f
+        )
+        {
+            isHittingWall = false;
+            return currentVelocity;
+        }
+        // check if we will still be inside the wall if we do not add wall's velocity to ours
+
+
+        return wallVelocity;
+    }
+
+    private bool isWallCollision(Vector2 i_hitNormal)
+    {
+        // if it isn't a ground collision then it must be a wall collision
+        return i_hitNormal.y < physicsConfig.MinGroundNormalY;
+    }
+
+    private WallCollisionData checkForIdleWallCollisions()
     {
         float minWallNormalX = physicsConfig.MinWallNormalX;
 
         RaycastSource raycastSource = physicsConfig.RaycastSource;
 
+        hitBuffer = new RaycastHit2D[physicsConfig.CollisionBufferSize];
         // right
         int hitCount = cast(
             MathConstants.VECTOR_2_RIGHT,
@@ -352,20 +460,13 @@ public class PhysicsBody2D
         for (int i = 0; i < hitCount; i++)
         {
             RaycastHit2D hit = wallHitBufferList[i];
-            if (true == hit)
+            if (true == hit && isWallCollision(hit.normal))
             {
-                float wallProjection = Vector2.Dot(MathConstants.VECTOR_2_RIGHT, hit.normal);
-
-                if (Mathf.Abs(wallProjection) > minWallNormalX)
-                {
-                    isHittingWall = true;
-                    currentWallTransform = hit.transform;
-                    return;
-                }
+                return new WallCollisionData(hit.normal, hit.transform, hit.point);
             }
         }
 
-        isHittingWall = false;
+        return WallCollisionData.NoCollision;
     }
 
     private Vector2 updateMovement(Vector2 i_move, bool i_yMovement)
@@ -422,17 +523,6 @@ public class PhysicsBody2D
                             }
                         }
 
-                        float wallProjection = Vector2.Dot(
-                            MathConstants.VECTOR_2_RIGHT,
-                            currentNormal.normalized
-                        );
-
-                        if (Mathf.Abs(wallProjection) > minWallNormalX)
-                        {
-                            isHittingWall = true;
-                            currentWallTransform = hit.transform;
-                        }
-
                         // Projecting our velocity on our current normal. This will help us scale
                         // our velocity variation depending on collision
                         float projection = Vector2.Dot(velocity, currentNormal);
@@ -466,8 +556,6 @@ public class PhysicsBody2D
                 }
             }
         }
-        else if (true == physicsConfig.IsCollisionEnabled)
-            checkForIdleWallCollisions();
 
         return i_move.normalized * distance;
     }
@@ -481,13 +569,15 @@ public class PhysicsBody2D
 
         if (false == wasHittingWall && true == isHittingWall)
         {
-            currentWallTransform = null;
-            OnWallStatusChanged?.Invoke(this);
+            // currentWallTransform = null;
+            OnWallStatusChanged?.Invoke(
+                new WallCollisionData(currentWallNormal, currentWallTransform, Vector2.zero)
+            );
             onWallHitEnter();
         }
         else if (true == wasHittingWall && false == isHittingWall)
         {
-            OnWallStatusChanged?.Invoke(this);
+            OnWallStatusChanged?.Invoke(WallCollisionData.NoCollision);
             onWallHitExit();
         }
     }
