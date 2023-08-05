@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableCollisions: 1
   raycastSource: 0
-  collisionBufferSize: 2
+  collisionBufferSize: 12
   minGroundNormalY: 0.65
   minWallNormalX: 0.9
   minMoveDistance: 0.001
   shellRadius: 0.01
-  idleWallDetectionRadius: 1
+  idleWallDetectionRadius: 0.05
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 8
@@ -28,5 +28,5 @@ MonoBehaviour:
     m_Bits: 0
   wallLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   gravityModifier: 1
