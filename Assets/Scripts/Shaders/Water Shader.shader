@@ -67,21 +67,21 @@ Shader "WaterShader"
 				float direction = 1;
 
 				float period = 1/_WaveFrequency * 0.5;
-				float step = smoothstep(_WaveCollisionPoint - period, _WaveCollisionPoint, v.uv.x);
-				step *= smoothstep(_WaveCollisionPoint + period, _WaveCollisionPoint , v.uv.x);
+				float middleStep = smoothstep(_WaveCollisionPoint - period, _WaveCollisionPoint, v.uv.x);
+				middleStep *= smoothstep(_WaveCollisionPoint + period, _WaveCollisionPoint , v.uv.x);
 
-				if(v.uv.x >= _WaveCollisionPoint + period)
-				direction*= -1;
+				float sinValue1 = v.uv.x * _WaveFrequency * 2 * PI * direction + _Time.y * _WaveSpeed;
+				float sinValue2 = v.uv.x * _WaveFrequency * 2 * PI * -direction + _Time.y * _WaveSpeed;
 
-				float sinValue1 = v.uv.x * _WaveFrequency * 2 * PI + _Time.y * _WaveSpeed;
-				float sinValue2 = v.uv.x * _WaveFrequency * -2 * PI + _Time.y * _WaveSpeed;
-				float tt1 = smoothstep(_WaveCollisionPoint + period, 1, v.uv.x);
-				float tt2 = smoothstep(_WaveCollisionPoint - period, 0, v.uv.x);
+				float rightStep = smoothstep(1, _WaveCollisionPoint + period, v.uv.x);
+				if(v.uv.x <= _WaveCollisionPoint) rightStep = 0;
+				//rightStep *= smoothstep(1, _WaveCollisionPoint + period, v.uv.x);
+				float leftStep = smoothstep(0, _WaveCollisionPoint - period, v.uv.x);
+				if(v.uv.x >= _WaveCollisionPoint) leftStep = 0;
 
-				float expValue = -3 * abs(v.uv.x - _WaveCollisionPoint);
+				//leftStep *= smoothstep(0, _WaveCollisionPoint, v.uv.x);
 
-				//float offsetY = exp(expValue) * sin(sinValue)* _WaveHeight * (step + 0.1);
-				float offsetY = _WaveHeight * step * sin(_Time.y * _WaveSpeed) + sin(sinValue1) * _WaveHeight/2 * (1-tt1) + sin(sinValue2) * _WaveHeight/2 * (1-tt2);
+				float offsetY = _WaveHeight * middleStep * sin(_Time.y * _WaveSpeed) + sin(sinValue1) * _WaveHeight * leftStep + sin(sinValue2) * _WaveHeight * rightStep;
 
 				float t = invLerp(_WaveImpactExtent,1,1-v.uv.y);
 				if (t > 0) t =0;
@@ -94,7 +94,7 @@ Shader "WaterShader"
 
 				o.uv_base = v.uv;
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-				o.step = step;
+				o.step = leftStep;
 
 				return o;
 			}
