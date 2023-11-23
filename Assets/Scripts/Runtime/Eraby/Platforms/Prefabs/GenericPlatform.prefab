@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a967ec1576be2e747b82a9c10d6c5169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 0}
   platformObj: {fileID: 3350147166496306917}
   accelerationConfig: {fileID: 11400000, guid: 893c8417e18c22d488975d5c79f80af5, type: 2}
 --- !u!1 &3457120263760998296
@@ -292,7 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d23c2617e1dc9de40b6cbcf89a1d35db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 0}
 --- !u!1 &8261612862321569806
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +335,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01fcb9d2dd555e34c9ec41253e2c6a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 0}
   waitTime: 0.5
 --- !u!1 &8746808645195602038
 GameObject:
@@ -383,5 +380,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b7a4ea29736a7e46818ec368dbe9b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 0}
-  waitTime: 0.5
+  waitTime: 0.2

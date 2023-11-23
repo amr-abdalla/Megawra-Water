@@ -58,11 +58,11 @@ public class BounceTapManager : MonoBehaviour
         OnTap?.Invoke();
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(erabyTransform.position, tapColliderSize);
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.color = Color.red;
+    //     Gizmos.DrawWireCube(erabyTransform.position, tapColliderSize);
+    // }
 
     public bool isTapped()
     {
