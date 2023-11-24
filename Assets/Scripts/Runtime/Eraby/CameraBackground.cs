@@ -21,7 +21,7 @@ public class CameraBackground : MonoBehaviour
     private Transform yAnchor;
     private SpriteRenderer[] backgroundRenderers;
 
-    private int numRenderers = 3;
+    private int numRenderers = 5;
 
     private Bounds bounds;
 
@@ -55,8 +55,8 @@ public class CameraBackground : MonoBehaviour
         float cameraCenter = (cameraMax.x + cameraMin.x) / 2;
 
         // calculate the bounds
-        bounds.min = cameraCenter - (1.5f) * spriteWidth;
-        bounds.max = cameraCenter + (1.5f) * spriteWidth;
+        bounds.min = cameraCenter - (numRenderers / 2) * spriteWidth;
+        bounds.max = cameraCenter + (numRenderers / 2) * spriteWidth;
 
         // set the initial positions
         for (int i = 0; i < numRenderers; i++)
@@ -100,8 +100,12 @@ public class CameraBackground : MonoBehaviour
         }
 
         // place the other sprites on either side of the sprite which intersects the camera bounds
-        bounds.min = backgroundRenderers[spriteIndex].bounds.min.x - backgroundSprite.bounds.size.x;
-        bounds.max = backgroundRenderers[spriteIndex].bounds.max.x + backgroundSprite.bounds.size.x;
+        bounds.min =
+            backgroundRenderers[spriteIndex].bounds.min.x
+            - (backgroundSprite.bounds.size.x * Mathf.FloorToInt(numRenderers / 2));
+        bounds.max =
+            backgroundRenderers[spriteIndex].bounds.max.x
+            + (backgroundSprite.bounds.size.x * Mathf.FloorToInt(numRenderers / 2));
 
         for (int i = 0; i < numRenderers; i++)
         {
