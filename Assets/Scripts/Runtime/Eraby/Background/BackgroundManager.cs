@@ -35,6 +35,15 @@ public class BackgroundManager : MonoBehaviour
     [SerializeField]
     private float distanceToPlayer = 0f;
 
+    [SerializeField]
+    private float spriteScale = 1f;
+
+    [SerializeField]
+    private int orderInLayer = 0;
+
+    [SerializeField]
+    private Material material = null;
+
     [Header("Weights")]
     [SerializeField]
     private SpriteFloatConfig groundWeights;
@@ -42,20 +51,46 @@ public class BackgroundManager : MonoBehaviour
     [SerializeField]
     private SpriteFloatConfig spriteDistances;
 
-    private float lastSpriteX = 0f;
+    private const int MAX_SPRITES = 100;
+
+    private List<GameObject> sprites = null;
+
+    private int cur_sprite = 0;
+
+    private Bounds bounds;
 
     private void Start()
     {
-        lastSpriteX = groundAnchor.position.x;
+        sprites = new List<GameObject>(MAX_SPRITES);
+        for (int i = 0; i < MAX_SPRITES; i++)
+        {
+            GameObject newSprite = new("Background " + i);
+            newSprite.transform.parent = groundAnchor;
+            newSprite.transform.position = groundAnchor.position;
+            newSprite.transform.localScale = new Vector3(spriteScale, spriteScale, 1f);
+            SpriteRenderer renderer = newSprite.AddComponent<SpriteRenderer>();
+            renderer.sortingLayerName = "Background_Fore";
+            renderer.sortingOrder = orderInLayer;
+            if (material != null)
+                renderer.material = material;
+            newSprite.SetActive(false);
+            sprites.Add(newSprite);
+        }
+
+        bounds.min = groundAnchor.position.x;
+        bounds.max = groundAnchor.position.x;
     }
 
     private void Update()
     {
-        // Player's forward direction is -x. lastSpriteX must always be atleast distanceToPlayer in the forward direction ahead of player.
-
-        while (player.position.x - lastSpriteX < distanceToPlayer)
+        // check if we need to place a new sprite
+        if (player.position.x + distanceToPlayer > bounds.max)
         {
-            lastSpriteX -= placeNewSprite(lastSpriteX);
+            bounds.max += placeNewSprite(bounds.max);
+        }
+        if (player.position.x - distanceToPlayer < bounds.min)
+        {
+            bounds.min -= placeNewSprite(bounds.min);
         }
     }
 
@@ -107,13 +142,14 @@ public class BackgroundManager : MonoBehaviour
                 distance = spriteDistances.Bushes;
                 break;
         }
+
         Vector3 position = groundAnchor.position;
         float half_sprite_width = sprite.bounds.size.x / 2f;
         position.x = x_pos - half_sprite_width;
-        GameObject newSprite = new();
-        newSprite.transform.parent = groundAnchor;
-        newSprite.transform.position = position;
-        SpriteRenderer renderer = newSprite.AddComponent<SpriteRenderer>();
+        SpriteRenderer renderer = sprites[cur_sprite].GetComponent<SpriteRenderer>();
+        sprites[cur_sprite].SetActive(true);
+        sprites[cur_sprite].transform.position = position;
+        cur_sprite = (cur_sprite + 1) % MAX_SPRITES;
         renderer.sprite = sprite;
         renderer.sortingLayerName = "Background_Fore";
 

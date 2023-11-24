@@ -168,7 +168,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &115553173
 GameObject:
@@ -1538,6 +1538,66 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &278910262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 278910264}
+  - component: {fileID: 278910263}
+  m_Layer: 0
+  m_Name: 'BackgroundManager (Mid) '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &278910263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278910262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b738bc8f44673488bea338d9ffcd99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundSprites: {fileID: 11400000, guid: 104a7689ac662aa4a9d035bbf3add742, type: 2}
+  groundAnchor: {fileID: 1789730604}
+  player: {fileID: 1576811030}
+  distanceToPlayer: 50
+  spriteScale: 0.7
+  orderInLayer: 1
+  material: {fileID: 2100000, guid: 64080599a9035d54a98743f5f6a6952a, type: 2}
+  groundWeights:
+    Buildings: 30
+    Palms: 0
+    Bushes: 0
+  spriteDistances:
+    Buildings: -0.5
+    Palms: 0
+    Bushes: 0
+--- !u!4 &278910264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278910262}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.5425186, y: 54.40525, z: 7.7575836}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1789730604}
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &366716427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2223,7 +2283,7 @@ GameObject:
   - component: {fileID: 1201267286}
   - component: {fileID: 1201267285}
   m_Layer: 0
-  m_Name: BackgroundManager
+  m_Name: BackgroundManager (Foreground)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2245,12 +2305,15 @@ MonoBehaviour:
   groundAnchor: {fileID: 177180410}
   player: {fileID: 1576811030}
   distanceToPlayer: 50
+  spriteScale: 1
+  orderInLayer: 2
+  material: {fileID: 0}
   groundWeights:
     Buildings: 30
-    Palms: 10
-    Bushes: 5
+    Palms: 0
+    Bushes: 0
   spriteDistances:
-    Buildings: -2
+    Buildings: -0.5
     Palms: 0
     Bushes: 0
 --- !u!4 &1201267286
@@ -2267,7 +2330,7 @@ Transform:
   m_Children:
   - {fileID: 177180410}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1257803884
 GameObject:
@@ -3774,7 +3837,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461756038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.517532, y: 43.570217, z: -10.097739}
+  m_LocalPosition: {x: 32.63747, y: 43.570217, z: -10.097739}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4026,6 +4089,52 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87ae202fed97dae448d2a98539ae2f96, type: 3}
+--- !u!1 &1789730603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1789730604}
+  - component: {fileID: 1789730605}
+  m_Layer: 0
+  m_Name: GroundAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1789730604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789730603}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 124, y: -22.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 278910264}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1789730605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789730603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f314a0b127a35724ea4236dc1b1c07b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1461756040}
+  parallaxFactor: 0.252
 --- !u!1 &1820249570 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4026483990970803123, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
