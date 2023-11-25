@@ -263,9 +263,7 @@ public class PhysicsBody2D
         RaycastHit2D i_hit
     )
     {
-        int layer = i_hit.collider.gameObject.layer;
-        LayerMask oneWayGroundLayers = physicsConfig.OneWayGroundLayerMask;
-        bool isOneWay = oneWayGroundLayers == (oneWayGroundLayers | (1 << layer));
+        bool isOneWay = isOneWayCollision(i_hit.collider);
         bool checkForCollsions = true;
         float shellRadius = physicsConfig.ShellRadius;
 
@@ -361,7 +359,7 @@ public class PhysicsBody2D
             if (false == hit)
                 continue;
 
-            if (isWallCollision(hit.normal))
+            if (isWallCollision(hit))
             {
                 // isHittingWall = true;
                 return new WallCollisionData(hit.normal, hit.transform, hit.point);
@@ -425,10 +423,20 @@ public class PhysicsBody2D
         return wallVelocity;
     }
 
-    private bool isWallCollision(Vector2 i_hitNormal)
+    private bool isWallCollision(RaycastHit2D i_hit)
     {
         // if it isn't a ground collision then it must be a wall collision
-        return i_hitNormal.y < physicsConfig.MinGroundNormalY;
+
+        return i_hit.normal.y < physicsConfig.MinGroundNormalY
+            && !isOneWayCollision(i_hit.collider);
+
+        // >>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<
+        // >>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<
+        // TODO: LOOK BACK AT THIS LATER. We're disabling wall collision on one way platforms for now, as it is causing inconsistencies
+        //       when bumping horizontally into them vs jumping from below them.
+        //       {I.E: bumping into the side will trigger x_movement logic, causing the player to be pushed back, but jumping from below will not}
+        // >>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<
+        // >>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<
     }
 
     private WallCollisionData checkForIdleWallCollisions()
@@ -460,13 +468,20 @@ public class PhysicsBody2D
         for (int i = 0; i < hitCount; i++)
         {
             RaycastHit2D hit = wallHitBufferList[i];
-            if (true == hit && isWallCollision(hit.normal))
+            if (true == hit && isWallCollision(hit))
             {
                 return new WallCollisionData(hit.normal, hit.transform, hit.point);
             }
         }
 
         return WallCollisionData.NoCollision;
+    }
+
+    private bool isOneWayCollision(Collider2D i_collider)
+    {
+        int layer = i_collider.gameObject.layer;
+        LayerMask oneWayGroundLayers = physicsConfig.OneWayGroundLayerMask;
+        return oneWayGroundLayers == (oneWayGroundLayers | (1 << layer));
     }
 
     private Vector2 updateMovement(Vector2 i_move, bool i_yMovement)
