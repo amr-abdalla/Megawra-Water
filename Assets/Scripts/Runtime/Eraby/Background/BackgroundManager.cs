@@ -51,7 +51,7 @@ public class BackgroundManager : MonoBehaviour
     [SerializeField]
     private SpriteFloatConfig spriteDistances;
 
-    private const int MAX_SPRITES = 100;
+    private const int MAX_SPRITES = 20;
 
     private List<GameObject> sprites = null;
 

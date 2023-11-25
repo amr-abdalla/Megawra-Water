@@ -25,7 +25,7 @@ MonoBehaviour:
     m_Bits: 8
   oneWayGroundLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   wallLayerMask:
     serializedVersion: 2
     m_Bits: 8

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
+  m_Name: Grey
   m_Shader: {fileID: 4800000, guid: dc5512205d6c69943b454503f2038418, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -71,7 +71,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Greyscale: 0.922
+    - _Greyscale: 0.644
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
