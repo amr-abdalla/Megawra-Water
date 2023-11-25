@@ -1,6 +1,11 @@
-﻿public interface IWallDetector2D
+﻿using UnityEngine;
+
+public interface IWallDetector2D
 {
     bool IsHittingWall { get; }
 
-    Physics2DWallEvent OnWallStatusChanged { get; set; }
+    Vector2 WallNormal { get; }
+
+    Transform CurrentWallTransform { get; }
+    // Physics2DWallEvent OnWallStatusChanged { get; set; }
 }

@@ -4,19 +4,22 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - FxTemporaire
+  - Ground
   - Bouncy
+  - Bump
+  - Trample
+  - PlayerBumper
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Platform
   - Water
   - UI
   - Chunk
-  - Background
-  - 
-  - 
+  - Camera Confiner
+  - PlatformBump
+  - PlayerBump
   - 
   - 
   - 
@@ -40,8 +43,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 2529949619
+  - name: Sky
+    uniqueID: 412226887
+    locked: 0
+  - name: Ground
+    uniqueID: 3666479681
+    locked: 0
+  - name: Background_Fore
+    uniqueID: 2657524185
     locked: 0
   - name: Default
     uniqueID: 0
