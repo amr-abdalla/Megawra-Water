@@ -123,6 +123,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &24572456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 24572457}
+  - component: {fileID: 24572458}
+  m_Layer: 0
+  m_Name: GroundAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &24572457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24572456}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 124, y: -8.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 356776834}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &24572458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24572456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f314a0b127a35724ea4236dc1b1c07b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1461756040}
+  parallaxFactor: 0.2
 --- !u!1 &39472188
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +214,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &115553173
 GameObject:
@@ -1574,14 +1620,19 @@ MonoBehaviour:
   spriteScale: 0.7
   orderInLayer: 1
   material: {fileID: 2100000, guid: 64080599a9035d54a98743f5f6a6952a, type: 2}
+  useNoise: 0
+  distanceNoiseMin: 0
+  distanceNoiseMax: 2
   groundWeights:
     Buildings: 30
     Palms: 0
     Bushes: 0
+    Clouds: 0
   spriteDistances:
     Buildings: -0.5
     Palms: 0
     Bushes: 0
+    Clouds: 0
 --- !u!4 &278910264
 Transform:
   m_ObjectHideFlags: 0
@@ -1589,15 +1640,80 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 278910262}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5425186, y: 54.40525, z: 7.7575836}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -109.14567, y: 19.259499, z: -0.0131549835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1789730604}
-  m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_Father: {fileID: 1830258807}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &356776833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 356776834}
+  - component: {fileID: 356776835}
+  m_Layer: 0
+  m_Name: BackgroundManager (Clouds-Fore)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &356776834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356776833}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -109.14567, y: 19.259499, z: -0.0131549835}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 24572457}
+  m_Father: {fileID: 1830258807}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &356776835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356776833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b738bc8f44673488bea338d9ffcd99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundSprites: {fileID: 11400000, guid: 8e2d0b9fe090b7b42a36d4effbecc4c0, type: 2}
+  groundAnchor: {fileID: 24572457}
+  player: {fileID: 1576811030}
+  distanceToPlayer: 50
+  spriteScale: 0.7
+  orderInLayer: 1
+  material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  useNoise: 1
+  distanceNoiseMin: -1
+  distanceNoiseMax: 10
+  groundWeights:
+    Buildings: 0
+    Palms: 0
+    Bushes: 0
+    Clouds: 10
+  spriteDistances:
+    Buildings: 0
+    Palms: 0
+    Bushes: 0
+    Clouds: 0
 --- !u!1001 &366716427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1655,6 +1771,52 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dc01e945f74d6c4b842927a78125ff1, type: 3}
+--- !u!1 &553971894
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 553971895}
+  - component: {fileID: 553971896}
+  m_Layer: 0
+  m_Name: GroundAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &553971895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553971894}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 124, y: -6.34, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1465128680}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &553971896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553971894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f314a0b127a35724ea4236dc1b1c07b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1461756040}
+  parallaxFactor: 0.3
 --- !u!1001 &596212140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2034,14 +2196,19 @@ MonoBehaviour:
   spriteScale: 0.7
   orderInLayer: -1
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  useNoise: 0
+  distanceNoiseMin: 0
+  distanceNoiseMax: 2
   groundWeights:
     Buildings: 30
     Palms: 0
     Bushes: 0
+    Clouds: 0
   spriteDistances:
     Buildings: 0
     Palms: 0
     Bushes: 0
+    Clouds: 0
 --- !u!4 &1037254766
 Transform:
   m_ObjectHideFlags: 0
@@ -2049,14 +2216,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037254764}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5425186, y: 54.40525, z: 7.7575836}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -109.14567, y: 19.259499, z: -0.0131549835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 830954191}
-  m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_Father: {fileID: 1830258807}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1083035395
 PrefabInstance:
@@ -2414,14 +2581,19 @@ MonoBehaviour:
   spriteScale: 1
   orderInLayer: 2
   material: {fileID: 0}
+  useNoise: 0
+  distanceNoiseMin: 0
+  distanceNoiseMax: 2
   groundWeights:
     Buildings: 30
     Palms: 0
     Bushes: 0
+    Clouds: 0
   spriteDistances:
     Buildings: -0.5
     Palms: 0
     Bushes: 0
+    Clouds: 0
 --- !u!4 &1201267286
 Transform:
   m_ObjectHideFlags: 0
@@ -2429,14 +2601,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201267284}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5425186, y: 54.40525, z: 7.7575836}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -109.14567, y: 19.259499, z: -0.0131549835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 177180410}
-  m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_Father: {fileID: 1830258807}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1257803884
 GameObject:
@@ -3943,7 +4115,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461756038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.63747, y: 43.570217, z: -10.097739}
+  m_LocalPosition: {x: 32.705616, y: 43.570217, z: -10.097739}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3985,6 +4157,71 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1465128679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1465128680}
+  - component: {fileID: 1465128681}
+  m_Layer: 0
+  m_Name: 'BackgroundManager (Clouds-Back) '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1465128680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465128679}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -109.14567, y: 19.259499, z: -0.0131549835}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 553971895}
+  m_Father: {fileID: 1830258807}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1465128681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465128679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b738bc8f44673488bea338d9ffcd99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundSprites: {fileID: 11400000, guid: 8e2d0b9fe090b7b42a36d4effbecc4c0, type: 2}
+  groundAnchor: {fileID: 553971895}
+  player: {fileID: 1576811030}
+  distanceToPlayer: 50
+  spriteScale: 0.7
+  orderInLayer: 1
+  material: {fileID: 2100000, guid: 64080599a9035d54a98743f5f6a6952a, type: 2}
+  useNoise: 1
+  distanceNoiseMin: -4
+  distanceNoiseMax: 4
+  groundWeights:
+    Buildings: 0
+    Palms: 0
+    Bushes: 0
+    Clouds: 10
+  spriteDistances:
+    Buildings: 0
+    Palms: 0
+    Bushes: 0
+    Clouds: 0
 --- !u!4 &1576811030 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4026483991751054407, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
@@ -4266,6 +4503,42 @@ MonoBehaviour:
   body: {fileID: 1576811035}
   spriteRenderer: {fileID: 1820249572}
   flipX: 0
+--- !u!1 &1830258806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1830258807}
+  m_Layer: 0
+  m_Name: Backgrounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1830258807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830258806}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 105.60315, y: 35.145752, z: 7.7707386}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1465128680}
+  - {fileID: 356776834}
+  - {fileID: 1037254766}
+  - {fileID: 278910264}
+  - {fileID: 1201267286}
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2137659508
 GameObject:
   m_ObjectHideFlags: 0

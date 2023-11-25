@@ -8,13 +8,17 @@ public struct SpriteFloatConfig
     public float Buildings;
     public float Palms;
     public float Bushes;
+
+    public float Clouds;
 }
 
 enum SpriteCategory
 {
     Buildings,
     Palms,
-    Bushes
+    Bushes,
+
+    Clouds
 }
 
 public class BackgroundManager : MonoBehaviour
@@ -45,6 +49,15 @@ public class BackgroundManager : MonoBehaviour
     private Material material = null;
 
     [Header("Weights")]
+    [SerializeField]
+    private bool useNoise = false;
+
+    [SerializeField]
+    private float distanceNoiseMin = 0f;
+
+    [SerializeField]
+    private float distanceNoiseMax = 2f;
+
     [SerializeField]
     private SpriteFloatConfig groundWeights;
 
@@ -96,14 +109,20 @@ public class BackgroundManager : MonoBehaviour
 
     private SpriteCategory getRandomSpriteCategory()
     {
-        float totalWeight = groundWeights.Buildings + groundWeights.Palms + groundWeights.Bushes;
+        float totalWeight =
+            groundWeights.Buildings
+            + groundWeights.Palms
+            + groundWeights.Bushes
+            + groundWeights.Clouds;
         float random = Random.Range(0f, totalWeight);
         if (random < groundWeights.Buildings)
             return SpriteCategory.Buildings;
         else if (random < groundWeights.Buildings + groundWeights.Palms)
             return SpriteCategory.Palms;
-        else
+        else if (random < groundWeights.Buildings + groundWeights.Palms + groundWeights.Bushes)
             return SpriteCategory.Bushes;
+        else
+            return SpriteCategory.Clouds;
     }
 
     private Sprite getRandomSprite(SpriteCategory category)
@@ -118,6 +137,8 @@ public class BackgroundManager : MonoBehaviour
                 return backgroundSprites.Palms[Random.Range(0, backgroundSprites.Palms.Length)];
             case SpriteCategory.Bushes:
                 return backgroundSprites.Bushes[Random.Range(0, backgroundSprites.Bushes.Length)];
+            case SpriteCategory.Clouds:
+                return backgroundSprites.Clouds[Random.Range(0, backgroundSprites.Clouds.Length)];
             default:
                 return null;
         }
@@ -130,6 +151,7 @@ public class BackgroundManager : MonoBehaviour
         SpriteCategory category = getRandomSpriteCategory();
         Sprite sprite = getRandomSprite(category);
         float distance = spriteDistances.Buildings;
+
         switch (category)
         {
             case SpriteCategory.Buildings:
@@ -141,7 +163,15 @@ public class BackgroundManager : MonoBehaviour
             case SpriteCategory.Bushes:
                 distance = spriteDistances.Bushes;
                 break;
+            case SpriteCategory.Clouds:
+                distance = spriteDistances.Clouds;
+                break;
         }
+
+        if (useNoise)
+            distance +=
+                Mathf.PerlinNoise(x_pos, 0) * (distanceNoiseMax - distanceNoiseMin)
+                + distanceNoiseMin;
 
         Vector3 position = groundAnchor.position;
         float half_sprite_width = sprite.bounds.size.x / 2f;
