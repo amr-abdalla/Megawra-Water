@@ -59,7 +59,7 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
             // set the position and rotation of Arrow Sprite to match the moveDirection
 
        ArrowSprite.position = transform.position+(Vector3)moveDirection * 0.8f;
-       ArrowSprite.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, moveDirection));
+       transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, moveDirection));
 
 
     }

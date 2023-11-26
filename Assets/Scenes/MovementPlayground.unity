@@ -218,6 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 449932208}
   - component: {fileID: 449932207}
+  - component: {fileID: 449932209}
   m_Layer: 7
   m_Name: Temp Background
   m_TagString: Untagged
@@ -292,6 +293,20 @@ Transform:
   m_Father: {fileID: 746938536}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &449932209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449932206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f314a0b127a35724ea4236dc1b1c07b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 758519690}
+  parallaxFactor: 0.7
 --- !u!1001 &466927560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -841,7 +856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angularAccelerationData: {fileID: 11400000, guid: f54d7bd3ee4d4634fa1bf5e7e50bcb48, type: 2}
-  ArrowSprite: {fileID: 917081171}
+  ArrowSprite: {fileID: 1342217066}
   dragSettingsData: {fileID: 11400000, guid: ee81ccdd3dc44474f8a1e929bad59dd3, type: 2}
   minSpeed: 1
   maxSpeed: 24
@@ -1148,6 +1163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 897026578}
   - component: {fileID: 897026577}
+  - component: {fileID: 897026579}
   m_Layer: 7
   m_Name: Temp Background (1)
   m_TagString: Untagged
@@ -1222,6 +1238,20 @@ Transform:
   m_Father: {fileID: 746938536}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &897026579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897026576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f314a0b127a35724ea4236dc1b1c07b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 758519690}
+  parallaxFactor: 0.8
 --- !u!1 &898259081
 GameObject:
   m_ObjectHideFlags: 0
@@ -14898,6 +14928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1991280488}
   - component: {fileID: 1991280487}
+  - component: {fileID: 1991280489}
   m_Layer: 7
   m_Name: Temp Background (2)
   m_TagString: Untagged
@@ -14972,6 +15003,20 @@ Transform:
   m_Father: {fileID: 746938536}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1991280489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991280486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f314a0b127a35724ea4236dc1b1c07b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 758519690}
+  parallaxFactor: 0.97
 --- !u!4 &2100937956 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5065781980929209433, guid: 479280e96dc5bec479a18f35ed530bad, type: 3}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Parallax : MonoBehaviour
 {
     [SerializeField]
-    private Camera mainCamera;
+    private GameObject mainCamera;
 
     [SerializeField]
     [Range(0, 1)]
