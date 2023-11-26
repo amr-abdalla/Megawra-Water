@@ -856,7 +856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angularAccelerationData: {fileID: 11400000, guid: f54d7bd3ee4d4634fa1bf5e7e50bcb48, type: 2}
-  ArrowSprite: {fileID: 1342217066}
+  VisualObject: {fileID: 1342217066}
   dragSettingsData: {fileID: 11400000, guid: ee81ccdd3dc44474f8a1e929bad59dd3, type: 2}
   minSpeed: 1
   maxSpeed: 24
