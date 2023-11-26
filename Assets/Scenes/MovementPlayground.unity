@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f314a0b127a35724ea4236dc1b1c07b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 758519690}
+  mainCamera: {fileID: 619463765}
   parallaxFactor: 0.7
 --- !u!1001 &466927560
 PrefabInstance:
@@ -656,8 +656,8 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
+  m_UpdateMethod: 0
+  m_BlendUpdateMethod: 0
   m_DefaultBlend:
     m_Style: 1
     m_Time: 2
@@ -1250,7 +1250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f314a0b127a35724ea4236dc1b1c07b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 758519690}
+  mainCamera: {fileID: 619463765}
   parallaxFactor: 0.8
 --- !u!1 &898259081
 GameObject:
@@ -15015,7 +15015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f314a0b127a35724ea4236dc1b1c07b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 758519690}
+  mainCamera: {fileID: 619463765}
   parallaxFactor: 0.97
 --- !u!4 &2100937956 stripped
 Transform:
