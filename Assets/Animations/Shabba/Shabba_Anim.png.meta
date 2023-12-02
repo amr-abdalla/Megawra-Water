@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -1075,8 +1075,8 @@ TextureImporter:
       SH_Swim_22: -1463453237
       SH_Dash_06: 766006247
       SH_Swim_08: -1807532253
-      SH_Swim_26: -1128698407
       SH_Swim_32: 961327565
+      SH_Swim_26: -1128698407
       SH_Swim_07: 2056004715
       SH_Dash_01: -1706994393
       SH_Swim_19: -1235864440
