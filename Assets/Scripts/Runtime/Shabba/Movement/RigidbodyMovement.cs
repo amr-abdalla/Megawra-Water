@@ -2,19 +2,31 @@ using UnityEngine;
 
 public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 {
-    [SerializeField] private AngularAccelerationData angularAccelerationData;
+    [SerializeField]
+    private AngularAccelerationData angularAccelerationData;
 
-    [SerializeField] private Transform ArrowSprite;
-    [SerializeField] private DragSettingsData dragSettingsData;
+    [SerializeField]
+    private Transform VisualObject;
+
+    [SerializeField]
+    private DragSettingsData dragSettingsData;
 
     [Header("Max values")]
-    [SerializeField] private float minSpeed = 1f;
-    [SerializeField] private float maxSpeed = 10f;
-    [SerializeField] private float maxDrag = 10f;
-    [SerializeField] private float timeToMaxDrag = 1f;
+    [SerializeField]
+    private float minSpeed = 1f;
+
+    [SerializeField]
+    private float maxSpeed = 10f;
+
+    [SerializeField]
+    private float maxDrag = 10f;
+
+    [SerializeField]
+    private float timeToMaxDrag = 1f;
 
     [Header("Initial values")]
-    [SerializeField] private float initialDrag = 0f;
+    [SerializeField]
+    private float initialDrag = 0f;
 
     private Rigidbody2D rigidBody;
 
@@ -33,17 +45,17 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
     }
 
     private void Update()
-	{
+    {
         // Debug.DrawRay(transform.position, rigidBody.velocity, Color.red);
-        debugMovement();
-	}
+    }
 
     void OnDisable()
     {
         resetToInitialState();
     }
 
-    void debugMovement(){
+    void applyRotation()
+    {
         // draws a gizmo of a small triangle pointing towards the direction of movement
         // Vector3[] trianglePoints = new Vector3[3];
 
@@ -56,15 +68,11 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
         // Debug.DrawLine(trianglePoints[1], trianglePoints[2], Color.magenta);
         // Debug.DrawLine(trianglePoints[2], trianglePoints[0], Color.magenta);
 
-            // set the position and rotation of Arrow Sprite to match the moveDirection
+        // set the position and rotation of Arrow Sprite to match the moveDirection
 
-       ArrowSprite.position = transform.position+(Vector3)moveDirection * 0.8f;
-       ArrowSprite.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, moveDirection));
-
-
+        VisualObject.position = transform.position + (Vector3)moveDirection * 0.8f;
+        transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, moveDirection));
     }
-
-    
 
     private void FixedUpdate()
     {
@@ -86,6 +94,8 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
         {
             onDidStopMoving();
         }
+
+        applyRotation();
     }
 
     #endregion
@@ -120,7 +130,8 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
         rotateDirection = direction;
     }
 
-    public Vector2 CurrentVelocity => null == rigidBody ? MathConstants.VECTOR_2_ZERO : rigidBody.velocity;
+    public Vector2 CurrentVelocity =>
+        null == rigidBody ? MathConstants.VECTOR_2_ZERO : rigidBody.velocity;
 
     #endregion
 
@@ -128,7 +139,7 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 
     void onDidStopMoving()
     {
-        // Code review : this could trigger an event to tell all listeners 
+        // Code review : this could trigger an event to tell all listeners
         // that object stopped moving (+ start whataver behaviour should happen in that case)
     }
 
@@ -159,9 +170,17 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
     private float ComputeAngularVelocity(float i_angleSign)
     {
         if (i_angleSign == 0f)
-            currentAngularVelocity = AccelerationUtility.descelerate(currentAngularVelocity, angularAccelerationData.angularDesceleration);
+            currentAngularVelocity = AccelerationUtility.descelerate(
+                currentAngularVelocity,
+                angularAccelerationData.angularDesceleration
+            );
         else
-            currentAngularVelocity = AccelerationUtility.accelerate(i_angleSign, currentAngularVelocity, angularAccelerationData.maxAngularVelocity, angularAccelerationData.angularAcceleration);
+            currentAngularVelocity = AccelerationUtility.accelerate(
+                i_angleSign,
+                currentAngularVelocity,
+                angularAccelerationData.maxAngularVelocity,
+                angularAccelerationData.angularAcceleration
+            );
 
         return currentAngularVelocity;
     }
