@@ -6681,7 +6681,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461756038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.19998, y: 37.57022, z: -10.097739}
+  m_LocalPosition: {x: 49.200035, y: 37.57022, z: -10.097739}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7167,6 +7167,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4026483991426673731, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
+      propertyPath: launchVelocityY
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4026483991751054404, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
       propertyPath: m_Name
       value: Eraby

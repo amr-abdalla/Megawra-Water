@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013dac98f90c2144fba45bfbfbff265f, type: 3}
   m_Name: DiveAcceleration
   m_EditorClassIdentifier: 
-  acceleration: {x: 199, y: 200}
-  desceleration: {x: 3, y: 3}
+  acceleration: {x: 199, y: 150}
+  desceleration: {x: 10, y: 3}
   moveVelocity: {x: 3, y: 20}
-  maxVelocity: {x: 199, y: 200}
+  maxVelocity: {x: 4, y: 150}
