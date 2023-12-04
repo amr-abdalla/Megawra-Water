@@ -3,19 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ErabyStateMachineDataProvider", menuName = "Eraby/ErabyStateMachineDataProvider", order = 0)]
 public class ErabyStateMachineDataProvider : AbstractStateMachineDataProvider
 {
-    /// <summary>
-    /// used by landing states to calculate the new Y velocity.
-    /// For instance: <see cref="ErabyLandingState"/>
-    /// </summary>
-    public float initialVelocityY = 0f;
-
+  
     /// <summary>
     ///  Base velocity used by states which inherit from <see cref="MoveHorizontalAbstractState" />.
     /// </summary>
     public float initialVelocityX = 0f;
 
     /// <summary>
-    /// Like <see cref="initialVelocityY"/>, used by landing states to calculate the new X velocity.
+    /// Like <see cref="launchVelocityY"/>, used by landing states to calculate the new X velocity.
     /// </summary>
     public float landingVelocityX = 0f;
 

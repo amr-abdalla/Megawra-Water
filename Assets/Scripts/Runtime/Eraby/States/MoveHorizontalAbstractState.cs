@@ -3,8 +3,7 @@ using System.Collections;
 
 public abstract class MoveHorizontalAbstractState : ErabyState
 {
-    [SerializeField]
-    protected AccelerationConfig2D accelerationData = null;
+
 
     [SerializeField]
     protected PhysicsBody2D body = null;

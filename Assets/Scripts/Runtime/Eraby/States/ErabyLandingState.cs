@@ -8,14 +8,14 @@ public class ErabyLandingState : ErabyAbstractLandingState
     {
         Debug.Log("Enter landing");
 
-        launchVelocityY = dataProvider.bounceVelocityMultiplier.y * dataProvider.initialVelocityY;
+        dataProvider.launchVelocityY = dataProvider.bounceVelocityMultiplier.y * dataProvider.launchVelocityY;
 
         float newVelocityX = clampVelocityX(
             -Mathf.Abs(dataProvider.landingVelocityX) * dataProvider.bounceVelocityMultiplier.x
         );
-        dataProvider.launchVelocityY = launchVelocityY;
+        dataProvider.launchVelocityY = dataProvider.launchVelocityY;
         dataProvider.launchVelocityX = newVelocityX;
-        Debug.Log("Bounce velocity: " + launchVelocityY);
+        Debug.Log("Bounce velocity: " + dataProvider.launchVelocityY);
 
         base.onStateEnter();
     }
