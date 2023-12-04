@@ -3,6 +3,9 @@ using System.Collections;
 
 public class ErabyLandingState : ErabyAbstractLandingState
 {
+
+    private float maxLandingTime = 1f;
+
     #region STATE API
     protected override void onStateEnter()
     {
@@ -13,10 +16,9 @@ public class ErabyLandingState : ErabyAbstractLandingState
         float newVelocityX = clampVelocityX(
             -Mathf.Abs(dataProvider.landingVelocityX) * dataProvider.bounceVelocityMultiplier.x
         );
-        dataProvider.launchVelocityY = dataProvider.launchVelocityY;
         dataProvider.launchVelocityX = newVelocityX;
         Debug.Log("Bounce velocity: " + dataProvider.launchVelocityY);
-
+        landingTime = mapLaunchVelocityToLandingTimme(dataProvider.launchVelocityY);
         base.onStateEnter();
     }
 
@@ -42,6 +44,12 @@ public class ErabyLandingState : ErabyAbstractLandingState
 
         dataProvider.launchVelocityX = newVelocityX;
         dataProvider.launchVelocityY *= tapMultiplier;
+    }
+
+
+    private float mapLaunchVelocityToLandingTimme(float yVel){
+        float maxYVelocity = accelerationData.MaxVelocityY;
+        return yVel/maxYVelocity * maxLandingTime;
     }
 
     #endregion
