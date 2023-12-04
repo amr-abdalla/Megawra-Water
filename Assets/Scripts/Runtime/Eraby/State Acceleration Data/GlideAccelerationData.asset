@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GlideAccelerationData
   m_EditorClassIdentifier: 
   acceleration: {x: 3, y: 5}
-  desceleration: {x: 3, y: 3}
+  desceleration: {x: 3, y: 10}
   moveVelocity: {x: 6, y: 3}
   maxVelocity: {x: 3, y: 15}

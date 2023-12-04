@@ -16,8 +16,8 @@ public class ErabyGlideStartState : State
 
         Debug.Log("Enter glide start");
         // controls.DisableControls();
-        body.SetVelocityX(0);
-        body.SetVelocityY(0);
+        // body.SetVelocityX(0);
+        // body.SetVelocityY(0);
 
         glideRoutine = StartCoroutine(glideSequence(glideDuration));
     }
