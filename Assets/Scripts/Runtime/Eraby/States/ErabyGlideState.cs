@@ -8,27 +8,20 @@ public class ErabyGlideState : ErabyAbstractFallState
     private float originalGravityMod;
     protected override void onStateEnter()
     {
-        base.onStateEnter();
         Debug.Log("Enter glide");
         controls.EnableControls();
         controls.JumpReleased += goToFall;
         originalGravityMod = body.GravityConfig.GravityModifier;
         body.SetGravityModifier(gravityMod);
+
+        base.onStateEnter();
+
         if (!controls.isJumping())
             goToFall();
 
+                    
+
         
-    }
-
-    protected override void onStateFixedUpdate()
-    {
-        if (!isEnabled)
-            return;
-        // float newVelocityY = body.VelocityY + accelerationData.DecelerationY * Time.fixedDeltaTime;
-        // Debug.Log(newVelocityY);
-        // body.SetVelocityY(newVelocityY);
-
-        base.onStateFixedUpdate();
     }
 
     public override void ResetState()

@@ -8587,6 +8587,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4026483990882304201, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
+      propertyPath: glideDuration
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4026483991426673731, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
       propertyPath: launchVelocityY
       value: 15
