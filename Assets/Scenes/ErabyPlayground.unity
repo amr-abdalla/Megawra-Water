@@ -466,7 +466,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115553173}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.6, y: 28.84, z: -10.097739}
+  m_LocalPosition: {x: 34.6, y: 28.84, z: -10.097739}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1927,7 +1927,7 @@ GameObject:
   - component: {fileID: 272606850}
   - component: {fileID: 272606851}
   m_Layer: 0
-  m_Name: BackgroundManager (Mid)  (1)
+  m_Name: BackgroundLayer (Mid)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1982,7 +1982,7 @@ GameObject:
   - component: {fileID: 278910264}
   - component: {fileID: 278910263}
   m_Layer: 0
-  m_Name: 'BackgroundManager (Mid) '
+  m_Name: 'BackgroundLayer (Mid-Back) '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2103,12 +2103,12 @@ GameObject:
   - component: {fileID: 356776834}
   - component: {fileID: 356776835}
   m_Layer: 0
-  m_Name: BackgroundManager (Clouds-Fore)
+  m_Name: BackgroundLayer (Clouds-Bottom)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &356776834
 Transform:
   m_ObjectHideFlags: 0
@@ -2137,15 +2137,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b738bc8f44673488bea338d9ffcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundSprites: []
+  backgroundSprites:
+  - {fileID: 21300000, guid: bb055410525f38d44914e319aeed552e, type: 3}
+  - {fileID: 21300000, guid: 76a9484b2241233469f6bf1613afdd6f, type: 3}
+  - {fileID: 21300000, guid: 5c5a90aba0172524ca3a807202d6b07b, type: 3}
+  - {fileID: 21300000, guid: 0a7f9575fde3f21429c29971b1a25357, type: 3}
+  - {fileID: 21300000, guid: fc70628f6620e394e8e263f2366605b2, type: 3}
   groundAnchor: {fileID: 24572457}
   player: {fileID: 1576811030}
   distanceToPlayer: 50
   spriteScale: 0.7
   orderInLayer: 1
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 3}
-  saturation: 0.5
-  maxGap: 4
+  saturation: 0.369
+  maxGap: 6.28
 --- !u!1001 &366716427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2408,7 +2413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1461756040}
-  parallaxFactor: 0.3
+  parallaxFactor: 0.2
 --- !u!1 &571459059
 GameObject:
   m_ObjectHideFlags: 0
@@ -2528,7 +2533,7 @@ GameObject:
   - component: {fileID: 612092146}
   - component: {fileID: 612092147}
   m_Layer: 0
-  m_Name: 'BackgroundManager (Palms-Mid)  '
+  m_Name: 'BackgroundLayer (Palms-Mid)  '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3001,7 +3006,7 @@ GameObject:
   - component: {fileID: 914734082}
   - component: {fileID: 914734083}
   m_Layer: 0
-  m_Name: BackgroundManager (Palms-Mid)   (2)
+  m_Name: BackgroundLayer (Palms-Mid-Back)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3244,7 +3249,7 @@ GameObject:
   - component: {fileID: 1037254766}
   - component: {fileID: 1037254765}
   m_Layer: 0
-  m_Name: 'BackgroundManager (Back)  '
+  m_Name: 'BackgroundLayer (Back)  '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3476,7 +3481,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090458527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.6, y: 39.52, z: -10.097739}
+  m_LocalPosition: {x: 34.6, y: 39.52, z: -10.097739}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3872,7 +3877,7 @@ GameObject:
   - component: {fileID: 1201267286}
   - component: {fileID: 1201267285}
   m_Layer: 0
-  m_Name: BackgroundManager (Foreground)
+  m_Name: BackgroundLayer (Foreground)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9149,7 +9154,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461756038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.599943, y: 37.57022, z: -10.097739}
+  m_LocalPosition: {x: 34.60006, y: 37.57022, z: -10.097739}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9202,12 +9207,12 @@ GameObject:
   - component: {fileID: 1465128680}
   - component: {fileID: 1465128681}
   m_Layer: 0
-  m_Name: 'BackgroundManager (Clouds-Back) '
+  m_Name: 'BackgroundLayer (Clouds-Top) '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1465128680
 Transform:
   m_ObjectHideFlags: 0
@@ -9216,7 +9221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465128679}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -109.14567, y: 19.259499, z: -0.0131549835}
+  m_LocalPosition: {x: -109.14567, y: 22.5, z: -0.0131549835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9236,15 +9241,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b738bc8f44673488bea338d9ffcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundSprites: []
+  backgroundSprites:
+  - {fileID: 21300000, guid: fcaad161d0461224cb1c62ec14704178, type: 3}
+  - {fileID: 21300000, guid: 9f1137c10c0fa5a428605a08ad35f35b, type: 3}
+  - {fileID: 21300000, guid: 5c5a90aba0172524ca3a807202d6b07b, type: 3}
+  - {fileID: 21300000, guid: fc70628f6620e394e8e263f2366605b2, type: 3}
   groundAnchor: {fileID: 553971895}
   player: {fileID: 1576811030}
   distanceToPlayer: 50
   spriteScale: 0.7
   orderInLayer: 1
   material: {fileID: 2100000, guid: 64080599a9035d54a98743f5f6a6952a, type: 2}
-  saturation: 0.5
-  maxGap: 4
+  saturation: 0.226
+  maxGap: 7.57
 --- !u!4 &1576811030 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4026483991751054407, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
@@ -10140,7 +10149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137659508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.47, y: 28.896, z: -2.06832}
+  m_LocalPosition: {x: 37.489998, y: 28.896, z: -2.06832}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10176,7 +10185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4026483991751054407, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -26.6
+      value: 34.6
       objectReference: {fileID: 0}
     - target: {fileID: 4026483991751054407, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
       propertyPath: m_LocalPosition.y

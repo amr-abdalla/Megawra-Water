@@ -5,7 +5,7 @@ using log4net.Config;
 using Newtonsoft.Json;
 using UnityEngine;
 
-public class BackgroundManager : MonoBehaviour
+public class BackgroundLayer : MonoBehaviour
 {
     // Instantiates Background sprites as player moves through the level
 
@@ -72,13 +72,7 @@ public class BackgroundManager : MonoBehaviour
     private void Update()
     {
         // check if we need to place a new sprite
-        if (player.position.x + distanceToPlayer > bounds.max)
-        {
-            if (!(bounds.max >= groundAnchor.position.x))
-            {
-                bounds.max += PlaceNewSprite(bounds.max);
-            }
-        }
+
         if (player.position.x - distanceToPlayer < bounds.min)
         {
             bounds.min -= PlaceNewSprite(bounds.min);
@@ -92,6 +86,7 @@ public class BackgroundManager : MonoBehaviour
             return backgroundSprites[0];
         }
 
+        // we move the selected sprite to the end of the array and exclude the last array element from the pool
         ArraySegment<Sprite> pool = new(backgroundSprites, 0, backgroundSprites.Length - 1);
         float rand = UnityEngine.Random.value;
         int i = Mathf.FloorToInt(rand * pool.Count);
