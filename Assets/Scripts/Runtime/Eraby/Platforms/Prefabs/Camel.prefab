@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 881197414181592792, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
+      propertyPath: m_SortingOrder
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 3350147166496306917, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: groundData
       value: 
