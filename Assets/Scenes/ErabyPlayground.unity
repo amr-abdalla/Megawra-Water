@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571328, b: 0.3069218, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -466,7 +466,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115553173}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.6, y: 28.84, z: -10.097739}
+  m_LocalPosition: {x: -263.1, y: 31.9, z: -10.097739}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3481,7 +3481,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090458527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.6, y: 39.52, z: -10.097739}
+  m_LocalPosition: {x: -263.1, y: 42.58, z: -10.097739}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3937,6 +3937,7 @@ GameObject:
   - component: {fileID: 1257803893}
   - component: {fileID: 1257803892}
   - component: {fileID: 1257803894}
+  - component: {fileID: 1257803895}
   m_Layer: 3
   m_Name: Ground
   m_TagString: Ground
@@ -3955,7 +3956,8 @@ Transform:
   m_LocalPosition: {x: -84.6, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1617982631}
   m_Father: {fileID: 1584854383}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6318,6 +6320,27 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
+--- !u!114 &1257803895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257803884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a9e458cf6eeb94f98ee29962c605e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pattern:
+    tiles:
+    - {fileID: 11400000, guid: 5aa6088a57e12a84cb0477ee07c3a411, type: 2}
+    - {fileID: 11400000, guid: 280fa80176a151445a19b80d1a0e3a1a, type: 2}
+    bounds: {x: 1, y: 2}
+  followedObject: {fileID: 1576811030}
+  spawnDistance: 10
+  tilemap: {fileID: 1257803893}
+  yAnchor: {fileID: 1617982631}
 --- !u!1 &1287899432
 GameObject:
   m_ObjectHideFlags: 0
@@ -6536,7 +6559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1401690322
 Transform:
   m_ObjectHideFlags: 0
@@ -9154,7 +9177,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461756038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.599964, y: 37.57022, z: -10.097739}
+  m_LocalPosition: {x: -263.1, y: 37.57022, z: -10.097739}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9305,6 +9328,37 @@ Transform:
   - {fileID: 1257803885}
   m_Father: {fileID: 0}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1617982630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1617982631}
+  m_Layer: 3
+  m_Name: yanchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1617982631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617982630}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 27.13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1257803885}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1646942377
 PrefabInstance:
@@ -10149,7 +10203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137659508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.489998, y: 28.896, z: -2.06832}
+  m_LocalPosition: {x: -200.67001, y: 31.344, z: -2.06832}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10171,6 +10225,10 @@ PrefabInstance:
       propertyPath: launchVelocityY
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 4026483991572100080, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
+      propertyPath: accelerationData
+      value: 
+      objectReference: {fileID: 11400000, guid: 893c8417e18c22d488975d5c79f80af5, type: 2}
     - target: {fileID: 4026483991615271165, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
       propertyPath: landingTime
       value: 0.5
@@ -10185,11 +10243,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4026483991751054407, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 34.6
+      value: -263.1
       objectReference: {fileID: 0}
     - target: {fileID: 4026483991751054407, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 28.84
+      value: 31.9
       objectReference: {fileID: 0}
     - target: {fileID: 4026483991751054407, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
       propertyPath: m_LocalPosition.z
