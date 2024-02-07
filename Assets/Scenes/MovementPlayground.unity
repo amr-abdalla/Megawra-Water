@@ -225,7 +225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &408136400
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -984,6 +984,8 @@ MonoBehaviour:
   maxDrag: 0.6
   timeToMaxDrag: 6
   initialDrag: 0
+  dashAnimation: {fileID: 1342217069}
+  idleAnimation: {fileID: 1342217068}
 --- !u!58 &758519696
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1684,6 +1686,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1342217066}
   - component: {fileID: 1342217067}
+  - component: {fileID: 1342217069}
+  - component: {fileID: 1342217068}
   m_Layer: 0
   m_Name: VisualObject
   m_TagString: Untagged
@@ -1758,6 +1762,128 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1342217068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342217065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76858a78b01a0eb46b4288c3c562a982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnEnable: 1
+  renderer: {fileID: 1342217067}
+  isLooping: 1
+  resetOnLastFrame: 0
+  frames:
+  - frameObject: {fileID: 2042649526, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -2098784829, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 127229166, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1524369792, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1000082390, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 283688219, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 2056004715, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1807532253, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1450591831, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1201638161, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1229352219, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -928706933, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 832561135, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -837980968, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 212293098, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1761618396, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1427755135, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -519929708, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1235864440, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -916662316, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 12201316, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1463453237, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1003603469, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1401287077, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1831259115, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1128698407, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1555216067, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1908853577, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 153027589, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -947777689, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -364413779, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 961327565, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1324474122, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1077761283, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  loopStartIndex: 0
+--- !u!114 &1342217069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342217065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76858a78b01a0eb46b4288c3c562a982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnEnable: 0
+  renderer: {fileID: 1342217067}
+  isLooping: 0
+  resetOnLastFrame: 0
+  frames:
+  - frameObject: {fileID: -1706994393, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -677770902, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -904016036, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 2119790516, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -899640048, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.08
+  - frameObject: {fileID: 766006247, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.08
+  - frameObject: {fileID: -1897482771, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.08
+  - frameObject: {fileID: -656160765, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.08
+  - frameObject: {fileID: 71906953, guid: 29878021581580e47a881516f9759fab, type: 3}
+    screenTime: 0.08
+  loopStartIndex: 0
 --- !u!4 &1392268932 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6203556586606148364, guid: 0b9c98d7a71a3b24fab222c0e60a2184, type: 3}
@@ -15011,7 +15137,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: -1706994393, guid: 29878021581580e47a881516f9759fab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

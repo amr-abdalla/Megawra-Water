@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,9 @@ public abstract class FrameSwapper<TRenderer, TFrame> : MonoBehaviourBase, IFram
     private CycleEvent cycleEvent = null;
     private Frame<TFrame> lastFrame;
     private float animationSpeedMultiplier = 1;
+
+    //this is a hack, remove asap
+    public event Action OnLastFrameReached;
 
     #region UNITY AND CORE
 
@@ -172,6 +176,7 @@ public abstract class FrameSwapper<TRenderer, TFrame> : MonoBehaviourBase, IFram
             if (resetOnLastFrame)
                 ResetAnimation();
 
+            OnLastFrameReached?.Invoke();
             return;
         }
 

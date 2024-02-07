@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
@@ -36,15 +37,26 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
     private Vector2 rotateDirection = Vector2.zero;
     private Vector2 moveDirection = Vector2.down;
 
+    [SerializeField] SpriteFrameSwapper dashAnimation;
+    [SerializeField] SpriteFrameSwapper idleAnimation;
+
     #region UNITY
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         resetToInitialState();
+        dashAnimation.OnLastFrameReached += OnFinishDashAnimation; // to be removed
     }
 
-    private void Update()
+	private void OnFinishDashAnimation()
+	{
+        dashAnimation.Stop();
+        idleAnimation.ResetAnimation();
+        idleAnimation.Play();
+	}
+
+	private void Update()
     {
         // Debug.DrawRay(transform.position, rigidBody.velocity, Color.red);
     }
@@ -70,7 +82,7 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 
         // set the position and rotation of Arrow Sprite to match the moveDirection
 
-        VisualObject.position = transform.position + (Vector3)moveDirection * 0.8f;
+        //VisualObject.position = transform.position + (Vector3)moveDirection * 0.8f;
         transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, moveDirection));
     }
 
@@ -116,6 +128,9 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 
 
         rigidBody.AddForce(moveDirection * force, ForceMode2D.Impulse);
+        idleAnimation.Stop();
+        dashAnimation.ResetAnimation();
+        dashAnimation.Play();
     }
 
     [ExposePublicMethod]
