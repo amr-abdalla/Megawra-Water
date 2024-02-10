@@ -43,6 +43,9 @@ public class GroundSpawner : MonoBehaviour
     void Start()
     {
         lastSpawnPosition = transform.position;
+        Vector3 cellsize = tilemap.layoutGrid.cellSize;
+        cellWidth = cellsize.x;
+        cellHeight = cellsize.y;
     }
 
     void Update()
@@ -57,12 +60,16 @@ public class GroundSpawner : MonoBehaviour
     }
 
     // takes topright corner of the world position to spawn the pattern
-    void Spawn(float x_pos, bool x_dir = false)
+    private void Spawn(float x_pos, bool x_dir = false)
     {
         // x_dir is true if the pattern is to be spawned to the right
         float x = lastSpawnPosition.x;
         // lambda function to check if x reaches the x_pos
-        bool check(float x) => x_dir ? x < x_pos : x > x_pos;
+        bool check(float x)
+        {
+            return x_dir ? x < x_pos : x > x_pos;
+        }
+
         while (check(x))
         {
             // pattern.bounds is the shape of the pattern
@@ -76,15 +83,19 @@ public class GroundSpawner : MonoBehaviour
                             x_dir ? (int)x + (i * cellWidth) : (int)x - (i * cellWidth),
                             (int)(-(j * cellHeight) + yAnchor.position.y)
                         ),
-                        pattern.tiles[i + j * (int)pattern.bounds.x]
+                        pattern.tiles[(i * pattern.bounds.y) + j]
                     );
                 }
             }
 
             if (x_dir)
+            {
                 x += cellWidth * pattern.bounds.x;
+            }
             else
+            {
                 x -= cellWidth * pattern.bounds.x;
+            }
         }
         lastSpawnPosition = new Vector3(x, lastSpawnPosition.y, lastSpawnPosition.z);
     }
