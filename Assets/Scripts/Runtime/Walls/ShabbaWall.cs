@@ -3,6 +3,9 @@ using UnityEngine;
 public class ShabbaWall : MonoBehaviour
 {
 	private Vector2 playerEnterVelocity;
+	private Vector2 pushDirection;
+	private Vector2 normal;
+	private Vector2 playerVelocity;
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
@@ -10,9 +13,13 @@ public class ShabbaWall : MonoBehaviour
 		{
 			Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
 			player.ApplyCancellingForce();
-			player.Push(playerEnterVelocity.magnitude, directionToPlayer.normalized);
-			
-			player.SetMoveDirection(Vector2.Reflect(player.CurrentVelocity.normalized, VectorUtility.GetNormalBetweenTwoPoints(transform.position, player.transform.position)));
+
+			normal = transform.position.x > collision.transform.position.x ? Vector2.left : Vector2.right ;
+			playerVelocity = -player.moveDirection;
+			pushDirection = -Vector2.Reflect(playerVelocity, normal).normalized;
+
+			player.SetMoveDirection(pushDirection);
+			player.Push(playerEnterVelocity.magnitude, pushDirection);
 		}
 	}
 
@@ -24,4 +31,23 @@ public class ShabbaWall : MonoBehaviour
 		}
 	}
 
-}
+//	private void OnDrawGizmos()
+//	{
+//		Color col = Gizmos.color;
+
+//		Gizmos.color = Color.red;
+
+//		Gizmos.DrawLine(transform.position, (Vector2)transform.position + pushDirection.normalized * 10f);
+
+//		Gizmos.color = Color.blue;
+
+//		Gizmos.DrawLine(transform.position, (Vector2)transform.position + normal.normalized * 10f);
+
+//		Gizmos.color = Color.green;
+
+//		Gizmos.DrawLine(transform.position, (Vector2)transform.position + playerVelocity.normalized * 10f);
+
+
+//		Gizmos.color = col;
+//	}
+//}

@@ -22,7 +22,7 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
     private float currentDragTimer = 0f;
     float currentAngularVelocity = 0f;
     private Vector2 rotateDirection = Vector2.zero;
-    private Vector2 moveDirection = Vector2.down;
+    public Vector2 moveDirection = Vector2.down;
 
     #region UNITY
 
