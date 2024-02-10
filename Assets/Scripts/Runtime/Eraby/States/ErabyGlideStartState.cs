@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ErabyGlideStartState : State
+public class ErabyGlideStartState : ErabyState
 {  
     private Coroutine glideRoutine = null;
 
@@ -18,7 +18,7 @@ public class ErabyGlideStartState : State
         // controls.DisableControls();
         body.SetVelocityX(0);
         body.SetVelocityY(0);
-
+        dataProvider.initialVelocityX = 0;
         glideRoutine = StartCoroutine(glideSequence(glideDuration));
     }
 
@@ -41,7 +41,8 @@ public class ErabyGlideStartState : State
     {
         if (!isEnabled)
             return;
-        body.SetVelocityY(0);
+        // body.SetVelocityY(0);
+        base.onStateFixedUpdate();
     }
 
     private void goToGlide()

@@ -16,14 +16,11 @@ abstract public class ErabyAbstractLandingState : ErabyState
     [SerializeField]
     protected PhysicsBody2D body = null;
 
-    [SerializeField]
-    protected AccelerationConfig2D accelerationData = null;
 
     [SerializeField]
     protected float landingTime = 0.5f;
     protected Coroutine landingRoutine = null;
 
-    protected float launchVelocityY = 0f;
 
     #region STATE API
 

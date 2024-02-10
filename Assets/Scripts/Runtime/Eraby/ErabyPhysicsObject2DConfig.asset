@@ -29,4 +29,4 @@ MonoBehaviour:
   wallLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  gravityModifier: 1
+  gravityModifier: 3

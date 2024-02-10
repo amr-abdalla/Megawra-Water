@@ -21,10 +21,12 @@ abstract class ErabyAbstractLaunchState : ErabyState
         startJumpY = body.transform.position.y;
         stopJumpY = startJumpY + maxJumpHeight;
         initialVelocityY = clampVelocityY(initialVelocityY);
+        Debug.Log(initialVelocityY);
         body.SetVelocityY(initialVelocityY);
         body.SetVelocityX(dataProvider.launchVelocityX);
-        dataProvider.initialVelocityY = initialVelocityY;
+        dataProvider.launchVelocityY = initialVelocityY;
         dataProvider.initialVelocityX = dataProvider.launchVelocityX;
+        Debug.Log(body.VelocityY);
         goToJump();
     }
 

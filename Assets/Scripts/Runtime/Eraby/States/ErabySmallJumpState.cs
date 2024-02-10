@@ -11,7 +11,7 @@ public class ErabySmallJumpState : ErabyAbstractJumpState
 
     protected override void onJumpEnded()
     {
-        if (!enabled)
+        if (!isEnabled)
         {
             return;
         }
