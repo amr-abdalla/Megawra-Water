@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4037bd954e0bc7247a312e171e52004b, type: 3}
+  m_Name: BackgroundSprites
+  m_EditorClassIdentifier: 
+  Buildings:
+  - {fileID: 21300000, guid: 9c69e51a4ffcac449b92744407da92af, type: 3}
+  - {fileID: 21300000, guid: f2378280deef9764790c1ca4da80c55e, type: 3}
+  - {fileID: 21300000, guid: 03fe64e87e6495d4796e9bbb05157520, type: 3}
+  - {fileID: 21300000, guid: 68c44b1b15249ec4388bece6b82ffb0a, type: 3}
+  - {fileID: 21300000, guid: f9df20521fac5b141aa19e5b4819d014, type: 3}
+  - {fileID: 21300000, guid: 91c3a58deb678f84585dde1b08a7dd5d, type: 3}
+  - {fileID: 21300000, guid: 580919af86e21404b95e99598e1c1ebc, type: 3}
+  - {fileID: 21300000, guid: 212b58fa33fffd84d8f29e31961979e9, type: 3}
+  - {fileID: 21300000, guid: 989336ead2abf364592fcf381bd3d036, type: 3}
+  - {fileID: 21300000, guid: ad36fc570d74ffa47ad0c1e538790158, type: 3}
+  - {fileID: 21300000, guid: 8e7fd226e95127245961e78d13daeab8, type: 3}
+  - {fileID: 21300000, guid: d156a39574c742a4e8693d2f748584fa, type: 3}
+  Clouds:
+  - {fileID: 21300000, guid: 5c5a90aba0172524ca3a807202d6b07b, type: 3}
+  - {fileID: 21300000, guid: fc70628f6620e394e8e263f2366605b2, type: 3}
+  - {fileID: 21300000, guid: fcaad161d0461224cb1c62ec14704178, type: 3}
+  - {fileID: 21300000, guid: 9f1137c10c0fa5a428605a08ad35f35b, type: 3}
+  - {fileID: 21300000, guid: b8f3412bc710fac4f86db8f94d8a00c6, type: 3}
+  Palms:
+  - {fileID: 21300000, guid: a33ea790beb8e674facc04bd8380b7ef, type: 3}
+  - {fileID: 21300000, guid: 2c5e682d1e91b504b8d4660e7d8f7f74, type: 3}
+  - {fileID: 21300000, guid: de84d56431f3f754d843465bc504d792, type: 3}
+  - {fileID: 21300000, guid: d4c05ac8e851ec64d833ce0113cf2e80, type: 3}
+  - {fileID: 21300000, guid: 9417af2139327d642af55d2371bc5399, type: 3}
+  Bushes:
+  - {fileID: 21300000, guid: cc1b0d0c9e3e0ef40b0c6eea575b2913, type: 3}
+  - {fileID: 21300000, guid: 0d0edfa27a8615648b672ab538b1de86, type: 3}

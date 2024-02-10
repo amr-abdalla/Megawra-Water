@@ -1,23 +1,49 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D, IGroundedObject2D, IVelocity2DManager
+public class PhysicsBody2D
+    : MonoBehaviourBase,
+        IPhysicsBody2D,
+        IWallDetector2D,
+        IGroundedObject2D,
+        IVelocity2DManager
 {
     [Header("Gizmos")]
-    [SerializeField] GizmoDrawMode gizmoDrawMode = GizmoDrawMode.NONE;
-    [SerializeField] Color groundTangentColor = Color.red;
-    [SerializeField] Color groundNormalColor = Color.green;
-    [SerializeField] Color velocityColor = Color.blue;
-    [SerializeField] bool normalizeVelocityGizmo = true;
-    [SerializeField] [Range(0.1f, 3f)] float gizmoThickness = 2f;
+    [SerializeField]
+    GizmoDrawMode gizmoDrawMode = GizmoDrawMode.NONE;
+
+    [SerializeField]
+    Color groundTangentColor = Color.red;
+
+    [SerializeField]
+    Color groundNormalColor = Color.green;
+
+    [SerializeField]
+    Color velocityColor = Color.blue;
+
+    [SerializeField]
+    bool normalizeVelocityGizmo = true;
+
+    [SerializeField]
+    [Range(0.1f, 3f)]
+    float gizmoThickness = 2f;
 
     [Header("Physics components")]
-    [SerializeField] private Collider2D objectCollider = null;
-    [SerializeField] private Rigidbody2D objectRgbd2D = null;
-    [SerializeField] private PhysicsObject2DConfig physicsConfig = null;
+    [SerializeField]
+    private Collider2D objectCollider = null;
+
+    [SerializeField]
+    private Rigidbody2D objectRgbd2D = null;
+
+    [SerializeField]
+    private PhysicsObject2DConfig physicsConfig = null;
 
     // Contact filter allows us to filter our raycasting depending on layers for example
     private ContactFilter2D contactFilter = new ContactFilter2D();
+
+    /// <summary> Used to filter wall collisions </summary>
+    private ContactFilter2D wallContactFilter = new ContactFilter2D();
 
     // Our huit buffer will be updated by Unity's casting
     private RaycastHit2D[] hitBuffer = null;
@@ -26,7 +52,9 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
     private List<RaycastHit2D> hitBufferListX = null;
     private List<RaycastHit2D> hitBufferListY = null;
 
-    // We cache the ground transforms 
+    private List<RaycastHit2D> wallHitBufferList = null;
+
+    // We cache the ground transforms
     private Dictionary<Transform, RaycastHit2D> groundTransformsBuffer = null;
 
     // Object transfrom
@@ -34,7 +62,7 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
     private Transform initialParent = null;
 
     // Runtime values
-    private Vector2 targetVelocity = MathConstants.VECTOR_2_ZERO; // The inputed velocity 
+    private Vector2 targetVelocity = MathConstants.VECTOR_2_ZERO; // The inputed velocity
     private Vector2 velocity = MathConstants.VECTOR_2_ZERO; // The internal velocity updated by the physics system
     private bool isGrounded = false;
     private bool wasGrounded = false;
@@ -43,6 +71,10 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
     private Vector2? currentGroundHit = null;
     private Vector2? lastGroundEnterPosition = null;
     private Transform currentGroundTransform = null;
+
+    private Transform currentWallTransform = null;
+
+    private Vector2 currentWallNormal = MathConstants.VECTOR_2_ZERO;
     private int? currentGroundLayer = null;
     private Vector2 groundNormal = MathConstants.VECTOR_2_ZERO;
     private Ground2D currentGroundCmpt = null;
@@ -54,17 +86,20 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
     {
         base.Awake();
 
-
-        if (null != physicsConfig) physicsConfig = Instantiate<PhysicsObject2DConfig>(physicsConfig);
-        if(null == objectRgbd2D) objectRgbd2D = GetComponent<Rigidbody2D>();
-        if (null == objectCollider) objectCollider = GetComponent<Collider2D>();
+        if (null != physicsConfig)
+            physicsConfig = Instantiate<PhysicsObject2DConfig>(physicsConfig);
+        if (null == objectRgbd2D)
+            objectRgbd2D = GetComponent<Rigidbody2D>();
+        if (null == objectCollider)
+            objectCollider = GetComponent<Collider2D>();
 
         initBody();
     }
 
     private void FixedUpdate()
     {
-        if (null == hitBuffer) return;
+        if (null == hitBuffer)
+            return;
 
         wasGrounded = isGrounded;
         wasHittingWall = isHittingWall;
@@ -78,14 +113,20 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
         // Our position delta at the current physics frame (current velocity * dt). This will be used for our movement.
         Vector2 deltaPosition = velocity * Time.fixedDeltaTime;
+        Vector2 groundTangent = new Vector2(groundNormal.y, -groundNormal.x);
+        Vector2 velocityAlongGround = groundTangent * velocity.x;
 
-        // To make it easier to deal with slopes, we call updateMovement twice : 
+        velocityAlongGround = calculateCollidedWallVelocity(
+            velocityAlongGround * Time.fixedDeltaTime,
+            velocityAlongGround
+        );
+
+        // To make it easier to deal with slopes, we call updateMovement twice :
         // once for x, once for y, with different parameters involved...
 
-        // Horizontal movement takes a vector that includes the ground normal, 
+        // Horizontal movement takes a vector that includes the ground normal,
         // so our entity can move along the ground's tangent
-        Vector2 groundTangent = new Vector2(groundNormal.y, -groundNormal.x);
-        Vector2 xMov = updateMovement(groundTangent * deltaPosition.x, false);
+        Vector2 xMov = updateMovement(velocityAlongGround * Time.fixedDeltaTime, false);
         objectRgbd2D.position += new Vector2(xMov.x, xMov.y);
 
         // Vertical movement takes the up vector scaled with our deltaPosition.
@@ -103,7 +144,8 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
     public ICollisions2DConfig CollisionsConfig => physicsConfig;
 
-    public Vector2 GravityVector => (null == physicsConfig ? Physics2D.gravity : physicsConfig.GravityVector);
+    public Vector2 GravityVector =>
+        (null == physicsConfig ? Physics2D.gravity : physicsConfig.GravityVector);
 
     #endregion
 
@@ -150,9 +192,20 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
     #region IWallDetector
 
+    public void toggleCollisionDetection(bool i_enable)
+    {
+        if (null == physicsConfig)
+            return;
+        physicsConfig.IsCollisionEnabled = i_enable;
+    }
+
     public Physics2DWallEvent OnWallStatusChanged { get; set; }
 
     public bool IsHittingWall => isHittingWall;
+
+    public Transform CurrentWallTransform => currentWallTransform;
+
+    public Vector2 WallNormal => currentWallNormal;
 
     #endregion
 
@@ -179,27 +232,38 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
     #region MUTABLE API
 
     [ExposePublicMethod]
-    public void SetGravityModifier(float i_gravityModifier) { if (null != physicsConfig) physicsConfig.SetGravityModifier(i_gravityModifier); }
+    public void SetGravityModifier(float i_gravityModifier)
+    {
+        if (null != physicsConfig)
+            physicsConfig.SetGravityModifier(i_gravityModifier);
+    }
 
     [ExposePublicMethod]
-    public void ResetGravityModifier() { if (null != physicsConfig) physicsConfig.ResetGravityModifier(); }
+    public void ResetGravityModifier()
+    {
+        if (null != physicsConfig)
+            physicsConfig.ResetGravityModifier();
+    }
 
     [ExposePublicMethod]
     public void ResetToInitialState()
     {
         resetValues();
-        if (null != physicsConfig) physicsConfig.ResetToInitialState();
+        if (null != physicsConfig)
+            physicsConfig.ResetToInitialState();
     }
 
     #endregion
 
     #region PROTECTED VIRTUAL
 
-    protected virtual bool canCheckForCollision(ref Vector2 i_move, bool i_yMovement, RaycastHit2D i_hit)
+    protected virtual bool canCheckForCollision(
+        ref Vector2 i_move,
+        bool i_yMovement,
+        RaycastHit2D i_hit
+    )
     {
-        int layer = i_hit.collider.gameObject.layer;
-        LayerMask oneWayGroundLayers = physicsConfig.OneWayGroundLayerMask; 
-        bool isOneWay = oneWayGroundLayers == (oneWayGroundLayers | (1 << layer));
+        bool isOneWay = isOneWayCollision(i_hit.collider);
         bool checkForCollsions = true;
         float shellRadius = physicsConfig.ShellRadius;
 
@@ -207,17 +271,23 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
         {
             if (i_yMovement)
             {
-                if (VelocityY > 0.1f) return false;
-                if(null == objectCollider)
+                if (VelocityY > 0.1f)
+                    return false;
+                if (null == objectCollider)
                 {
-                    Debug.LogWarning("PhysicsBody2D::canCheckForCollision -> cannot check one way ground collisions if collider isn't assigned.");
+                    Debug.LogWarning(
+                        "PhysicsBody2D::canCheckForCollision -> cannot check one way ground collisions if collider isn't assigned."
+                    );
                     return false;
                 }
 
                 float hitY = i_hit.point.y;
                 float boundsY = objectCollider.bounds.min.y;
 
-                if (hitY /*+ shellRadius*/ > boundsY)
+                if (
+                    hitY /*+ shellRadius*/
+                    > boundsY
+                )
                     checkForCollsions = false;
             }
             else
@@ -234,19 +304,11 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
     protected virtual void onWallHitExit() { }
 
-    protected virtual void onExitGround()
-    {
-    }
+    protected virtual void onExitGround() { }
 
-    protected virtual void onEnterGround()
-    {
-    }
+    protected virtual void onEnterGround() { }
 
-    protected virtual void onCurrentGroundUpdated()
-    {
-
-
-    }
+    protected virtual void onCurrentGroundUpdated() { }
 
     #endregion
 
@@ -262,10 +324,164 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
     int cast(Vector2 i_direction, float i_distance, RaycastSource i_raycastSource)
     {
         int hitCount = 0;
-        if (i_raycastSource == RaycastSource.RIGIDBODY) hitCount = null == objectRgbd2D ? 0 : objectRgbd2D.Cast(i_direction, contactFilter, hitBuffer, i_distance);
-        else if (i_raycastSource == RaycastSource.COLLIDER) hitCount = null == objectCollider ? 0 : objectCollider.Cast(i_direction, contactFilter, hitBuffer, i_distance);
+        if (i_raycastSource == RaycastSource.RIGIDBODY)
+            hitCount =
+                null == objectRgbd2D
+                    ? 0
+                    : objectRgbd2D.Cast(i_direction, contactFilter, hitBuffer, i_distance);
+        else if (i_raycastSource == RaycastSource.COLLIDER)
+            hitCount =
+                null == objectCollider
+                    ? 0
+                    : objectCollider.Cast(i_direction, contactFilter, hitBuffer, i_distance);
 
         return hitCount;
+    }
+
+    private WallCollisionData checkForWallCollision(Vector2 i_xmove)
+    {
+        if (Mathf.Abs(i_xmove.magnitude) <= Physics2DConstants.EPSILON_VELOCITY)
+            return checkForIdleWallCollisions();
+        else
+            return checkForMovingWallCollision(i_xmove);
+    }
+
+    private WallCollisionData checkForMovingWallCollision(Vector2 i_xmove)
+    {
+        int hitCount = cast(
+            i_xmove,
+            i_xmove.magnitude + physicsConfig.ShellRadius,
+            physicsConfig.RaycastSource
+        );
+
+        foreach (RaycastHit2D hit in hitBuffer)
+        {
+            if (false == hit)
+                continue;
+
+            if (isWallCollision(hit))
+            {
+                // isHittingWall = true;
+                return new WallCollisionData(hit.normal, hit.transform, hit.point);
+            }
+        }
+
+        return WallCollisionData.NoCollision;
+    }
+
+    private Vector2 calculateCollidedWallVelocity(Vector2 i_xmove, Vector2 currentVelocity)
+    {
+        WallCollisionData wallCollision = checkForWallCollision(i_xmove);
+
+        isHittingWall = wallCollision.IsHittingWall;
+        currentWallTransform = wallCollision.CurrentWallTransform;
+
+        currentWallNormal = wallCollision.WallNormal;
+
+        Vector2 hitPoint = wallCollision.Point;
+
+        if (!isHittingWall || null == currentWallTransform)
+            return currentVelocity;
+
+        Vector2 wallVelocity = MathConstants.VECTOR_2_ZERO;
+        // get PhysicsBody2D of wall
+        PhysicsBody2D wallPhysicsBody2D = currentWallTransform.GetComponent<PhysicsBody2D>();
+        if (null != wallPhysicsBody2D)
+            wallVelocity = wallPhysicsBody2D.Velocity2D;
+        else
+        {
+            Rigidbody2D wallRigidbody2D = currentWallTransform.GetComponent<Rigidbody2D>();
+            if (null != wallRigidbody2D)
+                wallVelocity = wallRigidbody2D.velocity;
+        }
+
+        // do nothing if wall is moving away from us or if we are moving away from wall with a velocity greater than wall's
+
+        if (
+            Vector2.Dot(currentVelocity, wallVelocity.normalized)
+                <= Physics2DConstants.EPSILON_VELOCITY
+            && Vector2.Dot(currentWallNormal, currentVelocity.normalized) > 0f
+        )
+        {
+            isHittingWall = false;
+            return currentVelocity;
+        }
+
+        // project wall's velocity on our velocity
+
+        if (
+            Vector2.Dot(currentVelocity, wallVelocity.normalized) >= 1f
+            && Vector2.Dot(currentWallNormal, currentVelocity.normalized) > 0f
+        )
+        {
+            isHittingWall = false;
+            return currentVelocity;
+        }
+        // check if we will still be inside the wall if we do not add wall's velocity to ours
+
+
+        return wallVelocity;
+    }
+
+    private bool isWallCollision(RaycastHit2D i_hit)
+    {
+        // if it isn't a ground collision then it must be a wall collision
+
+        return i_hit.normal.y < physicsConfig.MinGroundNormalY
+            && !isOneWayCollision(i_hit.collider);
+
+        // >>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<
+        // >>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<
+        // TODO: LOOK BACK AT THIS LATER. We're disabling wall collision on one way platforms for now, as it is causing inconsistencies
+        //       when bumping horizontally into them vs jumping from below them.
+        //       {I.E: bumping into the side will trigger x_movement logic, causing the player to be pushed back, but jumping from below will not}
+        // >>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<
+        // >>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<
+    }
+
+    private WallCollisionData checkForIdleWallCollisions()
+    {
+        float minWallNormalX = physicsConfig.MinWallNormalX;
+
+        RaycastSource raycastSource = physicsConfig.RaycastSource;
+
+        hitBuffer = new RaycastHit2D[physicsConfig.CollisionBufferSize];
+        // right
+        int hitCount = cast(
+            MathConstants.VECTOR_2_RIGHT,
+            physicsConfig.IdleWallDetectionRadius,
+            raycastSource
+        );
+
+        wallHitBufferList = hitBuffer.ToList();
+
+        hitCount += cast(
+            MathConstants.VECTOR_2_LEFT,
+            physicsConfig.IdleWallDetectionRadius,
+            raycastSource
+        );
+
+        wallHitBufferList.AddRange(hitBuffer);
+
+        // left
+
+        for (int i = 0; i < hitCount; i++)
+        {
+            RaycastHit2D hit = wallHitBufferList[i];
+            if (true == hit && isWallCollision(hit))
+            {
+                return new WallCollisionData(hit.normal, hit.transform, hit.point);
+            }
+        }
+
+        return WallCollisionData.NoCollision;
+    }
+
+    private bool isOneWayCollision(Collider2D i_collider)
+    {
+        int layer = i_collider.gameObject.layer;
+        LayerMask oneWayGroundLayers = physicsConfig.OneWayGroundLayerMask;
+        return oneWayGroundLayers == (oneWayGroundLayers | (1 << layer));
     }
 
     private Vector2 updateMovement(Vector2 i_move, bool i_yMovement)
@@ -282,6 +498,7 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
             Vector2 currentNormal;
             RaycastHit2D hit;
             float minGroundNormalY = physicsConfig.MinGroundNormalY;
+            float minWallNormalX = physicsConfig.MinWallNormalX;
 
             // We cast in the move direction (either in front of us if we are checking collisions on x or under us if we are checking collisions on y)
             // We also add a shell radius to the ray length. This is to make sure we don't get stuck in another collider.
@@ -296,7 +513,7 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
                 if (true == hit)
                 {
-                    // We check the normals of our hits in order to determine the angle of the collision 
+                    // We check the normals of our hits in order to determine the angle of the collision
                     currentNormal = hit.normal;
                     hitBufferList.Add(hit);
 
@@ -335,8 +552,14 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
                             if (false == i_yMovement)
                             {
-                                if (Mathf.Abs(velocity.x) <= Physics2DConstants.EPSILON_VELOCITY) velocity.x = 0f;
-                                isHittingWall = targetVelocity.x != 0f && velocity.x == 0f;
+                                if (Mathf.Abs(velocity.x) <= Physics2DConstants.EPSILON_VELOCITY)
+                                    velocity.x = 0f;
+                                // isHittingWall = targetVelocity.x != 0f && velocity.x == 0f;
+
+                                // if (true == isHittingWall)
+                                // {
+                                //     currentWallTransform = hit.transform;
+                                // }
                             }
                         }
 
@@ -354,25 +577,32 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
     void triggerWallEvents()
     {
-        if (null == physicsConfig) return;
-        if (false == physicsConfig.IsCollisionEnabled) return;
+        if (null == physicsConfig)
+            return;
+        if (false == physicsConfig.IsCollisionEnabled)
+            return;
 
         if (false == wasHittingWall && true == isHittingWall)
         {
-            OnWallStatusChanged?.Invoke(this);
+            // currentWallTransform = null;
+            OnWallStatusChanged?.Invoke(
+                new WallCollisionData(currentWallNormal, currentWallTransform, Vector2.zero)
+            );
             onWallHitEnter();
         }
         else if (true == wasHittingWall && false == isHittingWall)
         {
-            OnWallStatusChanged?.Invoke(this);
+            OnWallStatusChanged?.Invoke(WallCollisionData.NoCollision);
             onWallHitExit();
         }
     }
 
     void triggerGroundedEvents()
     {
-        if (null == physicsConfig) return;
-        if (false == physicsConfig.IsCollisionEnabled) return;
+        if (null == physicsConfig)
+            return;
+        if (false == physicsConfig.IsCollisionEnabled)
+            return;
 
         if (false == isGrounded && true == wasGrounded)
         {
@@ -386,7 +616,9 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
         float dist = float.MaxValue;
         Transform newTransform = currentGroundTransform;
-        float castCentroidX, hitPosX, currDist;
+        float castCentroidX,
+            hitPosX,
+            currDist;
         foreach (KeyValuePair<Transform, RaycastHit2D> pair in groundTransformsBuffer)
         {
             castCentroidX = pair.Value.centroid.x;
@@ -402,7 +634,8 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
         }
 
         bool didGroundTransformChange = currentGroundTransform != newTransform;
-        if (null != newTransform) currentGroundLayer = newTransform.gameObject.layer;
+        if (null != newTransform)
+            currentGroundLayer = newTransform.gameObject.layer;
         currentGroundTransform = newTransform;
 
         if (null != currentGroundTransform)
@@ -410,13 +643,13 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
             if (true == isGrounded && false == wasGrounded)
             {
                 // Moving ground WIP
-               /* LayerMask movingGroundLayers = physicsConfig.MovingGroundLayerMask;
-                bool isMoving = movingGroundLayers == (movingGroundLayers | (1 << currentGroundLayer));
-
-                if (true == isMoving)
-                    objectTransform.SetParent(currentGroundTransform);
-                else
-                    objectTransform.SetParent(initialParent);*/
+                /* LayerMask movingGroundLayers = physicsConfig.MovingGroundLayerMask;
+                 bool isMoving = movingGroundLayers == (movingGroundLayers | (1 << currentGroundLayer));
+ 
+                 if (true == isMoving)
+                     objectTransform.SetParent(currentGroundTransform);
+                 else
+                     objectTransform.SetParent(initialParent);*/
 
                 OnGroundedStatusChanged?.Invoke(this);
                 onEnterGround();
@@ -441,8 +674,10 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
     private void initBody()
     {
-        if (null == physicsConfig) return;
-        if (null == objectRgbd2D) return;
+        if (null == physicsConfig)
+            return;
+        if (null == objectRgbd2D)
+            return;
 
         resetValues();
 
@@ -460,14 +695,21 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
     }
 
     /// <summary>
-    /// This setting will filter the layers with which we want check collisions 
+    /// This setting will filter the layers with which we want check collisions
     /// </summary>
     private void setContactFilters()
     {
         contactFilter = new ContactFilter2D();
         contactFilter.useTriggers = false;
-        if(null != physicsConfig) contactFilter.SetLayerMask(physicsConfig.GroundLayerMask);
+        if (null != physicsConfig)
+            contactFilter.SetLayerMask(physicsConfig.GroundLayerMask);
         contactFilter.useLayerMask = true;
+
+        wallContactFilter = new ContactFilter2D();
+        wallContactFilter.useTriggers = false;
+        if (null != physicsConfig)
+            wallContactFilter.SetLayerMask(physicsConfig.WallLayerMask);
+        wallContactFilter.useLayerMask = true;
     }
 
     void resetValues()
@@ -498,8 +740,14 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
         if (velocity != MathConstants.VECTOR_2_ZERO)
         {
             Vector3 vel = new Vector3(velocity.x, velocity.y);
-            if (true == normalizeVelocityGizmo) vel.Normalize();
-            GizmoUtility.DrawArrow(transform.position, transform.position + vel, gizmoThickness, velocityColor);
+            if (true == normalizeVelocityGizmo)
+                vel.Normalize();
+            GizmoUtility.DrawArrow(
+                transform.position,
+                transform.position + vel,
+                gizmoThickness,
+                velocityColor
+            );
         }
 
         if (null != currentGroundHit)
@@ -510,7 +758,12 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
             if (true == isGrounded)
             {
-                GizmoUtility.DrawArrow(hit, hit + groundTangent, gizmoThickness, groundTangentColor);
+                GizmoUtility.DrawArrow(
+                    hit,
+                    hit + groundTangent,
+                    gizmoThickness,
+                    groundTangentColor
+                );
                 GizmoUtility.DrawArrow(hit, hit + normal, gizmoThickness, groundNormalColor);
             }
         }
@@ -518,12 +771,14 @@ public class PhysicsBody2D : MonoBehaviourBase, IPhysicsBody2D, IWallDetector2D,
 
     void OnDrawGizmos()
     {
-        if (gizmoDrawMode == GizmoDrawMode.ALWAYS) drawGizmos();
+        if (gizmoDrawMode == GizmoDrawMode.ALWAYS)
+            drawGizmos();
     }
 
     void OnDrawGizmosSelected()
     {
-        if (gizmoDrawMode == GizmoDrawMode.ON_SELECTED) drawGizmos();
+        if (gizmoDrawMode == GizmoDrawMode.ON_SELECTED)
+            drawGizmos();
     }
 
 #endif

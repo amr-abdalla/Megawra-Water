@@ -1,20 +1,33 @@
+using System;
 using UnityEngine;
 
 public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 {
-    [SerializeField] private AngularAccelerationData angularAccelerationData;
+    [SerializeField]
+    private AngularAccelerationData angularAccelerationData;
 
-    [SerializeField] private Transform ArrowSprite;
-    [SerializeField] private DragSettingsData dragSettingsData;
+    [SerializeField]
+    private Transform VisualObject;
+
+    [SerializeField]
+    private DragSettingsData dragSettingsData;
 
     [Header("Max values")]
-    [SerializeField] private float minSpeed = 1f;
-    [SerializeField] private float maxSpeed = 10f;
-    [SerializeField] private float maxDrag = 10f;
-    [SerializeField] private float timeToMaxDrag = 1f;
+    [SerializeField]
+    private float minSpeed = 1f;
+
+    [SerializeField]
+    private float maxSpeed = 10f;
+
+    [SerializeField]
+    private float maxDrag = 10f;
+
+    [SerializeField]
+    private float timeToMaxDrag = 1f;
 
     [Header("Initial values")]
-    [SerializeField] private float initialDrag = 0f;
+    [SerializeField]
+    private float initialDrag = 0f;
 
     private Rigidbody2D rigidBody;
 
@@ -22,28 +35,40 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
     private float currentDragTimer = 0f;
     float currentAngularVelocity = 0f;
     private Vector2 rotateDirection = Vector2.zero;
-    public Vector2 moveDirection = Vector2.down;
+    private Vector2 moveDirection = Vector2.down;
 
+    [SerializeField] SpriteFrameSwapper dashAnimation;
+    [SerializeField] SpriteFrameSwapper idleAnimation;
+
+    [SerializeField] private BonesHandler bonesHandler;
     #region UNITY
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         resetToInitialState();
+        dashAnimation.OnLastFrameReached += OnFinishDashAnimation; // to be removed
     }
 
-    private void Update()
+	private void OnFinishDashAnimation()
 	{
-        // Debug.DrawRay(transform.position, rigidBody.velocity, Color.red);
-        debugMovement();
+        dashAnimation.Stop();
+        idleAnimation.ResetAnimation();
+        idleAnimation.Play();
 	}
+
+	private void Update()
+    {
+        // Debug.DrawRay(transform.position, rigidBody.velocity, Color.red);
+    }
 
     void OnDisable()
     {
         resetToInitialState();
     }
 
-    void debugMovement(){
+    void applyRotation()
+    {
         // draws a gizmo of a small triangle pointing towards the direction of movement
         // Vector3[] trianglePoints = new Vector3[3];
 
@@ -56,15 +81,21 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
         // Debug.DrawLine(trianglePoints[1], trianglePoints[2], Color.magenta);
         // Debug.DrawLine(trianglePoints[2], trianglePoints[0], Color.magenta);
 
-            // set the position and rotation of Arrow Sprite to match the moveDirection
+        // set the position and rotation of Arrow Sprite to match the moveDirection
 
-       ArrowSprite.position = transform.position+(Vector3)moveDirection * 0.8f;
-       ArrowSprite.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, moveDirection));
+        //VisualObject.position = transform.position + (Vector3)moveDirection * 0.8f;
+        var prevRot = transform.rotation;
+        transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, moveDirection));
+ 
+        var diff = Vector2.SignedAngle(prevRot * Vector2.up, transform.rotation * Vector2.up);
 
+        Debug.Log(diff);
+
+        var t = Mathf.InverseLerp(-4.39f, 4.39f, diff);
+        Debug.Log(t);
+        bonesHandler.SetBones(t);
 
     }
-
-    
 
     private void FixedUpdate()
     {
@@ -86,6 +117,8 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
         {
             onDidStopMoving();
         }
+
+        applyRotation();
     }
 
     #endregion
@@ -96,30 +129,19 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
     [ExposePublicMethod]
     public void Push(float force = 100f)
     {
-        Push(force, moveDirection);
+        rigidBody.drag = initialDrag;
 
         // if velocity isn't 0, set move direction to velocity's direction
 
 
         // match the moveDirection to the forward direction of the rigidbody's rotation
         // moveDirection = rigidBody.transform.up;
-    }
 
-    public void ApplyCancellingForce()
-	{
-        Push(CurrentVelocity.magnitude, -moveDirection);
-    }
 
-    public void SetMoveDirection(Vector2 value)
-	{
-        moveDirection = value;
-	}
-
-    public void Push(float force, Vector2 direction)
-    {
-        rigidBody.drag = initialDrag;
-
-        rigidBody.AddForce(direction * force, ForceMode2D.Impulse);
+        rigidBody.AddForce(moveDirection * force, ForceMode2D.Impulse);
+        idleAnimation.Stop();
+        dashAnimation.ResetAnimation();
+        dashAnimation.Play();
     }
 
     [ExposePublicMethod]
@@ -134,16 +156,16 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
         rotateDirection = direction;
     }
 
-    public Vector2 CurrentVelocity => null == rigidBody ? MathConstants.VECTOR_2_ZERO : rigidBody.velocity;
+    public Vector2 CurrentVelocity =>
+        null == rigidBody ? MathConstants.VECTOR_2_ZERO : rigidBody.velocity;
 
-    public Vector2 MoveDirection => moveDirection;
-	#endregion
+    #endregion
 
-	#region PRIVATE
+    #region PRIVATE
 
-	void onDidStopMoving()
+    void onDidStopMoving()
     {
-        // Code review : this could trigger an event to tell all listeners 
+        // Code review : this could trigger an event to tell all listeners
         // that object stopped moving (+ start whataver behaviour should happen in that case)
     }
 
@@ -174,12 +196,20 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
     private float ComputeAngularVelocity(float i_angleSign)
     {
         if (i_angleSign == 0f)
-            currentAngularVelocity = AccelerationUtility.descelerate(currentAngularVelocity, angularAccelerationData.angularDesceleration);
+            currentAngularVelocity = AccelerationUtility.descelerate(
+                currentAngularVelocity,
+                angularAccelerationData.angularDesceleration
+            );
         else
-            currentAngularVelocity = AccelerationUtility.accelerate(i_angleSign, currentAngularVelocity, angularAccelerationData.maxAngularVelocity, angularAccelerationData.angularAcceleration);
+            currentAngularVelocity = AccelerationUtility.accelerate(
+                i_angleSign,
+                currentAngularVelocity,
+                angularAccelerationData.maxAngularVelocity,
+                angularAccelerationData.angularAcceleration
+            );
 
         return currentAngularVelocity;
     }
 
-	#endregion
+    #endregion
 }

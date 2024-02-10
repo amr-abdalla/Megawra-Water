@@ -1,0 +1,11 @@
+version: 2
+tpsheetFileNames:
+- Assets/Animations/Shabba/Shabba_Anim.tpsheet
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
+textureFileNames:
+- Assets/Animations/Shabba/Shabba_Anim.png
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.png
+normalmapFileNames:
+- 
+- Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+enableDebugOutput: 0
