@@ -83,11 +83,11 @@ Material:
     - _WaveFrequency: 5
     - _WaveHeight: 2
     - _WaveImpactExtent: 0.255
-    - _WaveSpeed: 3
+    - _WaveSpeed: 4
     - _ZWrite: 1
     - _waveImpactExtent: 0.5
     m_Colors:
-    - _Color: {r: 0.53755784, g: 0.6296035, b: 0.9433962, a: 1}
+    - _Color: {r: 0.5642577, g: 0.6494889, b: 0.9433962, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _WaveCollisionPoint: {r: 0.9333333, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
