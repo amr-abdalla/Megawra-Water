@@ -101,7 +101,7 @@ Shader "WaterShader"
 
 			float4 frag(v2f i) : SV_Target
 			{
-				return float4(i.step,i.step,0,1);
+				//return float4(i.step,i.step,0,1);
 
 				float4 col = tex2D(_MainTex, i.uv);
 				col.a *= _Alpha;
