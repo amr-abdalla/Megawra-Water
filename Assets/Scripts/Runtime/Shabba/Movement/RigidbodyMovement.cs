@@ -40,6 +40,7 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
     [SerializeField] SpriteFrameSwapper dashAnimation;
     [SerializeField] SpriteFrameSwapper idleAnimation;
 
+    [SerializeField] private BonesHandler bonesHandler;
     #region UNITY
 
     void Start()
@@ -83,7 +84,17 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
         // set the position and rotation of Arrow Sprite to match the moveDirection
 
         //VisualObject.position = transform.position + (Vector3)moveDirection * 0.8f;
+        var prevRot = transform.rotation;
         transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, moveDirection));
+ 
+        var diff = Vector2.SignedAngle(prevRot * Vector2.up, transform.rotation * Vector2.up);
+
+        Debug.Log(diff);
+
+        var t = Mathf.InverseLerp(-4.39f, 4.39f, diff);
+        Debug.Log(t);
+        bonesHandler.SetBones(t);
+
     }
 
     private void FixedUpdate()
