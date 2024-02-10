@@ -6334,13 +6334,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pattern:
     tiles:
-    - {fileID: 11400000, guid: 5aa6088a57e12a84cb0477ee07c3a411, type: 2}
     - {fileID: 11400000, guid: 280fa80176a151445a19b80d1a0e3a1a, type: 2}
+    - {fileID: 11400000, guid: 5aa6088a57e12a84cb0477ee07c3a411, type: 2}
     bounds: {x: 1, y: 2}
   followedObject: {fileID: 1576811030}
-  spawnDistance: 10
+  spawnDistance: 100
   tilemap: {fileID: 1257803893}
   yAnchor: {fileID: 1617982631}
+  cellWidth: 5
+  cellHeight: 5
 --- !u!1 &1287899432
 GameObject:
   m_ObjectHideFlags: 0

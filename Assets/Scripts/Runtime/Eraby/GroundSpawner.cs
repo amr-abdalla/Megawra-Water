@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 struct TilePattern
 {
     public Tile[] tiles;
-    public Vector2 bounds;
+    public Vector2Int bounds;
 }
 
 public class GroundSpawner : MonoBehaviour
@@ -27,6 +27,12 @@ public class GroundSpawner : MonoBehaviour
 
     [SerializeField]
     Transform yAnchor = null;
+
+    [SerializeField]
+    float cellWidth = 1;
+
+    [SerializeField]
+    float cellHeight = 10;
 
     Vector3Int WorldPosToCellCoord(float x, float y)
     {
@@ -56,7 +62,7 @@ public class GroundSpawner : MonoBehaviour
         // x_dir is true if the pattern is to be spawned to the right
         float x = lastSpawnPosition.x;
         // lambda function to check if x reaches the x_pos
-        Func<float, bool> check = (x) => x_dir ? x < x_pos : x > x_pos;
+        bool check(float x) => x_dir ? x < x_pos : x > x_pos;
         while (check(x))
         {
             // pattern.bounds is the shape of the pattern
@@ -67,8 +73,8 @@ public class GroundSpawner : MonoBehaviour
                     // pattern.tiles is the tiles to be spawned
                     tilemap.SetTile(
                         WorldPosToCellCoord(
-                            x_dir ? (int)x + i : (int)x - i,
-                            (int)(j + yAnchor.position.y)
+                            x_dir ? (int)x + (i * cellWidth) : (int)x - (i * cellWidth),
+                            (int)(-(j * cellHeight) + yAnchor.position.y)
                         ),
                         pattern.tiles[i + j * (int)pattern.bounds.x]
                     );
@@ -76,9 +82,10 @@ public class GroundSpawner : MonoBehaviour
             }
 
             if (x_dir)
-                x += pattern.bounds.x;
+                x += cellWidth * pattern.bounds.x;
             else
-                x -= pattern.bounds.x;
+                x -= cellWidth * pattern.bounds.x;
         }
+        lastSpawnPosition = new Vector3(x, lastSpawnPosition.y, lastSpawnPosition.z);
     }
 }
