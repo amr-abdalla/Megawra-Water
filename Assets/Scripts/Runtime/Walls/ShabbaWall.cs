@@ -15,7 +15,7 @@ public class ShabbaWall : MonoBehaviour
 			player.ApplyCancellingForce();
 
 			normal = transform.position.x > collision.transform.position.x ? Vector2.left : Vector2.right ;
-			playerVelocity = -player.moveDirection;
+			playerVelocity = -player.MoveDirection;
 			pushDirection = -Vector2.Reflect(playerVelocity, normal).normalized;
 
 			player.SetMoveDirection(pushDirection);
@@ -31,23 +31,23 @@ public class ShabbaWall : MonoBehaviour
 		}
 	}
 
-//	private void OnDrawGizmos()
-//	{
-//		Color col = Gizmos.color;
+	//	private void OnDrawGizmos()
+	//	{
+	//		Color col = Gizmos.color;
 
-//		Gizmos.color = Color.red;
+	//		Gizmos.color = Color.red;
 
-//		Gizmos.DrawLine(transform.position, (Vector2)transform.position + pushDirection.normalized * 10f);
+	//		Gizmos.DrawLine(transform.position, (Vector2)transform.position + pushDirection.normalized * 10f);
 
-//		Gizmos.color = Color.blue;
+	//		Gizmos.color = Color.blue;
 
-//		Gizmos.DrawLine(transform.position, (Vector2)transform.position + normal.normalized * 10f);
+	//		Gizmos.DrawLine(transform.position, (Vector2)transform.position + normal.normalized * 10f);
 
-//		Gizmos.color = Color.green;
+	//		Gizmos.color = Color.green;
 
-//		Gizmos.DrawLine(transform.position, (Vector2)transform.position + playerVelocity.normalized * 10f);
+	//		Gizmos.DrawLine(transform.position, (Vector2)transform.position + playerVelocity.normalized * 10f);
 
 
-//		Gizmos.color = col;
-//	}
-//}
+	//		Gizmos.color = col;
+	//	}
+}
