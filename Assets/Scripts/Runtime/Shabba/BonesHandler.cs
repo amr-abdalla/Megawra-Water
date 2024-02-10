@@ -26,8 +26,6 @@ public class BonesHandler : MonoBehaviour
 		float bone3y = Mathf.Lerp(0.037f, -0.037f, t);
 		float bone4y = Mathf.Lerp(0.1f, -0.1f, t);
 
-		Debug.Log(new Vector3(bone2y, bone3y, bone4y));
-
 		bone2.localPosition = new(0.543f, bone2y);
 		bone3.localPosition = new(0.462f, bone3y);
 		bone4.localPosition = new(0.355f, bone4y);

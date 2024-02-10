@@ -88,10 +88,7 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 
 		var diff = Vector2.SignedAngle(prevRot * Vector2.up, transform.rotation * Vector2.up);
 
-		Debug.Log(diff);
-
 		var t = Mathf.InverseLerp(-4.39f, 4.39f, diff);
-		Debug.Log(t);
 		bonesHandler.SetBones(t);
 
 	}

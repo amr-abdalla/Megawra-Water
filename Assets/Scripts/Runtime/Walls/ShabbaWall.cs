@@ -9,6 +9,7 @@ public class ShabbaWall : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
+		Debug.Log("col");
 		if (collision.transform.TryGetComponent(out RigidbodyMovement player))
 		{
 			Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
@@ -25,6 +26,7 @@ public class ShabbaWall : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		Debug.Log("trig");
 		if (collision.transform.TryGetComponent(out RigidbodyMovement player))
 		{
 			playerEnterVelocity = player.CurrentVelocity;
