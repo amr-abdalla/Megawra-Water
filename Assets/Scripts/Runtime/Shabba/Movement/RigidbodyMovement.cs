@@ -51,6 +51,7 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 
 	private void OnFinishDashAnimation()
 	{
+		dashAnimation.SetAnimationSpeed(1f);
 		dashAnimation.Stop();
 		idleAnimation.ResetAnimation();
 		idleAnimation.Play();
@@ -88,10 +89,35 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 
 		var diff = Vector2.SignedAngle(prevRot * Vector2.up, transform.rotation * Vector2.up);
 
-		var t = Mathf.InverseLerp(-4.39f, 4.39f, diff);
+		var t = Mathf.InverseLerp(0, 4.39f, Mathf.Abs(diff));
+		if(diff < 0)
+		{
+			if(VisualObject.localRotation != Quaternion.Euler(0, 180, 0))
+			{
+				idleAnimation.Stop();
+				dashAnimation.SetAnimationSpeed(multiplier);
+				dashAnimation.Play();
+			}
+
+			VisualObject.localRotation = Quaternion.Euler(0, 180, 0);
+		}
+		else if (diff > 0)
+		{
+			if (VisualObject.localRotation != Quaternion.Euler(0, 0, 0))
+			{
+				idleAnimation.Stop();
+				dashAnimation.SetAnimationSpeed(multiplier);
+				dashAnimation.Play();
+			}
+
+			VisualObject.localRotation = Quaternion.Euler(0, 0, 0);
+		}
+
 		bonesHandler.SetBones(t);
 
 	}
+
+	[SerializeField] private float multiplier = 1.5f;
 
 	private void FixedUpdate()
 	{

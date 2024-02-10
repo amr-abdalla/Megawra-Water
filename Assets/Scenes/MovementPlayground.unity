@@ -428,6 +428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 619463765}
   parallaxFactor: 0.7
+  parallaxYFactor: 0.9
 --- !u!1001 &466927560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1097,6 +1098,7 @@ MonoBehaviour:
   dashAnimation: {fileID: 1342217069}
   idleAnimation: {fileID: 1342217068}
   bonesHandler: {fileID: 758519698}
+  multiplier: 1.5
 --- !u!58 &758519696
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1110,9 +1112,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.47305536}
   serializedVersion: 2
-  m_Radius: 0.28
+  m_Radius: 0.7530554
 --- !u!114 &758519697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1626,6 +1628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 619463765}
   parallaxFactor: 0.8
+  parallaxYFactor: 0.9
 --- !u!1 &898259081
 GameObject:
   m_ObjectHideFlags: 0
@@ -15900,6 +15903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 619463765}
   parallaxFactor: 0.97
+  parallaxYFactor: 0.9
 --- !u!1 &2072467842
 GameObject:
   m_ObjectHideFlags: 0

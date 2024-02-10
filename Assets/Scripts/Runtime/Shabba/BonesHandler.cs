@@ -22,9 +22,9 @@ public class BonesHandler : MonoBehaviour
 
 	public void SetBones(float t)
 	{
-		float bone2y = Mathf.Lerp(-0.157f, 0.157f, t);
-		float bone3y = Mathf.Lerp(0.037f, -0.037f, t);
-		float bone4y = Mathf.Lerp(0.1f, -0.1f, t);
+		float bone2y = Mathf.Lerp(0, 0.157f, t);
+		float bone3y = Mathf.Lerp(0, -0.037f, t);
+		float bone4y = Mathf.Lerp(0, -0.1f, t);
 
 		bone2.localPosition = new(0.543f, bone2y);
 		bone3.localPosition = new(0.462f, bone3y);
