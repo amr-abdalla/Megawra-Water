@@ -1,9 +1,8 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class ErabyLandingState : ErabyAbstractLandingState
 {
-
     private float maxLandingTime = 1f;
 
     #region STATE API
@@ -11,14 +10,23 @@ public class ErabyLandingState : ErabyAbstractLandingState
     {
         Debug.Log("Enter landing");
 
-        dataProvider.launchVelocityY = dataProvider.bounceVelocityMultiplier.y * dataProvider.launchVelocityY;
+        dataProvider.launchVelocityY =
+            dataProvider.bounceVelocityMultiplier.y * dataProvider.launchVelocityY;
+
+
+        Vector2 velocity =
+            (new Vector2(dataProvider.landingVelocityX, dataProvider.launchVelocityY).magnitude
+            * dataProvider.bounceVelocityMultiplier.magnitude) * new Vector2(-1, 2).normalized;
+
 
         float newVelocityX = clampVelocityX(
-            -Mathf.Abs(dataProvider.landingVelocityX) * dataProvider.bounceVelocityMultiplier.x
+            velocity.x
+
         );
+        dataProvider.launchVelocityY = velocity.y;
         dataProvider.launchVelocityX = newVelocityX;
         Debug.Log("Bounce velocity: " + dataProvider.launchVelocityY);
-        landingTime = mapLaunchVelocityToLandingTimme(dataProvider.launchVelocityY);
+        landingTime = mapLaunchVelocityToLandingTime(dataProvider.launchVelocityY);
         base.onStateEnter();
     }
 
@@ -36,7 +44,7 @@ public class ErabyLandingState : ErabyAbstractLandingState
             setState<ErabyLaunchState>();
     }
 
-    override protected void applyTapMulipier()
+    protected override void applyTapMulipier()
     {
         float newVelocityX = clampVelocityX(
             -Mathf.Abs(dataProvider.landingVelocityX) * tapMultiplier
@@ -46,10 +54,10 @@ public class ErabyLandingState : ErabyAbstractLandingState
         dataProvider.launchVelocityY *= tapMultiplier;
     }
 
-
-    private float mapLaunchVelocityToLandingTimme(float yVel){
+    private float mapLaunchVelocityToLandingTime(float yVel)
+    {
         float maxYVelocity = accelerationData.MaxVelocityY;
-        return yVel/maxYVelocity * maxLandingTime;
+        return yVel / maxYVelocity * maxLandingTime;
     }
 
     #endregion
