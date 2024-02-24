@@ -2839,7 +2839,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 625.37396, y: 33.091965}
+  m_Size: {x: 1e+25, y: 33.091965}
   m_EdgeRadius: 0
 --- !u!4 &809318431
 Transform:
@@ -9500,15 +9500,7 @@ CompositeCollider2D:
   m_EdgeRadius: 0
   m_ColliderPaths:
   - m_Collider: {fileID: 809318430}
-    m_ColliderPaths:
-    - - X: 398945312
-        Y: 300721888
-      - X: -5854794240
-        Y: 300721888
-      - X: -5854794240
-        Y: -30197754
-      - X: 398945312
-        Y: -30197754
+    m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 39.894505, y: -3.0197754}
