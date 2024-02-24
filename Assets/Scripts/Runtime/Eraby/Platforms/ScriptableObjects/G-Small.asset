@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: G-Small
   m_EditorClassIdentifier: 
   bounceVelocityYMultiplier: 1.1
-  bounceVelocityXMultiplier: 1.1
+  bounceVelocityXMultiplier: 0

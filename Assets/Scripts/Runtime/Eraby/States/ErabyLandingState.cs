@@ -1,28 +1,37 @@
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class ErabyLandingState : ErabyAbstractLandingState
 {
     private float maxLandingTime = 1f;
 
+    Vector2 jumpUp = new Vector2(-1, 2).normalized;
+    Vector2 jumpBack = new Vector2(-1, 4).normalized;
+    Vector2 jumpForward = new Vector2(-1, 0.8f).normalized;
+
     #region STATE API
     protected override void onStateEnter()
     {
         Debug.Log("Enter landing");
 
-        dataProvider.launchVelocityY =
-            dataProvider.bounceVelocityMultiplier.y * dataProvider.launchVelocityY;
+        // dataProvider.launchVelocityY =
+        //     dataProvider.bounceVelocityMultiplier.y * dataProvider.launchVelocityY;
 
+        Vector2 jumpDir =
+            controls.MoveDirection() > 0.2f
+                ? jumpBack
+                : controls.MoveDirection() < -0.2f
+                    ? jumpForward
+                    : jumpUp;
 
         Vector2 velocity =
-            (new Vector2(dataProvider.landingVelocityX, dataProvider.launchVelocityY).magnitude
-            * dataProvider.bounceVelocityMultiplier.magnitude) * new Vector2(-1, 2).normalized;
+            (
+                new Vector2(dataProvider.landingVelocityX, dataProvider.launchVelocityY).magnitude
+                * dataProvider.bounceVelocityMultiplier.magnitude
+            ) * jumpDir;
 
-
-        float newVelocityX = clampVelocityX(
-            velocity.x
-
-        );
+        float newVelocityX = clampVelocityX(velocity.x);
         dataProvider.launchVelocityY = velocity.y;
         dataProvider.launchVelocityX = newVelocityX;
         Debug.Log("Bounce velocity: " + dataProvider.launchVelocityY);

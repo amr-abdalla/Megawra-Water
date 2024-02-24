@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: G-Ground
   m_EditorClassIdentifier: 
   bounceVelocityYMultiplier: 0.3
-  bounceVelocityXMultiplier: 0.7
+  bounceVelocityXMultiplier: 0

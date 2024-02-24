@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: AccelerationGeneric
   m_EditorClassIdentifier: 
   acceleration: {x: 34, y: 34}
-  desceleration: {x: 0, y: 0}
+  desceleration: {x: 20, y: 10}
   moveVelocity: {x: 3, y: 3}
   maxVelocity: {x: 3, y: 3}

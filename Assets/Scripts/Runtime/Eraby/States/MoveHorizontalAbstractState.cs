@@ -1,10 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 public abstract class MoveHorizontalAbstractState : ErabyState
 {
-
-
     [SerializeField]
     protected PhysicsBody2D body = null;
 
@@ -16,6 +14,7 @@ public abstract class MoveHorizontalAbstractState : ErabyState
 
     protected override void onStateEnter()
     {
+        Debug.Log("dataProvider.initialVelocityX: " + dataProvider.initialVelocityX);
         initialVelocityX = dataProvider.initialVelocityX;
         if (controls.isMoving())
             updateMoveVelocity(controls.MoveDirection());
@@ -78,7 +77,22 @@ public abstract class MoveHorizontalAbstractState : ErabyState
         {
             if (!isEnabled)
                 break;
-            body.SetVelocityX(body.VelocityX + direction * acceleration * Time.fixedDeltaTime);
+            Debug.Log(
+                "body.VelocityX: "
+                    + body.VelocityX
+                    + " targetVelocityX: "
+                    + targetVelocityX
+                    + " direction: "
+                    + direction
+                    + " acceleration: "
+                    + acceleration
+            );
+
+            // body.SetVelocityX(body.VelocityX + direction * acceleration * Time.fixedDeltaTime);
+            body.SetVelocityX(
+                Mathf.Lerp(body.VelocityX, targetVelocityX, acceleration * Time.fixedDeltaTime)
+            );
+            // body.SetVelocityX(targetVelocityX);
             yield return new WaitForFixedUpdate();
         }
         this.DisposeCoroutine(ref accelerationCoroutine);
