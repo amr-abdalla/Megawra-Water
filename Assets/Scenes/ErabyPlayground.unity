@@ -1961,11 +1961,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b738bc8f44673488bea338d9ffcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundSprites:
-  - {fileID: 21300000, guid: 9c69e51a4ffcac449b92744407da92af, type: 3}
+  distanceToPlayer: 50
   groundAnchor: {fileID: 1396880530}
   player: {fileID: 1576811030}
-  distanceToPlayer: 50
+  backgroundSprites:
+  - {fileID: 21300000, guid: 9c69e51a4ffcac449b92744407da92af, type: 3}
   spriteScale: 1
   orderInLayer: 2
   material: {fileID: 0}
@@ -2000,15 +2000,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b738bc8f44673488bea338d9ffcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToPlayer: 50
+  groundAnchor: {fileID: 1789730604}
+  player: {fileID: 1576811030}
   backgroundSprites:
   - {fileID: 21300000, guid: f9df20521fac5b141aa19e5b4819d014, type: 3}
   - {fileID: 21300000, guid: 91c3a58deb678f84585dde1b08a7dd5d, type: 3}
   - {fileID: 21300000, guid: 580919af86e21404b95e99598e1c1ebc, type: 3}
   - {fileID: 21300000, guid: 212b58fa33fffd84d8f29e31961979e9, type: 3}
   - {fileID: 21300000, guid: 989336ead2abf364592fcf381bd3d036, type: 3}
-  groundAnchor: {fileID: 1789730604}
-  player: {fileID: 1576811030}
-  distanceToPlayer: 50
   spriteScale: 1
   orderInLayer: 0
   material: {fileID: 2100000, guid: 64080599a9035d54a98743f5f6a6952a, type: 2}
@@ -2137,15 +2137,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b738bc8f44673488bea338d9ffcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToPlayer: 50
+  groundAnchor: {fileID: 24572457}
+  player: {fileID: 1576811030}
   backgroundSprites:
   - {fileID: 21300000, guid: bb055410525f38d44914e319aeed552e, type: 3}
   - {fileID: 21300000, guid: 76a9484b2241233469f6bf1613afdd6f, type: 3}
   - {fileID: 21300000, guid: 5c5a90aba0172524ca3a807202d6b07b, type: 3}
   - {fileID: 21300000, guid: 0a7f9575fde3f21429c29971b1a25357, type: 3}
   - {fileID: 21300000, guid: fc70628f6620e394e8e263f2366605b2, type: 3}
-  groundAnchor: {fileID: 24572457}
-  player: {fileID: 1576811030}
-  distanceToPlayer: 50
   spriteScale: 0.7
   orderInLayer: 1
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 3}
@@ -2222,6 +2222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 438458694}
+  - component: {fileID: 438458695}
   m_Layer: 0
   m_Name: PlatformManager
   m_TagString: Untagged
@@ -2240,10 +2241,41 @@ Transform:
   m_LocalPosition: {x: 10.097408, y: 44.057095, z: 0.22904605}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1635917192}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &438458695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438458693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb1a0b70773899b3b2d0fd52bf3a4ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToPlayer: 100
+  groundAnchor: {fileID: 1635917192}
+  player: {fileID: 1576811030}
+  platformPoolData:
+  - prefab: {fileID: 297889005591394777, guid: 9c7cc64617f14a24f974323d31d215eb, type: 3}
+    numInPool: 20
+  - prefab: {fileID: 297889005591394777, guid: df09fa8bf9bac1b4ba1ea095619aaafe, type: 3}
+    numInPool: 10
+  - prefab: {fileID: 297889005591394777, guid: ca2fdef2de470e040a0eefa3a9e593c9, type: 3}
+    numInPool: 10
+  - prefab: {fileID: 297889005591394777, guid: 8dc01e945f74d6c4b842927a78125ff1, type: 3}
+    numInPool: 20
+  - prefab: {fileID: 297889005591394777, guid: 87ae202fed97dae448d2a98539ae2f96, type: 3}
+    numInPool: 20
+  despawnDistance: 500
+  gaps:
+    min: 3
+    max: 5
 --- !u!1001 &443863925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2567,14 +2599,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b738bc8f44673488bea338d9ffcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToPlayer: 50
+  groundAnchor: {fileID: 571459060}
+  player: {fileID: 1576811030}
   backgroundSprites:
   - {fileID: 21300000, guid: a33ea790beb8e674facc04bd8380b7ef, type: 3}
   - {fileID: 21300000, guid: 2c5e682d1e91b504b8d4660e7d8f7f74, type: 3}
   - {fileID: 21300000, guid: de84d56431f3f754d843465bc504d792, type: 3}
   - {fileID: 21300000, guid: d4c05ac8e851ec64d833ce0113cf2e80, type: 3}
-  groundAnchor: {fileID: 571459060}
-  player: {fileID: 1576811030}
-  distanceToPlayer: 50
   spriteScale: 0.7
   orderInLayer: 2
   material: {fileID: 0}
@@ -3040,14 +3072,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b738bc8f44673488bea338d9ffcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToPlayer: 50
+  groundAnchor: {fileID: 1287899433}
+  player: {fileID: 1576811030}
   backgroundSprites:
   - {fileID: 21300000, guid: a33ea790beb8e674facc04bd8380b7ef, type: 3}
   - {fileID: 21300000, guid: 2c5e682d1e91b504b8d4660e7d8f7f74, type: 3}
   - {fileID: 21300000, guid: de84d56431f3f754d843465bc504d792, type: 3}
   - {fileID: 21300000, guid: d4c05ac8e851ec64d833ce0113cf2e80, type: 3}
-  groundAnchor: {fileID: 1287899433}
-  player: {fileID: 1576811030}
-  distanceToPlayer: 50
   spriteScale: 0.7
   orderInLayer: 1
   material: {fileID: 2100000, guid: 64080599a9035d54a98743f5f6a6952a, type: 2}
@@ -3130,7 +3162,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &989446758
 Transform:
   m_ObjectHideFlags: 0
@@ -3267,11 +3299,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b738bc8f44673488bea338d9ffcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundSprites:
-  - {fileID: 21300000, guid: 226cef9b84097f84896a91e1750be306, type: 3}
+  distanceToPlayer: 50
   groundAnchor: {fileID: 830954191}
   player: {fileID: 1576811030}
-  distanceToPlayer: 50
+  backgroundSprites:
+  - {fileID: 21300000, guid: 226cef9b84097f84896a91e1750be306, type: 3}
   spriteScale: 0.7
   orderInLayer: -1
   material: {fileID: 2100000, guid: c0441815173ee9b599de6afd1dbe95be, type: 2}
@@ -3895,13 +3927,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b738bc8f44673488bea338d9ffcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToPlayer: 100
+  groundAnchor: {fileID: 177180410}
+  player: {fileID: 1576811030}
   backgroundSprites:
   - {fileID: 21300000, guid: f2378280deef9764790c1ca4da80c55e, type: 3}
   - {fileID: 21300000, guid: 03fe64e87e6495d4796e9bbb05157520, type: 3}
   - {fileID: 21300000, guid: 68c44b1b15249ec4388bece6b82ffb0a, type: 3}
-  groundAnchor: {fileID: 177180410}
-  player: {fileID: 1576811030}
-  distanceToPlayer: 100
   spriteScale: 1
   orderInLayer: 5
   material: {fileID: 0}
@@ -9305,14 +9337,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b738bc8f44673488bea338d9ffcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToPlayer: 50
+  groundAnchor: {fileID: 553971895}
+  player: {fileID: 1576811030}
   backgroundSprites:
   - {fileID: 21300000, guid: fcaad161d0461224cb1c62ec14704178, type: 3}
   - {fileID: 21300000, guid: 9f1137c10c0fa5a428605a08ad35f35b, type: 3}
   - {fileID: 21300000, guid: 5c5a90aba0172524ca3a807202d6b07b, type: 3}
   - {fileID: 21300000, guid: fc70628f6620e394e8e263f2366605b2, type: 3}
-  groundAnchor: {fileID: 553971895}
-  player: {fileID: 1576811030}
-  distanceToPlayer: 50
   spriteScale: 0.7
   orderInLayer: 1
   material: {fileID: 2100000, guid: 64080599a9035d54a98743f5f6a6952a, type: 2}
@@ -9399,6 +9431,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1257803885}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1635917191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1635917192}
+  m_Layer: 0
+  m_Name: anchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1635917192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635917191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 27, y: -15.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 438458694}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1646942377

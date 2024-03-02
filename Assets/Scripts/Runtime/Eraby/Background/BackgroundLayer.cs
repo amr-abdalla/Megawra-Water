@@ -1,27 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using log4net.Config;
-using Newtonsoft.Json;
 using UnityEngine;
 
-public class BackgroundLayer : MonoBehaviour
+public class BackgroundLayer : AbstractSpawner
 {
     // Instantiates Background sprites as player moves through the level
 
     [Header("Sprites and Anchors")]
     [SerializeField]
     private Sprite[] backgroundSprites = null;
-
-    [SerializeField]
-    private Transform groundAnchor = null;
-
-    [SerializeField]
-    private Transform player = null;
-
-    [Header("Configurations")]
-    [SerializeField]
-    private float distanceToPlayer = 0f;
 
     [SerializeField]
     private float spriteScale = 1f;
@@ -45,8 +33,6 @@ public class BackgroundLayer : MonoBehaviour
 
     private int cur_sprite = 0;
 
-    private Bounds bounds;
-
     private void Start()
     {
         spriteRenderers = new List<GameObject>(MAX_SPRITES);
@@ -63,19 +49,6 @@ public class BackgroundLayer : MonoBehaviour
                 renderer.material = material;
             newSprite.SetActive(false);
             spriteRenderers.Add(newSprite);
-        }
-
-        bounds.min = groundAnchor.position.x;
-        bounds.max = groundAnchor.position.x;
-    }
-
-    private void Update()
-    {
-        // check if we need to place a new sprite
-
-        if (player.position.x - distanceToPlayer < bounds.min)
-        {
-            bounds.min -= PlaceNewSprite(bounds.min);
         }
     }
 
@@ -98,7 +71,7 @@ public class BackgroundLayer : MonoBehaviour
 
     // returns the distance to the next sprite
 
-    private float PlaceNewSprite(float x_pos)
+    protected override float Spawn(float x_pos)
     {
         float skip_gap = Mathf.Clamp(0, 1, Mathf.PerlinNoise(x_pos, 0f));
         if (skip_gap < (1 - saturation))
