@@ -24,9 +24,14 @@ public class ShabbaMoveState : ShabbaState
 
 	[SerializeField] private Rigidbody2D rigidBody;
 	[SerializeField] private ShabbaAnimationHandler shabbaAnimationHandler;
+	[SerializeField] private GameObject loseScreen;
 
 	#region events
-	public void onDidStopMoving() { }// => stateMachine.SetState<>();
+	public void onDidStopMoving() 
+	{
+		loseScreen.SetActive(true);
+		Time.timeScale = 0;
+	}// => stateMachine.SetState<>();
 	public Action OnPush;
 	public Action<float> OnRotate;
 
@@ -138,8 +143,8 @@ public class ShabbaMoveState : ShabbaState
 
 	public override void InitializeControls(Controls i_controls)
 	{
+		i_controls.RemoveControls();
 		(i_controls as ShabbaControls).RegisterMoveInput(Move);
-		(i_controls as ShabbaControls).RegisterPushInput(Push);
 	}
 
 	#region Input Functions

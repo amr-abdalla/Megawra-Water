@@ -68,7 +68,6 @@ public class ResidueChunk : MonoBehaviour
 
 	private void PushAllParticles(float value, Vector3 playerPosition, float speed)
 	{
-		Debug.Log("PUSH ALL PARTICLES");
 		pushedThisFrame = true;
 		StartCoroutine(this.InvokeAtEndOfFrame(MarkPushedToFalse));
 

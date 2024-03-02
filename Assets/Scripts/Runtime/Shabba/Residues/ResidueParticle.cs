@@ -47,6 +47,7 @@ public class ResidueParticle : MonoBehaviour
 
 	private void GetCollected()
 	{
+		ScoreTracker.CurrentScore += residueData.Score;
 		OnCollect?.Invoke(this);
 	}
 

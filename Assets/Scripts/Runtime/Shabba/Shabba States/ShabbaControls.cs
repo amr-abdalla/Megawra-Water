@@ -14,7 +14,7 @@ public class ShabbaControls : Controls
 
 	public override void EnableControls() => moveInput.action.Enable();
 
-	public override void RemoveControls() {} //not sure if this is needed
+	public override void RemoveControls() => unregisterInputs();
 
 	public void RegisterMoveInput(Action<InputAction.CallbackContext> action)
 	{
@@ -30,8 +30,15 @@ public class ShabbaControls : Controls
 		PushInput.action.performed += currentPushAction;
 	}
 
-	protected override void initInputs() => moveInput.action.performed += currentMoveAction;
+	protected override void initInputs()
+	{
+		moveInput.action.performed += currentMoveAction;
+		PushInput.action.performed += currentPushAction;
+	}
 
-	protected override void unregisterInputs() => moveInput.action.performed -= currentMoveAction;
-
+	protected override void unregisterInputs()
+	{
+		moveInput.action.performed -= currentMoveAction;
+		PushInput.action.performed -= currentPushAction;
+	}
 }
