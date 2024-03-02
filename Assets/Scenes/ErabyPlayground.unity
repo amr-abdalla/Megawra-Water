@@ -2263,18 +2263,18 @@ MonoBehaviour:
   player: {fileID: 1576811030}
   platformPoolData:
   - prefab: {fileID: 297889005591394777, guid: 9c7cc64617f14a24f974323d31d215eb, type: 3}
-    numInPool: 20
+    numInPool: 0
   - prefab: {fileID: 297889005591394777, guid: df09fa8bf9bac1b4ba1ea095619aaafe, type: 3}
-    numInPool: 10
+    numInPool: 0
   - prefab: {fileID: 297889005591394777, guid: ca2fdef2de470e040a0eefa3a9e593c9, type: 3}
-    numInPool: 10
+    numInPool: 0
   - prefab: {fileID: 297889005591394777, guid: 8dc01e945f74d6c4b842927a78125ff1, type: 3}
-    numInPool: 20
+    numInPool: 400
   - prefab: {fileID: 297889005591394777, guid: 87ae202fed97dae448d2a98539ae2f96, type: 3}
-    numInPool: 20
+    numInPool: 0
   despawnDistance: 500
   gaps:
-    min: 5
+    min: 10
     max: 15
 --- !u!1001 &443863925
 PrefabInstance:
@@ -10358,7 +10358,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 13fa2509e550a3342b7981286f974cac, type: 2}
     - target: {fileID: 4026483991615271165, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
       propertyPath: landingTime
-      value: 0.5
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 4026483991751054404, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
       propertyPath: m_Name

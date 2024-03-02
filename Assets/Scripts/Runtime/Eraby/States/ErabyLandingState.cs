@@ -35,7 +35,7 @@ public class ErabyLandingState : ErabyAbstractLandingState
         dataProvider.launchVelocityY = velocity.y;
         dataProvider.launchVelocityX = newVelocityX;
         Debug.Log("Bounce velocity: " + dataProvider.launchVelocityY);
-        landingTime = mapLaunchVelocityToLandingTime(dataProvider.launchVelocityY);
+        // landingTime = mapLaunchVelocityToLandingTime(dataProvider.launchVelocityY);
         base.onStateEnter();
     }
 
