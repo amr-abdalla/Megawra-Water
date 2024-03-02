@@ -68,16 +68,22 @@ public class PlatformManager : AbstractSpawner
     void CleanUpPlatforms()
     {
         var should_clean = spawnedPlatforms.Where(ShouldBeCleaned).ToList();
-        should_clean.ForEach(o => o.SetActive(false));
+        should_clean.ForEach(o => Despawn(o));
         platformPool.AddRange(should_clean);
         spawnedPlatforms = spawnedPlatforms.Except(should_clean).ToList();
         // if platformPool is empty, we force move one platfrom from spawnedPlatforms to platformPool
         if (platformPool.Count == 0 && spawnedPlatforms.Count > 0)
         {
             platformPool.Add(spawnedPlatforms[0]);
-            spawnedPlatforms[0].SetActive(false);
+            /* spawnedPlatforms[0].SetActive(false); */
             spawnedPlatforms.RemoveAt(0);
         }
+    }
+
+    void Despawn(GameObject obj)
+    {
+        Vector3 despawn_pos = new Vector3(999999, 999999, 99999);
+        obj.transform.position = despawn_pos;
     }
 
     protected override void Update()

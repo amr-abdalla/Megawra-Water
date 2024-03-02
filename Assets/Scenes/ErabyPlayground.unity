@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571328, b: 0.3069218, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2274,8 +2274,8 @@ MonoBehaviour:
     numInPool: 20
   despawnDistance: 500
   gaps:
-    min: 3
-    max: 5
+    min: 5
+    max: 15
 --- !u!1001 &443863925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9250,7 +9250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461756038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.00002, y: 37.57022, z: -10.097739}
+  m_LocalPosition: {x: 28, y: 31.9, z: -10.097739}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9457,7 +9457,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635917191}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27, y: -15.2, z: 0}
+  m_LocalPosition: {x: 27, y: -15.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9565,11 +9565,7 @@ CompositeCollider2D:
   - m_Collider: {fileID: 809318430}
     m_ColliderPaths: []
   m_CompositePaths:
-    m_Paths:
-    - - {x: 39.894505, y: -3.0197754}
-      - {x: 39.894505, y: 30.07219}
-      - {x: -585.47943, y: 30.07216}
-      - {x: -585.4794, y: -3.0197754}
+    m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!50 &1652056663
@@ -10349,13 +10345,17 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4026483991426673731, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
-      propertyPath: launchVelocityY
+      propertyPath: maxJumpHeight
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026483991426673731, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
+      propertyPath: launchVelocityY
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4026483991572100080, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
       propertyPath: accelerationData
       value: 
-      objectReference: {fileID: 11400000, guid: 893c8417e18c22d488975d5c79f80af5, type: 2}
+      objectReference: {fileID: 11400000, guid: 13fa2509e550a3342b7981286f974cac, type: 2}
     - target: {fileID: 4026483991615271165, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
       propertyPath: landingTime
       value: 0.5
