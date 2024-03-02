@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
+public class ShabbaMoveState : ShabbaState
 {
 	#region Data
 	[SerializeField] private AngularAccelerationData angularAccelerationData;
@@ -13,60 +15,34 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 	[Header("Initial values")] [SerializeField] private float initialDrag = 0f;
 	#endregion
 
-	#region Visuals
-	[SerializeField] private Transform VisualObject;
-	#endregion
-
-	private Rigidbody2D rigidBody;
-
 	#region runtime variables
 	private float currentDragTimer = 0f;
 	private float currentAngularVelocity = 0f;
 	private Vector2 rotateDirection = Vector2.zero;
 	private Vector2 moveDirection = Vector2.down;
+	#endregion
+
+	[SerializeField] private Rigidbody2D rigidBody;
+
+	#region events
+	public void onDidStopMoving() { }// => stateMachine.SetState<>();
+	public Action OnPush;
 
 	#endregion
 
-	#region animation
-	[SerializeField] SpriteFrameSwapper dashAnimation;
-	[SerializeField] SpriteFrameSwapper idleAnimation;
-	[SerializeField] private BonesHandler bonesHandler;
-	#endregion
+	#region State Methods
 
-	#region UNITY
+	public override void ResetState() { } //not sure if needed
 
-	void Start()
-	{
-		rigidBody = GetComponent<Rigidbody2D>();
-		resetToInitialState();
-		dashAnimation.OnLastFrameReached += OnFinishDashAnimation; // to be removed
-	}
+	protected override void onStateEnter() => resetVariableToInitialValues();
 
-	private void OnFinishDashAnimation()
-	{
-		dashAnimation.Stop();
-		idleAnimation.ResetAnimation();
-		idleAnimation.Play();
-	}
+	protected override void onStateExit() => resetVariableToInitialValues();
 
-	void OnDisable()
-	{
-		resetToInitialState();
-	}
+	protected override void onStateInit() { } //not sure if needed
 
-	void applyRotation()
-	{
-		var prevRot = transform.rotation;
-		transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, moveDirection));
+	protected override void onStateUpdate() { } //not needed
 
-		var diff = Vector2.SignedAngle(prevRot * Vector2.up, transform.rotation * Vector2.up);
-
-		var t = Mathf.InverseLerp(-4.39f, 4.39f, diff); // animation
-		bonesHandler.SetBones(t); // animation
-
-	}
-
-	private void FixedUpdate()
+	protected override void onStateFixedUpdate()
 	{
 		float deltaAngle = ComputeAngularVelocity(rotateDirection.x) * Time.deltaTime;
 		moveDirection = Quaternion.Euler(0, 0, -deltaAngle) * moveDirection;
@@ -92,55 +68,9 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 
 	#endregion
 
-
-	#region PUBLIC API
-
-	public Vector2 MoveDirection => moveDirection;
-
-	[ExposePublicMethod]
-	public void Push(float force = 100f) => Push(force, moveDirection);
-
-	public void ApplyCancellingForce() => Push(CurrentVelocity.magnitude, -moveDirection);
-
-	public void SetMoveDirection(Vector2 value) => moveDirection = value;
-
-	public void Push(float force, Vector2 direction)
-	{
-		rigidBody.drag = initialDrag;
-
-		rigidBody.AddForce(direction * force, ForceMode2D.Impulse);
-
-		idleAnimation.Stop();
-		dashAnimation.ResetAnimation();
-		dashAnimation.Play();
-	}
-
-	[ExposePublicMethod]
-	public void ResetToInitialState()
-	{
-		resetToInitialState();
-	}
-
-	[ExposePublicMethod]
-	public void Rotate(Vector2 direction)
-	{
-		rotateDirection = direction;
-	}
-
-	public Vector2 CurrentVelocity =>
-		null == rigidBody ? MathConstants.VECTOR_2_ZERO : rigidBody.velocity;
-
-	#endregion
-
 	#region PRIVATE
 
-	void onDidStopMoving()
-	{
-		// Code review : this could trigger an event to tell all listeners
-		// that object stopped moving (+ start whataver behaviour should happen in that case)
-	}
-
-	void resetToInitialState()
+	private void resetVariableToInitialValues()
 	{
 		currentDragTimer = 0f;
 		currentAngularVelocity = 0f;
@@ -150,9 +80,10 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 			rigidBody.drag = initialDrag;
 			// set object to look down
 			rigidBody.transform.rotation = Quaternion.Euler(0, 0, 180);
-			rigidBody.velocity = MathConstants.VECTOR_2_ZERO;
 		}
 	}
+
+	void applyRotation() => rigidBody.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, moveDirection));
 
 	void applyDrag()
 	{
@@ -183,4 +114,35 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 	}
 
 	#endregion
+
+	public override void InitializeControls(Controls i_controls)
+	{
+		(i_controls as ShabbaControls).RegisterMoveInput(Move);
+		(i_controls as ShabbaControls).RegisterPushInput(Push);
+	}
+
+	#region Input Functions
+	private void Move(InputAction.CallbackContext ctx)
+	{
+		rotateDirection = ctx.ReadValue<Vector2>();
+	}
+
+	private void Push(InputAction.CallbackContext ctx)
+	{
+		Push(7f, moveDirection);
+	}
+
+	public override void Push(float value, Vector3 direction)
+	{
+		rigidBody.drag = initialDrag;
+
+		rigidBody.AddForce(direction * value, ForceMode2D.Impulse);
+
+		OnPush?.Invoke();
+	}
+
+	public override Vector3 CurrentDirection => moveDirection;
+
+	#endregion
+
 }

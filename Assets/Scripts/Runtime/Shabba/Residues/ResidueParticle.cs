@@ -33,11 +33,10 @@ public class ResidueParticle : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.TryGetComponent(out RigidbodyMovement playerMovement) && residueData.IsCollectable()) //will figure out the condition later
+		if (other.TryGetComponent(out StateMachine player) && residueData.IsCollectable()) //will figure out the condition later
 		{
 			GetCollected();
-			playerMovement.Push(residueData.Momentum);
-
+			(player.CurrentState as ShabbaState).Push(residueData.Momentum, (player.CurrentState as ShabbaState).CurrentDirection);
 			Destroy(gameObject);
 		}
 	}
