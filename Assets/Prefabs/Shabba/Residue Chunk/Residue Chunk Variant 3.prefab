@@ -226,6 +226,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7761711707519999274, guid: 92ca5d6a7b1f6a2438a22e6efc2e86b8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2285424693904473020, guid: 92ca5d6a7b1f6a2438a22e6efc2e86b8, type: 3}
       propertyPath: m_Name
       value: Residue Chunk Variant 3

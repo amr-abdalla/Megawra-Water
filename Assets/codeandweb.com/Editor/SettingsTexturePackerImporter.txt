@@ -2,10 +2,13 @@ version: 2
 tpsheetFileNames:
 - Assets/Animations/Shabba/Shabba_Anim.tpsheet
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
+- Assets/Sprites/Shabba/Characters/Shabba New/Shabba_Anim.tps.tpsheet
 textureFileNames:
 - Assets/Animations/Shabba/Shabba_Anim.png
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.png
+- Assets/Sprites/Shabba/Characters/Shabba New/Shabba_Anim.tps.png
 normalmapFileNames:
 - 
 - Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- 
 enableDebugOutput: 0

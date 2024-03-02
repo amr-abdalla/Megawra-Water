@@ -37,9 +37,9 @@ public class ResidueChunk : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.TryGetComponent(out RigidbodyMovement otherBody))
+		if (collision.TryGetComponent(out StateMachine otherBody))
 		{
-			Vector2 bodyVelocity = otherBody.CurrentVelocity;
+			Vector2 bodyVelocity = otherBody.GetComponent<Rigidbody2D>().velocity;
 			float bodySpeed = bodyVelocity.magnitude;
 			PushAllParticles(bodySpeed * physicsConfig.PushValueMultiplier, otherBody.transform.position, bodySpeed * physicsConfig.PushSpeedMultiplier);
 		}
@@ -68,6 +68,7 @@ public class ResidueChunk : MonoBehaviour
 
 	private void PushAllParticles(float value, Vector3 playerPosition, float speed)
 	{
+		Debug.Log("PUSH ALL PARTICLES");
 		pushedThisFrame = true;
 		StartCoroutine(this.InvokeAtEndOfFrame(MarkPushedToFalse));
 

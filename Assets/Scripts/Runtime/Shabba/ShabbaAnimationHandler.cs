@@ -15,7 +15,7 @@ public class ShabbaAnimationHandler : MonoBehaviour
 
 	public void OnRotate(float rotationDiff)
 	{
-		var t = Mathf.InverseLerp(-4.39f, 4.39f, Mathf.Abs(rotationDiff));
+		var t = Mathf.InverseLerp(0, 4.39f, Mathf.Abs(rotationDiff));
 		if (rotationDiff > 0) transform.localRotation = Quaternion.Euler(0, 0, 0);
 		else if (rotationDiff < 0) transform.localRotation = Quaternion.Euler(0, 180, 0);
 		bonesHandler.SetBones(t);

@@ -22,13 +22,20 @@ public class BonesHandler : MonoBehaviour
 
 	public void SetBones(float t)
 	{
-		float bone2y = Mathf.Lerp(0, 0.157f, t);
-		float bone3y = Mathf.Lerp(0, -0.037f, t);
-		float bone4y = Mathf.Lerp(0, -0.1f, t);
+		float bone2y = Mathf.Lerp(4.872665e-08f, 0.01686376f, t);
+		float bone3y = Mathf.Lerp(4.624603e-08f, 0.06601496f, t);
+		float bone4y = Mathf.Lerp(3.957644e-09f, 0.09823086f, t);
 
-		bone2.localPosition = new(0.543f, bone2y);
-		bone3.localPosition = new(0.462f, bone3y);
-		bone4.localPosition = new(0.355f, bone4y);
+		float bone2RotZ = Mathf.Lerp(0, 1.724f, t);
+		float bone3RotZ = Mathf.Lerp(0, 10.453f, t);
+		float bone4RotZ = Mathf.Lerp(0, 0, t);
+
+		bone2.localPosition = new(0.364f, bone2y);
+		bone3.localPosition = new(0.363f, bone3y);
+		bone4.localPosition = new(0.379f, bone4y);
+		bone2.localRotation = Quaternion.Euler(0, 0, bone2RotZ);
+		bone3.localRotation = Quaternion.Euler(0, 0, bone3RotZ);
+		bone4.localRotation = Quaternion.Euler(0, 0, bone4RotZ);
 	}
 
 }
