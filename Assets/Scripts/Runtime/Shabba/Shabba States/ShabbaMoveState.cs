@@ -23,10 +23,12 @@ public class ShabbaMoveState : ShabbaState
 	#endregion
 
 	[SerializeField] private Rigidbody2D rigidBody;
+	[SerializeField] private ShabbaAnimationHandler shabbaAnimationHandler;
 
 	#region events
 	public void onDidStopMoving() { }// => stateMachine.SetState<>();
 	public Action OnPush;
+	public Action<float> OnRotate;
 
 	#endregion
 
@@ -34,9 +36,19 @@ public class ShabbaMoveState : ShabbaState
 
 	public override void ResetState() { } //not sure if needed
 
-	protected override void onStateEnter() => resetVariableToInitialValues();
+	protected override void onStateEnter()
+	{
+		resetVariableToInitialValues();
+		OnPush += shabbaAnimationHandler.InvokeDashAnimation;
+		OnRotate += shabbaAnimationHandler.OnRotate;
+	}
 
-	protected override void onStateExit() => resetVariableToInitialValues();
+	protected override void onStateExit()
+	{
+		resetVariableToInitialValues();
+		OnPush -= shabbaAnimationHandler.InvokeDashAnimation;
+		OnRotate -= shabbaAnimationHandler.OnRotate;
+	}
 
 	protected override void onStateInit() { } //not sure if needed
 
@@ -63,7 +75,7 @@ public class ShabbaMoveState : ShabbaState
 			onDidStopMoving();
 		}
 
-		applyRotation();
+		ApplyRotation();
 	}
 
 	#endregion
@@ -78,12 +90,21 @@ public class ShabbaMoveState : ShabbaState
 		if (null != rigidBody)
 		{
 			rigidBody.drag = initialDrag;
+			moveDirection = rigidBody.velocity.normalized;
 			// set object to look down
-			rigidBody.transform.rotation = Quaternion.Euler(0, 0, 180);
+			//rigidBody.transform.rotation = Quaternion.Euler(0, 0, 180);
 		}
 	}
 
-	void applyRotation() => rigidBody.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, moveDirection));
+	void ApplyRotation()
+	{
+		var prevRot = rigidBody.transform.rotation;
+		rigidBody.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, moveDirection));
+
+		var diff = Vector2.SignedAngle(prevRot * Vector2.up, rigidBody.transform.rotation * Vector2.up);
+
+		OnRotate?.Invoke(diff);
+	}
 
 	void applyDrag()
 	{
@@ -124,7 +145,7 @@ public class ShabbaMoveState : ShabbaState
 	#region Input Functions
 	private void Move(InputAction.CallbackContext ctx)
 	{
-		rotateDirection = ctx.ReadValue<Vector2>();
+		rotateDirection = -ctx.ReadValue<Vector2>();
 	}
 
 	private void Push(InputAction.CallbackContext ctx)

@@ -4,21 +4,21 @@ using UnityEngine.InputSystem;
 public class ShabbaInitialState : ShabbaState
 {
 	#region Data
-	[SerializeField] private float PushForce = 15f;
+	[SerializeField] private float PushForce = 10;
+	[SerializeField] private float acceleration = 5;
+	[SerializeField] private float desceleration = 7;
+	[SerializeField] private float maxSpeed = 10;
 	#endregion
 	[SerializeField] private Rigidbody2D rigidBody;
 
-	private Vector3 MoveDirection;
 	private float currentSpeed = 0;
-	private float acceleration = 5;
-	private float desceleration = 2;
-	private float maxSpeed = 10;
+	private Vector3 MoveDirection;
 
-	public override Vector3 CurrentDirection => transform.forward;
+	public override Vector3 CurrentDirection => MoveDirection;
 
 	public override void Push(float value, Vector3 direction)
 	{
-		rigidBody.AddForce(direction * value, ForceMode2D.Impulse);
+		rigidBody.AddForce((Vector3.right * currentSpeed / maxSpeed + direction)* value, ForceMode2D.Impulse);
 		stateMachine.SetState<ShabbaMoveState>();
 	}
 
