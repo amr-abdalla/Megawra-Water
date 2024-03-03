@@ -3646,7 +3646,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1342217065}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.081, y: 0, z: 0}
+  m_LocalPosition: {x: 0.081, y: -0.741, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -3901,7 +3901,7 @@ MonoBehaviour:
   - {fileID: 918982981}
   - {fileID: 1177226067}
   m_Bounds:
-    m_Center: {x: -0.031700015, y: 0.0034959316, z: 0}
+    m_Center: {x: -0.031700015, y: 0.0034964085, z: 0}
     m_Extent: {x: 0.40765443, y: 1.1010319, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -18299,7 +18299,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angularAccelerationData: {fileID: 11400000, guid: f54d7bd3ee4d4634fa1bf5e7e50bcb48, type: 2}
   dragSettingsData: {fileID: 11400000, guid: ee81ccdd3dc44474f8a1e929bad59dd3, type: 2}
-  rotationPivot: {fileID: 427725274}
   minSpeed: 1
   maxSpeed: 24
   maxDrag: 0.6
