@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controls: {fileID: 4026483990694836036}
-  accelerationData: {fileID: 11400000, guid: 13fa2509e550a3342b7981286f974cac, type: 2}
+  accelerationData: {fileID: 11400000, guid: f5bd43eca6b728e42a3328f321c84893, type: 2}
   body: {fileID: 4026483991751054410}
 --- !u!114 &4026483990477463360
 MonoBehaviour:
@@ -358,7 +358,7 @@ MonoBehaviour:
   controls: {fileID: 0}
   accelerationData: {fileID: 0}
   body: {fileID: 4026483991751054410}
-  glideDuration: 0.4
+  glideDuration: 0.1
 --- !u!1 &4026483990902267436
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,9 +730,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controls: {fileID: 0}
   accelerationData: {fileID: 0}
-  maxJumpHeight: 10
+  maxJumpHeight: 15
   body: {fileID: 4026483991751054410}
-  launchVelocityY: 20
+  launchVelocityY: Infinity
 --- !u!1 &4026483991572100081
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,7 +846,7 @@ MonoBehaviour:
   tapParticles: {fileID: 4026483991751054412}
   tapManager: {fileID: 4026483991751054415}
   body: {fileID: 4026483991751054410}
-  landingTime: 0.25
+  landingTime: 0.9
 --- !u!114 &4026483991615271164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1145,7 +1145,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.17326355, y: 0.91367817}
+  m_Offset: {x: -0.27164173, y: 0.91367817}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1156,7 +1156,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5336609, y: 1.060812}
+  m_Size: {x: 1.7304173, y: 1.060812}
   m_EdgeRadius: 0
 --- !u!114 &4026483991751054410
 MonoBehaviour:

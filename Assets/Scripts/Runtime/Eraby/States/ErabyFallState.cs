@@ -11,8 +11,8 @@ public class ErabyFallState : ErabyAbstractFallState
     {
         base.onStateEnter();
         Debug.Log("Enter fall");
-        controls.DiveStarted += goToFastFall;
-        controls.JumpPressed += goToGlide;
+        //controls.DiveStarted += goToFastFall;
+        //controls.JumpPressed += goToGlide;
 
         if (controls.isDiving())
             goToFastFall();

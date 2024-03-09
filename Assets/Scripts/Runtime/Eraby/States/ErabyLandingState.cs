@@ -7,8 +7,8 @@ public class ErabyLandingState : ErabyAbstractLandingState
     private float maxLandingTime = 1f;
 
     Vector2 jumpUp = new Vector2(-1, 2).normalized;
-    Vector2 jumpBack = new Vector2(-1, 4).normalized;
-    Vector2 jumpForward = new Vector2(-1, 0.8f).normalized;
+    Vector2 jumpBack = new Vector2(-1, 2).normalized;
+    Vector2 jumpForward = new Vector2(-1, 2).normalized;
 
     #region STATE API
     protected override void onStateEnter()
