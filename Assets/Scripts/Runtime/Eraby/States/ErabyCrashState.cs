@@ -7,23 +7,16 @@ public class ErabyCrashState : ErabyAbstractLandingState
     [SerializeField]
     private float minBounceVelocityY = 0f;
 
-    [SerializeField]
-    private float velocityXMultiplier = 0.5f;
+ 
 
     #region STATE API
     protected override void onStateEnter()
     {
         Debug.Log("Enter crash");
 
-        launchVelocityY = dataProvider.initialVelocityY / 2;
-        float newVelocityX = -Mathf.Abs(dataProvider.landingVelocityX) * velocityXMultiplier;
-        newVelocityX = -Mathf.Clamp(
-            Mathf.Abs(newVelocityX),
-            Mathf.Abs(newVelocityX),
-            Mathf.Abs(accelerationData.MaxVelocityX)
-        );
-        dataProvider.launchVelocityX = newVelocityX;
-        dataProvider.launchVelocityY = launchVelocityY;
+        
+        
+ 
         base.onStateEnter();
     }
 
@@ -31,12 +24,13 @@ public class ErabyCrashState : ErabyAbstractLandingState
     {
         yield return new WaitForSeconds(landingTime);
 
-        if (launchVelocityY > minBounceVelocityY)
+        // Debug.Log("LaunchVelocit")
+        if (dataProvider.launchVelocityY > minBounceVelocityY)
         {
             if (tapManager.isTapped())
                 setState<ErabySuperLaunchState>();
             else
-                setState<ErabySmallLaunchState>();
+                setState<ErabyCrashedLaunchState>();
         }
         else
             setState<ErabyIdleState>();

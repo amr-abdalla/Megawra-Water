@@ -29,7 +29,7 @@ public class ErabyBumpState : ErabyState
 
         body.SetVelocityX(bumpDirection.x);
         body.SetVelocityY(bumpDirection.y);
-        dataProvider.initialVelocityY = bumpDirection.y;
+        dataProvider.launchVelocityY = bumpDirection.y;
     }
 
     protected override void onStateInit() { }

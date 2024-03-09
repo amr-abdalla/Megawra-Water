@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class ErabyFallState : ErabyAbstractFallState
 {
-    private Coroutine glideRoutine = null;
 
     #region STATE API
     protected override void onStateInit() { }

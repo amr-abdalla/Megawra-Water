@@ -21,7 +21,7 @@ public class ErabyAbstractJumpState : MoveHorizontalAbstractState
 
     protected override void onStateExit()
     {
-        dataProvider.initialVelocityY = initialVelocityY;
+        dataProvider.launchVelocityY = initialVelocityY;
 
         base.onStateExit();
     }

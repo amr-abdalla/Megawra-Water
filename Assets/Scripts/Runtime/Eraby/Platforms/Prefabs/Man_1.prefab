@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 881197414181592792, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5ceb7c51985c7b45b485b466cc66b0b, type: 3}
+    - target: {fileID: 3350147166496306917, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
+      propertyPath: groundData
+      value: 
+      objectReference: {fileID: 11400000, guid: 869e3759ebf04ce889975c02815783f8, type: 2}
     - target: {fileID: 3358051211067628931, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: accelerationConfig
       value: 
@@ -41,7 +49,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5973593231523509811, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: m_Name
-      value: PlatformVariant1
+      value: Man_1
       objectReference: {fileID: 0}
     - target: {fileID: 5973593231523509815, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: m_Sprite
