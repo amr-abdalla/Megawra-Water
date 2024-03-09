@@ -78,16 +78,16 @@ public abstract class MoveHorizontalAbstractState : ErabyState
         {
             if (!isEnabled)
                 break;
-            Debug.Log(
-                "body.VelocityX: "
-                    + body.VelocityX
-                    + " targetVelocityX: "
-                    + targetVelocityX
-                    + " direction: "
-                    + direction
-                    + " acceleration: "
-                    + acceleration
-            );
+            // Debug.Log(
+            //     "body.VelocityX: "
+            //         + body.VelocityX
+            //         + " targetVelocityX: "
+            //         + targetVelocityX
+            //         + " direction: "
+            //         + direction
+            //         + " acceleration: "
+            //         + acceleration
+            // );
 
             // body.SetVelocityX(body.VelocityX + direction * acceleration * Time.fixedDeltaTime);
             body.SetVelocityX(

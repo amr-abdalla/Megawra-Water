@@ -72,4 +72,6 @@ public class ErabyStateMachineDataProvider : AbstractStateMachineDataProvider
     /// Used by Gizmos to draw the player's maximum altitude on the current jump.
     /// </summary>
     public float jumpStopHeight = 0f;
+
+    public float PlayerJumpHeight = 0f;
 }

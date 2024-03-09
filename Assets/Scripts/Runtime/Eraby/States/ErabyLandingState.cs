@@ -25,15 +25,15 @@ public class ErabyLandingState : ErabyAbstractLandingState
                     ? jumpForward
                     : jumpUp;
 
-        Vector2 velocity =
-            (
-                new Vector2(dataProvider.landingVelocityX, dataProvider.launchVelocityY).magnitude
-                * dataProvider.bounceVelocityMultiplier.magnitude
-            ) * jumpDir;
+        // Vector2 velocity =
+        //     (
+        //         new Vector2(dataProvider.landingVelocityX, dataProvider.launchVelocityY).magnitude
+        //         * dataProvider.bounceVelocityMultiplier.magnitude
+        //     ) * jumpDir;
 
-        float newVelocityX = clampVelocityX(velocity.x);
-        dataProvider.launchVelocityY = velocity.y;
-        dataProvider.launchVelocityX = newVelocityX;
+
+        dataProvider.launchVelocityY = float.PositiveInfinity;
+        dataProvider.launchVelocityX = clampVelocityX(dataProvider.landingVelocityX * dataProvider.bounceVelocityMultiplier.x);
         Debug.Log("Bounce velocity: " + dataProvider.launchVelocityY);
         // landingTime = mapLaunchVelocityToLandingTime(dataProvider.launchVelocityY);
         base.onStateEnter();
@@ -47,10 +47,10 @@ public class ErabyLandingState : ErabyAbstractLandingState
     override protected IEnumerator landingSequence()
     {
         yield return new WaitForSeconds(landingTime);
-        if (tapManager.isTapped())
-            setState<ErabySuperLaunchState>();
-        else
-            setState<ErabyLaunchState>();
+        // if (tapManager.isTapped())
+        //     setState<ErabySuperLaunchState>();
+        // else
+        setState<ErabyLaunchState>();
     }
 
     protected override void applyTapMulipier()

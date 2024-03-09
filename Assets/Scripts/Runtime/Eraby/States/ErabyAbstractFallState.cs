@@ -76,6 +76,7 @@ public abstract class ErabyAbstractFallState : MoveHorizontalAbstractState
         dataProvider.landingVelocityY = body.VelocityY;
         dataProvider.landingVelocityX = body.VelocityX;
 
+
         body.SetVelocityY(0);
         // controls.DisableControls();
 
@@ -85,6 +86,7 @@ public abstract class ErabyAbstractFallState : MoveHorizontalAbstractState
                 ground.BounceVelocityXMultiplier,
                 ground.BounceVelocityYMultiplier
             );
+            dataProvider.PlayerJumpHeight = ground.PlayerJumpHeight;
             setState<ErabyLandingState>();
         }
         else

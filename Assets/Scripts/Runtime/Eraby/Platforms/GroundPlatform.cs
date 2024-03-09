@@ -9,6 +9,8 @@ public class GroundPlatform : Platform, IGroundPlatform
 
     public float BounceVelocityXMultiplier => groundData.BounceVelocityXMultiplier;
 
+    public float PlayerJumpHeight => groundData.PlayerJumpHeight;
+
     public bool IsBouncy => BounceVelocityYMultiplier >= 1f;
 
     protected override PlatformCollisionData generateCollisionData(Collision2D other)

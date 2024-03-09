@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controls: {fileID: 4026483990694836036}
   accelerationData: {fileID: 11400000, guid: 13fa2509e550a3342b7981286f974cac, type: 2}
-  maxJumpHeight: 10
   body: {fileID: 4026483991751054410}
+  startJumpY: -1
   crashFactor: 0.5
 --- !u!1 &4026483989770302196
 GameObject:
@@ -405,8 +405,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controls: {fileID: 0}
   accelerationData: {fileID: 0}
-  maxJumpHeight: 30
   body: {fileID: 4026483991751054410}
+  startJumpY: -1
 --- !u!1 &4026483990970803123
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,8 +620,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controls: {fileID: 0}
   accelerationData: {fileID: 0}
-  maxJumpHeight: 20.1
   body: {fileID: 4026483991751054410}
+  startJumpY: -1
 --- !u!1 &4026483991107377306
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,9 +730,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controls: {fileID: 0}
   accelerationData: {fileID: 0}
-  maxJumpHeight: 15
   body: {fileID: 4026483991751054410}
-  launchVelocityY: Infinity
+  startJumpY: -1
+  maxJumpHeight: 5
 --- !u!1 &4026483991572100081
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,7 +846,7 @@ MonoBehaviour:
   tapParticles: {fileID: 4026483991751054412}
   tapManager: {fileID: 4026483991751054415}
   body: {fileID: 4026483991751054410}
-  landingTime: 0.9
+  landingTime: 0.6
 --- !u!114 &4026483991615271164
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,4 +5,6 @@ public interface IGroundPlatform
     public float BounceVelocityXMultiplier { get; }
 
     public bool IsBouncy => BounceVelocityYMultiplier >= 1f;
+
+    public float PlayerJumpHeight { get; }
 }

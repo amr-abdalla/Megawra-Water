@@ -67,7 +67,7 @@ abstract public class ErabyAbstractLandingState : ErabyState
     {
         if (tapManager.isTapped())
         {
-            onTap();
+            // onTap();
         }
 
         this.DisposeCoroutine(ref landingRoutine);
