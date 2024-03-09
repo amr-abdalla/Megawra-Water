@@ -150,7 +150,7 @@ public class ShabbaMoveState : ShabbaState
 	#region Input Functions
 	private void Move(InputAction.CallbackContext ctx)
 	{
-		rotateDirection = -ctx.ReadValue<Vector2>();
+		rotateDirection = ctx.ReadValue<Vector2>();
 	}
 
 	private void Push(InputAction.CallbackContext ctx)
