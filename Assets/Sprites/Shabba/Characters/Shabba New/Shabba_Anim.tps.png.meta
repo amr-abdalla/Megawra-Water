@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -67,10 +67,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -41061,8 +41061,8 @@ TextureImporter:
       SH_Swim_c1_04: 1238719498
       SH_Swim_01: -1926426104
       SH_Swim_09: -533292438
-      SH_Swim_c1_29: -1197559978
       SH_Dash_C2_04: -423211297
+      SH_Swim_c1_29: -1197559978
       SH_Dash_C1_06: -1249941278
       SH_Swim_c1_14: -876370490
       SH_Swim_c1_01: -310204627
