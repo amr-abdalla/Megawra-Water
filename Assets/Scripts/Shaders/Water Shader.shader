@@ -15,7 +15,7 @@ Shader "WaterShader"
 
 	SubShader
 	{
-		Tags { "Queue"="Transparent" "RenderType"="Transparent" }
+		Tags { "Queue"="Overlay" "RenderType"="Transparent" }
 		Blend SrcAlpha OneMinusSrcAlpha
 		Cull Off
 
