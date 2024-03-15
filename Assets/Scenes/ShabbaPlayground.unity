@@ -156,7 +156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 396042170406646506, guid: 2d6f79a3aecfa3a4bb0399111bbe1fbf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -9.1
       objectReference: {fileID: 0}
     - target: {fileID: 396042170406646506, guid: 2d6f79a3aecfa3a4bb0399111bbe1fbf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8748,11 +8748,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 396042170406646506, guid: 2d6f79a3aecfa3a4bb0399111bbe1fbf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 396042170406646506, guid: 2d6f79a3aecfa3a4bb0399111bbe1fbf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -17.94
       objectReference: {fileID: 0}
     - target: {fileID: 396042170406646506, guid: 2d6f79a3aecfa3a4bb0399111bbe1fbf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8877,6 +8877,26 @@ PrefabInstance:
     - target: {fileID: 7746966342094093670, guid: 2d6f79a3aecfa3a4bb0399111bbe1fbf, type: 3}
       propertyPath: m_SortingLayerID
       value: -1637443111
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172186193075843769, guid: 2d6f79a3aecfa3a4bb0399111bbe1fbf, type: 3}
+      propertyPath: m_BlendStyleIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172186193075843769, guid: 2d6f79a3aecfa3a4bb0399111bbe1fbf, type: 3}
+      propertyPath: m_NormalMapQuality
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172186193075843769, guid: 2d6f79a3aecfa3a4bb0399111bbe1fbf, type: 3}
+      propertyPath: m_LightVolumeIntensity
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172186193075843769, guid: 2d6f79a3aecfa3a4bb0399111bbe1fbf, type: 3}
+      propertyPath: m_ShadowIntensityEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172186193075843769, guid: 2d6f79a3aecfa3a4bb0399111bbe1fbf, type: 3}
+      propertyPath: m_LightVolumeIntensityEnabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8457407948460975021, guid: 2d6f79a3aecfa3a4bb0399111bbe1fbf, type: 3}
       propertyPath: m_SortingLayer
