@@ -88,14 +88,15 @@ public class PlatformManager : AbstractSpawner
 
     protected override void Update()
     {
-        int max = 50;
+        int max = 5;
 
-        Transform lastSpawned = spawnedPlatforms.LastOrDefault()?.transform;
 
-        while (player.position.x - distanceToPlayer < (lastSpawned?.transform.position.x ?? bounds.min) && max-- > 0)
+        spawnedPlatforms.Sort((a, b) => b.transform.position.x.CompareTo(a.transform.position.x));
+        bounds.min = spawnedPlatforms.LastOrDefault()?.transform.position.x ?? bounds.min;
+        while (player.position.x - distanceToPlayer < (bounds.min) && max-- > 0)
         {
             Debug.LogError($"{player.position.x} - {distanceToPlayer} < {bounds.min})");
-            bounds.min = Spawn(lastSpawned?.transform.position.x ?? bounds.min);
+            bounds.min = Spawn(bounds.min);
         }
     }
 
