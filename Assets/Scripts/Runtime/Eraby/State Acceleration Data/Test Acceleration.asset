@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: {x: 10, y: 10}
   desceleration: {x: 3, y: 3}
-  moveVelocity: {x: 10, y: 3}
+  moveVelocity: {x: 15, y: 3}
   maxVelocity: {x: 100, y: 100}

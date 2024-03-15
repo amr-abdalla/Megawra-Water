@@ -89,9 +89,13 @@ public class PlatformManager : AbstractSpawner
     protected override void Update()
     {
         int max = 50;
-        while (player.position.x - distanceToPlayer < bounds.min && max-- > 0)
+
+        Transform lastSpawned = spawnedPlatforms.LastOrDefault()?.transform;
+
+        while (player.position.x - distanceToPlayer < (lastSpawned?.transform.position.x ?? bounds.min) && max-- > 0)
         {
-            bounds.min = Spawn(bounds.min);
+            Debug.LogError($"{player.position.x} - {distanceToPlayer} < {bounds.min})");
+            bounds.min = Spawn(lastSpawned?.transform.position.x ?? bounds.min);
         }
     }
 
@@ -100,8 +104,10 @@ public class PlatformManager : AbstractSpawner
         return SpawnPlatform(x);
     }
 
+
     float SpawnPlatform(float x)
     {
+        float currentRandom = UnityEngine.Random.Range(gaps.min, gaps.max);
         CleanUpPlatforms();
         ShuffleList(platformPool);
         GameObject platform = platformPool[0];
@@ -109,12 +115,12 @@ public class PlatformManager : AbstractSpawner
         // tinker with the state machine so enable/disable doesn't mess things up
         platform.SetActive(true);
         platform.transform.position = new Vector3(
-            x,
+            x - currentRandom,
             groundAnchor.position.y,
             groundAnchor.position.z
         );
         spawnedPlatforms.Add(platform);
-        return platform.transform.position.x - UnityEngine.Random.Range(gaps.min, gaps.max);
+        return platform.transform.position.x;
     }
 
     void ShuffleList<T>(List<T> l)
