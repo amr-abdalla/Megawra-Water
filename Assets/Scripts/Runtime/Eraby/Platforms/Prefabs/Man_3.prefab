@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7499508977388115626
+--- !u!1001 &2958742351431045892
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 297889005591394777, guid: 8dc01e945f74d6c4b842927a78125ff1, type: 3}
       propertyPath: m_Name
-      value: Man_2
+      value: Man_3
       objectReference: {fileID: 0}
     - target: {fileID: 7767095139022823405, guid: 8dc01e945f74d6c4b842927a78125ff1, type: 3}
       propertyPath: m_Mesh
@@ -62,6 +62,6 @@ PrefabInstance:
     - target: {fileID: 8088665763576639098, guid: 8dc01e945f74d6c4b842927a78125ff1, type: 3}
       propertyPath: skeletonDataAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 35e8b72e641b49d4eaa6c0ac7de33d7e, type: 2}
+      objectReference: {fileID: 11400000, guid: b84f0f75fff93e245b3b64dce3dbe7c2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dc01e945f74d6c4b842927a78125ff1, type: 3}
