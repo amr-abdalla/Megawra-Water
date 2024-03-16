@@ -33,7 +33,10 @@ public class ErabyLandingState : ErabyAbstractLandingState
 
 
         dataProvider.launchVelocityY = float.PositiveInfinity;
-        dataProvider.launchVelocityX = clampVelocityX(dataProvider.landingVelocityX * dataProvider.bounceVelocityMultiplier.x);
+        Debug.Log("Landing velocity X: " + dataProvider.landingVelocityX);
+        dataProvider.launchVelocityX = clampVelocityX(
+            dataProvider.landingVelocityX * dataProvider.bounceVelocityMultiplier.x
+        );
         Debug.Log("Bounce velocity: " + dataProvider.launchVelocityY);
         // landingTime = mapLaunchVelocityToLandingTime(dataProvider.launchVelocityY);
         base.onStateEnter();
@@ -55,12 +58,12 @@ public class ErabyLandingState : ErabyAbstractLandingState
 
     protected override void applyTapMulipier()
     {
-        float newVelocityX = clampVelocityX(
-            -Mathf.Abs(dataProvider.landingVelocityX) * tapMultiplier
-        );
+        // float newVelocityX = clampVelocityX(
+        //     -Mathf.Abs(dataProvider.landingVelocityX) * tapMultiplier
+        // );
 
-        dataProvider.launchVelocityX = newVelocityX;
-        dataProvider.launchVelocityY *= tapMultiplier;
+        // dataProvider.launchVelocityX = newVelocityX;
+        // dataProvider.launchVelocityY *= tapMultiplier;
     }
 
     private float mapLaunchVelocityToLandingTime(float yVel)

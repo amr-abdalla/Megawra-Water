@@ -3,12 +3,10 @@ using UnityEngine;
 abstract class ErabyAbstractLaunchState : ErabyState
 {
     [Header("Jump Configs")]
-
-
-
     [SerializeField]
     protected PhysicsBody2D body = null;
     private float initialVelocityY = 0f;
+
     [SerializeField]
     private float startJumpY = -1f;
     private float stopJumpY = 0f;
@@ -20,6 +18,7 @@ abstract class ErabyAbstractLaunchState : ErabyState
         initialVelocityY = dataProvider.launchVelocityY;
         Debug.Log("Launch Velocity: " + dataProvider.landingVelocityY);
         Debug.Log("Max Jump Height" + dataProvider.PlayerJumpHeight);
+        Debug.Log("Launch Velocity X: " + dataProvider.launchVelocityX);
         startJumpY = startJumpY < 0 ? body.transform.position.y : startJumpY;
         stopJumpY = startJumpY + dataProvider.PlayerJumpHeight;
         initialVelocityY = clampVelocityY(initialVelocityY);
@@ -65,7 +64,7 @@ abstract class ErabyAbstractLaunchState : ErabyState
         return Mathf.Clamp(velocityY, velocityY, maxInitialVelocityY);
     }
 
-    abstract protected void goToJump();
+    protected abstract void goToJump();
 
     public override void DrawGizmos()
     {

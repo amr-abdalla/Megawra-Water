@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: G-Small
   m_EditorClassIdentifier: 
   bounceVelocityYMultiplier: 1.5
-  bounceVelocityXMultiplier: 0
+  bounceVelocityXMultiplier: 0.4
   playerJumpHeight: 20

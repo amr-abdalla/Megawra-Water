@@ -143,25 +143,33 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: -2
       objectReference: {fileID: 0}
+    - target: {fileID: 1094910817083684762, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172622278214859871, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
+      propertyPath: waitTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3350147166496306917, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: groundData
       value: 
       objectReference: {fileID: 11400000, guid: 8728201108c2c3f6e8357bc398d6ced9, type: 2}
     - target: {fileID: 5168009965866314559, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: m_Size.x
-      value: 2.3235703
+      value: 3.5659282
       objectReference: {fileID: 0}
     - target: {fileID: 5168009965866314559, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: m_Size.y
-      value: 2.769024
+      value: 1.8777676
       objectReference: {fileID: 0}
     - target: {fileID: 5168009965866314559, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: m_Offset.x
-      value: 1.6756096
+      value: 1.3245088
       objectReference: {fileID: 0}
     - target: {fileID: 5168009965866314559, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: m_Offset.y
-      value: 5.9690495
+      value: 5.5234213
       objectReference: {fileID: 0}
     - target: {fileID: 5168009965866314559, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.y
@@ -239,6 +247,10 @@ PrefabInstance:
       propertyPath: spline
       value: 
       objectReference: {fileID: 5288774213726725239}
+    - target: {fileID: 8524333714960231666, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
+      propertyPath: waitTime
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 8524333714960231666, guid: a35ba21902be81b4f9223c1f33747589, type: 3}
       propertyPath: bounceAnimation
       value: Jump
