@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13fa4e5f7a3df364ea5f0890a2f6c7ba, type: 3}
   m_Name: G-Small
   m_EditorClassIdentifier: 
-  bounceVelocityYMultiplier: 1.1
+  bounceVelocityYMultiplier: 1.5
   bounceVelocityXMultiplier: 0
   playerJumpHeight: 20
