@@ -14657,6 +14657,18 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0.34901962
       objectReference: {fileID: 0}
+    - target: {fileID: 4026483991426673731, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
+      propertyPath: maxJumpHeight
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026483991426673731, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
+      propertyPath: launchVelocityX
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026483991572100080, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
+      propertyPath: accelerationData
+      value: 
+      objectReference: {fileID: 11400000, guid: 37931e01c22d053468c5786abed9c940, type: 2}
     - target: {fileID: 4026483991751054404, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
       propertyPath: m_Name
       value: Eraby
