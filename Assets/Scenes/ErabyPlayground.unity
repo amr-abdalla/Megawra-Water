@@ -2964,15 +2964,15 @@ MonoBehaviour:
   - prefab: {fileID: 297889005591394777, guid: 9c7cc64617f14a24f974323d31d215eb, type: 3}
     numInPool: 15
   - prefab: {fileID: 297889005591394777, guid: df09fa8bf9bac1b4ba1ea095619aaafe, type: 3}
-    numInPool: 0
+    numInPool: 20
   - prefab: {fileID: 297889005591394777, guid: ca2fdef2de470e040a0eefa3a9e593c9, type: 3}
     numInPool: 0
   - prefab: {fileID: 297889005591394777, guid: 8dc01e945f74d6c4b842927a78125ff1, type: 3}
-    numInPool: 30
+    numInPool: 20
   - prefab: {fileID: 7796236552687234931, guid: 106c3f36241eef34e8db2c05f78747bf, type: 3}
-    numInPool: 30
+    numInPool: 20
   - prefab: {fileID: 3255469241926118109, guid: 9128d7bdd7189694f94db717b1000fee, type: 3}
-    numInPool: 30
+    numInPool: 20
   despawnDistance: 500
   gaps:
     min: 5
