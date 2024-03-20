@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 256292378}
   - component: {fileID: 256292379}
   - component: {fileID: 1942039845}
+  - component: {fileID: 4371388324931963180}
   m_Layer: 0
   m_Name: Crashed Launch
   m_TagString: Untagged
@@ -65,6 +66,22 @@ MonoBehaviour:
   dropShadowData: {fileID: 11400000, guid: 508d0a9055aadba4db48eff51e3b42eb, type: 2}
   shadowTransform: {fileID: 1577588494}
   playerTransform: {fileID: 4026483991751054407}
+--- !u!114 &4371388324931963180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256292377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c51161859087ad4484e399b202378e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spine: {fileID: 6284143390441576648}
+  animationName: Jump_Up
+  loop: 1
+  delay: 0
 --- !u!1 &1577588493
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1838556042}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.11, y: 0, z: 0}
+  m_LocalPosition: {x: -0.04, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -171,7 +188,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6039216}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.34901962}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -193,6 +210,7 @@ GameObject:
   - component: {fileID: 4026483989770302198}
   - component: {fileID: 4026483989770302201}
   - component: {fileID: 389116991}
+  - component: {fileID: 8949718558251964243}
   m_Layer: 0
   m_Name: Small Fall
   m_TagString: Untagged
@@ -237,7 +255,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4026483989770302196}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 157c1d3cc5f0e1d4984f3b4c9d58ebcc, type: 3}
   m_Name: 
@@ -259,6 +277,22 @@ MonoBehaviour:
   dropShadowData: {fileID: 11400000, guid: 508d0a9055aadba4db48eff51e3b42eb, type: 2}
   shadowTransform: {fileID: 1577588494}
   playerTransform: {fileID: 4026483991751054407}
+--- !u!114 &8949718558251964243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026483989770302196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c51161859087ad4484e399b202378e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spine: {fileID: 6284143390441576648}
+  animationName: Jump_Down
+  loop: 0
+  delay: 0
 --- !u!1 &4026483990060562413
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +349,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4026483990060562413}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 157c1d3cc5f0e1d4984f3b4c9d58ebcc, type: 3}
   m_Name: 
@@ -334,6 +368,7 @@ GameObject:
   - component: {fileID: 4026483990477463361}
   - component: {fileID: 4026483990477463360}
   - component: {fileID: 1353927167}
+  - component: {fileID: 223558908753427988}
   m_Layer: 0
   m_Name: Fall
   m_TagString: Untagged
@@ -378,7 +413,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4026483990477463391}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 157c1d3cc5f0e1d4984f3b4c9d58ebcc, type: 3}
   m_Name: 
@@ -400,6 +435,22 @@ MonoBehaviour:
   dropShadowData: {fileID: 11400000, guid: 508d0a9055aadba4db48eff51e3b42eb, type: 2}
   shadowTransform: {fileID: 1577588494}
   playerTransform: {fileID: 4026483991751054407}
+--- !u!114 &223558908753427988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026483990477463391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c51161859087ad4484e399b202378e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spine: {fileID: 6284143390441576648}
+  animationName: Jump_Down
+  loop: 0
+  delay: 0
 --- !u!1 &4026483990694836037
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,7 +639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4026483990970803122
 Transform:
   m_ObjectHideFlags: 0
@@ -683,6 +734,7 @@ GameObject:
   - component: {fileID: 4026483991016259429}
   - component: {fileID: 4026483991016259428}
   - component: {fileID: 75573839}
+  - component: {fileID: 6545531887702231016}
   m_Layer: 0
   m_Name: Crash
   m_TagString: Untagged
@@ -723,7 +775,7 @@ MonoBehaviour:
   tapParticles: {fileID: 4026483991751054412}
   tapManager: {fileID: 4026483991751054415}
   body: {fileID: 4026483991751054410}
-  landingTime: 0.1
+  landingTime: 0.4
   minBounceVelocityY: 5
 --- !u!114 &4026483991016259428
 MonoBehaviour:
@@ -732,7 +784,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4026483991016259427}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 157c1d3cc5f0e1d4984f3b4c9d58ebcc, type: 3}
   m_Name: 
@@ -754,6 +806,22 @@ MonoBehaviour:
   dropShadowData: {fileID: 11400000, guid: 508d0a9055aadba4db48eff51e3b42eb, type: 2}
   shadowTransform: {fileID: 1577588494}
   playerTransform: {fileID: 4026483991751054407}
+--- !u!114 &6545531887702231016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026483991016259427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c51161859087ad4484e399b202378e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spine: {fileID: 6284143390441576648}
+  animationName: Jump_Start
+  loop: 0
+  delay: 0
 --- !u!1 &4026483991055568782
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,6 +833,7 @@ GameObject:
   - component: {fileID: 4026483991055568817}
   - component: {fileID: 4026483991055568816}
   - component: {fileID: 1527227180}
+  - component: {fileID: 1619534774674308765}
   m_Layer: 0
   m_Name: Launch
   m_TagString: Untagged
@@ -818,6 +887,22 @@ MonoBehaviour:
   dropShadowData: {fileID: 11400000, guid: 508d0a9055aadba4db48eff51e3b42eb, type: 2}
   shadowTransform: {fileID: 1577588494}
   playerTransform: {fileID: 4026483991751054407}
+--- !u!114 &1619534774674308765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026483991055568782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c51161859087ad4484e399b202378e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spine: {fileID: 6284143390441576648}
+  animationName: Jump_Up
+  loop: 0
+  delay: 0
 --- !u!1 &4026483991107377306
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,6 +915,7 @@ GameObject:
   - component: {fileID: 4026483991107377308}
   - component: {fileID: 4026483991107377311}
   - component: {fileID: 2008297845}
+  - component: {fileID: 4393073967301482333}
   m_Layer: 0
   m_Name: Jump
   m_TagString: Untagged
@@ -874,7 +960,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4026483991107377306}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 157c1d3cc5f0e1d4984f3b4c9d58ebcc, type: 3}
   m_Name: 
@@ -896,6 +982,26 @@ MonoBehaviour:
   dropShadowData: {fileID: 11400000, guid: 508d0a9055aadba4db48eff51e3b42eb, type: 2}
   shadowTransform: {fileID: 1577588494}
   playerTransform: {fileID: 4026483991751054407}
+--- !u!114 &4393073967301482333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026483991107377306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d44e93debe0497c42a81b0927cf45073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spine: {fileID: 6284143390441576648}
+  animations:
+  - name: Jump_Up
+    loop: 0
+    delay: 0
+  - name: Jump_MidLoop
+    loop: 0
+    delay: 0.2
 --- !u!1 &4026483991426673729
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,6 +1013,7 @@ GameObject:
   - component: {fileID: 4026483991426673728}
   - component: {fileID: 4026483991426673731}
   - component: {fileID: 332355504}
+  - component: {fileID: 4587192999806244988}
   m_Layer: 0
   m_Name: Small Launch
   m_TagString: Untagged
@@ -945,7 +1052,8 @@ MonoBehaviour:
   accelerationData: {fileID: 0}
   body: {fileID: 4026483991751054410}
   startJumpY: -1
-  maxJumpHeight: 5
+  maxJumpHeight: 15
+  launchVelocityX: -3
 --- !u!114 &332355504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -961,6 +1069,22 @@ MonoBehaviour:
   dropShadowData: {fileID: 11400000, guid: 508d0a9055aadba4db48eff51e3b42eb, type: 2}
   shadowTransform: {fileID: 1577588494}
   playerTransform: {fileID: 4026483991751054407}
+--- !u!114 &4587192999806244988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026483991426673729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c51161859087ad4484e399b202378e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spine: {fileID: 6284143390441576648}
+  animationName: Jump_Start
+  loop: 0
+  delay: 0
 --- !u!1 &4026483991572100081
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,6 +1097,7 @@ GameObject:
   - component: {fileID: 4026483991572100080}
   - component: {fileID: 4026483991572100082}
   - component: {fileID: 909259362}
+  - component: {fileID: 5536894019227907226}
   m_Layer: 0
   m_Name: Walk
   m_TagString: Untagged
@@ -1008,7 +1133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controls: {fileID: 4026483990694836036}
-  accelerationData: {fileID: 11400000, guid: 13fa2509e550a3342b7981286f974cac, type: 2}
+  accelerationData: {fileID: 11400000, guid: 37931e01c22d053468c5786abed9c940, type: 2}
   body: {fileID: 4026483991751054410}
 --- !u!114 &4026483991572100082
 MonoBehaviour:
@@ -1039,6 +1164,22 @@ MonoBehaviour:
   dropShadowData: {fileID: 11400000, guid: 508d0a9055aadba4db48eff51e3b42eb, type: 2}
   shadowTransform: {fileID: 1577588494}
   playerTransform: {fileID: 4026483991751054407}
+--- !u!114 &5536894019227907226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026483991572100081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c51161859087ad4484e399b202378e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spine: {fileID: 6284143390441576648}
+  animationName: Run
+  loop: 1
+  delay: 0
 --- !u!1 &4026483991615271160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,6 +1192,7 @@ GameObject:
   - component: {fileID: 4026483991615271165}
   - component: {fileID: 4026483991615271164}
   - component: {fileID: 403506657}
+  - component: {fileID: 5847902273232018447}
   m_Layer: 0
   m_Name: Landing
   m_TagString: Untagged
@@ -1099,7 +1241,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4026483991615271160}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 157c1d3cc5f0e1d4984f3b4c9d58ebcc, type: 3}
   m_Name: 
@@ -1121,6 +1263,22 @@ MonoBehaviour:
   dropShadowData: {fileID: 11400000, guid: 508d0a9055aadba4db48eff51e3b42eb, type: 2}
   shadowTransform: {fileID: 1577588494}
   playerTransform: {fileID: 4026483991751054407}
+--- !u!114 &5847902273232018447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026483991615271160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c51161859087ad4484e399b202378e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spine: {fileID: 6284143390441576648}
+  animationName: Jump_Start
+  loop: 0
+  delay: 0
 --- !u!1 &4026483991631657324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,6 +1424,7 @@ GameObject:
   - component: {fileID: 4026483991725624152}
   - component: {fileID: 4026483991725624155}
   - component: {fileID: 450267370}
+  - component: {fileID: 2044278912710737949}
   m_Layer: 0
   m_Name: Idle
   m_TagString: Untagged
@@ -1310,7 +1469,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4026483991725624148}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 157c1d3cc5f0e1d4984f3b4c9d58ebcc, type: 3}
   m_Name: 
@@ -1346,6 +1505,22 @@ MonoBehaviour:
   dropShadowData: {fileID: 11400000, guid: 508d0a9055aadba4db48eff51e3b42eb, type: 2}
   shadowTransform: {fileID: 1577588494}
   playerTransform: {fileID: 4026483991751054407}
+--- !u!114 &2044278912710737949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026483991725624148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c51161859087ad4484e399b202378e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spine: {fileID: 6284143390441576648}
+  animationName: Run
+  loop: 1
+  delay: 0
 --- !u!1 &4026483991751054404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,6 +1560,7 @@ Transform:
   - {fileID: 4026483990694836038}
   - {fileID: 4026483990970803122}
   - {fileID: 1577588494}
+  - {fileID: 6490932017847643735}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6277,6 +6453,7 @@ GameObject:
   - component: {fileID: 4026483991820223372}
   - component: {fileID: 4026483991820223375}
   - component: {fileID: 697285945}
+  - component: {fileID: 1138822976184150454}
   m_Layer: 0
   m_Name: Small Jump
   m_TagString: Untagged
@@ -6321,7 +6498,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4026483991820223370}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 157c1d3cc5f0e1d4984f3b4c9d58ebcc, type: 3}
   m_Name: 
@@ -6343,6 +6520,26 @@ MonoBehaviour:
   dropShadowData: {fileID: 11400000, guid: 508d0a9055aadba4db48eff51e3b42eb, type: 2}
   shadowTransform: {fileID: 1577588494}
   playerTransform: {fileID: 4026483991751054407}
+--- !u!114 &1138822976184150454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026483991820223370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d44e93debe0497c42a81b0927cf45073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spine: {fileID: 6284143390441576648}
+  animations:
+  - name: Jump_Up
+    loop: 0
+    delay: 0
+  - name: Jump_MidLoop
+    loop: 0
+    delay: 0.2
 --- !u!1 &4026483991915608171
 GameObject:
   m_ObjectHideFlags: 0
@@ -6390,3 +6587,127 @@ MonoBehaviour:
   controls: {fileID: 4026483990694836036}
   accelerationData: {fileID: 0}
   body: {fileID: 4026483991751054410}
+--- !u!1 &8331307486010464962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6490932017847643735}
+  - component: {fileID: 2603015249311950872}
+  - component: {fileID: 659447552283026795}
+  - component: {fileID: 6284143390441576648}
+  m_Layer: 0
+  m_Name: Spine GameObject (eraby)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6490932017847643735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331307486010464962}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.24, y: 0, z: 0.09773934}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4026483991751054407}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2603015249311950872
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331307486010464962}
+  m_Mesh: {fileID: 0}
+--- !u!23 &659447552283026795
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331307486010464962}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e57edf45221a0194382f029cfe3a4326, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6284143390441576648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331307486010464962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonDataAsset: {fileID: 11400000, guid: 73a049cab03241745bef7481d717d52b, type: 2}
+  initialSkinName: 
+  fixPrefabOverrideViaMeshFilter: 2
+  initialFlipX: 0
+  initialFlipY: 0
+  updateWhenInvisible: 3
+  separatorSlotNames: []
+  zSpacing: 0
+  useClipping: 1
+  immutableTriangles: 0
+  pmaVertexColors: 1
+  clearStateOnDisable: 0
+  tintBlack: 0
+  singleSubmesh: 0
+  fixDrawOrder: 0
+  addNormals: 0
+  calculateTangents: 0
+  maskInteraction: 0
+  maskMaterials:
+    materialsMaskDisabled: []
+    materialsInsideMask: []
+    materialsOutsideMask: []
+  disableRenderingOnOverride: 1
+  updateTiming: 1
+  unscaledTime: 0
+  _animationName: Run
+  loop: 1
+  timeScale: 1
