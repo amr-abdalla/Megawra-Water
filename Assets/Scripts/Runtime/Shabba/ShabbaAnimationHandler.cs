@@ -13,8 +13,16 @@ public class ShabbaAnimationHandler : MonoBehaviour
 		dashAnimation.Play();
 	}
 
+	public void PlayIdleAnimation()
+	{
+		dashAnimation.Stop();
+		idleAnimation.ResetAnimation();
+		idleAnimation.Play();
+	}
+
 	public void ResetAnimation()
 	{
+		idleAnimation.Stop();
 		Sprite firstSprite = idleAnimation.GetFirstFrame();
 		idleAnimation.ResetAnimation(firstSprite);
 	}

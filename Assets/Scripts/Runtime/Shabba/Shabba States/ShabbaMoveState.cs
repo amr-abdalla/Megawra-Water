@@ -29,9 +29,9 @@ public class ShabbaMoveState : ShabbaState
 	#region events
 	public void onDidStopMoving() 
 	{
-		loseScreen.SetActive(true);
-		Time.timeScale = 0;
+		stateMachine.SetState<ShabbaDyingState>();
 	}// => stateMachine.SetState<>();
+
 	public Action OnPush;
 	public Action<float> OnRotate;
 
@@ -43,6 +43,7 @@ public class ShabbaMoveState : ShabbaState
 
 	protected override void onStateEnter()
 	{
+		shabbaAnimationHandler.PlayIdleAnimation();
 		resetVariableToInitialValues();
 		OnPush += shabbaAnimationHandler.InvokeDashAnimation;
 		OnRotate += shabbaAnimationHandler.OnRotate;
@@ -53,6 +54,7 @@ public class ShabbaMoveState : ShabbaState
 		resetVariableToInitialValues();
 		OnPush -= shabbaAnimationHandler.InvokeDashAnimation;
 		OnRotate -= shabbaAnimationHandler.OnRotate;
+		isInit = false; //hack
 	}
 
 	protected override void onStateInit() { } //not sure if needed
