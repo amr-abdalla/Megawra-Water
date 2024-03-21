@@ -10,14 +10,14 @@ public class UIManager : MonoBehaviour
 
 	private void Awake()
 	{
-		GameManager.OnLoseAction += OnLose;
-		GameManager.OnWinAction += OnWin;
+		GlobalReferences.gameManager.OnLoseAction += OnLose;
+		GlobalReferences.gameManager.OnWinAction += OnWin;
 	}
 
 	private void OnDestroy()
 	{
-		GameManager.OnLoseAction -= OnLose;
-		GameManager.OnWinAction -= OnWin;
+		GlobalReferences.gameManager.OnLoseAction -= OnLose;
+		GlobalReferences.gameManager.OnWinAction -= OnWin;
 	}
 
 	private void OnLose()
@@ -29,6 +29,6 @@ public class UIManager : MonoBehaviour
 	{
 		winUI.SetActive(true);
 		scoreText.text = "Score " + ScoreTracker.CurrentScore.ToString();
-		timeText.text = "Time " + ((int)(Time.time - GameManager.StartTime)).ToString();
+		timeText.text = "Time " + ((int)(Time.time - GlobalReferences.gameManager.StartTime)).ToString();
 	}
 }

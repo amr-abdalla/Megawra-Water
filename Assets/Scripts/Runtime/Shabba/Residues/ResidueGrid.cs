@@ -54,7 +54,7 @@ public class ResidueGrid : MonoBehaviourBase
 
 		if(HasWon())
 		{
-			GameManager.OnWin();
+			GlobalReferences.gameManager.OnWin();
 		}
 	}
 

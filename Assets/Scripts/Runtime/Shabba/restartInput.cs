@@ -14,7 +14,7 @@ public class restartInput : MonoBehaviour
 
 	public void RestartScene()
 	{
-		GameManager.Init();
+		GlobalReferences.gameManager.Init();
 		SceneManager.LoadScene(0);
 	}
 }

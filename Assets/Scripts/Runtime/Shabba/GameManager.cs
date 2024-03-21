@@ -1,31 +1,35 @@
 using UnityEngine;
 
-public static class GameManager
+public class GameManager: MonoBehaviour
 {
+	public float StartTime { get; private set; }
+	public System.Action OnLoseAction;
+	public System.Action OnWinAction;
 
-	public static float StartTime { get; private set; }
-	public static System.Action OnLoseAction;
-	public static System.Action OnWinAction;
-
-	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-	public static void Init()
+	private void Awake()
 	{
+		Init();
+	}
+
+	public void Init()
+	{
+		//condition for levels here
 		Resume();
 		StartTime = Time.time;
 		ScoreTracker.CurrentScore = 0;
 	}
 
-	public static void Pause() => Time.timeScale = 0;
+	public void Pause() => Time.timeScale = 0;
 
-	public static void Resume() => Time.timeScale = 1;
+	public void Resume() => Time.timeScale = 1;
 
-	public static void OnLose()
+	public void OnLose()
 	{
 		Pause();
 		OnLoseAction?.Invoke();
 	}
 
-	public static void OnWin()
+	public void OnWin()
 	{
 		Pause();
 		OnWinAction?.Invoke();
