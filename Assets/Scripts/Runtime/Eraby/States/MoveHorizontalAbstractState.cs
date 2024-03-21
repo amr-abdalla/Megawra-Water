@@ -37,7 +37,7 @@ public abstract class MoveHorizontalAbstractState : ErabyState
 
     float clampVelocityX(float i_velocityX, float i_maxVelocityX)
     {
-        if (i_velocityX > 0) return 0;
+        // if (i_velocityX > 0) return 0;
         return Mathf.Abs(i_velocityX) >= i_maxVelocityX
             ? Mathf.Sign(i_velocityX) * i_maxVelocityX
             : i_velocityX;

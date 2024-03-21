@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ErabyAcceleration
   m_EditorClassIdentifier: 
   acceleration: {x: 10, y: 10}
-  desceleration: {x: 1, y: 3}
+  desceleration: {x: Infinity, y: 3}
   moveVelocity: {x: 10, y: 3}
   maxVelocity: {x: 100, y: 100}

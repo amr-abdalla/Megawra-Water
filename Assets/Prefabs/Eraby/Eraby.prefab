@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controls: {fileID: 4026483990694836036}
-  accelerationData: {fileID: 11400000, guid: f5bd43eca6b728e42a3328f321c84893, type: 2}
+  accelerationData: {fileID: 11400000, guid: 13fa2509e550a3342b7981286f974cac, type: 2}
   body: {fileID: 4026483991751054410}
 --- !u!114 &4026483990477463360
 MonoBehaviour:
@@ -1001,7 +1001,7 @@ MonoBehaviour:
     delay: 0
   - name: Jump_MidLoop
     loop: 0
-    delay: 0.2
+    delay: 0
 --- !u!1 &4026483991426673729
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,7 +1133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controls: {fileID: 4026483990694836036}
-  accelerationData: {fileID: 11400000, guid: 37931e01c22d053468c5786abed9c940, type: 2}
+  accelerationData: {fileID: 11400000, guid: 13fa2509e550a3342b7981286f974cac, type: 2}
   body: {fileID: 4026483991751054410}
 --- !u!114 &4026483991572100082
 MonoBehaviour:
@@ -1518,8 +1518,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spine: {fileID: 6284143390441576648}
-  animationName: Run
-  loop: 1
+  animationName: Jump_Down
+  loop: 0
   delay: 0
 --- !u!1 &4026483991751054404
 GameObject:

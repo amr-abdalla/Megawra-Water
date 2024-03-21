@@ -33,7 +33,7 @@ public class SpineAnimationSequenceStateFeature : StateFeatureAbstract
         if (spine)
             spine.AnimationState.SetAnimation(0, animation.name, animation.loop);
 
-        yield return new WaitForSeconds(spine.AnimationState.GetCurrent(0).Animation.Duration);
+        // yield return new WaitForSeconds(spine.AnimationState.GetCurrent(0).Animation.Duration);
         if (index + 1 < animations.Length)
             animationCoroutine = StartCoroutine(AnimationRoutine(animations[index + 1], index + 1));
         else

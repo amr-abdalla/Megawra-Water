@@ -57,5 +57,5 @@
     "prettier.useEditorConfig": false,
     "dotnet.server.useOmnisharp": true,
     "omnisharp.useModernNet": false,
-    "dotnet.defaultSolution": "MegawraWater.sln"
+    "dotnet.defaultSolution": "Megawra-Water.sln"
 }
