@@ -15,6 +15,7 @@ public abstract class AbstractSpawner : MonoBehaviour
     [SerializeField]
     protected Transform player = null;
 
+  protected Vector3 initialGroundAnchorPostion;
     protected struct SpawnerBounds
     {
         public float min;
@@ -25,6 +26,8 @@ public abstract class AbstractSpawner : MonoBehaviour
 
     protected virtual void Awake()
     {
+        initialGroundAnchorPostion = groundAnchor.position;
+        
         bounds = new SpawnerBounds { min = groundAnchor.position.x, max = groundAnchor.position.x };
     }
 

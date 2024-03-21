@@ -1,39 +1,36 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[Serializable]
-struct PoolData
-{
-    public GameObject prefab;
-    public int numInPool;
-}
 
 public class PlatformManager : AbstractSpawner
 {
-    [SerializeField]
-    PoolData[] platformPoolData;
+
+    public PlatformManagerConfig config = null;
+
+    private List<PlatformManagerConfig.PoolData> platformPoolData => config.Platforms;
 
     List<GameObject> platformPool = null;
 
     List<GameObject> spawnedPlatforms = null;
 
-    [SerializeField]
-    public float despawnDistance;
 
-    [Serializable]
-    struct DistanceConfig
+    private float despawnDistance => config.DespawnDistance;
+
+
+    private PlatformManagerConfig.DistanceConfig gaps => config.Gaps;
+
+
+
+    protected override void Awake()
     {
-        public float min;
-        public float max;
+        platformPool = new();
+        spawnedPlatforms = new();
+        base.Awake();
     }
 
-    [SerializeField]
-    private DistanceConfig gaps;
-
-    void Start()
+    public void InitPlatforms()
     {
         int num_platforms = platformPoolData.Select(data => data.numInPool).Sum();
 
@@ -43,7 +40,7 @@ public class PlatformManager : AbstractSpawner
         Debug.Log("PlatformManager Start");
         Debug.Log("num_platforms: " + num_platforms);
 
-        foreach (PoolData data in platformPoolData)
+        foreach (PlatformManagerConfig.PoolData data in platformPoolData)
         {
             for (int i = 0; i < data.numInPool; i++)
             {
@@ -54,6 +51,18 @@ public class PlatformManager : AbstractSpawner
                 platformPool.Add(spawned);
             }
         }
+
+    }
+
+    public void ClearPlatforms()
+    {
+        platformPool.ForEach(p => Destroy(p));
+        spawnedPlatforms.ForEach(p => Destroy(p));
+
+        platformPool.Clear();
+        spawnedPlatforms.Clear();
+        bounds = new SpawnerBounds { min = groundAnchor.position.x, max = groundAnchor.position.x };
+
     }
 
     bool ShouldBeCleaned(GameObject platform)
