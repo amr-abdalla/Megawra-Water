@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb42cbf364c62c4496dc92bdf8d07d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  residueData: {fileID: 11400000, guid: 99e0b04991a9c9a4e9548326de5bce46, type: 2}
+  residueData: {fileID: 11400000, guid: 3121c487d8a25c44f8ecf1a87c96a4ee, type: 2}
 --- !u!60 &7696253495181561728
 PolygonCollider2D:
   m_ObjectHideFlags: 0

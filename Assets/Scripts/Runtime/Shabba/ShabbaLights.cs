@@ -12,6 +12,5 @@ public class ShabbaLights : MonoBehaviour
 	{
 		var currentY = Mathf.InverseLerp(startY, finishY, shabba.transform.position.y);
 		light2D.intensity = Mathf.Lerp(2.6f, 0, currentY);
-		Debug.Log(light2D.intensity);
 	}
 }

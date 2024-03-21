@@ -13,6 +13,12 @@ public class ShabbaAnimationHandler : MonoBehaviour
 		dashAnimation.Play();
 	}
 
+	public void ResetAnimation()
+	{
+		Sprite firstSprite = idleAnimation.GetFirstFrame();
+		idleAnimation.ResetAnimation(firstSprite);
+	}
+
 	public void OnRotate(float rotationDiff)
 	{
 		var t = Mathf.InverseLerp(0, 4.39f, Mathf.Abs(rotationDiff));
@@ -28,6 +34,8 @@ public class ShabbaAnimationHandler : MonoBehaviour
 		idleAnimation.Play();
 	}
 
-	void Start() => dashAnimation.OnLastFrameReached += OnFinishDashAnimation;
-
+	void Start()
+	{
+		dashAnimation.OnLastFrameReached += OnFinishDashAnimation;
+	}
 }

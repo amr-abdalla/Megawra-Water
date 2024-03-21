@@ -25,6 +25,8 @@ public class ResidueParticle : MonoBehaviour
 		particleMovement.GetPushed(pushValue, pushDirection, speed);
 	}
 
+	public ResidueData.ResidueType GetResidueType() => residueData.Type;
+
 	#endregion
 
 	#region UNITY

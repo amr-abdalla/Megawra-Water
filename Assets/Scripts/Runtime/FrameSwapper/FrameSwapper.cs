@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class FrameSwapper<TRenderer, TFrame> : MonoBehaviourBase, IFrameSwapper where TRenderer : Component
@@ -49,11 +50,13 @@ public abstract class FrameSwapper<TRenderer, TFrame> : MonoBehaviourBase, IFram
 	public int LoopCount => loopCount;
 	public bool IsPlaying => null != playback;
 	public bool IsPaused => !isResumed;
-    #endregion
+	#endregion
 
-    #region MUTABLE
+	#region MUTABLE
 
-    public void RegisterCycleEvents(params CycleEvent[] i_cycleEvents)
+	public TFrame GetFirstFrame() => frames[0].FrameObject;
+
+	public void RegisterCycleEvents(params CycleEvent[] i_cycleEvents)
 	{
 		foreach (CycleEvent eventCallback in i_cycleEvents)
 		{

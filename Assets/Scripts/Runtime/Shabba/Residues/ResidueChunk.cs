@@ -10,6 +10,7 @@ public class ResidueChunk : MonoBehaviour
 
 	public System.Action<ResidueChunk, Vector3, float, float> OnGetPushed;
 	public System.Action<ResidueChunk> OnDestroy;
+	public System.Action<ResidueParticle> OnParticleRemoved;
 
 	private List<ResidueParticle> residueParticles = null;
 
@@ -23,12 +24,27 @@ public class ResidueChunk : MonoBehaviour
 
 	public void Init()
 	{
+
 		residueParticles = GetComponentsInChildren<ResidueParticle>().ToList();
 		foreach (ResidueParticle residueParticle in residueParticles)
 		{
 			residueParticle.Init();
 			residueParticle.OnCollect += RemoveResidueParticleFromCachedList;
 		}
+
+	}
+
+	public Dictionary<ResidueData.ResidueType, int> GetResiduesCountByTypes()
+	{
+		Dictionary<ResidueData.ResidueType, int> residueNumbersByTypes = new Dictionary<ResidueData.ResidueType, int>() { { ResidueData.ResidueType.Small, 0 }, { ResidueData.ResidueType.Medium, 0 }, { ResidueData.ResidueType.Large, 0 } };
+
+		foreach (ResidueParticle residueParticle in residueParticles)
+		{
+			residueNumbersByTypes[residueParticle.GetResidueType()]++;
+		}
+
+		return residueNumbersByTypes;
+
 	}
 
 	#endregion
@@ -53,6 +69,7 @@ public class ResidueChunk : MonoBehaviour
 	{
 		residueParticle.OnCollect -= RemoveResidueParticleFromCachedList;
 		residueParticles.Remove(residueParticle);
+		OnParticleRemoved?.Invoke(residueParticle);
 
 		if (residueParticles.Count == 0)
 		{

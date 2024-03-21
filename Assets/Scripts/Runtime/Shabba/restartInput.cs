@@ -9,7 +9,12 @@ public class restartInput : MonoBehaviour
 
 	void Start()
 	{
-		restart.action.performed += (ctx) => SceneManager.LoadScene(0);
+		restart.action.performed += (ctx) => RestartScene();
 	}
 
+	public void RestartScene()
+	{
+		GameManager.Init();
+		SceneManager.LoadScene(0);
+	}
 }

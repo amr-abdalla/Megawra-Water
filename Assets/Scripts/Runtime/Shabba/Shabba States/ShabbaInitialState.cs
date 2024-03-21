@@ -10,6 +10,7 @@ public class ShabbaInitialState : ShabbaState
 	[SerializeField] private float maxSpeed = 10;
 	#endregion
 	[SerializeField] private Rigidbody2D rigidBody;
+	[SerializeField] private ShabbaAnimationHandler shabbaAnimationHandler;
 
 	private float currentSpeed = 0;
 	private Vector3 MoveDirection;
@@ -24,7 +25,7 @@ public class ShabbaInitialState : ShabbaState
 
 	public override void ResetState() { }
 
-	protected override void onStateEnter() { }
+	protected override void onStateEnter() => shabbaAnimationHandler.ResetAnimation();
 
 	protected override void onStateExit() { }
 

@@ -25,6 +25,7 @@ public class MeshGenerator : MonoBehaviourBase
 	private void Start()
 	{
 		Init();
+		GenerateMesh();
 	}
 
 	#endregion
