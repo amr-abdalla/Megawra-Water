@@ -5,6 +5,8 @@ public class ShabbaAudioManager : MonoBehaviour
 	private int currentDashIndex = 0;
 	private int currentCrystalCollectIndex = 0;
 
+	private float timeSinceLastPlayedCollectCrystal = -2;
+
 	[SerializeField] private AudioClip[] dashClips;
 	[SerializeField] private AudioSource dashAudioSource;
 
@@ -21,9 +23,29 @@ public class ShabbaAudioManager : MonoBehaviour
 
 	public void PlayCollectClip()
 	{
+		if (Time.time - timeSinceLastPlayedCollectCrystal <= 2)
+		{
+			if (currentCrystalCollectIndex == 0)
+			{
+				currentCrystalCollectIndex = 1;
+			}
+			else
+			{
+				collectBigCrystalSource.pitch += 0.1f;
+			}
+		}
+		else
+		{
+			currentCrystalCollectIndex = 0;
+			collectBigCrystalSource.pitch = 1;
+
+		}
+
+		timeSinceLastPlayedCollectCrystal = Time.time;
+
 		collectBigCrystalSource.clip = collectBigCrystalClips[currentCrystalCollectIndex];
+
 		collectBigCrystalSource.Play();
-		currentCrystalCollectIndex = Mathf.Min(currentCrystalCollectIndex + 1, collectBigCrystalClips.Length - 1);// (currentCrystalCollectIndex + 1) % collectBigCrystalClips.Length;
 
 	}
 

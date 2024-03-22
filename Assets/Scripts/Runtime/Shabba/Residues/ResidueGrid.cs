@@ -28,14 +28,8 @@ public class ResidueGrid : MonoBehaviourBase
 	#region UNITY
 	private void Start()
 	{
-		InitChunks();
-
 		ScoreTracker.MaxScore = 0;
-		foreach(var residue in AllResidueCount)
-		{
-			ScoreTracker.MaxScore += residue.Value;
-		}
-
+		InitChunks();
 	}
 
 	#endregion

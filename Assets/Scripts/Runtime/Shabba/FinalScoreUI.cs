@@ -24,8 +24,6 @@ public class FinalScoreUI : MonoBehaviour
 
 	public void Setup()
 	{
-		Debug.Log("Current Score " + ScoreTracker.CurrentScore + " Max Score " + ScoreTracker.MaxScore);
-
 		foreach(var spriteScore in spriteScores)
 		{
 			if(spriteScore.IsScoreFulfilled(ScoreTracker.CurrentScore, ScoreTracker.MaxScore))
