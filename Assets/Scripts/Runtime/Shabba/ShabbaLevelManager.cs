@@ -1,16 +1,8 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class ShabbaLevelManager : MonoBehaviour
 {
-	[SerializeField] InputActionReference restart;
-
-	void Start()
-	{
-		restart.action.performed += (ctx) => GoToNextLevel();
-	}
-
 	public void GoToMainMenu()
 	{
 		ScoreTracker.TotalScore = 0;
@@ -20,9 +12,10 @@ public class ShabbaLevelManager : MonoBehaviour
 
 	public void GoToNextLevel()
 	{
-		if(SceneManager.GetActiveScene().name == "ShabbaLevel2")
+		if (SceneManager.GetActiveScene().name == "ShabbaLevel2")
 		{
 			SceneManager.LoadScene("Main Menu");
+			return;
 		}
 
 		SceneManager.LoadScene("ShabbaLevel2");

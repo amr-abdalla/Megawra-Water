@@ -2247,10 +2247,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1112d8ba-bd7b-40d6-8e2d-9a3a8b2d6fe0
     m_ActionName: Shabba/Push[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b1141ea7-dec1-4499-985e-2b84c05f4b6f
-    m_ActionName: Shabba/RestartGame[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Shabba
@@ -2298,7 +2294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5858fc7b256d8e243b013b83b7f9a0d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restart: {fileID: 1106009938709141351, guid: aa644bfc2337c30408815c43caa8e014, type: 3}
+  restart: {fileID: 6616664993253886368, guid: aa644bfc2337c30408815c43caa8e014, type: 3}
 --- !u!1 &797568004
 GameObject:
   m_ObjectHideFlags: 0

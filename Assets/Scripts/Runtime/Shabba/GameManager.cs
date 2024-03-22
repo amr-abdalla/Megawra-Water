@@ -42,7 +42,15 @@ public class GameManager: MonoBehaviour
 		OnWinAction?.Invoke();
 	}
 
-	private void GoToNextLevel(InputAction.CallbackContext obj) => levelManager.GoToNextLevel();
+	private void GoToNextLevel(InputAction.CallbackContext obj)
+	{
+		levelManager.GoToNextLevel();
+		shabbaControls.RemoveControls();
+	}
 
-	private void Restart(InputAction.CallbackContext obj) => levelManager.GoToMainMenu();
+	private void Restart(InputAction.CallbackContext obj)
+	{
+		levelManager.GoToMainMenu();
+		shabbaControls.RemoveControls();
+	}
 }
