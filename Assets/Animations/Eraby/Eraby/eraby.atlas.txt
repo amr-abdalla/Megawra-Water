@@ -1,0 +1,75 @@
+eraby.png
+size:300,523
+filter:Linear,Linear
+pma:true
+Back Arm
+bounds:111,124,83,104
+offsets:0,1,83,105
+Back Hand
+bounds:112,9,68,29
+Bangs
+bounds:204,83,53,40
+offsets:0,1,53,42
+Closed
+bounds:182,36,62,19
+Erba
+bounds:2,371,190,150
+Erba Strap
+bounds:2,79,149,107
+offsets:1,0,151,107
+rotate:90
+Erba Strap Back
+bounds:112,40,65,82
+offsets:1,1,66,84
+Face
+bounds:188,252,109,112
+offsets:1,0,110,113
+Hand Upper
+bounds:246,6,27,49
+offsets:0,1,27,51
+Happy
+bounds:204,57,62,24
+Happy 1
+bounds:275,29,20,20
+Happy2
+bounds:259,98,25,20
+rotate:90
+Hat
+bounds:196,125,78,87
+offsets:1,4,80,91
+rotate:90
+Leg_1
+bounds:196,205,45,102
+offsets:0,0,46,103
+rotate:90
+Leg_2
+bounds:2,20,57,108
+offsets:0,1,57,110
+rotate:90
+Nose
+bounds:275,51,23,45
+Oh
+bounds:259,85,11,14
+rotate:90
+Open Eye
+bounds:179,58,64,23
+rotate:90
+Poker
+bounds:188,237,13,6
+rotate:90
+Sad
+bounds:285,193,13,10
+Skirt
+bounds:2,230,129,139
+Smile
+bounds:24,8,15,10
+Torso
+bounds:194,366,104,155
+offsets:0,1,104,156
+Ugh
+bounds:182,15,59,19
+Upper Arm
+bounds:133,240,53,129
+offsets:0,1,53,130
+Upset
+bounds:2,2,20,16

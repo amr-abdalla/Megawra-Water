@@ -11,21 +11,21 @@ public class ErabyFallState : ErabyAbstractFallState
     {
         base.onStateEnter();
         Debug.Log("Enter fall");
-        // controls.DiveStarted += goToFastFall;
-        // controls.JumpPressed += goToGlide;
+        //controls.DiveStarted += goToFastFall;
+        //controls.JumpPressed += goToGlide;
 
-        if (controls.isDiving())
-            goToFastFall();
+        // if (controls.isDiving())
+            // goToFastFall();
 
-        if (controls.isJumping())
-            goToGlide();
+        // if (controls.isJumping())
+            // goToGlide();
     }
 
     protected override void onStateExit()
     {
-        controls.DiveStarted -= goToFastFall;
+        // controls.DiveStarted -= goToFastFall;
 
-        controls.JumpPressed -= goToGlide;
+        // controls.JumpPressed -= goToGlide;
 
         base.onStateExit();
     }

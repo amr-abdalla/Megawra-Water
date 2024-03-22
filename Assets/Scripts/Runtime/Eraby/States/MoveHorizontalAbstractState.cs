@@ -38,7 +38,7 @@ public abstract class MoveHorizontalAbstractState : ErabyState
 
     float clampVelocityX(float i_velocityX, float i_maxVelocityX)
     {
-        if (i_velocityX > 0) return 0;
+        // if (i_velocityX > 0) return 0;
         return Mathf.Abs(i_velocityX) >= i_maxVelocityX
             ? Mathf.Sign(i_velocityX) * i_maxVelocityX
             : i_velocityX;
@@ -79,7 +79,22 @@ public abstract class MoveHorizontalAbstractState : ErabyState
         {
             if (!isEnabled)
                 break;
-            body.SetVelocityX(body.VelocityX + direction * acceleration * Time.fixedDeltaTime);
+            // Debug.Log(
+            //     "body.VelocityX: "
+            //         + body.VelocityX
+            //         + " targetVelocityX: "
+            //         + targetVelocityX
+            //         + " direction: "
+            //         + direction
+            //         + " acceleration: "
+            //         + acceleration
+            // );
+
+            // body.SetVelocityX(body.VelocityX + direction * acceleration * Time.fixedDeltaTime);
+            body.SetVelocityX(
+                Mathf.Lerp(body.VelocityX, targetVelocityX, acceleration * Time.fixedDeltaTime)
+            );
+            // body.SetVelocityX(targetVelocityX);
             yield return new WaitForFixedUpdate();
         }
         this.DisposeCoroutine(ref accelerationCoroutine);

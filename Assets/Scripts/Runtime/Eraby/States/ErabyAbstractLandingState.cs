@@ -67,7 +67,7 @@ abstract public class ErabyAbstractLandingState : ErabyState
     {
         if (tapManager.isTapped())
         {
-            onTap();
+            // onTap();
         }
 
         this.DisposeCoroutine(ref landingRoutine);
@@ -76,11 +76,11 @@ abstract public class ErabyAbstractLandingState : ErabyState
 
     protected float clampVelocityX(float velocityX)
     {
-        return Mathf.Clamp(
+        return -Mathf.Abs(Mathf.Clamp(
             velocityX,
             -Mathf.Abs(accelerationData.MaxVelocityX),
             Mathf.Abs(accelerationData.MaxVelocityX)
-        );
+        ));
     }
 
     #endregion

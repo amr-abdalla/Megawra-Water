@@ -1,9 +1,12 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ErabyStateMachineDataProvider", menuName = "Eraby/ErabyStateMachineDataProvider", order = 0)]
+[CreateAssetMenu(
+    fileName = "ErabyStateMachineDataProvider",
+    menuName = "Eraby/ErabyStateMachineDataProvider",
+    order = 0
+)]
 public class ErabyStateMachineDataProvider : AbstractStateMachineDataProvider
 {
-  
     /// <summary>
     ///  Base velocity used by states which inherit from <see cref="MoveHorizontalAbstractState" />.
     /// </summary>
@@ -13,6 +16,11 @@ public class ErabyStateMachineDataProvider : AbstractStateMachineDataProvider
     /// Like <see cref="launchVelocityY"/>, used by landing states to calculate the new X velocity.
     /// </summary>
     public float landingVelocityX = 0f;
+
+    /// <summary>
+    /// Like <see cref="launchVelocityY"/>, used by landing states to calculate the new Y velocity.
+    /// </summary>
+    public float landingVelocityY = 0f;
 
     /// <summary>
     /// Data recieved from a platform when bumped horizontally.
@@ -64,4 +72,6 @@ public class ErabyStateMachineDataProvider : AbstractStateMachineDataProvider
     /// Used by Gizmos to draw the player's maximum altitude on the current jump.
     /// </summary>
     public float jumpStopHeight = 0f;
+
+    public float PlayerJumpHeight = 0f;
 }

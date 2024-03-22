@@ -1,15 +1,27 @@
 version: 2
 tpsheetFileNames:
+- Assets/Animations/Eraby/Water FX/small_splash_01.tpsheet
+- Assets/Animations/Eraby/Water FX/small_splash_02.tpsheet
+- Assets/Animations/Eraby/Water FX/splash_01.tpsheet
+- Assets/Animations/Eraby/Water FX/splash_02.tpsheet
 - Assets/Animations/Shabba/New Animations/Shabba_Anim.tps.tpsheet
 - Assets/Animations/Shabba/Shabba_Anim.tpsheet
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
 - Assets/Sprites/Shabba/Characters/Shabba New/Shabba_Anim.tps.tpsheet
 textureFileNames:
+- Assets/Animations/Eraby/Water FX/small_splash_01.png
+- Assets/Animations/Eraby/Water FX/small_splash_02.png
+- Assets/Animations/Eraby/Water FX/splash_01.png
+- Assets/Animations/Eraby/Water FX/splash_02.png
 - Assets/Animations/Shabba/New Animations/Shabba_Anim.tps.png
 - Assets/Animations/Shabba/Shabba_Anim.png
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.png
 - Assets/Sprites/Shabba/Characters/Shabba New/Shabba_Anim.tps.png
 normalmapFileNames:
+- 
+- 
+- 
+- 
 - 
 - 
 - Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png

@@ -20,6 +20,8 @@ public class AABBPlatform : Platform, IGroundPlatform, IWallPlatform
 
     public float BumpMagnitude => wallData.bumpMagnitude;
 
+    public float PlayerJumpHeight => groundData.PlayerJumpHeight;
+
     protected override PlatformCollisionData generateCollisionData(Collision2D other)
     {
         PlatformCollisionData ret = new PlatformCollisionData();
