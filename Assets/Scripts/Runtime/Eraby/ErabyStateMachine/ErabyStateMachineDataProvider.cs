@@ -74,4 +74,6 @@ public class ErabyStateMachineDataProvider : AbstractStateMachineDataProvider
     public float jumpStopHeight = 0f;
 
     public float PlayerJumpHeight = 0f;
+
+    public int numCrashes = 0;
 }
