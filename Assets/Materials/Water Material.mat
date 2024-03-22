@@ -76,14 +76,14 @@ Material:
     - _SpecularHighlights: 1
     - _Speed: 2.92
     - _SrcBlend: 1
-    - _SurfaceWaveStrength: 4
+    - _SurfaceWaveStrength: 2
     - _UVSec: 0
-    - _WaveCollisionPoint: 0.5
+    - _WaveCollisionPoint: 0
     - _WaveCollisionPointX: 0.52
-    - _WaveFrequency: 7.04
-    - _WaveHeight: 2
-    - _WaveImpactExtent: 0.255
-    - _WaveSpeed: 6
+    - _WaveFrequency: 6
+    - _WaveHeight: 5
+    - _WaveImpactExtent: 0.21
+    - _WaveSpeed: 3
     - _ZWrite: 1
     - _waveImpactExtent: 0.5
     m_Colors:

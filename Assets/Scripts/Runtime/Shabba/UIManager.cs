@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-	[SerializeField] GameObject winUI;
 	[SerializeField] GameObject loseUI;
-	[SerializeField] TextMeshProUGUI scoreText;
-	[SerializeField] TextMeshProUGUI timeText;
+	[SerializeField] FinalScoreUI winUI;
 
 	private void Awake()
 	{
@@ -27,8 +25,7 @@ public class UIManager : MonoBehaviour
 
 	private void OnWin()
 	{
-		winUI.SetActive(true);
-		scoreText.text = "Score " + ScoreTracker.CurrentScore.ToString();
-		timeText.text = "Time " + ((int)(Time.time - GlobalReferences.gameManager.StartTime)).ToString();
+		winUI.gameObject.SetActive(true);
+		winUI.Setup();
 	}
 }

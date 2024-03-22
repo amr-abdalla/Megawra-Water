@@ -27,6 +27,8 @@ public class ResidueParticle : MonoBehaviour
 
 	public ResidueData.ResidueType GetResidueType() => residueData.Type;
 
+	public float GetResidueScore() => residueData.Score;
+
 	#endregion
 
 	#region UNITY

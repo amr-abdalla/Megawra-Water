@@ -30,6 +30,7 @@ public class ResidueChunk : MonoBehaviour
 		{
 			residueParticle.Init();
 			residueParticle.OnCollect += RemoveResidueParticleFromCachedList;
+			ScoreTracker.MaxScore += residueParticle.GetResidueScore();
 		}
 
 	}
