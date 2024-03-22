@@ -15,7 +15,7 @@ class ErabyLevelStartFallState : ErabyAbstractLandingState
         body.SetGravityModifier(0);
         dataProvider.launchVelocityY = float.PositiveInfinity;
         dataProvider.launchVelocityX = launchVelX;
-
+        dataProvider.numCrashes = 0;
         base.onStateEnter();
     }
 

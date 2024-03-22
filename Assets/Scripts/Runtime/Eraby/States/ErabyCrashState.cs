@@ -13,6 +13,10 @@ public class ErabyCrashState : ErabyAbstractLandingState
     protected override void onStateEnter()
     {
         Debug.Log("Enter crash");
+        dataProvider.numCrashes += 1;
+        if(dataProvider.numCrashes >= 5){
+          // TODO: Goto menu
+        }
 
         
         
