@@ -480,3 +480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitTime: 0.2
+  spline: {fileID: 0}
+  bounceAnimation: Bounce
+  walkAnimation: Walk
+  skeletonDataAsset: {fileID: 0}
