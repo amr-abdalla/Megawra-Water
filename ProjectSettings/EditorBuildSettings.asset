@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 6dbe33f298c16844cbbfc8a8b76e5c07
+  - enabled: 1
+    path: Assets/Scenes/ErabyPlayground.unity
+    guid: 0b987bdfb59e5e64a88cf1a56c2b52bc
+  - enabled: 1
+    path: Assets/Scenes/Shabba/ShabbaLevel1.unity
+    guid: e4649f4df4c782a49a95539f6711efe6
+  - enabled: 1
+    path: Assets/Scenes/Shabba/ShabbaLevel2.unity
+    guid: 1710680dfb6543340b11429ee363c2f3
   m_configObjects: {}

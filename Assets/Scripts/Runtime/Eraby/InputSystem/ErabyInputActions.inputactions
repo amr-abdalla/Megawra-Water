@@ -242,6 +242,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Menu",
+            "id": "9059cf4c-2c37-4c9a-a9d5-f4bc35716952",
+            "actions": [
+                {
+                    "name": "Eraby",
+                    "type": "Button",
+                    "id": "9e321990-a73e-4b32-8773-174b5a4afb5e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Shabba",
+                    "type": "Button",
+                    "id": "44a32b3b-cfde-4177-aa4a-d82665e60cac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "047f0ad2-8e15-4995-9fda-c18c3ab622b6",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eraby",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b7a10eb1-412c-4ffc-89bd-7aac06447c67",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shabba",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

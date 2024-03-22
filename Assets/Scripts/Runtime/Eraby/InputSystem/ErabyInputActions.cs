@@ -264,6 +264,54 @@ public partial class @ErabyInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Menu"",
+            ""id"": ""9059cf4c-2c37-4c9a-a9d5-f4bc35716952"",
+            ""actions"": [
+                {
+                    ""name"": ""Eraby"",
+                    ""type"": ""Button"",
+                    ""id"": ""9e321990-a73e-4b32-8773-174b5a4afb5e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shabba"",
+                    ""type"": ""Button"",
+                    ""id"": ""44a32b3b-cfde-4177-aa4a-d82665e60cac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""047f0ad2-8e15-4995-9fda-c18c3ab622b6"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eraby"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7a10eb1-412c-4ffc-89bd-7aac06447c67"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shabba"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -274,6 +322,10 @@ public partial class @ErabyInputActions : IInputActionCollection2, IDisposable
         m_Player_Dive = m_Player.FindAction("Dive", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Bounce = m_Player.FindAction("Bounce", throwIfNotFound: true);
+        // Menu
+        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        m_Menu_Eraby = m_Menu.FindAction("Eraby", throwIfNotFound: true);
+        m_Menu_Shabba = m_Menu.FindAction("Shabba", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -386,11 +438,57 @@ public partial class @ErabyInputActions : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Menu
+    private readonly InputActionMap m_Menu;
+    private IMenuActions m_MenuActionsCallbackInterface;
+    private readonly InputAction m_Menu_Eraby;
+    private readonly InputAction m_Menu_Shabba;
+    public struct MenuActions
+    {
+        private @ErabyInputActions m_Wrapper;
+        public MenuActions(@ErabyInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Eraby => m_Wrapper.m_Menu_Eraby;
+        public InputAction @Shabba => m_Wrapper.m_Menu_Shabba;
+        public InputActionMap Get() { return m_Wrapper.m_Menu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuActions instance)
+        {
+            if (m_Wrapper.m_MenuActionsCallbackInterface != null)
+            {
+                @Eraby.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnEraby;
+                @Eraby.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnEraby;
+                @Eraby.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnEraby;
+                @Shabba.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnShabba;
+                @Shabba.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnShabba;
+                @Shabba.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnShabba;
+            }
+            m_Wrapper.m_MenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Eraby.started += instance.OnEraby;
+                @Eraby.performed += instance.OnEraby;
+                @Eraby.canceled += instance.OnEraby;
+                @Shabba.started += instance.OnShabba;
+                @Shabba.performed += instance.OnShabba;
+                @Shabba.canceled += instance.OnShabba;
+            }
+        }
+    }
+    public MenuActions @Menu => new MenuActions(this);
     public interface IPlayerActions
     {
         void OnJump(InputAction.CallbackContext context);
         void OnDive(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnBounce(InputAction.CallbackContext context);
+    }
+    public interface IMenuActions
+    {
+        void OnEraby(InputAction.CallbackContext context);
+        void OnShabba(InputAction.CallbackContext context);
     }
 }

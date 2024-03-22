@@ -1,6 +1,7 @@
 // using Cinemachine;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ErabyCrashState : ErabyAbstractLandingState
 {
@@ -15,7 +16,7 @@ public class ErabyCrashState : ErabyAbstractLandingState
         if (dataProvider.numCrashes >= 5)
         {
             // TODO: Goto menu
-            SceneManagement.SceneManager.LoadScene("Main Menu");
+            SceneManager.LoadScene("Main Menu");
         }
 
         base.onStateEnter();
