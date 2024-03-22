@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571328, b: 0.3069218, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10324,6 +10324,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1387842062}
   - component: {fileID: 1387842061}
+  - component: {fileID: 1387842064}
+  - component: {fileID: 1387842063}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -10347,7 +10349,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1387842060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3091.0554, y: 70.26051, z: 1.8460102}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10355,6 +10357,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1387842063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387842060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f811efe06d6520abf8a885822c25c167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioclips:
+  - {fileID: 8300000, guid: 3d5a89b4c26e446458ac9fe711619c9b, type: 3}
+  - {fileID: 8300000, guid: 9bfa9e3571329c44081ad855fac52155, type: 3}
+  - {fileID: 8300000, guid: f631b9d6261ac32f1975feb6678dc56e, type: 3}
+  erabyBody: {fileID: 4026483990505614933}
+  crossfade: {fileID: 1387842064}
+  maxVelocity: 20
+--- !u!114 &1387842064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387842060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87171f5803370dbb6b37b2751bd7ffe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: 1
+  fadeDuration: 0.2
 --- !u!1 &1396880529
 GameObject:
   m_ObjectHideFlags: 0
@@ -13051,7 +13086,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1461756041}
   - component: {fileID: 1461756040}
-  - component: {fileID: 1461756039}
   - component: {fileID: 1461756042}
   - component: {fileID: 1461756043}
   m_Layer: 0
@@ -13061,14 +13095,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1461756039
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1461756038}
-  m_Enabled: 1
 --- !u!20 &1461756040
 Camera:
   m_ObjectHideFlags: 0
