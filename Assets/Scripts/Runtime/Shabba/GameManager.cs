@@ -44,5 +44,5 @@ public class GameManager: MonoBehaviour
 
 	private void GoToNextLevel(InputAction.CallbackContext obj) => levelManager.GoToNextLevel();
 
-	private void Restart(InputAction.CallbackContext obj) => levelManager.RestartScene();
+	private void Restart(InputAction.CallbackContext obj) => levelManager.GoToMainMenu();
 }

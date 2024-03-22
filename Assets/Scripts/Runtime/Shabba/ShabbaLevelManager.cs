@@ -11,20 +11,20 @@ public class ShabbaLevelManager : MonoBehaviour
 		restart.action.performed += (ctx) => GoToNextLevel();
 	}
 
-	public void RestartScene()
+	public void GoToMainMenu()
 	{
 		ScoreTracker.TotalScore = 0;
 		GlobalReferences.gameManager.Init();
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		SceneManager.LoadScene("Main Menu");
 	}
 
 	public void GoToNextLevel()
 	{
-		if(SceneManager.GetActiveScene().buildIndex == 1)
+		if(SceneManager.GetActiveScene().name == "ShabbaLevel2")
 		{
-			return;
+			SceneManager.LoadScene("Main Menu");
 		}
 
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		SceneManager.LoadScene("ShabbaLevel2");
 	}
 }
