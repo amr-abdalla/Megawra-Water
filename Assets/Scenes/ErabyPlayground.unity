@@ -229,9 +229,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f314a0b127a35724ea4236dc1b1c07b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 857979954}
+  mainCamera: {fileID: 1461756038}
   parallaxFactor: 0.2
-  parallaxYFactor: 0.5
+  parallaxYFactor: 0
 --- !u!1001 &28740270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3550,9 +3550,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f314a0b127a35724ea4236dc1b1c07b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 857979954}
+  mainCamera: {fileID: 1461756038}
   parallaxFactor: 0.2
-  parallaxYFactor: 0.5
+  parallaxYFactor: 0
 --- !u!1 &571459059
 GameObject:
   m_ObjectHideFlags: 0
@@ -3597,9 +3597,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f314a0b127a35724ea4236dc1b1c07b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 857979954}
+  mainCamera: {fileID: 1461756038}
   parallaxFactor: 0.15
-  parallaxYFactor: 0.5
+  parallaxYFactor: 0
 --- !u!1 &592178355
 GameObject:
   m_ObjectHideFlags: 0
@@ -4558,7 +4558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1461756038}
   parallaxFactor: 0.399
-  parallaxYFactor: 0.5
+  parallaxYFactor: 0
 --- !u!1 &851752898
 GameObject:
   m_ObjectHideFlags: 0
@@ -10012,7 +10012,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1461756038}
   parallaxFactor: 0.252
-  parallaxYFactor: 0.5
+  parallaxYFactor: 0
 --- !u!1001 &1288066400
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10358,9 +10358,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f314a0b127a35724ea4236dc1b1c07b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 857979954}
+  mainCamera: {fileID: 1461756038}
   parallaxFactor: 0.15
-  parallaxYFactor: 0.5
+  parallaxYFactor: 0
 --- !u!1 &1401690321
 GameObject:
   m_ObjectHideFlags: 0
@@ -14889,9 +14889,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f314a0b127a35724ea4236dc1b1c07b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 857979954}
+  mainCamera: {fileID: 1461756038}
   parallaxFactor: 0.252
-  parallaxYFactor: 0.5
+  parallaxYFactor: 0
 --- !u!1 &1801751583
 GameObject:
   m_ObjectHideFlags: 0
