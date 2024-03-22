@@ -396,17 +396,6 @@
                     "action": "RestartGame",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "12defb2e-45b2-497f-b507-040a2e1b0293",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "RestartGame",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }

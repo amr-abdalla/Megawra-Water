@@ -53,6 +53,7 @@ public class ShabbaInitialState : ShabbaState
 
 	public override void InitializeControls(Controls i_controls)
 	{
+		(i_controls as ShabbaControls).RemoveControls();
 		(i_controls as ShabbaControls).RegisterMoveInput(Move);
 		(i_controls as ShabbaControls).RegisterPushInput(Push);
 	}

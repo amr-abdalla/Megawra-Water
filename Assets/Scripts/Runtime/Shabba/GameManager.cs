@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager: MonoBehaviour
 {
 	public float StartTime { get; private set; }
 	public System.Action OnLoseAction;
 	public System.Action OnWinAction;
+	[SerializeField] private ShabbaControls shabbaControls;
+	[SerializeField] private ShabbaLevelManager levelManager;
 
 	private void Awake()
 	{
@@ -26,12 +29,20 @@ public class GameManager: MonoBehaviour
 	public void OnLose()
 	{
 		Pause();
+		shabbaControls.RemoveControls();
+		shabbaControls.RegisterPushInput(Restart);
 		OnLoseAction?.Invoke();
 	}
 
 	public void OnWin()
 	{
 		Pause();
+		shabbaControls.RemoveControls();
+		shabbaControls.RegisterPushInput(GoToNextLevel);
 		OnWinAction?.Invoke();
 	}
+
+	private void GoToNextLevel(InputAction.CallbackContext obj) => levelManager.GoToNextLevel();
+
+	private void Restart(InputAction.CallbackContext obj) => levelManager.RestartScene();
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour
+public class ShabbaLevelManager : MonoBehaviour
 {
 	[SerializeField] InputActionReference restart;
 
@@ -20,6 +20,11 @@ public class LevelManager : MonoBehaviour
 
 	public void GoToNextLevel()
 	{
+		if(SceneManager.GetActiveScene().buildIndex == 1)
+		{
+			return;
+		}
+
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
 }
