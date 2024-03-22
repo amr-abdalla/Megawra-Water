@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 1
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -51,9 +51,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -115,18 +115,150 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: splash_S2_01
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 401
+        width: 119
+        height: 110
+      alignment: 9
+      pivot: {x: -0.30252102, y: 0.72727275}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cbb97d7a09755a3abce952a58f8304d
+      internalID: -1456924098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splash_S2_02
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 250
+        width: 168
+        height: 133
+      alignment: 9
+      pivot: {x: 0.1845238, y: 0.518797}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 141b41460e90815f5831d489e68daf05
+      internalID: 471802802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splash_S2_03
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 256
+        width: 188
+        height: 135
+      alignment: 9
+      pivot: {x: 0.40425533, y: 0.4814815}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 985f5a19459b7c4a2b140e458eadf52d
+      internalID: -260782469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splash_S2_04
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 393
+        width: 192
+        height: 118
+      alignment: 9
+      pivot: {x: 0.59375, y: 0.33050847}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79478ec674d6c75fb8f47c3a189436f8
+      internalID: -817502838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splash_S2_05
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 385
+        width: 194
+        height: 126
+      alignment: 9
+      pivot: {x: 0.7113402, y: 0.36507937}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 638d000a42f8006b8b5322f2c5e589ab
+      internalID: -307015362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splash_S2_06
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 375
+        width: 25
+        height: 24
+      alignment: 9
+      pivot: {x: 6.08, y: -1.4166666}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 150effc1545343eae8c53809cfa9198e
+      internalID: -1413815806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3c55460a4c68d5bacb6e7a7afa3213ff
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      splash_S2_01: -1456924098
+      splash_S2_06: -1413815806
+      splash_S2_03: -260782469
+      splash_S2_04: -817502838
+      splash_S2_05: -307015362
+      splash_S2_02: 471802802
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

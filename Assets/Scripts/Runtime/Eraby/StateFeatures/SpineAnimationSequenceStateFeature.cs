@@ -8,6 +8,7 @@ struct Animation
 {
     public string name;
     public bool loop;
+    
     public float delay;
 }
 
