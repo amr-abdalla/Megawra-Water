@@ -35,7 +35,16 @@ public class ResidueGrid : MonoBehaviourBase
 	#endregion
 
 	#region PRIVATE
-	private void InitChunks()
+	private void RemoveAllChunks()
+	{
+		foreach(var cell in residueCells)
+		{
+			cell.residueChunk.RemoveAllParticles();
+		}
+	}
+
+
+	public void InitChunks()
 	{
 		AllResidueCount = new Dictionary<ResidueData.ResidueType, int>() { { ResidueData.ResidueType.Small, 0 }, { ResidueData.ResidueType.Medium, 0 }, { ResidueData.ResidueType.Large, 0 } };
 		CurrentResidueCount = new(AllResidueCount);

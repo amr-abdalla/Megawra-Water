@@ -17,6 +17,15 @@ public class ResidueChunk : MonoBehaviour
 	bool pushedThisFrame = false;
 
 	#region PUBLIC API
+	public void RemoveAllParticles()
+	{
+		foreach(var particle in residueParticles)
+		{
+			Destroy(particle.gameObject);
+		}
+		Destroy(gameObject);
+	}
+
 	public IReadOnlyList<ResidueParticle> GetResidueParticles()
 	{
 		return residueParticles;

@@ -25,7 +25,11 @@ public class ShabbaInitialState : ShabbaState
 
 	public override void ResetState() { }
 
-	protected override void onStateEnter() => shabbaAnimationHandler.ResetAnimation();
+	protected override void onStateEnter()
+	{
+		shabbaAnimationHandler.ResetAnimation();
+		rigidBody.velocity = Vector2.zero;
+	}
 
 	protected override void onStateExit() { }
 

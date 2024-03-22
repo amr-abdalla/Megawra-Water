@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +25,10 @@ public class FinalScoreUI : MonoBehaviour
 
 	public void Setup()
 	{
-		foreach(var spriteScore in spriteScores)
+		ScoreTracker.TotalScore += ScoreTracker.CurrentScore;
+		Debug.Log("Current Score " + ScoreTracker.CurrentScore + " Max Score " + ScoreTracker.MaxScore + " Total Score " + ScoreTracker.TotalScore);
+
+		foreach (var spriteScore in spriteScores)
 		{
 			if(spriteScore.IsScoreFulfilled(ScoreTracker.CurrentScore, ScoreTracker.MaxScore))
 			{
@@ -33,5 +37,5 @@ public class FinalScoreUI : MonoBehaviour
 			}
 		}
 	}
-
+	
 }
