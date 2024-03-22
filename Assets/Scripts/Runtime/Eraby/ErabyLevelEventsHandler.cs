@@ -14,11 +14,17 @@ public class ErabyLevelEventsHandler : MonoBehaviour
 
     [SerializeField]
     private ErabyStateMachine stateMachine;
+
+    [SerializeField]
+    private PhysicsBody2D erabyBody;
+
+    [SerializeField]
+    private float erabyInitialVelocityX;
+
     private void HandleLevelStart(int _i_level)
     {
-        stateMachine.SetState<ErabyIdleState>();
+        stateMachine.SetState<ErabyLevelStartFallState>();
         erabyTransform.position = erabyInitialPostion;
-
     }
 
     private void Awake()

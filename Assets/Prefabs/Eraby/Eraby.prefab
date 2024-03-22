@@ -114,6 +114,102 @@ Transform:
   m_Father: {fileID: 4026483991751054407}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1810059913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1810059914}
+  - component: {fileID: 1810059918}
+  - component: {fileID: 1810059917}
+  - component: {fileID: 1810059916}
+  - component: {fileID: 1810059915}
+  m_Layer: 0
+  m_Name: Level Start
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1810059914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810059913}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4026483991631657327}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1810059918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810059913}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157c1d3cc5f0e1d4984f3b4c9d58ebcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: c2baeac9bc10a514dbc4ab7ae1f5d0c5, type: 2}
+  targetTransform: {fileID: 4026483990970803122}
+--- !u!114 &1810059917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810059913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b66c6b42f0edd743a5528ae312538aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropShadowData: {fileID: 11400000, guid: 508d0a9055aadba4db48eff51e3b42eb, type: 2}
+  shadowTransform: {fileID: 1577588494}
+  playerTransform: {fileID: 4026483991751054407}
+--- !u!114 &1810059916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810059913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c51161859087ad4484e399b202378e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spine: {fileID: 6284143390441576648}
+  animationName: Jump_Down
+  loop: 0
+  delay: 0
+--- !u!114 &1810059915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810059913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b222f6f7fb5c4649aa26a99222bdd31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controls: {fileID: 4026483990694836036}
+  accelerationData: {fileID: 11400000, guid: 13fa2509e550a3342b7981286f974cac, type: 2}
+  body: {fileID: 4026483991751054410}
+  startXVelocity: -20
 --- !u!1 &1838556042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,6 +1421,7 @@ Transform:
   - {fileID: 4026483991426673728}
   - {fileID: 4026483990902267439}
   - {fileID: 256292378}
+  - {fileID: 1810059914}
   m_Father: {fileID: 4026483991751054407}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1518,8 +1615,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spine: {fileID: 6284143390441576648}
-  animationName: Jump_Down
-  loop: 0
+  animationName: Idle
+  loop: 1
   delay: 0
 --- !u!1 &4026483991751054404
 GameObject:
@@ -1537,6 +1634,7 @@ GameObject:
   - component: {fileID: 4026483991751054413}
   - component: {fileID: 4026483991751054415}
   - component: {fileID: 4026483991751054449}
+  - component: {fileID: 4026483990505614932}
   m_Layer: 0
   m_Name: Eraby
   m_TagString: Player
@@ -6438,9 +6536,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82668d47d0f38c3428d97e94349385e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialState: {fileID: 4026483991725624150}
+  initialState: {fileID: 1810059915}
   controls: {fileID: 4026483990694836036}
   _dataProvider: {fileID: 11400000, guid: fe2ba83b42b089c4ea678577a79711cf, type: 2}
+--- !u!114 &4026483990505614932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026483991751054404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18cba0e4efbcf75298f16c320fd65746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelManager: {fileID: 0}
+  erabyInitialPostion: {x: 38, y: 50, z: -0.1}
+  erabyTransform: {fileID: 4026483991751054407}
+  stateMachine: {fileID: 4026483991751054449}
+  erabyBody: {fileID: 4026483991751054410}
+  erabyInitialVelocityX: -50
 --- !u!1 &4026483991820223370
 GameObject:
   m_ObjectHideFlags: 0
@@ -6708,6 +6824,6 @@ MonoBehaviour:
   disableRenderingOnOverride: 1
   updateTiming: 1
   unscaledTime: 0
-  _animationName: Run
+  _animationName: Idle
   loop: 1
   timeScale: 1
