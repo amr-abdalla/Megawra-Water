@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
+public abstract class ErabyAbstractFallState : MoveHorizontalAbstractState
 {
     #region STATE API
     protected bool groundCheckEnabled = true;
@@ -73,7 +73,9 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
             return;
         }
 
+        dataProvider.landingVelocityY = body.VelocityY;
         dataProvider.landingVelocityX = body.VelocityX;
+
 
         body.SetVelocityY(0);
         // controls.DisableControls();
@@ -84,6 +86,7 @@ abstract public class ErabyAbstractFallState : MoveHorizontalAbstractState
                 ground.BounceVelocityXMultiplier,
                 ground.BounceVelocityYMultiplier
             );
+            dataProvider.PlayerJumpHeight = ground.PlayerJumpHeight;
             setState<ErabyLandingState>();
         }
         else

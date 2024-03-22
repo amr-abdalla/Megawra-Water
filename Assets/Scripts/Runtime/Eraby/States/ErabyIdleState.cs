@@ -5,9 +5,9 @@ public class ErabyIdleState : ErabyState
     [SerializeField]
     protected PhysicsBody2D body = null;
 
-
     protected override void onStateEnter()
     {
+        body.SetVelocityX(0);
         Debug.Log("Enter idle");
         if (controls == null)
         {

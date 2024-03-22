@@ -4,13 +4,11 @@ abstract class ErabyAbstractLaunchState : ErabyState
 {
     [Header("Jump Configs")]
     [SerializeField]
-    [Range(1f, 30f)]
-    protected float maxJumpHeight = 8f;
-
-    [SerializeField]
     protected PhysicsBody2D body = null;
     private float initialVelocityY = 0f;
-    private float startJumpY = 0f;
+
+    [SerializeField]
+    private float startJumpY = -1f;
     private float stopJumpY = 0f;
 
     protected override void onStateInit() { }
@@ -18,12 +16,16 @@ abstract class ErabyAbstractLaunchState : ErabyState
     protected override void onStateEnter()
     {
         initialVelocityY = dataProvider.launchVelocityY;
-        startJumpY = body.transform.position.y;
-        stopJumpY = startJumpY + maxJumpHeight;
+        Debug.Log("Launch Velocity: " + dataProvider.landingVelocityY);
+        Debug.Log("Max Jump Height" + dataProvider.PlayerJumpHeight);
+        Debug.Log("Launch Velocity X: " + dataProvider.launchVelocityX);
+        startJumpY = startJumpY < 0 ? body.transform.position.y : startJumpY;
+        stopJumpY = startJumpY + dataProvider.PlayerJumpHeight;
         initialVelocityY = clampVelocityY(initialVelocityY);
         Debug.Log(initialVelocityY);
         body.SetVelocityY(initialVelocityY);
         body.SetVelocityX(dataProvider.launchVelocityX);
+        Debug.Log("Body Velocity X: " + body.VelocityX);
         dataProvider.launchVelocityY = initialVelocityY;
         dataProvider.initialVelocityX = dataProvider.launchVelocityX;
         Debug.Log(body.VelocityY);
@@ -58,12 +60,12 @@ abstract class ErabyAbstractLaunchState : ErabyState
         float maxInitialVelocityY = Mathf.Sqrt(
             2
                 * body.GravityVector.magnitude
-                * (maxJumpHeight - (body.transform.position.y - startJumpY))
+                * (dataProvider.PlayerJumpHeight - (body.transform.position.y - startJumpY))
         );
         return Mathf.Clamp(velocityY, velocityY, maxInitialVelocityY);
     }
 
-    abstract protected void goToJump();
+    protected abstract void goToJump();
 
     public override void DrawGizmos()
     {

@@ -1,27 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using log4net.Config;
-using Newtonsoft.Json;
 using UnityEngine;
 
-public class BackgroundLayer : MonoBehaviour
+public class BackgroundLayer : AbstractSpawner
 {
     // Instantiates Background sprites as player moves through the level
 
     [Header("Sprites and Anchors")]
     [SerializeField]
     private Sprite[] backgroundSprites = null;
-
-    [SerializeField]
-    private Transform groundAnchor = null;
-
-    [SerializeField]
-    private Transform player = null;
-
-    [Header("Configurations")]
-    [SerializeField]
-    private float distanceToPlayer = 0f;
 
     [SerializeField]
     private float spriteScale = 1f;
@@ -45,11 +33,31 @@ public class BackgroundLayer : MonoBehaviour
 
     private int cur_sprite = 0;
 
-    private Bounds bounds;
+    [SerializeField]
+    private LevelManager levelManager = null;
 
-    private void Start()
+    protected override void Awake()
+
     {
-        spriteRenderers = new List<GameObject>(MAX_SPRITES);
+      base.Awake();
+     levelManager?.RegisterToLevelStart(HandleLevelStart);
+        
+    }
+
+    private void HandleLevelStart(int _i_level){
+        Reset();
+        Init();
+    }
+
+   private void Init(){
+    cur_sprite =0;
+    groundAnchor.position = initialGroundAnchorPostion;
+        Debug.Log("Ground Anchor Postion" + groundAnchor.position);
+
+          bounds = new SpawnerBounds { min = groundAnchor.position.x, max = groundAnchor.position.x };
+
+
+spriteRenderers = new List<GameObject>(MAX_SPRITES);
         for (int i = 0; i < MAX_SPRITES; i++)
         {
             GameObject newSprite = new("Background " + i);
@@ -64,21 +72,16 @@ public class BackgroundLayer : MonoBehaviour
             newSprite.SetActive(false);
             spriteRenderers.Add(newSprite);
         }
+   }
 
-        bounds.min = groundAnchor.position.x;
-        bounds.max = groundAnchor.position.x;
-    }
+   private void Reset(){
+    if(null==spriteRenderers) return;
+    spriteRenderers.ForEach(s => Destroy(s));
+    spriteRenderers.Clear();
+          
 
-    private void Update()
-    {
-        // check if we need to place a new sprite
 
-        if (player.position.x - distanceToPlayer < bounds.min)
-        {
-            bounds.min -= PlaceNewSprite(bounds.min);
-        }
-    }
-
+   }
     private Sprite GetRandomSprite()
     {
         if (backgroundSprites.Length == 1)
@@ -98,8 +101,9 @@ public class BackgroundLayer : MonoBehaviour
 
     // returns the distance to the next sprite
 
-    private float PlaceNewSprite(float x_pos)
+    protected override float Spawn(float x_pos)
     {
+        if(null == spriteRenderers) return 0;
         float skip_gap = Mathf.Clamp(0, 1, Mathf.PerlinNoise(x_pos, 0f));
         if (skip_gap < (1 - saturation))
         {
