@@ -1,30 +1,27 @@
 // using Cinemachine;
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class ErabyCrashState : ErabyAbstractLandingState
 {
     [SerializeField]
     private float minBounceVelocityY = 0f;
 
- 
-
     #region STATE API
     protected override void onStateEnter()
     {
         Debug.Log("Enter crash");
         dataProvider.numCrashes += 1;
-        if(dataProvider.numCrashes >= 5){
-          // TODO: Goto menu
+        if (dataProvider.numCrashes >= 5)
+        {
+            // TODO: Goto menu
+            SceneManagement.SceneManager.LoadScene("Main Menu");
         }
 
-        
-        
- 
         base.onStateEnter();
     }
 
-    override protected IEnumerator landingSequence()
+    protected override IEnumerator landingSequence()
     {
         yield return new WaitForSeconds(landingTime);
 
@@ -40,7 +37,7 @@ public class ErabyCrashState : ErabyAbstractLandingState
             setState<ErabyIdleState>();
     }
 
-    override protected void applyTapMulipier()
+    protected override void applyTapMulipier()
     {
         //Debug.LogError("Apply tap multiplier");
         float newVelocityX = clampVelocityX(
