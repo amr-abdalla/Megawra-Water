@@ -25,6 +25,7 @@ public class ShabbaMoveState : ShabbaState
 	[SerializeField] private Rigidbody2D rigidBody;
 	[SerializeField] private ShabbaAnimationHandler shabbaAnimationHandler;
 	[SerializeField] private GameObject loseScreen;
+	[SerializeField] private ShabbaAudioManager audioSource;
 
 	#region events
 	public void onDidStopMoving() 
@@ -165,6 +166,8 @@ public class ShabbaMoveState : ShabbaState
 		rigidBody.drag = initialDrag;
 
 		rigidBody.AddForce(direction * value, ForceMode2D.Impulse);
+
+		audioSource.PlayDashClip();
 
 		OnPush?.Invoke();
 	}

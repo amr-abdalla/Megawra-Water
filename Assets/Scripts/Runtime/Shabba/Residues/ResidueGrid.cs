@@ -6,18 +6,19 @@ using UnityEngine;
 [Serializable]
 public struct ResidueCell
 {
-	public Vector2Int position;
+	public Vector2 position;
 	public ResidueChunk residueChunk;
 }
 
 public class ResidueGrid : MonoBehaviourBase
 {
-	private const float _XSpacing = 8f;
-	private const float _YSpacing = 8f;
+	private const float _XSpacing = 11f;
+	private const float _YSpacing = 11f;
 
 	private Dictionary<ResidueData.ResidueType, int> AllResidueCount;
 	private Dictionary<ResidueData.ResidueType, int> CurrentResidueCount;
 	[SerializeField] private List<ResidueCell> residueCells;
+	[SerializeField] private ShabbaAudioManager ShabbaAudioManager;
 
 	#region PUBLIC API
 	public IReadOnlyList<ResidueCell> GetResidueCells() => residueCells;
@@ -28,10 +29,13 @@ public class ResidueGrid : MonoBehaviourBase
 	private void Start()
 	{
 		InitChunks();
+
+		ScoreTracker.MaxScore = 0;
 		foreach(var residue in AllResidueCount)
 		{
 			ScoreTracker.MaxScore += residue.Value;
 		}
+
 	}
 
 	#endregion
@@ -44,17 +48,23 @@ public class ResidueGrid : MonoBehaviourBase
 
 		foreach (var cell in residueCells)
 		{
-			cell.residueChunk.transform.position = new Vector3(_XSpacing * cell.position.x, _YSpacing * cell.position.y);
-			cell.residueChunk.Init();
-			AddChunkToTotalCount(cell.residueChunk);
-			cell.residueChunk.OnDestroy += RemoveCellWithChunk;
-			cell.residueChunk.OnParticleRemoved += OnParticleRemoved;
+			ResidueChunk residueChunk = Instantiate(cell.residueChunk);
+			residueChunk.transform.position = new Vector3(_XSpacing * cell.position.x, _YSpacing * cell.position.y);
+			residueChunk.Init();
+			AddChunkToTotalCount(residueChunk);
+			residueChunk.OnDestroy += RemoveCellWithChunk;
+			residueChunk.OnParticleRemoved += OnParticleRemoved;
 		}
 	}
 
 	private void OnParticleRemoved(ResidueParticle residueParticle)
 	{
 		CurrentResidueCount[residueParticle.GetResidueType()]--;
+
+		if(residueParticle.GetResidueType() == ResidueData.ResidueType.Large)
+		{
+			ShabbaAudioManager.PlayCollectClip();
+		}
 
 		if(HasWon())
 		{
