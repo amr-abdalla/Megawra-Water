@@ -1154,7 +1154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hackyAudio: {fileID: 434862274}
-  hackyClip: {fileID: 8300000, guid: 952b573d6a08a0a46a46ecb98aa83380, type: 3}
+  hackyClip: {fileID: 8300000, guid: 9aad44025f9f87d409b7c102f6dde7d9, type: 3}
 --- !u!1 &443876038
 GameObject:
   m_ObjectHideFlags: 0
