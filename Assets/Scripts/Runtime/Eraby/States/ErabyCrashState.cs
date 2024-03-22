@@ -1,5 +1,4 @@
 // using Cinemachine;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +6,8 @@ public class ErabyCrashState : ErabyAbstractLandingState
 {
     [SerializeField]
     private float minBounceVelocityY = 0f;
+
+ 
 
     #region STATE API
     protected override void onStateEnter()
