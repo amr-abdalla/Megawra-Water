@@ -1,0 +1,54 @@
+{
+    "name": "MainMenu",
+    "maps": [
+        {
+            "name": "Menu",
+            "id": "7691c5c1-6c0a-4cad-9c5f-3552c4e77cf1",
+            "actions": [
+                {
+                    "name": "SelectEraby",
+                    "type": "Button",
+                    "id": "1d76137b-a73c-410f-bf08-021c1dec7374",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectShabba",
+                    "type": "Button",
+                    "id": "46cb4d97-b94c-437f-8ed8-9a2e34221670",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "46367924-53d6-425e-9c45-c2761898cef1",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectEraby",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45876dcd-7a29-41c5-b1c9-ac7b645c3467",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectShabba",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
