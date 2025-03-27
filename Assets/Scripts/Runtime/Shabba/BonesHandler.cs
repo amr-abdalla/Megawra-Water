@@ -33,9 +33,9 @@ public class BonesHandler : MonoBehaviour
         // float bone3y = Mathf.Lerp(4.624603e-08f, 0.06601496f, t);
         // float bone4y = Mathf.Lerp(3.957644e-09f, 0.09823086f, t);
 
-        float bone2RotZ = rotationCurve.Evaluate(t) * -1.724f * 1.2f;
-        float bone3RotZ = rotationCurve.Evaluate(t) * -10.453f * 1.2f;
-        float bone4RotZ = 0f;
+        float bone2RotZ = rotationCurve.Evaluate(t) * -8.837f;
+        float bone3RotZ = rotationCurve.Evaluate(t) * -3.64f;
+        float bone4RotZ = rotationCurve.Evaluate(t) * -8.208f;
 
         // bone2.localPosition = new(0.364f, bone2y);
         // bone3.localPosition = new(0.363f, bone3y);

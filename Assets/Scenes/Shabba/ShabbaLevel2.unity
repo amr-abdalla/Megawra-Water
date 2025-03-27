@@ -2247,10 +2247,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1112d8ba-bd7b-40d6-8e2d-9a3a8b2d6fe0
     m_ActionName: Shabba/Push[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b1141ea7-dec1-4499-985e-2b84c05f4b6f
-    m_ActionName: Shabba/RestartGame[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Shabba
@@ -2298,7 +2294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5858fc7b256d8e243b013b83b7f9a0d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restart: {fileID: 1106009938709141351, guid: aa644bfc2337c30408815c43caa8e014, type: 3}
 --- !u!1 &797568004
 GameObject:
   m_ObjectHideFlags: 0
@@ -3041,7 +3036,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918982980}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.32477346, y: 0.00000004624603, z: 0}
+  m_LocalPosition: {x: 0.36321858, y: 5.0253676e-11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3594,7 +3589,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1177226066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.34969562, y: 0.000000003957644, z: 0}
+  m_LocalPosition: {x: 0.3796987, y: 0.00000009098419, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3625,7 +3620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217899597}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.32392353, y: 0.00000004872665, z: 0}
+  m_LocalPosition: {x: 0.36411217, y: -0.000000013419962, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4463,8 +4458,8 @@ MonoBehaviour:
   - {fileID: 918982981}
   - {fileID: 1177226067}
   m_Bounds:
-    m_Center: {x: -0.031699926, y: 0.0034964085, z: 0}
-    m_Extent: {x: 0.4076544, y: 1.1010318, z: 0}
+    m_Center: {x: -0.0033530593, y: 0.00000047683716, z: 0}
+    m_Extent: {x: 0.5335547, y: 1.1, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
