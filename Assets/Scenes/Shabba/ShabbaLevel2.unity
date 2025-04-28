@@ -4183,7 +4183,11 @@ GameObject:
   - component: {fileID: 1342217066}
   - component: {fileID: 1342217067}
   - component: {fileID: 1342217069}
+  - component: {fileID: 1342217077}
+  - component: {fileID: 1342217076}
   - component: {fileID: 1342217068}
+  - component: {fileID: 1342217075}
+  - component: {fileID: 1342217078}
   - component: {fileID: 1342217071}
   - component: {fileID: 1342217072}
   - component: {fileID: 1342217073}
@@ -4436,8 +4440,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13aebce0c684c9f46aeb63bbf01c0bb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashAnimation: {fileID: 1342217069}
-  idleAnimation: {fileID: 1342217068}
+  dashAnimations:
+  - {fileID: 1342217069}
+  - {fileID: 1342217077}
+  - {fileID: 1342217076}
+  idleAnimations:
+  - {fileID: 1342217068}
+  - {fileID: 1342217075}
+  - {fileID: 1342217078}
   bonesHandler: {fileID: 1342217071}
 --- !u!114 &1342217073
 MonoBehaviour:
@@ -4458,7 +4468,7 @@ MonoBehaviour:
   - {fileID: 918982981}
   - {fileID: 1177226067}
   m_Bounds:
-    m_Center: {x: -0.0033530593, y: 0.00000047683716, z: 0}
+    m_Center: {x: -0.0033529997, y: 0.00000047683716, z: 0}
     m_Extent: {x: 0.5335547, y: 1.1, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -4761,6 +4771,250 @@ MonoBehaviour:
   - {x: -0.20752636, y: 0.67204344, z: 0}
   - {x: -0.3125456, y: 0.5595264, z: -0.00000017881393}
   - {x: -0.4157713, y: 0.35307494, z: -0.00000017881393}
+--- !u!114 &1342217075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342217065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76858a78b01a0eb46b4288c3c562a982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnEnable: 0
+  renderer: {fileID: 1342217067}
+  isLooping: 0
+  resetOnLastFrame: 0
+  frames:
+  - frameObject: {fileID: 1325893964, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -310204627, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1081251037, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1132667536, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1238719498, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -2086801828, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -305872508, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 938757785, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 67085750, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1345439340, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1017766295, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1398191187, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 2096002870, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -273023690, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -876370490, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -931501328, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -59122857, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1723804159, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1316128446, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -951338523, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 9885427, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1683461760, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1067000506, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 245863899, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1825251368, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 199667147, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -343076486, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -330562901, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1492820922, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1197559978, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -76076344, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -55241845, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -2023920616, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 170709947, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  loopStartIndex: 0
+--- !u!114 &1342217076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342217065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76858a78b01a0eb46b4288c3c562a982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnEnable: 0
+  renderer: {fileID: 1342217067}
+  isLooping: 0
+  resetOnLastFrame: 0
+  frames:
+  - frameObject: {fileID: 831639888, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -508490735, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1742621758, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -423211297, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 900981347, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.08
+  - frameObject: {fileID: 873438566, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.08
+  - frameObject: {fileID: -1406906913, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.08
+  - frameObject: {fileID: -40575897, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.08
+  - frameObject: {fileID: 392362834, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.08
+  loopStartIndex: 0
+--- !u!114 &1342217077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342217065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76858a78b01a0eb46b4288c3c562a982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnEnable: 0
+  renderer: {fileID: 1342217067}
+  isLooping: 0
+  resetOnLastFrame: 0
+  frames:
+  - frameObject: {fileID: 1063555658, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1294884623, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1566504338, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 4232225, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1846464671, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.08
+  - frameObject: {fileID: -1249941278, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.08
+  - frameObject: {fileID: 317868979, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.08
+  - frameObject: {fileID: 343156721, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.08
+  - frameObject: {fileID: -104566824, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.08
+  loopStartIndex: 0
+--- !u!114 &1342217078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342217065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76858a78b01a0eb46b4288c3c562a982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnEnable: 0
+  renderer: {fileID: 1342217067}
+  isLooping: 0
+  resetOnLastFrame: 0
+  frames:
+  - frameObject: {fileID: 1644670283, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -492684159, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 810060856, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 309257231, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1698411494, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -28675576, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1501213027, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 768164550, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 193354647, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 819383888, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1494991225, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 74569641, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1993362339, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1189301899, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 864784651, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 607964415, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -2075840962, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1482591276, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1307554735, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 232367281, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 398997483, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 544020153, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1096060963, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -462194850, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 565730904, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 945513522, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1739202683, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1640362823, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 869597074, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 851191077, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -1614293263, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 305306570, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: -701208286, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  - frameObject: {fileID: 1077658270, guid: 60a074a1621968f458b3be652d1dddb0, type: 3}
+    screenTime: 0.04
+  loopStartIndex: 0
 --- !u!1 &1376650146
 GameObject:
   m_ObjectHideFlags: 0
