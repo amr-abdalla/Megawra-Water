@@ -6,16 +6,16 @@ public class UIManager : MonoBehaviour
 	[SerializeField] GameObject loseUI;
 	[SerializeField] FinalScoreUI winUI;
 
-	private void Awake()
+	private void Start()
 	{
-		GlobalReferences.gameManager.OnLoseAction += OnLose;
-		GlobalReferences.gameManager.OnWinAction += OnWin;
+		GameStateHandler.Instance.OnLoseAction += OnLose;
+		GameStateHandler.Instance.OnWinAction += OnWin;
 	}
 
 	private void OnDestroy()
 	{
-		GlobalReferences.gameManager.OnLoseAction -= OnLose;
-		GlobalReferences.gameManager.OnWinAction -= OnWin;
+		GameStateHandler.Instance.OnLoseAction -= OnLose;
+		GameStateHandler.Instance.OnWinAction -= OnWin;
 	}
 
 	private void OnLose()

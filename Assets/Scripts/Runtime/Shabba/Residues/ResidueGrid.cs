@@ -64,14 +64,14 @@ public class ResidueGrid : MonoBehaviourBase
 	{
 		CurrentResidueCount[residueParticle.GetResidueType()]--;
 
-		if(residueParticle.GetResidueType() == ResidueData.ResidueType.Large)
+		if (residueParticle.GetResidueType() == ResidueData.ResidueType.Large)
 		{
 			ShabbaAudioManager.PlayCollectClip();
 		}
 
-		if(HasWon())
+		if (HasWon())
 		{
-			GlobalReferences.gameManager.OnWin();
+			GameStateHandler.Instance.OnWin();
 		}
 	}
 

@@ -1,23 +1,34 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ShabbaLevelManager : MonoBehaviour
+public class ShabbaLevelManager
 {
-	public void GoToMainMenu()
-	{
-		ScoreTracker.TotalScore = 0;
-		GlobalReferences.gameManager.Init();
-		SceneManager.LoadScene("Main Menu");
-	}
+	private const int MainMenuBuildIndex = 0;
+	private const string ShabbaSceneKeyword = "Shabba";
+
+	public void GoToMainMenu() => SceneManager.LoadScene(MainMenuBuildIndex);
 
 	public void GoToNextLevel()
 	{
-		if (SceneManager.GetActiveScene().name == "ShabbaLevel2")
+		int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+		int totalSceneCount = SceneManager.sceneCountInBuildSettings;
+
+		if (currentSceneIndex >= totalSceneCount - 1)
 		{
-			SceneManager.LoadScene("Main Menu");
+			SceneManager.LoadScene(MainMenuBuildIndex);
 			return;
 		}
 
-		SceneManager.LoadScene("ShabbaLevel2");
+		string nextScenePath = SceneUtility.GetScenePathByBuildIndex(currentSceneIndex + 1);
+		string nextSceneName = System.IO.Path.GetFileNameWithoutExtension(nextScenePath);
+
+		if (nextSceneName.Contains(ShabbaSceneKeyword))
+		{
+			SceneManager.LoadScene(currentSceneIndex + 1);
+		}
+		else
+		{
+			Debug.LogError($"Failed to Go To Next Level, current scene index is {currentSceneIndex} and next scene name is {nextSceneName} (it should contain the word Shabba)");
+		}
 	}
 }
