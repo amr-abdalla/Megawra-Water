@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571328, b: 0.3069218, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4201,6 +4201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 788264028}
   - component: {fileID: 788264027}
+  - component: {fileID: 788264029}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -4285,6 +4286,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &788264029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788264026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1001 &796170269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10206,7 +10227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 592178357}
-  distanceToGoal: -1e+20
+  distanceToGoal: 1000
 --- !u!61 &1345662785
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12543,8 +12564,8 @@ Tilemap:
   - first: {x: 27, y: 8, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 5
-      m_TileSpriteIndex: 5
+      m_TileIndex: 6
+      m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -12842,8 +12863,10 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: b6e20d5afb2293844b782e714aafe9eb, type: 2}
   - m_RefCount: 21
     m_Data: {fileID: 11400000, guid: 00c5edc50ae204948ad3bf64404625db, type: 2}
-  - m_RefCount: 121
+  - m_RefCount: 120
     m_Data: {fileID: 11400000, guid: 5aa6088a57e12a84cb0477ee07c3a411, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 1e4ea2447db997d408f3b49682d8e665, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 22
     m_Data: {fileID: -1307542194, guid: 8b5e4b8602d11224cb72ad4f96475d65, type: 3}
@@ -12855,8 +12878,10 @@ Tilemap:
     m_Data: {fileID: 87908333, guid: 8b5e4b8602d11224cb72ad4f96475d65, type: 3}
   - m_RefCount: 21
     m_Data: {fileID: 2071304522, guid: 8b5e4b8602d11224cb72ad4f96475d65, type: 3}
-  - m_RefCount: 121
+  - m_RefCount: 120
     m_Data: {fileID: 21300000, guid: 70a46eb518be4f34ea488657fbb5e0d3, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: dc62b8a1c41a8524e86eb9e1d90522cb, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 121
     m_Data:
@@ -14937,7 +14962,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789730603}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 124, y: -26.4, z: 0}
+  m_LocalPosition: {x: 123.89, y: -27.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
