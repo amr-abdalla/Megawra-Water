@@ -17,7 +17,7 @@ public class ErabyCrashState : ErabyAbstractLandingState
         if (dataProvider.numCrashes >= 5)
         {
             // TODO: Goto menu
-            SceneManager.LoadScene("Main Menu");
+            // SceneManager.LoadScene("Main Menu");
         }
 
         base.onStateEnter();

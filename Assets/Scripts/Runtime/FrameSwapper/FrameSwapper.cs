@@ -20,6 +20,8 @@ public abstract class FrameSwapper<TRenderer, TFrame> : MonoBehaviourBase, IFram
     private int loopCount = 0;
     private CycleEvent cycleEvent = null;
     private Frame<TFrame> lastFrame;
+
+    [SerializeField]
     private float animationSpeedMultiplier = 1;
 
     //this is a hack, remove asap
