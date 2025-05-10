@@ -10,19 +10,25 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     PlatformManager platformManager;
 
+    [SerializeField]
+    private ErabyUIManager erabyUIManager;
 
-    private Action<int> OnLevelStart;
+
+
+
+    public Action<int> OnNewLevelTransitionEnd;
+    public Action<int> OnNewLevelTransitionStart;
 
     public Action OnGameEnd;
     public void RegisterToLevelStart(Action<int> callback)
     {
-        OnLevelStart += callback;
+        OnNewLevelTransitionEnd += callback;
 
     }
 
     public void UnregisterFromLevelStart(Action<int> callback)
     {
-        OnLevelStart -= callback;
+        OnNewLevelTransitionEnd -= callback;
     }
 
 
@@ -38,7 +44,11 @@ public class LevelManager : MonoBehaviour
     void Awake()
     {
         level = 0;
-        OnLevelStart += HandleLevelStart;
+        OnNewLevelTransitionStart += HandleLevelStart;
+        erabyUIManager.OnEndLevelTransition += () =>
+        {
+            OnNewLevelTransitionEnd?.Invoke(level);
+        };
 
     }
 
@@ -68,7 +78,7 @@ public class LevelManager : MonoBehaviour
         if (level >= numLevels) { OnGameEnd?.Invoke(); }
         else
         {
-            OnLevelStart?.Invoke(level);
+            OnNewLevelTransitionStart?.Invoke(level);
         }
         level++;
 

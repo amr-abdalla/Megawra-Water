@@ -15,18 +15,31 @@ public class ErabyWalkState : MoveHorizontalAbstractState
         controls.EnableControls();
         controls.JumpPressed += goToJump;
         controls.MoveReleased += goToIdle;
+        controls.MoveStarted += handleMove;
     }
 
     protected override void onStateExit()
     {
         controls.JumpPressed -= goToJump;
         controls.MoveReleased -= goToIdle;
+        controls.MoveStarted -= handleMove;
         base.onStateExit();
     }
 
     protected override void onStateInit() { }
 
-    protected override void onStateUpdate() { }
+    protected override void onStateUpdate()
+    {
+        // if(controls.MoveDirection)
+    }
+
+    private void handleMove(float x)
+    {
+        if (x >= 0)
+        {
+            goToIdle();
+        }
+    }
 
     private void goToJump()
     {

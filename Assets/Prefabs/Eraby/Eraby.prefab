@@ -1464,6 +1464,7 @@ Transform:
   - {fileID: 4026483990902267439}
   - {fileID: 256292378}
   - {fileID: 1810059914}
+  - {fileID: 1935836661086608848}
   m_Father: {fileID: 4026483991751054407}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6745,6 +6746,105 @@ MonoBehaviour:
   controls: {fileID: 4026483990694836036}
   accelerationData: {fileID: 0}
   body: {fileID: 4026483991751054410}
+--- !u!1 &6893533418756989049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1935836661086608848}
+  - component: {fileID: 5052297822439650827}
+  - component: {fileID: 2025422026704040084}
+  - component: {fileID: 698989939708526198}
+  - component: {fileID: 9145736166193498351}
+  m_Layer: 0
+  m_Name: Level Transition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1935836661086608848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6893533418756989049}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4026483991631657327}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5052297822439650827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6893533418756989049}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157c1d3cc5f0e1d4984f3b4c9d58ebcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: c2baeac9bc10a514dbc4ab7ae1f5d0c5, type: 2}
+  targetTransform: {fileID: 4026483990970803122}
+--- !u!114 &2025422026704040084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6893533418756989049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b66c6b42f0edd743a5528ae312538aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropShadowData: {fileID: 11400000, guid: 508d0a9055aadba4db48eff51e3b42eb, type: 2}
+  shadowTransform: {fileID: 1577588494}
+  playerTransform: {fileID: 4026483991751054407}
+--- !u!114 &698989939708526198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6893533418756989049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c51161859087ad4484e399b202378e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spine: {fileID: 6284143390441576648}
+  animationName: Idle
+  loop: 0
+  delay: 0
+--- !u!114 &9145736166193498351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6893533418756989049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d9da86906e2644aa7eb19cf8f1b7e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controls: {fileID: 4026483990694836036}
+  accelerationData: {fileID: 11400000, guid: 37931e01c22d053468c5786abed9c940, type: 2}
+  tapMultiplier: 1.5
+  tapParticles: {fileID: 0}
+  tapManager: {fileID: 0}
+  body: {fileID: 4026483991751054410}
+  landingTime: 0.5
 --- !u!1 &8331307486010464962
 GameObject:
   m_ObjectHideFlags: 0

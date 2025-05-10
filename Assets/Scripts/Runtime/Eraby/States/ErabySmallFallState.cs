@@ -33,6 +33,8 @@ public class ErabySmallFallState : ErabyAbstractFallState
 
     protected override void onDidEnterGround()
     {
-        goToLanding<ErabyIdleState>();
+        if (controls.isMoving())
+            goToLanding<ErabyWalkState>();
+        else goToLanding<ErabyIdleState>();
     }
 }

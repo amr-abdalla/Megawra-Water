@@ -7,6 +7,9 @@ public class Goal : MonoBehaviour
     [SerializeField]
     private LevelManager levelManager;
 
+    [SerializeField]
+    private Transform goalTransform;
+
 
     [SerializeField]
     private float distanceToGoal;
@@ -14,9 +17,9 @@ public class Goal : MonoBehaviour
     {
         levelManager.RegisterToLevelStart(i =>
         {
-            Vector3 postion = transform.position;
+            Vector3 postion = goalTransform.position;
             postion.x = distanceToGoal * (i + 1);
-            transform.position = postion;
+            goalTransform.position = postion;
         });
 
 
@@ -24,8 +27,6 @@ public class Goal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
-
         if (other.CompareTag("Player")) levelManager.StartNextLevel();
     }
 }

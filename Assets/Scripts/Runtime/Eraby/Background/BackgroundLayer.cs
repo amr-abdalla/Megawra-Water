@@ -39,25 +39,31 @@ public class BackgroundLayer : AbstractSpawner
     protected override void Awake()
 
     {
-      base.Awake();
-     levelManager?.RegisterToLevelStart(HandleLevelStart);
-        
+        base.Awake();
+        if (null == levelManager)
+        {
+            return;
+        }
+        levelManager.OnNewLevelTransitionStart += HandleLevelStart;
+
     }
 
-    private void HandleLevelStart(int _i_level){
+    private void HandleLevelStart(int _i_level)
+    {
         Reset();
         Init();
     }
 
-   private void Init(){
-    cur_sprite =0;
-    groundAnchor.position = initialGroundAnchorPostion;
+    private void Init()
+    {
+        cur_sprite = 0;
+        groundAnchor.position = initialGroundAnchorPostion;
         Debug.Log("Ground Anchor Postion" + groundAnchor.position);
 
-          bounds = new SpawnerBounds { min = groundAnchor.position.x, max = groundAnchor.position.x };
+        bounds = new SpawnerBounds { min = groundAnchor.position.x, max = groundAnchor.position.x };
 
 
-spriteRenderers = new List<GameObject>(MAX_SPRITES);
+        spriteRenderers = new List<GameObject>(MAX_SPRITES);
         for (int i = 0; i < MAX_SPRITES; i++)
         {
             GameObject newSprite = new("Background " + i);
@@ -72,16 +78,17 @@ spriteRenderers = new List<GameObject>(MAX_SPRITES);
             newSprite.SetActive(false);
             spriteRenderers.Add(newSprite);
         }
-   }
+    }
 
-   private void Reset(){
-    if(null==spriteRenderers) return;
-    spriteRenderers.ForEach(s => Destroy(s));
-    spriteRenderers.Clear();
-          
+    private void Reset()
+    {
+        if (null == spriteRenderers) return;
+        spriteRenderers.ForEach(s => Destroy(s));
+        spriteRenderers.Clear();
 
 
-   }
+
+    }
     private Sprite GetRandomSprite()
     {
         if (backgroundSprites.Length == 1)
@@ -103,7 +110,7 @@ spriteRenderers = new List<GameObject>(MAX_SPRITES);
 
     protected override float Spawn(float x_pos)
     {
-        if(null == spriteRenderers) return 0;
+        if (null == spriteRenderers) return 0;
         float skip_gap = Mathf.Clamp(0, 1, Mathf.PerlinNoise(x_pos, 0f));
         if (skip_gap < (1 - saturation))
         {

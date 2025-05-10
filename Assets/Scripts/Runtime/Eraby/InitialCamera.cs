@@ -15,7 +15,7 @@ public class InitialCamera : MonoBehaviour
 
     private IEnumerator CameraSequence()
     {
-        virtualCamera.Priority = 100;
+        virtualCamera.Priority = 1000;
         yield return new WaitForSeconds(waitTime);
         virtualCamera.Priority = 0;
     }
@@ -28,5 +28,9 @@ public class InitialCamera : MonoBehaviour
     private void Awake()
     {
         levelManager.RegisterToLevelStart(StartCameraSequence);
+        levelManager.OnNewLevelTransitionStart += (i) =>
+        {
+            virtualCamera.Priority = 1000;
+        };
     }
 }
