@@ -30,7 +30,7 @@ public class RigidbodyMovement : MonoBehaviourBase, IShabbaMoveAction
 	#region animation
 	[SerializeField] SpriteFrameSwapper dashAnimation;
 	[SerializeField] SpriteFrameSwapper idleAnimation;
-	[SerializeField] private BonesHandler bonesHandler;
+	[SerializeField] private ShabbaBonesHandler bonesHandler;
 	#endregion
 
 	#region UNITY
