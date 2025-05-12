@@ -14,13 +14,15 @@ public abstract class FrameSwapper<TRenderer, TFrame> : MonoBehaviourBase, IFram
 	[SerializeField] private int loopStartIndex;
 	//[SerializeField] private float screenTimeForEachFrame;
 
-	private bool isResumed = true;
-	protected Frame<TFrame> currentFrame;
-	private Coroutine playback = null;
-	private int loopCount = 0;
-	private CycleEvent cycleEvent = null;
-	private Frame<TFrame> lastFrame;
-	private float animationSpeedMultiplier = 1;
+    private bool isResumed = true;
+    protected Frame<TFrame> currentFrame;
+    private Coroutine playback = null;
+    private int loopCount = 0;
+    private CycleEvent cycleEvent = null;
+    private Frame<TFrame> lastFrame;
+
+    [SerializeField]
+    private float animationSpeedMultiplier = 1;
 
 	//this is a hack, remove asap
 	public event Action OnLastFrameReached;

@@ -47,7 +47,7 @@ public class ErabyIdleState : ErabyState
 
     void handleMoveStarted(float x = 0)
     {
-        if (!isEnabled)
+        if (!isEnabled || x >= 0)
             return;
         setState<ErabyWalkState>();
     }

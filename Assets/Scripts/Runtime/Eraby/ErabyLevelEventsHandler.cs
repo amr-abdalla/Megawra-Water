@@ -21,14 +21,24 @@ public class ErabyLevelEventsHandler : MonoBehaviour
     [SerializeField]
     private float erabyInitialVelocityX;
 
-    private void HandleLevelStart(int _i_level)
+    private void HandleLevelTransitionStart(int _i_level)
     {
-        stateMachine.SetState<ErabyLevelStartFallState>();
+        Debug.Log("Level Transition Start: " + _i_level);
         erabyTransform.position = erabyInitialPostion;
+        erabyBody.SetVelocity(Vector2.zero);
+        stateMachine.SetState<ErabyLevelTransitionIdleState>();
+        stateMachine.Reset();
+    }
+
+    private void HandleLevelTransitionEnd(int _i_level)
+    {
+        Debug.Log("Level Transition End: " + _i_level);
+        stateMachine.SetState<ErabyLevelStartFallState>();
     }
 
     private void Awake()
     {
-        levelManager.RegisterToLevelStart(HandleLevelStart);
+        levelManager.OnNewLevelTransitionStart += HandleLevelTransitionStart;
+        levelManager.OnNewLevelTransitionEnd += HandleLevelTransitionEnd;
     }
 }

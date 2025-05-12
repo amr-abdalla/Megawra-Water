@@ -104,7 +104,7 @@ public class PlatformManager : AbstractSpawner
         bounds.min = spawnedPlatforms.LastOrDefault()?.transform.position.x ?? bounds.min;
         while (player.position.x - distanceToPlayer < (bounds.min) && max-- > 0)
         {
-            Debug.LogError($"{player.position.x} - {distanceToPlayer} < {bounds.min})");
+            // Debug.LogError($"{player.position.x} - {distanceToPlayer} < {bounds.min})");
             bounds.min = Spawn(bounds.min);
         }
     }

@@ -4,7 +4,7 @@ public abstract class RichStateMachine<T> : StateMachine
     where T : AbstractStateMachineDataProvider, new()
 {
     [SerializeField]
-    private T _dataProvider = null;
+    protected T _dataProvider = null;
 
     private RichState<T> _currentRichState = null;
 
@@ -16,6 +16,7 @@ public abstract class RichStateMachine<T> : StateMachine
     }
 
     public T DataProvider => _dataProvider;
+
 
     public override void SetState(State i_state)
     {
