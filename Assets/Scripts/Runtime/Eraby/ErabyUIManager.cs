@@ -14,8 +14,6 @@ public class ErabyUIManager : MonoBehaviour
     [SerializeField]
     private Image panel;
 
-    [SerializeField]
-    private Image levelSuccessPanel;
 
     [SerializeField]
     private Image levelFailPanel;
@@ -32,6 +30,14 @@ public class ErabyUIManager : MonoBehaviour
     [SerializeField]
     private LevelManager levelManager;
 
+    [SerializeField]
+    private TransitionScreenManager transitionScreenManager;
+
+    [SerializeField]
+    private Button restartButton;
+
+    private TransitionScreenManager levelSuccessPanel => transitionScreenManager;
+
     private void handleNextLevelButtonClicked()
     {
         OnNextLevelButtonClicked?.Invoke();
@@ -41,12 +47,18 @@ public class ErabyUIManager : MonoBehaviour
     {
         OnEndGameButtonClicked?.Invoke();
     }
+
+    private void handleRestartButtonClicked()
+    {
+        levelManager.RestartGame();
+    }
     private void Awake()
     {
         levelManager.OnNewLevelTransitionStart += StartLevelTransition;
         levelManager.OnLevelEnd += HandleLevelEnd;
         nextLevelButton.onClick.AddListener(handleNextLevelButtonClicked);
         endGameButton.onClick.AddListener(handleEndGameButtonClicked);
+        restartButton.onClick.AddListener(handleRestartButtonClicked);
     }
 
     private void OnDestroy()
@@ -55,15 +67,20 @@ public class ErabyUIManager : MonoBehaviour
         levelManager.OnLevelEnd -= HandleLevelEnd;
         nextLevelButton.onClick.RemoveListener(handleNextLevelButtonClicked);
         endGameButton.onClick.RemoveListener(handleEndGameButtonClicked);
+        restartButton.onClick.RemoveListener(handleRestartButtonClicked);
     }
 
-    private void showButtons(bool show = true)
+    private void showButtons(bool show = true, bool restart = false)
     {
-        nextLevelButton.gameObject.SetActive(show);
+        nextLevelButton.gameObject.SetActive(show && !restart);
         endGameButton.gameObject.SetActive(show);
+        restartButton.gameObject.SetActive(show && restart);
         if (show)
         {
-            nextLevelButton.Select();
+            if (restart)
+                restartButton.Select();
+            else
+                nextLevelButton.Select();
         }
 
     }
@@ -72,7 +89,7 @@ public class ErabyUIManager : MonoBehaviour
     {
         if (levelEndData.isSuccess)
         {
-            ShowLevelSuccessPanel();
+            ShowLevelSuccessPanel(levelEndData);
             Debug.Log("Level Success");
             Debug.Log($"Level: {levelEndData.level}, Score: {levelEndData.score}, Time: {levelEndData.time}, Remaining Water: {levelEndData.remainingWater}");
         }
@@ -84,9 +101,10 @@ public class ErabyUIManager : MonoBehaviour
 
 
 
-    public void ShowLevelSuccessPanel()
+    public void ShowLevelSuccessPanel(LevelManager.LevelEndData levelEndData)
     {
-        levelSuccessPanel.gameObject.SetActive(true);
+        transitionScreenManager.gameObject.SetActive(true);
+        transitionScreenManager.ShowTransitionScreen(levelEndData);
         levelFailPanel.gameObject.SetActive(false);
         gameSuccessPanel.gameObject.SetActive(false);
         panel.gameObject.SetActive(false);
@@ -99,7 +117,7 @@ public class ErabyUIManager : MonoBehaviour
         levelFailPanel.gameObject.SetActive(true);
         gameSuccessPanel.gameObject.SetActive(false);
         panel.gameObject.SetActive(false);
-        showButtons(false);
+        showButtons(true, true);
     }
 
     public void ShowGameSuccessPanel()
@@ -122,6 +140,11 @@ public class ErabyUIManager : MonoBehaviour
         // }
         if (transitionRoutine != null) return;
         transitionRoutine = StartCoroutine(StartTransitionRoutine(i_level));
+    }
+
+    private float easeInExpo(float x)
+    {
+        return x <= 0 ? 0 : Mathf.Pow(2, 10 * x - 10);
     }
 
     private IEnumerator StartTransitionRoutine(int i_level)
@@ -152,10 +175,10 @@ public class ErabyUIManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.2f);
 
-        dur = 1f;
+        dur = 2f;
         for (float t = 0f; t <= dur; t += Time.deltaTime)
         {
-            color.a = 1f - Mathf.Lerp(0f, 1f, t / dur);
+            color.a = 1f - easeInExpo(t / dur);
             panel.color = color;
             yield return null;
         }

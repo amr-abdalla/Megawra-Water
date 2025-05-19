@@ -16,16 +16,16 @@ abstract class ErabyAbstractLaunchState : ErabyState
     protected override void onStateEnter()
     {
         initialVelocityY = dataProvider.launchVelocityY;
-        Debug.Log("Launch Velocity: " + dataProvider.landingVelocityY);
-        Debug.Log("Max Jump Height" + dataProvider.PlayerJumpHeight);
-        Debug.Log("Launch Velocity X: " + dataProvider.launchVelocityX);
+        // Debug.Log("Launch Velocity: " + dataProvider.landingVelocityY);
+        // Debug.Log("Max Jump Height" + dataProvider.PlayerJumpHeight);
+        // Debug.Log("Launch Velocity X: " + dataProvider.launchVelocityX);
         startJumpY = startJumpY < 0 ? body.transform.position.y : startJumpY;
         stopJumpY = startJumpY + dataProvider.PlayerJumpHeight;
         initialVelocityY = clampVelocityY(initialVelocityY);
-        Debug.Log(initialVelocityY);
+        // Debug.Log(initialVelocityY);
         body.SetVelocityY(initialVelocityY);
         body.SetVelocityX(dataProvider.launchVelocityX);
-        Debug.Log("Body Velocity X: " + body.VelocityX);
+        // Debug.Log("Body Velocity X: " + body.VelocityX);
         dataProvider.launchVelocityY = initialVelocityY;
         dataProvider.initialVelocityX = dataProvider.launchVelocityX;
         Debug.Log(body.VelocityY);

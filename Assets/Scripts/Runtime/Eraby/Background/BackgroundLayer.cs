@@ -58,7 +58,7 @@ public class BackgroundLayer : AbstractSpawner
     {
         cur_sprite = 0;
         groundAnchor.position = initialGroundAnchorPostion;
-        Debug.Log("Ground Anchor Postion" + groundAnchor.position);
+        // Debug.Log("Ground Anchor Postion" + groundAnchor.position);
 
         bounds = new SpawnerBounds { min = groundAnchor.position.x, max = groundAnchor.position.x };
 

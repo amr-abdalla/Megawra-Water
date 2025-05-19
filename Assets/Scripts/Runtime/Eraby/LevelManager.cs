@@ -92,6 +92,20 @@ public class LevelManager : MonoBehaviour
         StartNextLevel();
     }
 
+    public void RestartGame()
+    {
+        Debug.Log("Restart game");
+        level = 0;
+        gameEndData = new GameEndData
+        {
+            totalScore = 0,
+            totalTime = 0,
+            totalCrashes = 0,
+            isSuccess = false
+        };
+        StartNextLevel();
+    }
+
     void ExitGame()
     {
         Debug.Log("Exit game");
