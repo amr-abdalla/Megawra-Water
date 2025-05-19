@@ -40,7 +40,7 @@ public class MainMenuManager : MonoBehaviour
 
 	private void GoToEraby()
 	{
-		SceneManager.LoadScene("ErabyPlayground");
+		StartCoroutine(TransitionManager.instance.TransitionToScene("ErabyLoadingScene", "ErabyPlayground"));
 	}
 
 	private void GoToShabba()

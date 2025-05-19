@@ -181,37 +181,38 @@ public class ErabyUIManager : MonoBehaviourBase
         levelSuccessPanel.gameObject.SetActive(false);
         gameSuccessPanel.gameObject.SetActive(false);
         showButtons(false);
-        panel.gameObject.SetActive(true);
-        Color color = panel.color;
-        color.a = 0f;
-        panel.color = color;
-        float dur = 1f;
-        if (i_level < 0)
+        if (i_level >= 1)
         {
+            panel.gameObject.SetActive(true);
+            Color color = panel.color;
+            color.a = 0f;
+            panel.color = color;
+            float dur = 1f;
+            if (i_level < 0)
+            {
+                for (float t = 0f; t <= dur; t += Time.deltaTime)
+                {
+                    color.a = Mathf.Lerp(0f, 1f, t / dur);
+                    panel.color = color;
+
+                    yield return null;
+                }
+            }
+            else
+            {
+                color.a = 1f;
+                panel.color = color;
+            }
+            yield return new WaitForSeconds(0.2f);
+
+            dur = 2f;
             for (float t = 0f; t <= dur; t += Time.deltaTime)
             {
-                color.a = Mathf.Lerp(0f, 1f, t / dur);
+                color.a = 1f - easeInExpo(t / dur);
                 panel.color = color;
-
                 yield return null;
             }
         }
-        else
-        {
-            color.a = 1f;
-            panel.color = color;
-        }
-        yield return new WaitForSeconds(0.2f);
-
-        dur = 2f;
-        for (float t = 0f; t <= dur; t += Time.deltaTime)
-        {
-            color.a = 1f - easeInExpo(t / dur);
-            panel.color = color;
-            yield return null;
-        }
-
-
         OnEndLevelTransition?.Invoke();
         this.DisposeCoroutine(ref transitionRoutine);
         transitionRoutine = null;

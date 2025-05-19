@@ -24,7 +24,7 @@ public class ShabbaLevelManager
 
 		if (nextSceneName.Contains(ShabbaSceneKeyword))
 		{
-			SceneManager.LoadScene(currentSceneIndex + 1);
+			GameStateHandler.Instance.StartCoroutine(TransitionManager.instance.TransitionToScene("ShabbaLoadingScene", nextSceneName));
 		}
 		else
 		{
