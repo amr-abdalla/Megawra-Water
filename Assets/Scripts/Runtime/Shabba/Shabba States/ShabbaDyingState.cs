@@ -40,7 +40,7 @@ public class ShabbaDyingState : ShabbaState
 
 		if (Time.time - StartTime > DeathTime)
 		{
-			GlobalReferences.gameManager.OnLose();
+			GameStateHandler.Instance.OnLose();
 		}
 	}
 

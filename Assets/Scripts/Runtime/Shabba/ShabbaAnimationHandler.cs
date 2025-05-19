@@ -2,48 +2,42 @@ using UnityEngine;
 
 public class ShabbaAnimationHandler : MonoBehaviour
 {
-	[SerializeField] private SpriteFrameSwapper dashAnimation;
-	[SerializeField] private SpriteFrameSwapper idleAnimation;
-	[SerializeField] private BonesHandler bonesHandler;
+	[SerializeField] private ShabbaAnimationController shabbaAnimationController;
+	[SerializeField] private ShabbaBonesHandler bonesHandler;
+	private const float _maxRotationDiff = 4.39f; 
 
-	public void InvokeDashAnimation()
-	{
-		idleAnimation.Stop();
-		dashAnimation.ResetAnimation();
-		dashAnimation.Play();
-	}
+	private void OnScoreChanged() => shabbaAnimationController.UpdateCurrentAnimation();
 
-	public void PlayIdleAnimation()
-	{
-		dashAnimation.Stop();
-		idleAnimation.ResetAnimation();
-		idleAnimation.Play();
-	}
+	public void PlayDashAnimation() => shabbaAnimationController.PlayDashAnimation();
 
-	public void ResetAnimation()
-	{
-		idleAnimation.Stop();
-		Sprite firstSprite = idleAnimation.GetFirstFrame();
-		idleAnimation.ResetAnimation(firstSprite);
-	}
+	public void PlayIdleAnimation() => shabbaAnimationController.PlayIdleAnimation();
+
+	public void ResetAnimation() => shabbaAnimationController.ResetIdleAnimation();
 
 	public void OnRotate(float rotationDiff)
 	{
-		var t = Mathf.InverseLerp(0, 4.39f, Mathf.Abs(rotationDiff));
-		if (rotationDiff > 0) transform.localRotation = Quaternion.Euler(0, 0, 0);
-		else if (rotationDiff < 0) transform.localRotation = Quaternion.Euler(0, 180, 0);
-		bonesHandler.SetBones(t);
-	}
+		var t = Mathf.InverseLerp(0, _maxRotationDiff, Mathf.Abs(rotationDiff));
 
-	private void OnFinishDashAnimation()
-	{
-		dashAnimation.Stop();
-		idleAnimation.ResetAnimation();
-		idleAnimation.Play();
+		if (rotationDiff > 0)
+		{
+			transform.localRotation = Quaternion.Euler(0, 0, 0);
+		}
+		else if (rotationDiff < 0)
+		{
+			transform.localRotation = Quaternion.Euler(0, 180, 0);
+		}
+
+		bonesHandler.SetBones(t);
 	}
 
 	void Start()
 	{
-		dashAnimation.OnLastFrameReached += OnFinishDashAnimation;
+		shabbaAnimationController.Init();
+		ScoreTracker.OnScoreChanged += OnScoreChanged;
+	}
+
+	private void OnDestroy()
+	{
+		shabbaAnimationController.DeregisterEvents();
 	}
 }

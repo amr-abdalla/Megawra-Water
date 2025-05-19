@@ -46,14 +46,14 @@ public class ShabbaMoveState : ShabbaState
 	{
 		shabbaAnimationHandler.PlayIdleAnimation();
 		resetVariableToInitialValues();
-		OnPush += shabbaAnimationHandler.InvokeDashAnimation;
+		OnPush += shabbaAnimationHandler.PlayDashAnimation;
 		OnRotate += shabbaAnimationHandler.OnRotate;
 	}
 
 	protected override void onStateExit()
 	{
 		resetVariableToInitialValues();
-		OnPush -= shabbaAnimationHandler.InvokeDashAnimation;
+		OnPush -= shabbaAnimationHandler.PlayDashAnimation;
 		OnRotate -= shabbaAnimationHandler.OnRotate;
 		isInit = false; //hack
 	}
