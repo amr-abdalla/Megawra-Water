@@ -21,6 +21,13 @@ public class ErabyLevelEventsHandler : MonoBehaviour
     [SerializeField]
     private float erabyInitialVelocityX;
 
+    private void HandleLevelEnd(LevelManager.LevelEndData _i_levelEndData)
+    {
+        erabyTransform.position = erabyInitialPostion;
+        erabyBody.SetVelocity(Vector2.zero);
+        stateMachine.SetState<ErabyLevelTransitionIdleState>();
+        stateMachine.Reset();
+    }
     private void HandleLevelTransitionStart(int _i_level)
     {
         Debug.Log("Level Transition Start: " + _i_level);
@@ -40,5 +47,12 @@ public class ErabyLevelEventsHandler : MonoBehaviour
     {
         levelManager.OnNewLevelTransitionStart += HandleLevelTransitionStart;
         levelManager.OnNewLevelTransitionEnd += HandleLevelTransitionEnd;
+        levelManager.OnLevelEnd += HandleLevelEnd;
+    }
+    private void OnDestroy()
+    {
+        levelManager.OnNewLevelTransitionStart -= HandleLevelTransitionStart;
+        levelManager.OnNewLevelTransitionEnd -= HandleLevelTransitionEnd;
+        levelManager.OnLevelEnd -= HandleLevelEnd;
     }
 }

@@ -27,6 +27,13 @@ public class BackgroundLayer : AbstractSpawner
     [SerializeField]
     [Range(0f, 10f)]
     private float maxGap = 4f;
+
+    [SerializeField]
+    private float noSpawnDistanceFromGoal = 40f; // Distance from goal where no backgrounds spawn
+
+    [SerializeField]
+    private Transform goalTransform = null; // Reference to the goal's transform
+
     private const int MAX_SPRITES = 20;
 
     private List<GameObject> spriteRenderers = null;
@@ -58,7 +65,7 @@ public class BackgroundLayer : AbstractSpawner
     {
         cur_sprite = 0;
         groundAnchor.position = initialGroundAnchorPostion;
-        Debug.Log("Ground Anchor Postion" + groundAnchor.position);
+        // Debug.Log("Ground Anchor Postion" + groundAnchor.position);
 
         bounds = new SpawnerBounds { min = groundAnchor.position.x, max = groundAnchor.position.x };
 
@@ -111,6 +118,11 @@ public class BackgroundLayer : AbstractSpawner
     protected override float Spawn(float x_pos)
     {
         if (null == spriteRenderers) return 0;
+        // Prevent spawning if within noSpawnDistanceFromGoal of the goal
+        if (goalTransform != null && Mathf.Abs(goalTransform.position.x - x_pos) < noSpawnDistanceFromGoal)
+        {
+            return maxGap; // Skip this spawn, return max gap to move forward
+        }
         float skip_gap = Mathf.Clamp(0, 1, Mathf.PerlinNoise(x_pos, 0f));
         if (skip_gap < (1 - saturation))
         {

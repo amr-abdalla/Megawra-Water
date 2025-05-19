@@ -117,6 +117,10 @@ public class PlatformManager : AbstractSpawner
 
     float SpawnPlatform(float x)
     {
+        if (platformPool.Count == 0)
+        {
+            return x;
+        }
         float currentRandom = UnityEngine.Random.Range(gaps.min, gaps.max);
         CleanUpPlatforms();
         ShuffleList(platformPool);

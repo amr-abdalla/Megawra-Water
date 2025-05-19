@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Goal : MonoBehaviour
@@ -18,7 +19,7 @@ public class Goal : MonoBehaviour
         levelManager.RegisterToLevelStart(i =>
         {
             Vector3 postion = goalTransform.position;
-            postion.x = distanceToGoal * (i + 1);
+            postion.x = distanceToGoal * Mathf.Pow(2, i);
             goalTransform.position = postion;
         });
 
@@ -27,6 +28,6 @@ public class Goal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) levelManager.StartNextLevel();
+        if (other.CompareTag("Player")) levelManager.EndLevel(true);
     }
 }

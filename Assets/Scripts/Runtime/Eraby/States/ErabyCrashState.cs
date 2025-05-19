@@ -1,8 +1,6 @@
 // using Cinemachine;
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ErabyCrashState : ErabyAbstractLandingState
 {
@@ -16,6 +14,15 @@ public class ErabyCrashState : ErabyAbstractLandingState
         dataProvider.numCrashes += 1;
         if (dataProvider.numCrashes >= 5)
         {
+            // find the level manager in the scene and call the end level method
+            LevelManager levelManager = FindObjectOfType<LevelManager>();
+            if (levelManager == null)
+            {
+                Debug.LogError("LevelManager not found in the scene");
+                return;
+            }
+            levelManager.EndLevel(false);
+
             // TODO: Goto menu
             // SceneManager.LoadScene("Main Menu");
         }
