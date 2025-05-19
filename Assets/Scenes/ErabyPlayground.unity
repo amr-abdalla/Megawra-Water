@@ -6093,8 +6093,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: c0441815173ee9b599de6afd1dbe95be, type: 2}
   saturation: 1
   maxGap: 0
-  noSpawnDistanceFromGoal: 60
-  goalTransform: {fileID: 630041114}
+  noSpawnDistanceFromGoal: 100
+  goalTransform: {fileID: 0}
   levelManager: {fileID: 592178357}
 --- !u!4 &1037254766
 Transform:
@@ -14350,7 +14350,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f86e746b6b8f57244901b21af5dd15a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c68609fef4de22e47841aa1991e4a125, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
