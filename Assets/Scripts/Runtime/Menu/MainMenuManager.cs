@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -44,7 +45,7 @@ public class MainMenuManager : MonoBehaviour
 
 	private void GoToShabba()
 	{
-		SceneManager.LoadScene("ShabbaLevel1");
+		StartCoroutine(TransitionManager.instance.TransitionToScene("ShabbaLoadingScene", "ShabbaLevel1"));
 	}
 
 	private void OnEnable()
