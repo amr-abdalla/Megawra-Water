@@ -8,19 +8,83 @@ public class ErabyUIManager : MonoBehaviour
     // Start is called before the first frame update
     public Action OnEndLevelTransition;
 
+    public Action OnNextLevelButtonClicked;
+    public Action OnEndGameButtonClicked;
+
     [SerializeField]
     private Image panel;
 
     [SerializeField]
+    private Image levelSuccessPanel;
+
+    [SerializeField]
+    private Image levelFailPanel;
+
+    [SerializeField]
+    private Image gameSuccessPanel;
+
+    [SerializeField]
+    private Button nextLevelButton;
+
+    [SerializeField]
+    private Button endGameButton;
+
+    [SerializeField]
     private LevelManager levelManager;
+
+    private void handleNextLevelButtonClicked()
+    {
+        OnNextLevelButtonClicked?.Invoke();
+    }
+
+    private void handleEndGameButtonClicked()
+    {
+        OnEndGameButtonClicked?.Invoke();
+    }
     private void Awake()
     {
         levelManager.OnNewLevelTransitionStart += StartLevelTransition;
+        nextLevelButton.onClick.AddListener(handleNextLevelButtonClicked);
+        endGameButton.onClick.AddListener(handleEndGameButtonClicked);
     }
 
     private void OnDestroy()
     {
         levelManager.OnNewLevelTransitionStart -= StartLevelTransition;
+        nextLevelButton.onClick.RemoveListener(handleNextLevelButtonClicked);
+        endGameButton.onClick.RemoveListener(handleEndGameButtonClicked);
+    }
+
+
+
+    public void ShowLevelSuccessPanel()
+    {
+        levelSuccessPanel.gameObject.SetActive(true);
+        levelFailPanel.gameObject.SetActive(false);
+        gameSuccessPanel.gameObject.SetActive(false);
+        panel.gameObject.SetActive(false);
+        nextLevelButton.gameObject.SetActive(true);
+        endGameButton.gameObject.SetActive(false);
+    }
+
+    public void ShowLevelFailPanel()
+    {
+        levelSuccessPanel.gameObject.SetActive(false);
+        levelFailPanel.gameObject.SetActive(true);
+        gameSuccessPanel.gameObject.SetActive(false);
+        panel.gameObject.SetActive(false);
+        nextLevelButton.gameObject.SetActive(true);
+        endGameButton.gameObject.SetActive(false);
+    }
+
+    public void ShowGameSuccessPanel()
+    {
+        levelSuccessPanel.gameObject.SetActive(false);
+        levelFailPanel.gameObject.SetActive(false);
+        gameSuccessPanel.gameObject.SetActive(true);
+        panel.gameObject.SetActive(false);
+        nextLevelButton.gameObject.SetActive(false);
+        endGameButton.gameObject.SetActive(true);
     }
 
     private Coroutine transitionRoutine;
@@ -37,6 +101,7 @@ public class ErabyUIManager : MonoBehaviour
 
     private IEnumerator StartTransitionRoutine(int i_level)
     {
+        panel.gameObject.SetActive(true);
         Color color = panel.color;
         color.a = 0f;
         panel.color = color;
