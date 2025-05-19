@@ -6,7 +6,11 @@ public class ErabyStateMachine : RichStateMachine<ErabyStateMachineDataProvider>
     {
         if (DataProvider != null)
         {
-            _dataProvider = new ErabyStateMachineDataProvider();
+            DataProvider.Reset();
+        }
+        else
+        {
+            Debug.LogError("DataProvider is null. Cannot reset state machine.");
         }
     }
 }

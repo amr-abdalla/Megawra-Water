@@ -82,10 +82,24 @@ public class LevelManager : MonoBehaviour
             isSuccess = false
         };
 
+        erabyUIManager.OnEndGameButtonClicked += ExitGame;
+        erabyUIManager.OnNextLevelButtonClicked += HandleNextLevelButtonClicked;
+
     }
 
     void Start()
     {
+        StartNextLevel();
+    }
+
+    void ExitGame()
+    {
+        Debug.Log("Exit game");
+    }
+
+    void HandleNextLevelButtonClicked()
+    {
+        Debug.Log("Next level button clicked");
         StartNextLevel();
     }
 
@@ -107,7 +121,7 @@ public class LevelManager : MonoBehaviour
             level = level,
             isSuccess = isSuccess,
             score = 0,
-            time = levelStartTime - Time.time,
+            time = Time.time - levelStartTime,
             remainingWater = 5 - erabyStateMachineDataProvider.numCrashes
         };
 

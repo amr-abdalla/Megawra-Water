@@ -76,4 +76,19 @@ public class ErabyStateMachineDataProvider : AbstractStateMachineDataProvider
     public float PlayerJumpHeight = 0f;
 
     public int numCrashes = 0;
+
+    public void Reset()
+    {
+        initialVelocityX = 0f;
+        landingVelocityX = 0f;
+        landingVelocityY = 0f;
+        bumpDuration = 0f;
+        bumpMagnitude = 0f;
+        launchVelocity = MathConstants.VECTOR_2_ZERO;
+        bounceVelocityMultiplier = MathConstants.VECTOR_2_ONE;
+        fallPlatform = null;
+        bumpDirection = MathConstants.VECTOR_2_ZERO;
+        jumpStopHeight = 0f;
+        PlayerJumpHeight = 0f;
+    }
 }

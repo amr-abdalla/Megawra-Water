@@ -44,6 +44,7 @@ public class ErabyUIManager : MonoBehaviour
     private void Awake()
     {
         levelManager.OnNewLevelTransitionStart += StartLevelTransition;
+        levelManager.OnLevelEnd += HandleLevelEnd;
         nextLevelButton.onClick.AddListener(handleNextLevelButtonClicked);
         endGameButton.onClick.AddListener(handleEndGameButtonClicked);
     }
@@ -51,8 +52,34 @@ public class ErabyUIManager : MonoBehaviour
     private void OnDestroy()
     {
         levelManager.OnNewLevelTransitionStart -= StartLevelTransition;
+        levelManager.OnLevelEnd -= HandleLevelEnd;
         nextLevelButton.onClick.RemoveListener(handleNextLevelButtonClicked);
         endGameButton.onClick.RemoveListener(handleEndGameButtonClicked);
+    }
+
+    private void showButtons(bool show = true)
+    {
+        nextLevelButton.gameObject.SetActive(show);
+        endGameButton.gameObject.SetActive(show);
+        if (show)
+        {
+            nextLevelButton.Select();
+        }
+
+    }
+
+    private void HandleLevelEnd(LevelManager.LevelEndData levelEndData)
+    {
+        if (levelEndData.isSuccess)
+        {
+            ShowLevelSuccessPanel();
+            Debug.Log("Level Success");
+            Debug.Log($"Level: {levelEndData.level}, Score: {levelEndData.score}, Time: {levelEndData.time}, Remaining Water: {levelEndData.remainingWater}");
+        }
+        else
+        {
+            ShowLevelFailPanel();
+        }
     }
 
 
@@ -63,8 +90,7 @@ public class ErabyUIManager : MonoBehaviour
         levelFailPanel.gameObject.SetActive(false);
         gameSuccessPanel.gameObject.SetActive(false);
         panel.gameObject.SetActive(false);
-        nextLevelButton.gameObject.SetActive(true);
-        endGameButton.gameObject.SetActive(false);
+        showButtons();
     }
 
     public void ShowLevelFailPanel()
@@ -73,8 +99,7 @@ public class ErabyUIManager : MonoBehaviour
         levelFailPanel.gameObject.SetActive(true);
         gameSuccessPanel.gameObject.SetActive(false);
         panel.gameObject.SetActive(false);
-        nextLevelButton.gameObject.SetActive(true);
-        endGameButton.gameObject.SetActive(false);
+        showButtons(false);
     }
 
     public void ShowGameSuccessPanel()
@@ -101,6 +126,10 @@ public class ErabyUIManager : MonoBehaviour
 
     private IEnumerator StartTransitionRoutine(int i_level)
     {
+        levelFailPanel.gameObject.SetActive(false);
+        levelSuccessPanel.gameObject.SetActive(false);
+        gameSuccessPanel.gameObject.SetActive(false);
+        showButtons(false);
         panel.gameObject.SetActive(true);
         Color color = panel.color;
         color.a = 0f;
