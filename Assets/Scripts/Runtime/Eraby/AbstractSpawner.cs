@@ -15,7 +15,9 @@ public abstract class AbstractSpawner : MonoBehaviour
     [SerializeField]
     protected Transform player = null;
 
-  protected Vector3 initialGroundAnchorPostion;
+    public bool ShouldSpawn = true;
+
+    protected Vector3 initialGroundAnchorPostion;
     protected struct SpawnerBounds
     {
         public float min;
@@ -27,7 +29,7 @@ public abstract class AbstractSpawner : MonoBehaviour
     protected virtual void Awake()
     {
         initialGroundAnchorPostion = groundAnchor.position;
-        
+
         bounds = new SpawnerBounds { min = groundAnchor.position.x, max = groundAnchor.position.x };
     }
 
@@ -35,7 +37,7 @@ public abstract class AbstractSpawner : MonoBehaviour
     {
         // check if we need to place a new sprite
 
-        if (player.position.x - distanceToPlayer < bounds.min)
+        if (ShouldSpawn && player.position.x - distanceToPlayer < bounds.min)
         {
             bounds.min -= Spawn(bounds.min);
         }

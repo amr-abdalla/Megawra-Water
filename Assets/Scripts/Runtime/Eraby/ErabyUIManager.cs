@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ErabyUIManager : MonoBehaviour
+public class ErabyUIManager : MonoBehaviourBase
 {
     // Start is called before the first frame update
     public Action OnEndLevelTransition;
@@ -36,6 +37,9 @@ public class ErabyUIManager : MonoBehaviour
     [SerializeField]
     private Button restartButton;
 
+    [SerializeField]
+    private Button restartWinButton;
+
     private TransitionScreenManager levelSuccessPanel => transitionScreenManager;
 
     private void handleNextLevelButtonClicked()
@@ -46,43 +50,50 @@ public class ErabyUIManager : MonoBehaviour
     private void handleEndGameButtonClicked()
     {
         OnEndGameButtonClicked?.Invoke();
+        SceneManager.LoadScene("Main Menu");
     }
 
     private void handleRestartButtonClicked()
     {
+        Debug.Log("Restarting game");
         levelManager.RestartGame();
     }
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         levelManager.OnNewLevelTransitionStart += StartLevelTransition;
         levelManager.OnLevelEnd += HandleLevelEnd;
+        levelManager.OnGameEnd += HandleGameEnd;
         nextLevelButton.onClick.AddListener(handleNextLevelButtonClicked);
         endGameButton.onClick.AddListener(handleEndGameButtonClicked);
         restartButton.onClick.AddListener(handleRestartButtonClicked);
+        restartWinButton.onClick.AddListener(handleRestartButtonClicked);
     }
 
     private void OnDestroy()
     {
         levelManager.OnNewLevelTransitionStart -= StartLevelTransition;
         levelManager.OnLevelEnd -= HandleLevelEnd;
+        levelManager.OnGameEnd -= HandleGameEnd;
         nextLevelButton.onClick.RemoveListener(handleNextLevelButtonClicked);
         endGameButton.onClick.RemoveListener(handleEndGameButtonClicked);
         restartButton.onClick.RemoveListener(handleRestartButtonClicked);
+        restartWinButton.onClick.RemoveListener(handleRestartButtonClicked);
     }
 
-    private void showButtons(bool show = true, bool restart = false)
+    private void showButtons(bool show = true, bool restart = false, bool gameEnd = false)
     {
         nextLevelButton.gameObject.SetActive(show && !restart);
         endGameButton.gameObject.SetActive(show);
-        restartButton.gameObject.SetActive(show && restart);
-        if (show)
-        {
-            if (restart)
-                restartButton.Select();
-            else
-                nextLevelButton.Select();
-        }
+        restartButton.gameObject.SetActive(show && restart && !gameEnd);
+        restartWinButton.gameObject.SetActive(show && restart && gameEnd);
 
+        if (!show) return;
+
+        if (restart)
+            (gameEnd ? (Selectable)restartWinButton : restartButton).Select();
+        else
+            nextLevelButton.Select();
     }
 
     private void HandleLevelEnd(LevelManager.LevelEndData levelEndData)
@@ -99,6 +110,20 @@ public class ErabyUIManager : MonoBehaviour
         }
     }
 
+    private void HandleGameEnd(LevelManager.GameEndData gameEndData)
+    {
+        if (gameEndData.isSuccess)
+        {
+            ShowGameSuccessPanel();
+        }
+        else
+        {
+            ShowLevelFailPanel();
+        }
+        Debug.Log("Game Success");
+        Debug.Log($"Total Score: {gameEndData.totalScore}, Total Time: {gameEndData.totalTime}, Total Crashes: {gameEndData.totalCrashes}");
+    }
+
 
 
     public void ShowLevelSuccessPanel(LevelManager.LevelEndData levelEndData)
@@ -111,6 +136,7 @@ public class ErabyUIManager : MonoBehaviour
         showButtons();
     }
 
+    [ExposePublicMethod]
     public void ShowLevelFailPanel()
     {
         levelSuccessPanel.gameObject.SetActive(false);
@@ -128,6 +154,8 @@ public class ErabyUIManager : MonoBehaviour
         panel.gameObject.SetActive(false);
         nextLevelButton.gameObject.SetActive(false);
         endGameButton.gameObject.SetActive(true);
+        endGameButton.Select();
+        restartWinButton.gameObject.SetActive(true);
     }
 
     private Coroutine transitionRoutine;

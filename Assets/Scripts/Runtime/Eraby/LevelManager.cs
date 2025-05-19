@@ -67,7 +67,8 @@ public class LevelManager : MonoBehaviour
     void Awake()
     {
         level = 0;
-        OnNewLevelTransitionStart += HandleLevelStart;
+        platformManager.ShouldSpawn = false;
+        OnNewLevelTransitionEnd += HandleLevelStart;
 
         erabyUIManager.OnEndLevelTransition += () =>
         {
@@ -123,6 +124,7 @@ public class LevelManager : MonoBehaviour
         platformManager.ClearPlatforms();
         platformManager.config = levels.LevelConfigs[i_level].ManagerConfig;
         platformManager.InitPlatforms();
+        platformManager.ShouldSpawn = true;
         levelStartTime = Time.time;
         erabyStateMachineDataProvider.numCrashes = 0;
 
@@ -130,6 +132,7 @@ public class LevelManager : MonoBehaviour
 
     public void EndLevel(bool isSuccess)
     {
+        platformManager.ShouldSpawn = false;
         LevelEndData data = new LevelEndData
         {
             level = level,
@@ -160,8 +163,10 @@ public class LevelManager : MonoBehaviour
         {
             OnGameEnd?.Invoke(gameEndData);
         }
-
-        OnLevelEnd?.Invoke(data);
+        else
+        {
+            OnLevelEnd?.Invoke(data);
+        }
     }
 
     public void StartNextLevel()
