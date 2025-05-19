@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 public enum GameID
 {
 	Shabba,
-	Eraby
+	Eraby,
+	None
 }
 
 public class MainMenuManager : MonoBehaviour
 {
-	private GameID _currentlySelectedGame = GameID.Shabba;
+	private GameID _currentlySelectedGame = GameID.None;
 
 	private GameID CurrentlySelectedGame
 	{
