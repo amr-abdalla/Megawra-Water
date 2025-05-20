@@ -8,6 +8,10 @@ public class TransitionManager : MonoBehaviour
 
 	[SerializeField] private CanvasGroup blackImage;
 	[SerializeField] private AnimationCurve fadeCurve;
+
+	private bool _isTransitioning = false;
+
+	public bool IsTransitioning => _isTransitioning;
 	
 	private const float _defaultFadeDuration = 1f;
 
@@ -59,6 +63,7 @@ public class TransitionManager : MonoBehaviour
 
 	public IEnumerator TransitionToScene(string loadingScene, string mainScene, float duration = 0)
 	{
+		_isTransitioning = true;
 		if (duration <= 0)
 		{
 			duration = _defaultFadeDuration;
@@ -74,6 +79,7 @@ public class TransitionManager : MonoBehaviour
 		AsyncOperation levelOp = SceneManager.LoadSceneAsync(mainScene, LoadSceneMode.Single);
 		yield return new WaitForSeconds(0.5f);
 		yield return levelOp;
+		_isTransitioning = false;
 	}
 
 }

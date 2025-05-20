@@ -66,6 +66,11 @@ public class MainMenuManager : MonoBehaviour
 
 	private void OnSubmitInputRecieved(InputAction.CallbackContext action)
 	{
+		if (TransitionManager.instance.IsTransitioning)
+		{
+			return;
+		}
+
 		switch (CurrentlySelectedGame)
 		{
 			case GameID.Eraby:
