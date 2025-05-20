@@ -5,10 +5,13 @@ using UnityEngine.UI;
 public class ShabbaUIManager : MonoBehaviour
 {
 	[SerializeField] GameObject loseUI;
-	[SerializeField] Button loseRestartButton;
-	[SerializeField] Button loseMainMenuButton;
-	[SerializeField] Button winNextLevelButton;
-	[SerializeField] Button winMainMenuButton;
+	[SerializeField] GameObject finalWinUI;
+	[SerializeField] Button loseRestart;
+	[SerializeField] Button loseMainMenu;
+	[SerializeField] Button winNextLevel;
+	[SerializeField] Button winMainMenu;
+	[SerializeField] Button finalWinRestart;
+	[SerializeField] Button finalWinMainMenu;
 
 	[SerializeField] FinalScoreUI winUI;
 
@@ -16,32 +19,44 @@ public class ShabbaUIManager : MonoBehaviour
 	{
 		GameStateHandler.Instance.OnLoseAction += OnLose;
 		GameStateHandler.Instance.OnWinAction += OnWin;
-		loseRestartButton.onClick.AddListener(GameStateHandler.Instance.Restart);
-		loseMainMenuButton.onClick.AddListener(GameStateHandler.Instance.GoToMainMenu);
-		winMainMenuButton.onClick.AddListener(GameStateHandler.Instance.GoToMainMenu);
-		winNextLevelButton.onClick.AddListener(GameStateHandler.Instance.GoToNextLevel);
+		loseRestart.onClick.AddListener(GameStateHandler.Instance.Restart);
+		loseMainMenu.onClick.AddListener(GameStateHandler.Instance.GoToMainMenu);
+		winMainMenu.onClick.AddListener(GameStateHandler.Instance.GoToMainMenu);
+		winNextLevel.onClick.AddListener(GameStateHandler.Instance.GoToNextLevel);
+		finalWinRestart.onClick.AddListener(GameStateHandler.Instance.Restart);
+		finalWinMainMenu.onClick.AddListener(GameStateHandler.Instance.GoToMainMenu);
 	}
 
 	private void OnDestroy()
 	{
 		GameStateHandler.Instance.OnLoseAction -= OnLose;
 		GameStateHandler.Instance.OnWinAction -= OnWin;
-		loseRestartButton.onClick.RemoveListener(GameStateHandler.Instance.Restart);
-		loseMainMenuButton.onClick.RemoveListener(GameStateHandler.Instance.GoToMainMenu);
-		winMainMenuButton.onClick.RemoveListener(GameStateHandler.Instance.GoToMainMenu);
-		winNextLevelButton.onClick.RemoveListener(GameStateHandler.Instance.GoToNextLevel);
+		loseRestart.onClick.RemoveListener(GameStateHandler.Instance.Restart);
+		loseMainMenu.onClick.RemoveListener(GameStateHandler.Instance.GoToMainMenu);
+		winMainMenu.onClick.RemoveListener(GameStateHandler.Instance.GoToMainMenu);
+		winNextLevel.onClick.RemoveListener(GameStateHandler.Instance.GoToNextLevel);
+		finalWinRestart.onClick.AddListener(GameStateHandler.Instance.Restart);
+		finalWinMainMenu.onClick.AddListener(GameStateHandler.Instance.GoToMainMenu);
 	}
 
 	private void OnLose()
 	{
 		loseUI.SetActive(true);
-		loseRestartButton.Select();
+		loseRestart.Select();
 	}
 
 	private void OnWin()
 	{
-		winUI.gameObject.SetActive(true);
-		winUI.Setup();
-		winNextLevelButton.Select();
+		if (GameStateHandler.Instance.IsCurrentLevelTheFinalLevel)
+		{
+			finalWinUI.SetActive(true);
+			finalWinMainMenu.Select();
+		}
+		else
+		{
+			winUI.gameObject.SetActive(true);
+			winUI.Setup();
+			winNextLevel.Select();
+		}
 	}
 }

@@ -8,6 +8,14 @@ public class ShabbaLevelManager
 
 	public void GoToMainMenu() => SceneManager.LoadScene(MainMenuBuildIndex);
 
+	public bool IsCurrentLevelTheFinalLevel()
+	{
+		int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+		int totalSceneCount = SceneManager.sceneCountInBuildSettings;
+
+		return currentSceneIndex >= totalSceneCount - 1;
+	}
+
 	public void GoToNextLevel()
 	{
 		int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;

@@ -56,6 +56,8 @@ public class GameStateHandler : MonoBehaviour
 		gameTimer.Resume();
 	}
 
+	public bool IsCurrentLevelTheFinalLevel => levelManager.IsCurrentLevelTheFinalLevel();
+
 	private void ClickSelectedButton(InputAction.CallbackContext _)
 	{
 		var currentSelected = EventSystem.current.currentSelectedGameObject;
