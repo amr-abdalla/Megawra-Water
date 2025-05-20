@@ -109,12 +109,12 @@ public class LevelManager : MonoBehaviour
 
     void ExitGame()
     {
-        Debug.Log("Exit game");
+        // Debug.Log("Exit game");
     }
 
     void HandleNextLevelButtonClicked()
     {
-        Debug.Log("Next level button clicked");
+        // Debug.Log("Next level button clicked");
         StartNextLevel();
     }
 

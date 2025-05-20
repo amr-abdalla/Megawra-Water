@@ -57,7 +57,7 @@ public abstract class ErabyAbstractFallState : MoveHorizontalAbstractState
     protected void goToLanding<OnGroundedType>()
         where OnGroundedType : State
     {
-        Debug.Log("Go to landing. Current State: " + this.GetType().Name);
+        // Debug.Log("Go to landing. Current State: " + this.GetType().Name);
         if (null == body.CurrentGroundTransform)
         {
             Debug.LogError("Ground is null");

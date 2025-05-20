@@ -22,7 +22,7 @@ public class PlatformBounceState : State
 
     protected override void onStateEnter()
     {
-        Debug.Log("Platform Bounce State");
+        // Debug.Log("Platform Bounce State");
         if (spline) spline.AnimationState.SetAnimation(0, bounceAnimation, false);
         bounceCoroutine = StartCoroutine(bounce());
     }

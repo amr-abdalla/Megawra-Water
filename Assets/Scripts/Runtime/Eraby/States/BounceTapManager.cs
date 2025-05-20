@@ -26,7 +26,7 @@ public class BounceTapManager : MonoBehaviour
 
     public void ResetTap()
     {
-        Debug.Log("Reset tap");
+        // Debug.Log("Reset tap");
         tapped = false;
         distance = 0;
     }

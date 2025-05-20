@@ -8,10 +8,10 @@ public class ErabyIdleState : ErabyState
     protected override void onStateEnter()
     {
         body.SetVelocityX(0);
-        Debug.Log("Enter idle");
+        // Debug.Log("Enter idle");
         if (controls == null)
         {
-            Debug.LogError("Controls not set");
+            // Debug.LogError("Controls not set");
             return;
         }
 

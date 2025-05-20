@@ -17,7 +17,7 @@ public class PlatformMoveState : State
 
     protected override void onStateEnter()
     {
-        Debug.Log("Platform Move State");
+        // Debug.Log("Platform Move State");
         platformObj.onCollision += onPlatformCollision;
         moveTarget.velocity = accelerationConfig.MoveVelocityX * Vector2.left;
     }

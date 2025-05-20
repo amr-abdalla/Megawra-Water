@@ -37,8 +37,8 @@ public class PlatformManager : AbstractSpawner
         platformPool = new List<GameObject>(num_platforms);
         spawnedPlatforms = new List<GameObject>(num_platforms);
 
-        Debug.Log("PlatformManager Start");
-        Debug.Log("num_platforms: " + num_platforms);
+        // Debug.Log("PlatformManager Start");
+        // Debug.Log("num_platforms: " + num_platforms);
 
         foreach (PlatformManagerConfig.PoolData data in platformPoolData)
         {

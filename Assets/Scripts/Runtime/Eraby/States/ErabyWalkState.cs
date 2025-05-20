@@ -5,7 +5,7 @@ public class ErabyWalkState : MoveHorizontalAbstractState
 {
     protected override void onStateEnter()
     {
-        Debug.Log("Enter walk");
+        // Debug.Log("Enter walk");
 
         if (!controls.isMoving())
             goToIdle();
@@ -49,7 +49,7 @@ public class ErabyWalkState : MoveHorizontalAbstractState
 
     private void goToIdle()
     {
-        Debug.Log("Go to idle");
+        // Debug.Log("Go to idle");
         // body.SetVelocityX(0);
         stateMachine.SetState<ErabyIdleState>();
     }

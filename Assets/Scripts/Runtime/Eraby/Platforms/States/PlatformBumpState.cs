@@ -12,7 +12,7 @@ public class PlatformBumpState : State
 
     protected override void onStateEnter()
     {
-        Debug.Log("Platform Bump State");
+        // Debug.Log("Platform Bump State");
         bumpCoroutine = StartCoroutine(bump());
     }
 

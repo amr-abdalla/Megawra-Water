@@ -8,7 +8,7 @@ class ErabyCrashedLaunchState : ErabyAbstractLaunchState
     private float crashFactor = 0.1f;
     protected override void onStateEnter()
     {
-        Debug.Log("Enter crashed launch");
+        // Debug.Log("Enter crashed launch");
         dataProvider.launchVelocityY *= crashFactor;
         float newVelocityX = -Mathf.Abs(dataProvider.landingVelocityX) * crashFactor;
         newVelocityX = -Mathf.Clamp(

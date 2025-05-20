@@ -9,7 +9,7 @@ public class ErabyJumpState : ErabyAbstractJumpState
     protected override void onStateEnter()
     {
         base.onStateEnter();
-        Debug.Log("Enter jump");
+        // Debug.Log("Enter jump");
         // controls.DiveStarted += goToFastFall;
     }
 

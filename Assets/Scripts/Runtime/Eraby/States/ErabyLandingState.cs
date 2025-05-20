@@ -12,7 +12,7 @@ public class ErabyLandingState : ErabyAbstractLandingState
     #region STATE API
     protected override void onStateEnter()
     {
-        Debug.Log("Enter landing");
+        // Debug.Log("Enter landing");
 
         // dataProvider.launchVelocityY =
         //     dataProvider.bounceVelocityMultiplier.y * dataProvider.launchVelocityY;

@@ -6,7 +6,7 @@ public class ErabySmallJumpState : ErabyAbstractJumpState
     {
         base.onStateEnter();
 
-        Debug.Log("Enter small jump");
+        // Debug.Log("Enter small jump");
     }
 
     protected override void onJumpEnded()

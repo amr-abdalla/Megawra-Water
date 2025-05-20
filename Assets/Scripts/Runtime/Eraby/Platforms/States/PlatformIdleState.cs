@@ -6,7 +6,7 @@ public class PlatformIdleState : State
 
     protected override void onStateEnter()
     {
-        Debug.Log("Platform Idle State");
+        // Debug.Log("Platform Idle State");
         goToMove();
     }
 

@@ -10,7 +10,7 @@ public class ErabyCrashState : ErabyAbstractLandingState
     #region STATE API
     protected override void onStateEnter()
     {
-        Debug.Log("Enter crash");
+        // Debug.Log("Enter crash");
         dataProvider.setNumCrashes(dataProvider.numCrashes + 1);
         if (dataProvider.numCrashes >= 5)
         {
