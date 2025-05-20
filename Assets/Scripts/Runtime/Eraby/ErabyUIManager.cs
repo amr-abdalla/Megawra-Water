@@ -181,37 +181,35 @@ public class ErabyUIManager : MonoBehaviourBase
         levelSuccessPanel.gameObject.SetActive(false);
         gameSuccessPanel.gameObject.SetActive(false);
         showButtons(false);
-        if (i_level >= 1)
+        panel.gameObject.SetActive(true);
+        Color color = panel.color;
+        color.a = 1f;
+        panel.color = color;
+        // float dur = 1f;
+        // if (i_level > 0)
+        // {
+        //     for (float t = 0f; t <= dur; t += Time.deltaTime)
+        //     {
+        //         color.a = Mathf.Lerp(0f, 1f, t / dur);
+        //         panel.color = color;
+
+        //         yield return null;
+        //     }
+        // }
+        // else
+        // {
+        //     panel.gameObject.SetActive(true);
+        //     color.a = 1f;
+        //     panel.color = color;
+        // }
+        yield return new WaitForSeconds(0.2f);
+
+        float dur = 2f;
+        for (float t = 0f; t <= dur; t += Time.deltaTime)
         {
-            panel.gameObject.SetActive(true);
-            Color color = panel.color;
-            color.a = 0f;
+            color.a = 1f - easeInExpo(t / dur);
             panel.color = color;
-            float dur = 1f;
-            if (i_level < 0)
-            {
-                for (float t = 0f; t <= dur; t += Time.deltaTime)
-                {
-                    color.a = Mathf.Lerp(0f, 1f, t / dur);
-                    panel.color = color;
-
-                    yield return null;
-                }
-            }
-            else
-            {
-                color.a = 1f;
-                panel.color = color;
-            }
-            yield return new WaitForSeconds(0.2f);
-
-            dur = 2f;
-            for (float t = 0f; t <= dur; t += Time.deltaTime)
-            {
-                color.a = 1f - easeInExpo(t / dur);
-                panel.color = color;
-                yield return null;
-            }
+            yield return null;
         }
         OnEndLevelTransition?.Invoke();
         this.DisposeCoroutine(ref transitionRoutine);
