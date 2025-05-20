@@ -28,7 +28,7 @@ abstract class ErabyAbstractLaunchState : ErabyState
         // Debug.Log("Body Velocity X: " + body.VelocityX);
         dataProvider.launchVelocityY = initialVelocityY;
         dataProvider.initialVelocityX = dataProvider.launchVelocityX;
-        Debug.Log(body.VelocityY);
+        // Debug.Log(body.VelocityY);
         goToJump();
     }
 
