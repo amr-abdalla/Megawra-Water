@@ -1,0 +1,10 @@
+diff a/Assets/Scripts/Runtime/Eraby/ErabyUIManager.cs b/Assets/Scripts/Runtime/Eraby/ErabyUIManager.cs	(rejected hunks)
+@@ -181,7 +181,7 @@ public class ErabyUIManager : MonoBehaviourBase
+         levelSuccessPanel.gameObject.SetActive(false);
+         gameSuccessPanel.gameObject.SetActive(false);
+         showButtons(false);
+-        if (i_level >= 1)
++        if (i_level >= 1) // hack to use the MainMenuManager transition
+         {
+             panel.gameObject.SetActive(true);
+             Color color = panel.color;

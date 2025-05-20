@@ -26,7 +26,7 @@ public class FinalScoreUI : MonoBehaviour
 	public void Setup()
 	{
 		ScoreTracker.TotalScore += ScoreTracker.CurrentScore;
-		Debug.Log("Current Score " + ScoreTracker.CurrentScore + " Max Score " + ScoreTracker.MaxScore + " Total Score " + ScoreTracker.TotalScore);
+		//Debug.Log("Current Score " + ScoreTracker.CurrentScore + " Max Score " + ScoreTracker.MaxScore + " Total Score " + ScoreTracker.TotalScore);
 
 		foreach (var spriteScore in spriteScores)
 		{

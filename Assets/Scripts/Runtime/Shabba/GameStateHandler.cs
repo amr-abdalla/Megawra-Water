@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GameStateHandler : MonoBehaviour
 {
@@ -34,19 +36,19 @@ public class GameStateHandler : MonoBehaviour
 
 	public void OnLose()
 	{
-		shabbaInputHandler.EnableControls(GoToMainMenu);
+		shabbaInputHandler.EnableControls(ClickSelectedButton);
 		OnLoseAction?.Invoke();
 		gameTimer.Pause();
 	}
 
 	public void OnWin()
 	{
-		shabbaInputHandler.EnableControls(GoToNextLevel);
+		shabbaInputHandler.EnableControls(ClickSelectedButton);
 		OnWinAction?.Invoke();
 		gameTimer.Pause();
 	}
 
-	private void GoToNextLevel(InputAction.CallbackContext _)
+	public void GoToNextLevel()
 	{
 		ScoreTracker.CurrentScore = 0;
 		levelManager.GoToNextLevel();
@@ -54,11 +56,25 @@ public class GameStateHandler : MonoBehaviour
 		gameTimer.Resume();
 	}
 
-	private void GoToMainMenu(InputAction.CallbackContext _)
+	private void ClickSelectedButton(InputAction.CallbackContext _)
+	{
+		var currentSelected = EventSystem.current.currentSelectedGameObject;
+		currentSelected?.GetComponent<Button>().onClick?.Invoke();
+	}
+
+	public void GoToMainMenu()
 	{
 		ResetGame();
 		levelManager.GoToMainMenu();
 		shabbaInputHandler.DisableControls();
 		gameTimer.Resume();
+	}
+
+	public void Restart()
+	{
+		ResetGame();
+		shabbaInputHandler.DisableControls();
+		gameTimer.Resume();
+		levelManager.GoToFirstLevel();
 	}
 }

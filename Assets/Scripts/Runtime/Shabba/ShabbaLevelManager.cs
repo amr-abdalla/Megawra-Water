@@ -31,4 +31,6 @@ public class ShabbaLevelManager
 			Debug.LogError($"Failed to Go To Next Level, current scene index is {currentSceneIndex} and next scene name is {nextSceneName} (it should contain the word Shabba)");
 		}
 	}
+
+	public void GoToFirstLevel() => SceneManager.LoadScene("ShabbaLevel1");
 }
