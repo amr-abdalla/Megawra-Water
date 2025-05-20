@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(
@@ -77,6 +78,14 @@ public class ErabyStateMachineDataProvider : AbstractStateMachineDataProvider
 
     public int numCrashes = 0;
 
+    public void setNumCrashes(int num)
+    {
+        numCrashes = num;
+        OnNumCrashesChanged?.Invoke(numCrashes);
+    }
+
+    public Action<int> OnNumCrashesChanged;
+
     public void Reset()
     {
         initialVelocityX = 0f;
@@ -90,5 +99,7 @@ public class ErabyStateMachineDataProvider : AbstractStateMachineDataProvider
         bumpDirection = MathConstants.VECTOR_2_ZERO;
         jumpStopHeight = 0f;
         PlayerJumpHeight = 0f;
+        numCrashes = 0;
+        OnNumCrashesChanged?.Invoke(0);
     }
 }

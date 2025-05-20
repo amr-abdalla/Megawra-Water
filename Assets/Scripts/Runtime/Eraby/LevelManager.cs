@@ -126,7 +126,7 @@ public class LevelManager : MonoBehaviour
         platformManager.InitPlatforms();
         platformManager.ShouldSpawn = true;
         levelStartTime = Time.time;
-        erabyStateMachineDataProvider.numCrashes = 0;
+        erabyStateMachineDataProvider.setNumCrashes(0);
 
     }
 
