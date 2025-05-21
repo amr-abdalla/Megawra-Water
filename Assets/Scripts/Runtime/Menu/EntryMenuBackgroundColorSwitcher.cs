@@ -17,8 +17,8 @@ public class EntryMenuBackgroundColorSwitcher : MonoBehaviour
 	{
 		Color color1 = new Color(0f, 50 / 255f, 108 / 255f);
 		Color color2 = new Color(0f, 181 / 255f, 181 / 255f);
-		targetColors.Add(color1);
 		targetColors.Add(color2);
+		targetColors.Add(color1);
 	}
 
 

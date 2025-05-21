@@ -1,19 +1,29 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class BigContentPresenter : MonoBehaviour
 {
 	[SerializeField] private RectTransform content;
 	[SerializeField] private float baseSpeed = 200f;
 	[SerializeField] private InputActionReference navigationAction;
+	[SerializeField] private InputActionReference exitToMenuAction;
+	[SerializeField] private GameObject creditsUI;
+
 
 	private float targetPositionY;
 	private float currentSpeed;
 	private float maxSpeed;
 	private float minSpeed;
+	private Vector3 initialPosition;
 
-	void Start()
+	private bool isDone = false;
+
+
+	void ResetCredits()
 	{
+
+		content.transform.position = initialPosition;
 		currentSpeed = baseSpeed;
 		maxSpeed = baseSpeed * 2.5f;
 		minSpeed = 0f;
@@ -21,18 +31,40 @@ public class BigContentPresenter : MonoBehaviour
 		targetPositionY = content.rect.height + screenHeight + content.transform.position.y;
 	}
 
-	private void OnEnable()
+	void Start()
 	{
-		navigationAction.action.Enable();
+		initialPosition = content.transform.position;
+		ResetCredits();
 	}
 
+	private void OnEnable()
+	{
+		exitToMenuAction.action.Enable();
+		exitToMenuAction.action.performed += exitToMenuActionHandler;
+	}
 	private void OnDisable()
 	{
-		navigationAction.action.Disable();
+		exitToMenuAction.action.Disable();
+		exitToMenuAction.action.performed -= exitToMenuActionHandler;
+	}
+	private void ExitToMenu()
+	{
+		ResetCredits();
+		creditsUI.SetActive(false);
+	}
+
+	private void exitToMenuActionHandler(InputAction.CallbackContext obj)
+	{
+		ExitToMenu();
 	}
 
 	void Update()
 	{
+		if (isDone)
+		{
+			return;
+		}
+
 		Vector2 navInput = navigationAction.action.ReadValue<Vector2>();
 
 		if (navInput.y == -1)
@@ -51,7 +83,7 @@ public class BigContentPresenter : MonoBehaviour
 		if (content.anchoredPosition.y >= targetPositionY)
 		{
 			//TODO: idk, exit the UI or something
-			Debug.Log("Done");
+			isDone = true;
 			return;
 		}
 

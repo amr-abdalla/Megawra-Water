@@ -3408,6 +3408,10 @@ MonoBehaviour:
     m_GlyphIndex: 412
     m_Scale: 1
   - m_ElementType: 1
+    m_Unicode: 65155
+    m_GlyphIndex: 403
+    m_Scale: 1
+  - m_ElementType: 1
     m_Unicode: 65156
     m_GlyphIndex: 404
     m_Scale: 1
