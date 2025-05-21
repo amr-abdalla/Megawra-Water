@@ -10,12 +10,18 @@ public class EntryMenu : MonoBehaviour
     [SerializeField] private Button gameButton;
 
     [SerializeField] private GameObject creditsUI;
+    [SerializeField] private GameObject storyUI;
 
     private SceneTransitionHelper sceneTransitionHelper;
 
     private void onCreditsClicked()
     {
         creditsUI.SetActive(true);
+    }
+
+    private void onStoryClicked()
+    {
+        storyUI.SetActive(true);
     }
 
     private void onGameClicked()
@@ -29,6 +35,7 @@ public class EntryMenu : MonoBehaviour
         sceneTransitionHelper = GetComponent<SceneTransitionHelper>();
         creditsButton.onClick.AddListener(onCreditsClicked);
         gameButton.onClick.AddListener(onGameClicked);
+        storyButton.onClick.AddListener(onStoryClicked);
         gameButton.Select();
     }
 
@@ -36,6 +43,7 @@ public class EntryMenu : MonoBehaviour
     {
         creditsButton.onClick.RemoveListener(onCreditsClicked);
         gameButton.onClick.RemoveListener(onGameClicked);
+        storyButton.onClick.RemoveListener(onStoryClicked);
     }
 
 }
