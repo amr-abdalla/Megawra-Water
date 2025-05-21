@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 6dbe33f298c16844cbbfc8a8b76e5c07
   - enabled: 1
-    path: Assets/Scenes/ShabbaLoadingScene.unity
+    path: Assets/Scenes/Entry Scene.unity
     guid: e5016d41c1407aa44b7fad52b77fa2f7
+  - enabled: 1
+    path: Assets/Scenes/ShabbaLoadingScene.unity
+    guid: 8cb0549f25325eb4b9fc28909ab0ccc3
   - enabled: 1
     path: Assets/Scenes/ErabyLoadingScene.unity
     guid: 95f87cf50d56a8b40b41522dd95737e5
