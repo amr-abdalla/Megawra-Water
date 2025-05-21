@@ -10,6 +10,7 @@ class ErabyLevelTransitionIdleState : ErabyAbstractLandingState
     #region STATE API
     protected override void onStateEnter()
     {
+	Debug.Log("TIDLE");
         initialGravity = body.GravityConfig.GravityModifier;
         body.SetGravityModifier(0);
         base.onStateEnter();

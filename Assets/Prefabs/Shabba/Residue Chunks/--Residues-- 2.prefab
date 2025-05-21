@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3207580351012785769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3207580351012785770}
+  m_Layer: 0
+  m_Name: --Residues-- 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3207580351012785770
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3207580351012785769}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.27639, y: 19.174482, z: -0.53230894}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3207580351020978363}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3207580351020978361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3207580351020978363}
+  - component: {fileID: 3207580351020978364}
+  - component: {fileID: 3207580351020978365}
+  m_Layer: 0
+  m_Name: Residue Grid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3207580351020978363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3207580351020978361}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 20.85967, y: -39.38528, z: 0.30664626}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3207580351012785770}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3207580351020978364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3207580351020978361}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81bee03e7d6046847a8d7536828db22c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  residueCells:
+  - position: {x: 0, y: 0}
+    residueChunk: {fileID: 843828406854762779, guid: 4878120c15f0f9744bcf918eba586ba1, type: 3}
+  - position: {x: 0, y: -0.5}
+    residueChunk: {fileID: 1345568220935154492, guid: ed6554d466fe0cb4d9dcd141863c8840, type: 3}
+  - position: {x: 0, y: -1}
+    residueChunk: {fileID: 843828406854762779, guid: 4878120c15f0f9744bcf918eba586ba1, type: 3}
+  - position: {x: 0, y: -1.5}
+    residueChunk: {fileID: 1345568220935154492, guid: ed6554d466fe0cb4d9dcd141863c8840, type: 3}
+  - position: {x: 0, y: -2}
+    residueChunk: {fileID: 843828406854762779, guid: 4878120c15f0f9744bcf918eba586ba1, type: 3}
+  - position: {x: 0, y: -2.5}
+    residueChunk: {fileID: 1345568220935154492, guid: ed6554d466fe0cb4d9dcd141863c8840, type: 3}
+  - position: {x: 0, y: -3}
+    residueChunk: {fileID: 843828406854762779, guid: 4878120c15f0f9744bcf918eba586ba1, type: 3}
+  ShabbaAudioManager: {fileID: 0}
+--- !u!114 &3207580351020978365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3207580351020978361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81bee03e7d6046847a8d7536828db22c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  residueCells:
+  - position: {x: 0, y: 0}
+    residueChunk: {fileID: 2023827513756033058, guid: 8e701636e18668c48846bcd3df6c5152, type: 3}
+  - position: {x: 0, y: -0.9}
+    residueChunk: {fileID: 4130736906324849189, guid: 2448507831a79234fba913163421f5a3, type: 3}
+  - position: {x: 0, y: -1.8}
+    residueChunk: {fileID: 2023827513756033058, guid: 8e701636e18668c48846bcd3df6c5152, type: 3}
+  - position: {x: 0, y: -2.7}
+    residueChunk: {fileID: 4130736906324849189, guid: 2448507831a79234fba913163421f5a3, type: 3}
+  - position: {x: 0, y: -3.6}
+    residueChunk: {fileID: 2023827513756033058, guid: 8e701636e18668c48846bcd3df6c5152, type: 3}
+  ShabbaAudioManager: {fileID: 0}

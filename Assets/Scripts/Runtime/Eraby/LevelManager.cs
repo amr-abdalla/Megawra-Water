@@ -82,7 +82,7 @@ public class LevelManager : MonoBehaviour
     {
         level = 0;
         platformManager.ShouldSpawn = false;
-        OnNewLevelTransitionEnd += HandleLevelStart;
+        OnNewLevelTransitionStart += HandleLevelStart;
 
         exitToMenuAction.action.Enable();
         exitToMenuAction.action.performed += HandleExitToMenuActionHandler;
@@ -133,6 +133,7 @@ public class LevelManager : MonoBehaviour
         // Debug.Log("Next level button clicked");
         StartNextLevel();
     }
+
 
     private void HandleLevelStart(int i_level)
     {

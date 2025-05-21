@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3251,10 +3251,10 @@ RectTransform:
   m_Father: {fileID: 1360542537}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 359.0372, y: 215.65}
-  m_SizeDelta: {x: 642.1849, y: 346.75}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -373, y: 215.65}
+  m_SizeDelta: {x: 621.4934, y: 346.7477}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &374084516
 MonoBehaviour:
@@ -6238,10 +6238,10 @@ RectTransform:
   m_Father: {fileID: 1360542537}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -373, y: 215.65}
-  m_SizeDelta: {x: 621.4934, y: 346.7477}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 359.0372, y: 215.65}
+  m_SizeDelta: {x: 642.1849, y: 346.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &969945662
 MonoBehaviour:
@@ -11557,10 +11557,10 @@ RectTransform:
   m_Father: {fileID: 1360542537}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -373, y: 215.65}
-  m_SizeDelta: {x: 621.4934, y: 346.7477}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 359.0372, y: 215.65}
+  m_SizeDelta: {x: 642.1849, y: 346.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1307555864
 MonoBehaviour:
@@ -11754,7 +11754,7 @@ MonoBehaviour:
   transitionScreenManager: {fileID: 788302440}
   restartButton: {fileID: 969945662}
   restartWinButton: {fileID: 1441003818}
-  sceneTransitionHelper: {fileID: 0}
+  sceneTransitionHelper: {fileID: 1360542538}
 --- !u!114 &1360542534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11856,6 +11856,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65b4f183871618945a39c76a087e8830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1364102960 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9145736166193498351, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
+  m_PrefabInstance: {fileID: 4026483990505614929}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d9da86906e2644aa7eb19cf8f1b7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1386682039
@@ -14779,10 +14790,10 @@ RectTransform:
   m_Father: {fileID: 1360542537}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -373, y: 215.65}
-  m_SizeDelta: {x: 621.4934, y: 346.7477}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 359.0372, y: 215.65}
+  m_SizeDelta: {x: 642.1849, y: 346.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1441003818
 MonoBehaviour:
@@ -18475,6 +18486,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4026483991751054449, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
+      propertyPath: initialState
+      value: 
+      objectReference: {fileID: 1364102960}
     - target: {fileID: 9145736166193498351, guid: 22f61e8a9710e9e42aace969b7db829e, type: 3}
       propertyPath: tapManager
       value: 

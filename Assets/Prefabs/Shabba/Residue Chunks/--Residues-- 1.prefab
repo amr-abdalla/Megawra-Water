@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8194172503520990251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8194172503520990249}
+  - component: {fileID: 8194172503520990255}
+  m_Layer: 0
+  m_Name: Residue Grid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8194172503520990249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8194172503520990251}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 20.85967, y: -39.38528, z: 0.30664626}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8194172503529573112}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8194172503520990255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8194172503520990251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81bee03e7d6046847a8d7536828db22c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  residueCells:
+  - position: {x: 0, y: 0}
+    residueChunk: {fileID: 843828406854762779, guid: 4878120c15f0f9744bcf918eba586ba1, type: 3}
+  - position: {x: 0, y: -0.85}
+    residueChunk: {fileID: 1345568220935154492, guid: ed6554d466fe0cb4d9dcd141863c8840, type: 3}
+  - position: {x: 0, y: -1.7}
+    residueChunk: {fileID: 843828406854762779, guid: 4878120c15f0f9744bcf918eba586ba1, type: 3}
+  - position: {x: 0, y: -2.55}
+    residueChunk: {fileID: 1345568220935154492, guid: ed6554d466fe0cb4d9dcd141863c8840, type: 3}
+  - position: {x: 0, y: -3.4}
+    residueChunk: {fileID: 843828406854762779, guid: 4878120c15f0f9744bcf918eba586ba1, type: 3}
+  - position: {x: 0, y: -4.25}
+    residueChunk: {fileID: 1345568220935154492, guid: ed6554d466fe0cb4d9dcd141863c8840, type: 3}
+  - position: {x: 0, y: -5.1}
+    residueChunk: {fileID: 843828406854762779, guid: 4878120c15f0f9744bcf918eba586ba1, type: 3}
+  - position: {x: 0, y: -5.95}
+    residueChunk: {fileID: 843828406854762779, guid: 4878120c15f0f9744bcf918eba586ba1, type: 3}
+  ShabbaAudioManager: {fileID: 0}
+--- !u!1 &8194172503529573115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8194172503529573112}
+  m_Layer: 0
+  m_Name: --Residues-- 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8194172503529573112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8194172503529573115}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.27639, y: 19.174482, z: -0.53230894}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8194172503520990249}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

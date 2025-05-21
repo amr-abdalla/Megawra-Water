@@ -11,6 +11,7 @@ class ErabyLevelStartFallState : ErabyAbstractLandingState
     #region STATE API
     protected override void onStateEnter()
     {
+	Debug.Log("TFALL");
         initialGravity = body.GravityConfig.GravityModifier;
         body.SetGravityModifier(0);
         dataProvider.launchVelocityY = float.PositiveInfinity;

@@ -87,7 +87,7 @@ public class MainMenuManager : MonoBehaviour
 	{
 		float inputValue = action.ReadValue<float>();
 
-		if (inputValue > 0)
+		if (inputValue < 0)
 		{
 			SelectRight();
 		}

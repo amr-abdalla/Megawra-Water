@@ -205,7 +205,7 @@ public class ErabyUIManager : MonoBehaviourBase
         //     color.a = 1f;
         //     panel.color = color;
         // }
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
         float dur = 2f;
         for (float t = 0f; t <= dur; t += Time.deltaTime)
@@ -214,6 +214,9 @@ public class ErabyUIManager : MonoBehaviourBase
             panel.color = color;
             yield return null;
         }
+	color.a = 0f;
+	panel.color = color;
+	yield return new WaitForSeconds(2f);
         OnEndLevelTransition?.Invoke();
         this.DisposeCoroutine(ref transitionRoutine);
         transitionRoutine = null;
