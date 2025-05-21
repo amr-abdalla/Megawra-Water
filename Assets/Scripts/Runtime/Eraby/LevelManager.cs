@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
 {
@@ -34,8 +35,16 @@ public class LevelManager : MonoBehaviour
     private ErabyStateMachineDataProvider erabyStateMachineDataProvider;
 
 
+    [SerializeField]
+    private SceneTransitionHelper sceneTransitionHelper;
+
+    [SerializeField]
+    private InputActionReference exitToMenuAction;
+
     public Action<int> OnNewLevelTransitionEnd;
     public Action<int> OnNewLevelTransitionStart;
+
+
 
     public Action<LevelEndData> OnLevelEnd;
 
@@ -46,6 +55,11 @@ public class LevelManager : MonoBehaviour
     {
         OnNewLevelTransitionEnd += callback;
 
+    }
+
+    private void HandleExitToMenuActionHandler(InputAction.CallbackContext obj)
+    {
+        sceneTransitionHelper.LoadScene("Entry Scene");
     }
 
     public void UnregisterFromLevelStart(Action<int> callback)
@@ -70,6 +84,8 @@ public class LevelManager : MonoBehaviour
         platformManager.ShouldSpawn = false;
         OnNewLevelTransitionEnd += HandleLevelStart;
 
+        exitToMenuAction.action.Enable();
+        exitToMenuAction.action.performed += HandleExitToMenuActionHandler;
         erabyUIManager.OnEndLevelTransition += () =>
         {
             OnNewLevelTransitionEnd?.Invoke(level);
@@ -173,6 +189,14 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("Starting Level " + level);
         OnNewLevelTransitionStart?.Invoke(level);
+    }
+
+    private void OnDestroy()
+    {
+        OnNewLevelTransitionEnd -= HandleLevelStart;
+        exitToMenuAction.action.performed -= HandleExitToMenuActionHandler;
+        erabyUIManager.OnEndGameButtonClicked -= ExitGame;
+        erabyUIManager.OnNextLevelButtonClicked -= HandleNextLevelButtonClicked;
     }
 
 }

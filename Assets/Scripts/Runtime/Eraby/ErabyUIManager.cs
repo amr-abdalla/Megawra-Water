@@ -42,6 +42,9 @@ public class ErabyUIManager : MonoBehaviourBase
 
     private TransitionScreenManager levelSuccessPanel => transitionScreenManager;
 
+    [SerializeField]
+    private SceneTransitionHelper sceneTransitionHelper;
+
     private void handleNextLevelButtonClicked()
     {
         OnNextLevelButtonClicked?.Invoke();
@@ -50,7 +53,7 @@ public class ErabyUIManager : MonoBehaviourBase
     private void handleEndGameButtonClicked()
     {
         OnEndGameButtonClicked?.Invoke();
-        SceneManager.LoadScene("Entry Scene");
+        sceneTransitionHelper.LoadScene("Entry Scene");
     }
 
     private void handleRestartButtonClicked()
