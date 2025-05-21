@@ -8,7 +8,7 @@ public class BigContentPresenter : MonoBehaviour
 	[SerializeField] private float baseSpeed = 200f;
 	[SerializeField] private InputActionReference navigationAction;
 	[SerializeField] private InputActionReference exitToMenuAction;
-	[SerializeField] private GameObject creditsUI;
+	[SerializeField] private GameObject contentUI;
 
 
 	private float targetPositionY;
@@ -20,12 +20,13 @@ public class BigContentPresenter : MonoBehaviour
 	private bool isDone = false;
 
 
-	void ResetCredits()
+	void ResetContent()
 	{
 
+		isDone = false;
 		content.transform.position = initialPosition;
 		currentSpeed = baseSpeed;
-		maxSpeed = baseSpeed * 2.5f;
+		maxSpeed = baseSpeed * 5f;
 		minSpeed = 0f;
 		float screenHeight = ((RectTransform)content.parent).rect.height;
 		targetPositionY = content.rect.height + screenHeight + content.transform.position.y;
@@ -34,7 +35,7 @@ public class BigContentPresenter : MonoBehaviour
 	void Start()
 	{
 		initialPosition = content.transform.position;
-		ResetCredits();
+		ResetContent();
 	}
 
 	private void OnEnable()
@@ -49,8 +50,8 @@ public class BigContentPresenter : MonoBehaviour
 	}
 	private void ExitToMenu()
 	{
-		ResetCredits();
-		creditsUI.SetActive(false);
+		ResetContent();
+		contentUI.SetActive(false);
 	}
 
 	private void exitToMenuActionHandler(InputAction.CallbackContext obj)
@@ -67,11 +68,11 @@ public class BigContentPresenter : MonoBehaviour
 
 		Vector2 navInput = navigationAction.action.ReadValue<Vector2>();
 
-		if (navInput.y == -1)
+		if (navInput.y < 0)
 		{
 			currentSpeed = maxSpeed;
 		}
-		else if (navInput.y == 1)
+		else if (navInput.y > 0)
 		{
 			currentSpeed = minSpeed;
 		}
@@ -82,8 +83,8 @@ public class BigContentPresenter : MonoBehaviour
 
 		if (content.anchoredPosition.y >= targetPositionY)
 		{
-			//TODO: idk, exit the UI or something
 			isDone = true;
+			ExitToMenu();
 			return;
 		}
 
