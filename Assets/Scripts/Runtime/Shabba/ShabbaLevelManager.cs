@@ -3,10 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class ShabbaLevelManager
 {
-	private const int MainMenuBuildIndex = 0;
+	private const string MainMenuScene = "Main Menu";
+	private const string EntryScene = "Entry Scene";
 	private const string ShabbaSceneKeyword = "Shabba";
 
-	public void GoToMainMenu() => SceneManager.LoadScene(MainMenuBuildIndex);
+	public void GoToMainMenu() => SceneManager.LoadScene(MainMenuScene);
+
+	public void GoToEntryScene() => SceneManager.LoadScene(EntryScene);
 
 	public bool IsCurrentLevelTheFinalLevel()
 	{
@@ -23,7 +26,7 @@ public class ShabbaLevelManager
 
 		if (currentSceneIndex >= totalSceneCount - 1)
 		{
-			SceneManager.LoadScene(MainMenuBuildIndex);
+			SceneManager.LoadScene(MainMenuScene);
 			return;
 		}
 

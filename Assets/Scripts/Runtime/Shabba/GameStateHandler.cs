@@ -72,6 +72,14 @@ public class GameStateHandler : MonoBehaviour
 		gameTimer.Resume();
 	}
 
+	public void GoToEntryScene()
+	{
+		ResetGame();
+		levelManager.GoToEntryScene();
+		shabbaInputHandler.DisableControls();
+		gameTimer.Resume();
+	}
+
 	public void Restart()
 	{
 		ResetGame();

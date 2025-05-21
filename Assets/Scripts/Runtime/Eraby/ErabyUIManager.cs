@@ -50,7 +50,7 @@ public class ErabyUIManager : MonoBehaviourBase
     private void handleEndGameButtonClicked()
     {
         OnEndGameButtonClicked?.Invoke();
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("Entry Scene");
     }
 
     private void handleRestartButtonClicked()
