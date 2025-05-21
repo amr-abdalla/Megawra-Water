@@ -20,11 +20,11 @@ public class ShabbaUIManager : MonoBehaviour
 		GameStateHandler.Instance.OnLoseAction += OnLose;
 		GameStateHandler.Instance.OnWinAction += OnWin;
 		loseRestart.onClick.AddListener(GameStateHandler.Instance.Restart);
-		loseMainMenu.onClick.AddListener(GameStateHandler.Instance.GoToMainMenu);
-		winMainMenu.onClick.AddListener(GameStateHandler.Instance.GoToMainMenu);
+		loseMainMenu.onClick.AddListener(GameStateHandler.Instance.GoToEntryScene);
+		winMainMenu.onClick.AddListener(GameStateHandler.Instance.GoToEntryScene);
 		winNextLevel.onClick.AddListener(GameStateHandler.Instance.GoToNextLevel);
 		finalWinRestart.onClick.AddListener(GameStateHandler.Instance.Restart);
-		finalWinMainMenu.onClick.AddListener(GameStateHandler.Instance.GoToMainMenu);
+		finalWinMainMenu.onClick.AddListener(GameStateHandler.Instance.GoToEntryScene);
 	}
 
 	private void OnDestroy()
@@ -32,11 +32,11 @@ public class ShabbaUIManager : MonoBehaviour
 		GameStateHandler.Instance.OnLoseAction -= OnLose;
 		GameStateHandler.Instance.OnWinAction -= OnWin;
 		loseRestart.onClick.RemoveListener(GameStateHandler.Instance.Restart);
-		loseMainMenu.onClick.RemoveListener(GameStateHandler.Instance.GoToMainMenu);
-		winMainMenu.onClick.RemoveListener(GameStateHandler.Instance.GoToMainMenu);
+		loseMainMenu.onClick.RemoveListener(GameStateHandler.Instance.GoToEntryScene);
+		winMainMenu.onClick.RemoveListener(GameStateHandler.Instance.GoToEntryScene);
 		winNextLevel.onClick.RemoveListener(GameStateHandler.Instance.GoToNextLevel);
 		finalWinRestart.onClick.AddListener(GameStateHandler.Instance.Restart);
-		finalWinMainMenu.onClick.AddListener(GameStateHandler.Instance.GoToMainMenu);
+		finalWinMainMenu.onClick.AddListener(GameStateHandler.Instance.GoToEntryScene);
 	}
 
 	private void OnLose()
